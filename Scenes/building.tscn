@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://213qfeta8ufe"]
+
+[ext_resource type="Script" path="res://Scripts/building/building.gd" id="1_dmbmw"]
+[ext_resource type="Texture2D" uid="uid://c11lbgrfjcuo4" path="res://Assets/Sprites/Building/pokemon_center.png" id="1_x8o6u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dl8gx"]
+size = Vector2(64, 62)
+
+[node name="Area2D" type="Area2D"]
+script = ExtResource("1_dmbmw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_x8o6u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_dl8gx")
+one_way_collision = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
