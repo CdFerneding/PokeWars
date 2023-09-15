@@ -3,15 +3,33 @@ extends Area2D
 signal hit
 
 @export var speed = 400 # How fast the player will move (pixels/sec).
-var screen_size # Size of the game window.
+@export var tilemap: TileMap
+var limit_right
+var limit_bottom
 var previous_direction
 var previous_position
 
+var vector_minimum_top_left
+var vector_maximum_bottom_right
+
 func _ready():
-	screen_size = get_viewport_rect().size
 	previous_direction = "down"
 	$AnimatedSprite2D.animation = "idle_down"
 	hide()
+	update_limit()
+	
+func update_limit():
+	var shape = $CollisionShape2D.shape.get_rect().size
+	
+	var mapRect = tilemap.get_used_rect()
+	var tileSize = tilemap.cell_quadrant_size
+	var worldSizeInPixels = mapRect.size * tileSize
+	limit_right = worldSizeInPixels.x
+	limit_bottom = worldSizeInPixels.y
+	
+	vector_minimum_top_left = Vector2(shape.x/2,shape.y)
+	
+	vector_maximum_bottom_right = Vector2(worldSizeInPixels.x-shape.x/2, worldSizeInPixels.y-shape.y/2)
 
 func _process(delta):
 	var velocity = Vector2.ZERO # The player's movement vector.
@@ -26,11 +44,14 @@ func _process(delta):
 
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
-	$AnimatedSprite2D.play()
 	
 	position += velocity * delta
-	position = position.clamp(Vector2.ZERO, screen_size)
+	position = position.clamp(vector_minimum_top_left, vector_maximum_bottom_right)
 	previous_position = position
+	
+	previous_position = position
+	
+	$AnimatedSprite2D.play()
 	
 	if velocity == Vector2.ZERO:
 		$AnimatedSprite2D.animation = "idle_"+previous_direction
