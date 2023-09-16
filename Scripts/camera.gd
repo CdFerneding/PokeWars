@@ -50,14 +50,12 @@ func _process(delta):
 		velocity.y += moveOffset * delta
 	if Input.is_action_pressed("move_up") and position.y > border_top:
 		velocity.y -= moveOffset * delta
-	if Input.is_action_pressed("zoom_out") and zoom.x > 3 and $CooldownZoomTimer.is_stopped():
-		zoom.x -= 1
-		zoom.y -= 1
-		$CooldownZoomTimer.start()
-	if Input.is_action_pressed("zoom_in") and zoom.x < 6 and $CooldownZoomTimer.is_stopped():
-		zoom.x += 1
-		zoom.y += 1
-		$CooldownZoomTimer.start()
+	if Input.is_action_pressed("zoom_out") and zoom.x > 3:
+		zoom.x -= 0.15
+		zoom.y -= 0.15
+	if Input.is_action_pressed("zoom_in") and zoom.x < 7:
+		zoom.x += 0.15
+		zoom.y += 0.15
 		
 	var new_position = position + velocity
 
