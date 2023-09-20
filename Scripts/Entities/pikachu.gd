@@ -12,6 +12,8 @@ var previous_position
 var vector_minimum_top_left
 var vector_maximum_bottom_right
 
+# selected pokemon variables
+
 func _ready():
 	previous_direction = "down"
 	$AnimatedSprite2D.animation = "idle_down"
@@ -84,3 +86,5 @@ func start(pos):
 	position = pos
 	show()
 	$CollisionShape2D.disabled = false
+
+	

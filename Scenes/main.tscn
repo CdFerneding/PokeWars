@@ -119,3 +119,8 @@ editor_draw_drag_margin = true
 script = ExtResource("5_0705s")
 tilemap = NodePath("../Node2D/BaseLayer")
 moveOffset = 300
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[connection signal="input_event" from="Pikachu" to="." method="_on_pikachu_input_event"]
+[connection signal="mouse_entered" from="Pikachu" to="." method="_on_pikachu_mouse_entered"]
