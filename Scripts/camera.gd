@@ -9,6 +9,12 @@ var border_right
 var border_left
 var border_bottom
 var border_top
+var viewport_rect
+
+var maximum_x_to_move_camera_left
+var maximum_y_to_move_camera_up
+var minimum_x_to_move_camera_right
+var minimum_y_to_move_camera_down
 
 func _ready():
 	update_limit()
@@ -26,7 +32,7 @@ func update_limit():
 
 # if the zoom or the viewport change, we need to go through this method
 func update_border():
-	var viewport_rect = get_viewport_rect()
+	viewport_rect = get_viewport_rect()
 	visible_size = viewport_rect.size / zoom  # Adjust for camera zoom
 	
 	viewportXBy2 = visible_size.x/2 # Will be use to calculate 
@@ -36,28 +42,39 @@ func update_border():
 	border_left = viewportXBy2
 	border_bottom = limit_bottom - viewportYBy2
 	border_top= viewportYBy2
-
+	maximum_x_to_move_camera_left = viewport_rect.size.x - viewport_rect.size.x / 20
+	maximum_y_to_move_camera_up = viewport_rect.size.y - viewport_rect.size.y / 20
+	minimum_x_to_move_camera_right = viewport_rect.size.x / 20
+	minimum_y_to_move_camera_down = viewport_rect.size.y / 20
+	
+	print(maximum_x_to_move_camera_left, maximum_y_to_move_camera_up, minimum_x_to_move_camera_right, minimum_y_to_move_camera_down)
 	
 
 func _process(delta):
-	var velocity = Vector2.ZERO # The player's movement vector.
 	
-	if Input.is_action_pressed("move_right") and position.x < border_right:
+	var mouse_position = get_viewport().get_mouse_position()
+	
+	var velocity = Vector2.ZERO # The player's movement vector.
+	var mouse_on_right = mouse_position.x > minimum_x_to_move_camera_right
+	var mouse_on_left = mouse_position.x < maximum_x_to_move_camera_left
+	var mouse_on_up = mouse_position.y < maximum_y_to_move_camera_up
+	var mouse_on_down = mouse_position.y > minimum_y_to_move_camera_down
+	
+	
+	if (Input.is_action_pressed("move_right") or mouse_on_right) and position.x < border_right:
 		velocity.x += moveOffset * delta
-	if Input.is_action_pressed("move_left") and position.x > border_left:
+	if (Input.is_action_pressed("move_left") or mouse_on_left) and position.x > border_left:
 		velocity.x -= moveOffset * delta
-	if Input.is_action_pressed("move_down") and position.y < border_bottom:
+	if (Input.is_action_pressed("move_down") or mouse_on_down) and position.y < border_bottom:
 		velocity.y += moveOffset * delta
-	if Input.is_action_pressed("move_up") and position.y > border_top:
+	if (Input.is_action_pressed("move_up") or mouse_on_up) and position.y > border_top:
 		velocity.y -= moveOffset * delta
-	if Input.is_action_pressed("zoom_out") and zoom.x > 3 and $CooldownZoomTimer.is_stopped():
-		zoom.x -= 1
-		zoom.y -= 1
-		$CooldownZoomTimer.start()
-	if Input.is_action_pressed("zoom_in") and zoom.x < 6 and $CooldownZoomTimer.is_stopped():
-		zoom.x += 1
-		zoom.y += 1
-		$CooldownZoomTimer.start()
+	if Input.is_action_pressed("zoom_out") and zoom.x > 3:
+		zoom.x -= 0.15
+		zoom.y -= 0.15
+	if Input.is_action_pressed("zoom_in") and zoom.x < 7:
+		zoom.x += 0.15
+		zoom.y += 0.15
 		
 	var new_position = position + velocity
 

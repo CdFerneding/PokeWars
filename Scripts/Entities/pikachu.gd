@@ -2,7 +2,7 @@ extends Area2D
 
 signal hit
 
-@export var speed = 400 # How fast the player will move (pixels/sec).
+@export var speed = 200 # How fast the player will move (pixels/sec).
 @export var tilemap: TileMap
 var limit_right
 var limit_bottom
@@ -12,6 +12,8 @@ var currentDir
 
 var vector_minimum_top_left
 var vector_maximum_bottom_right
+
+# selected pokemon variables
 
 func _ready():
 	previous_direction = "down"

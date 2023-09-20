@@ -682,9 +682,7 @@ position = Vector2(532, 347)
 position = Vector2(0.5, -8.5)
 shape = SubResource("RectangleShape2D_y8ubw")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Pikachu"]
-scale = Vector2(2, 2)
-sprite_frames = SubResource("SpriteFrames_xje7h")
-animation = &"walking_right"
+[node name="HUD" type="CanvasLayer" parent="."]
 
-[connection signal="area_exited" from="Pokemon_center" to="Pokemon_center" method="_on_area_exited"]
+[connection signal="input_event" from="Pikachu" to="." method="_on_pikachu_input_event"]
+[connection signal="mouse_entered" from="Pikachu" to="." method="_on_pikachu_mouse_entered"]

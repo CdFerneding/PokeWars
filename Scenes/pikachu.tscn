@@ -665,5 +665,4 @@ position = Vector2(0.5, -10.5)
 shape = SubResource("RectangleShape2D_0x8vy")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="area_entered" from="." to="." method="_on_area_entered"]
-[connection signal="area_exited" from="." to="." method="_on_area_exited"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
