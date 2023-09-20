@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=3 uid="uid://f7infs0jvx4y"]
+[gd_scene load_steps=2 format=3 uid="uid://f7infs0jvx4y"]
 
 [ext_resource type="Script" path="res://Scripts/Entities/pikachu.gd" id="1_11rav"]
 [ext_resource type="Texture2D" uid="uid://cq7ae722atlyg" path="res://Assets/Sprites/Elektro/Pikachu/Idle-Anim.png" id="1_bwyar"]
@@ -651,6 +651,7 @@ animations = [{
 size = Vector2(45, 35)
 
 [node name="Pikachu" type="Area2D"]
+collision_mask = 3
 script = ExtResource("1_11rav")
 metadata/_edit_group_ = true
 
@@ -664,3 +665,5 @@ position = Vector2(0.5, -10.5)
 shape = SubResource("RectangleShape2D_0x8vy")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
