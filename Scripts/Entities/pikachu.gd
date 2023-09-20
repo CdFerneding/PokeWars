@@ -12,8 +12,6 @@ var previous_position
 var vector_minimum_top_left
 var vector_maximum_bottom_right
 
-# selected pokemon variables
-
 func _ready():
 	previous_direction = "down"
 	$AnimatedSprite2D.animation = "idle_down"
@@ -80,11 +78,8 @@ func _on_body_entered(body):
 	position = previous_position
 	# Must be deferred as we can't change physics properties on a physics callback.
 	$CollisionShape2D.set_deferred("disabled", true)
-	
-	
+
 func start(pos):
 	position = pos
 	show()
 	$CollisionShape2D.disabled = false
-
-	
