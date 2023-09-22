@@ -56,7 +56,7 @@ func _process(delta):
 		previous_positions.pop_front()
 		previous_positions.append(position)
 	position += velocity * delta
-	position = position.clamp(Vector2.ZERO, screen_size)
+
 	
 	$AnimatedSprite2D.play()
 	
