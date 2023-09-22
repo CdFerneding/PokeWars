@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5xbd3qrnk5vl"]
+
+[ext_resource type="Script" path="res://Scenes/HUD.gd" id="1_uqwre"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_uqwre")
+
+[node name="Selected" type="Label" parent="."]
+offset_left = 146.0
+offset_top = 583.0
+offset_right = 360.0
+offset_bottom = 625.0
+
+[node name="GameTimerLabel" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.077
+anchor_right = 0.5
+anchor_bottom = 0.077
+offset_left = -552.0
+offset_top = 531.104
+offset_right = -277.0
+offset_bottom = 573.104
+
+[node name="Food" type="Label" parent="."]
+offset_left = 16.0
+offset_top = 521.0
+offset_right = 83.0
+offset_bottom = 544.0
+
+[node name="Wood" type="Label" parent="."]
+offset_left = 22.0
+offset_top = 562.0
+offset_right = 88.0
+offset_bottom = 590.0
+
+[node name="Stone" type="Label" parent="."]
+offset_left = 20.0
+offset_top = 596.0
+offset_right = 87.0
+offset_bottom = 628.0
