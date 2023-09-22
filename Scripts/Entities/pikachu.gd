@@ -7,7 +7,8 @@ signal hit
 var limit_right
 var limit_bottom
 var previous_direction
-var previous_position
+var previous_positions = []
+var currentDir
 
 var vector_minimum_top_left
 var vector_maximum_bottom_right
@@ -33,23 +34,27 @@ func update_limit():
 
 func _process(delta):
 	var velocity = Vector2.ZERO # The player's movement vector.
-	if Input.is_action_pressed("move_right"):
+	if  Input.is_action_pressed("move_right"):
 		velocity.x += 1
 	if Input.is_action_pressed("move_left"):
 		velocity.x -= 1
-	if Input.is_action_pressed("move_down"):
+	if Input.is_action_pressed("move_down") :
 		velocity.y += 1
 	if Input.is_action_pressed("move_up"):
 		velocity.y -= 1
 
+
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
+		$AnimatedSprite2D.play()
 	
+	if(previous_positions.size() < 4):
+		previous_positions.append(position)
+	else:
+		previous_positions.pop_front()
+		previous_positions.append(position)
 	position += velocity * delta
-	position = position.clamp(vector_minimum_top_left, vector_maximum_bottom_right)
-	previous_position = position
-	
-	previous_position = position
+
 	
 	$AnimatedSprite2D.play()
 	
@@ -71,13 +76,6 @@ func _process(delta):
 		previous_direction = current_animation.left(current_animation.length() - 1)
 		current_animation = "walking_"+previous_direction
 		$AnimatedSprite2D.animation = current_animation
-		
-func _on_body_entered(body):
-	print("colision")
-	hit.emit()
-	position = previous_position
-	# Must be deferred as we can't change physics properties on a physics callback.
-	$CollisionShape2D.set_deferred("disabled", true)
 
 func start(pos):
 	position = pos
