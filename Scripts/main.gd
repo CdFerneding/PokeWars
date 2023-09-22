@@ -19,9 +19,10 @@ func _process(delta):
 func new_game():
 	score = 0
 	$Pikachu.start($StartPosition.position)
-		
-func _on_pikachu_input_event(viewport, event, shape_idx):
+
+func _on_pikachu_mouse_entered():
 	if Input.is_action_pressed("left_click"):
+		print("hello world")
 		selected_pikachu.append($Pikachu)
 
 func _unhandled_input(event):
@@ -33,5 +34,3 @@ func _unhandled_input(event):
 			
 			# end of a star algorithm, pikachu arrived
 			selected_pikachu = []
-
-
