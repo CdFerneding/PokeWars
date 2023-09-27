@@ -48,11 +48,16 @@ func _process(delta):
 		velocity = velocity.normalized() * speed
 		$AnimatedSprite2D.play()
 	
+		
+	position = position.clamp(vector_minimum_top_left, vector_maximum_bottom_right)
+	
+	
 	if(previous_positions.size() < 4):
 		previous_positions.append(position)
 	else:
 		previous_positions.pop_front()
 		previous_positions.append(position)
+		
 	position += velocity * delta
 
 	
