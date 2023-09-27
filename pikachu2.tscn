@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://okgvm32m4p2v"]
+[gd_scene load_steps=37 format=3 uid="uid://okgvm32m4p2v"]
 
 [ext_resource type="Script" path="res://pikachu2.gd" id="1_inikx"]
 [ext_resource type="Texture2D" uid="uid://dka0n2flxvea1" path="res://Assets/Sprites/Elektro/Pikachu/Walk-Anim.png" id="1_yf5c8"]
@@ -270,15 +270,21 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7yptx"]
+
 [node name="CharacterBody2D" type="CharacterBody2D"]
+position = Vector2(40, 29)
 script = ExtResource("1_inikx")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(68, 63)
+position = Vector2(1, 2)
 sprite_frames = SubResource("SpriteFrames_oglag")
-animation = &"walk_down_left"
+animation = &"walk_down"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_7yptx")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 navigation_layers = 3
+debug_enabled = true

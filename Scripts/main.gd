@@ -21,15 +21,16 @@ func new_game():
 	$Pikachu.start($StartPosition.position)
 
 func _on_pikachu_mouse_entered():
+	print("cl")
 	if Input.is_action_pressed("left_click"):
-		print("hello world")
+		print("hello world<")
 		selected_pikachu.append($Pikachu)
 
 func _unhandled_input(event):
 	if selected_pikachu.size() != 0:
 		if Input.is_action_pressed("right_click"):
 			selected_destination = get_viewport().get_mouse_position()
-			print(selected_pikachu[0], " from: ", selected_pikachu[0].position , " to: ", selected_destination)
+			print(selected_pikachu[0], " from: ", selected_pikachu[0].position, " to: ", selected_destination)
 			# a star algorithm here
 			
 			# end of a star algorithm, pikachu arrived
