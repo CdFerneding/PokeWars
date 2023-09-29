@@ -64,7 +64,7 @@ func _process(delta):
 	$AnimatedSprite2D.play()
 	
 	if velocity == Vector2.ZERO:
-		$AnimatedSprite2D.animation = "idle_"+previous_direction
+		$AnimatedSprite2D.animation = "idle_" + previous_direction
 	else:
 		var current_animation = ""
 		
