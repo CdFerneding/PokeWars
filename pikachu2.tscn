@@ -270,7 +270,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7yptx"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_vg7x3"]
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 position = Vector2(40, 29)
@@ -282,8 +282,8 @@ sprite_frames = SubResource("SpriteFrames_oglag")
 animation = &"walk_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, 1)
-shape = SubResource("RectangleShape2D_7yptx")
+position = Vector2(1, -2)
+shape = SubResource("CircleShape2D_vg7x3")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 navigation_layers = 3

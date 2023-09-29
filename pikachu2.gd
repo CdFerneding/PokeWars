@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
-
-
 const speed = 200
+
+signal pikachu_2(pik)
 
 var player : Node2D
 @onready var nav_agent:= $NavigationAgent2D as NavigationAgent2D
@@ -10,24 +10,27 @@ var player : Node2D
 func _process(delta:float):
 	var mouse_position = get_viewport().get_mouse_position()
 	
-	print(mouse_position.x, " ", mouse_position.y)
-	make_path()
+	#make_path()
 	
-	#player.position.x = mouse_position.x
-	#player.position.y = mouse_position.y
 
 func _physics_process(_delta: float) -> void:
+	
 	var dir = to_local(nav_agent.get_next_path_position()).normalized()
 	velocity = dir * speed
 	move_and_slide()
 	
+	
 func make_path() -> void:
 	nav_agent.target_position = get_global_mouse_position()
 	
-
-
-func _on_timer_timeout():
-	make_path()
+func _input(event):
+	if event.is_action("left_click"):
+		print("Pikachu clicked")
+		emit_signal("pikachu_2", self)
+		
+		
+		
+   
 
 
 
