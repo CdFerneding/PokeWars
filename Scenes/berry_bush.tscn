@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://ce3m6j2mwao5n"]
+
+[ext_resource type="Script" path="res://Scenes/berry_bush.gd" id="1_eufeq"]
+[ext_resource type="Texture2D" uid="uid://bxxo682hxtojr" path="res://Assets/berryBush.png" id="1_ixyck"]
+
+[node name="BerryBush" type="StaticBody2D"]
+script = ExtResource("1_eufeq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ixyck")
