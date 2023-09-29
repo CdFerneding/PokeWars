@@ -257,13 +257,13 @@ format = 2
 layer_0/tile_data = PackedInt32Array(196615, 0, 0, 393217, 0, 1, 65538, 65536, 0, 196614, 196608, 4, 327686, 196608, 5, 262150, 131072, 7, 196613, 196608, 6, 196612, 196608, 6, 327685, 196608, 7, 327684, 196608, 7, 851968, 0, 0, 0, 0, 0, 25, 0, 0, 851993, 0, 0)
 
 [node name="StartPosition" type="Marker2D" parent="."]
-position = Vector2(140, 140)
+position = Vector2(391, 203)
 
 [node name="Pokemon_center" parent="." instance=ExtResource("3_vioyy")]
 position = Vector2(181, 65)
 
 [node name="Pikachu" parent="." node_paths=PackedStringArray("tilemap") groups=["Unit"] instance=ExtResource("3_yw6pa")]
-position = Vector2(211, 129)
+position = Vector2(391, 203)
 tilemap = NodePath("../Node2D/BaseLayer")
 
 [node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("tilemap")]
@@ -277,6 +277,7 @@ tilemap = NodePath("../Node2D/BaseLayer")
 moveOffset = 300
 
 [node name="Pikachu_2" parent="." instance=ExtResource("6_ft3bd")]
+position = Vector2(63, 117)
 input_pickable = true
 
 [connection signal="mouse_entered" from="Pikachu" to="." method="_on_pikachu_mouse_entered"]

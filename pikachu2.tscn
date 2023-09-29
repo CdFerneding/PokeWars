@@ -271,6 +271,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vg7x3"]
+radius = 9.05539
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 position = Vector2(40, 29)
