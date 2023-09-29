@@ -648,7 +648,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0x8vy"]
-size = Vector2(21, 26)
+size = Vector2(21, 19)
 
 [node name="Pikachu" type="Area2D"]
 collision_mask = 3
@@ -660,7 +660,7 @@ sprite_frames = SubResource("SpriteFrames_bi4y1")
 animation = &"idle_down_right"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1.5, -6)
+position = Vector2(1.5, -3.5)
 shape = SubResource("RectangleShape2D_0x8vy")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
