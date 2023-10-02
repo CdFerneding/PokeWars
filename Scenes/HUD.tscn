@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://c5xbd3qrnk5vl"]
 
-[ext_resource type="Script" path="res://Scenes/HUD.gd" id="1_uqwre"]
+[ext_resource type="Script" path="res://Scripts/Data/HUD.gd" id="1_xrsjc"]
 
 [sub_resource type="Gradient" id="Gradient_qvgvk"]
 interpolation_color_space = 2
@@ -29,7 +29,7 @@ font_color = Color(0, 0, 0, 1)
 
 [node name="HUD" type="CanvasLayer"]
 follow_viewport_enabled = true
-script = ExtResource("1_uqwre")
+script = ExtResource("1_xrsjc")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 offset_right = 549.0

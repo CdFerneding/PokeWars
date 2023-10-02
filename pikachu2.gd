@@ -6,8 +6,14 @@ const speed = 50
 #used to detect when path is reached
 var target : Vector2
 
+var previous_direction
+
 #implements the pathfinding algorithm
 @onready var nav_agent:= $NavigationAgent2D as NavigationAgent2D
+
+func _ready():
+	previous_direction = "walk_down"
+	$AnimatedSprite2D.animation = "walk_down"
 
 func _process(delta:float):
 	pass
@@ -32,7 +38,6 @@ func make_path() -> void:
 #toDo
 #not sufficient yet
 func apply_corresponding_animation(prev):
-	var previous_direction
 	var current_animation = ""
 	
 	#if prev.x == velocity.x and prev.y == velocity.y:
@@ -47,11 +52,15 @@ func apply_corresponding_animation(prev):
 		current_animation+="left_"
 	elif prev.x < velocity.x - 0.4:
 		current_animation += "right_"
+		
+	if current_animation == "":
+		current_animation = previous_direction+"_"
 	
 	previous_direction = current_animation.left(current_animation.length() - 1)
 	current_animation = "walk_"+previous_direction
 	print(current_animation)
 	$AnimatedSprite2D.animation = current_animation
+
 	
 func _input(event):
 	pass
