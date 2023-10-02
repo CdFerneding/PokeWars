@@ -34,11 +34,11 @@ func _unhandled_input(event):
 			for p in selected_pikachu:
 				p.make_path()
 			# end of a star algorithm, pikachu arrived
-			selected_pikachu = []
 	if pik_hover and Input.is_action_pressed("left_click"):
 		selected_pikachu.append($Pikachu_2)
 		pik_hover = false
 	elif Input.is_action_pressed("left_click"):
+		selected_pikachu = []
 		pik_hover = false
 
 
