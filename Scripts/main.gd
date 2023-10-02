@@ -24,7 +24,7 @@ func _process(delta):
 	
 func new_game():
 	score = 0
-	$Pikachu.start($StartPosition.position)
+	# $Pikachu.start($StartPosition.position)
 
 
 func _unhandled_input(event):
@@ -60,8 +60,8 @@ func pikatchu_scale_on_hover() -> void:
 
 #deprecated functions
 
-func _on_pikachu_mouse_entered():
-	hover = true
-
-func _on_pikachu_mouse_exited():
-	hover = false
+#func _on_pikachu_mouse_entered():
+#	hover = true
+#
+#func _on_pikachu_mouse_exited():
+#	hover = false

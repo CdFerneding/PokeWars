@@ -1,7 +1,22 @@
 [gd_scene load_steps=5 format=3 uid="uid://213qfeta8ufe"]
 
-[ext_resource type="Script" path="res://Scripts/building/building.gd" id="1_dmbmw"]
 [ext_resource type="Texture2D" uid="uid://c11lbgrfjcuo4" path="res://Assets/Sprites/Building/pokemon_center.png" id="1_x8o6u"]
+
+[sub_resource type="GDScript" id="GDScript_hyqow"]
+script/source = "extends Area2D
+
+@export var speed = 200
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dl8gx"]
 size = Vector2(64, 62)
@@ -23,7 +38,7 @@ func _process(delta):
 [node name="PokeCenter" type="Area2D"]
 collision_layer = 2
 collision_mask = 3
-script = ExtResource("1_dmbmw")
+script = SubResource("GDScript_hyqow")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_x8o6u")

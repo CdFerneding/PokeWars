@@ -1,11 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://cn8ein6jc6frg"]
+[gd_scene load_steps=12 format=3 uid="uid://cn8ein6jc6frg"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_c7xow"]
 [ext_resource type="Texture2D" uid="uid://b0yuglgf5hf8t" path="res://Assets/BerryGardenTiles.png" id="2_d3ghr"]
 [ext_resource type="PackedScene" uid="uid://213qfeta8ufe" path="res://Scenes/building.tscn" id="3_vioyy"]
-[ext_resource type="PackedScene" uid="uid://f7infs0jvx4y" path="res://Scenes/pikachu.tscn" id="3_yw6pa"]
 [ext_resource type="Script" path="res://Scripts/camera.gd" id="5_0705s"]
-[ext_resource type="PackedScene" uid="uid://okgvm32m4p2v" path="res://pikachu2.tscn" id="6_ft3bd"]
+[ext_resource type="PackedScene" uid="uid://bgxdshrc4i5u8" path="res://Scenes/pikachu2.tscn" id="6_ft3bd"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_wcukn"]
 vertices = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -262,10 +261,6 @@ position = Vector2(391, 203)
 [node name="Pokemon_center" parent="." instance=ExtResource("3_vioyy")]
 position = Vector2(181, 65)
 
-[node name="Pikachu" parent="." node_paths=PackedStringArray("tilemap") groups=["Unit"] instance=ExtResource("3_yw6pa")]
-position = Vector2(391, 203)
-tilemap = NodePath("../Node2D/BaseLayer")
-
 [node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("tilemap")]
 position = Vector2(144, 81)
 zoom = Vector2(4, 4)
@@ -280,6 +275,5 @@ moveOffset = 300
 position = Vector2(63, 117)
 input_pickable = true
 
-[connection signal="mouse_entered" from="Pikachu" to="." method="_on_pikachu_mouse_entered"]
 [connection signal="mouse_entered" from="Pikachu_2" to="." method="_on_pikachu_2_mouse_entered"]
 [connection signal="mouse_exited" from="Pikachu_2" to="." method="_on_pikachu_2_mouse_exited"]
