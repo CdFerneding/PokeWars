@@ -12,7 +12,7 @@ var previous_direction
 @onready var nav_agent:= $NavigationAgent2D as NavigationAgent2D
 
 func _ready():
-	previous_direction = "walk_down"
+	previous_direction = "down"
 	$AnimatedSprite2D.animation = "walk_down"
 
 func _process(delta:float):
@@ -26,7 +26,10 @@ func _physics_process(_delta: float) -> void:
 	var dir = to_local(nav_agent.get_next_path_position()).normalized()
 	#print(nav_agent.get_next_path_position(), " : ", get_global_mouse_position()) 
 	velocity = dir * speed
-	
+	if velocity.x + velocity.y <= 0.1:
+		velocity = Vector2.ZERO
+		dir = self.position
+		target = self.position
 	apply_corresponding_animation(prev_vel)
 	
 	move_and_slide()
@@ -43,14 +46,14 @@ func apply_corresponding_animation(prev):
 	#if prev.x == velocity.x and prev.y == velocity.y:
 	#	current_animation += "down_"
 		
-	if prev.y < velocity.y - 0.4:
+	if velocity.y > 0:
 		current_animation+="down_"
-	elif prev.y > velocity.y + 0.4:
+	elif velocity.y < 0:
 		current_animation+="up_"
 		
-	if prev.x > velocity.x + 0.4:
+	if velocity.x < 0:
 		current_animation+="left_"
-	elif prev.x < velocity.x - 0.4:
+	elif velocity.x > 0:
 		current_animation += "right_"
 		
 	if current_animation == "":
@@ -60,6 +63,7 @@ func apply_corresponding_animation(prev):
 	current_animation = "walk_"+previous_direction
 	print(current_animation)
 	$AnimatedSprite2D.animation = current_animation
+	$AnimatedSprite2D.play()
 
 	
 func _input(event):

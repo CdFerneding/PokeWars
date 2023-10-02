@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b0yuglgf5hf8t" path="res://Assets/BerryGardenTiles.png" id="2_d3ghr"]
 [ext_resource type="PackedScene" uid="uid://213qfeta8ufe" path="res://Scenes/building.tscn" id="3_vioyy"]
 [ext_resource type="Script" path="res://Scripts/camera.gd" id="5_0705s"]
-[ext_resource type="PackedScene" uid="uid://okgvm32m4p2v" path="res://Scenes/pikachu2.tscn" id="6_ft3bd"]
+[ext_resource type="PackedScene" uid="uid://bgxdshrc4i5u8" path="res://Scenes/pikachu2.tscn" id="6_ft3bd"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_wcukn"]
 vertices = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)

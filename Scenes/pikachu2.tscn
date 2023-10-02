@@ -1,6 +1,6 @@
-[gd_scene load_steps=37 format=3 uid="uid://okgvm32m4p2v"]
+[gd_scene load_steps=37 format=3 uid="uid://bgxdshrc4i5u8"]
 
-[ext_resource type="Script" path="res://pikachu2.gd" id="1_inikx"]
+[ext_resource type="Script" path="res://Scripts/Entities/pikachu2.gd" id="1_wmp5u"]
 [ext_resource type="Texture2D" uid="uid://dka0n2flxvea1" path="res://Assets/Sprites/Elektro/Pikachu/Walk-Anim.png" id="1_yf5c8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gbxyb"]
@@ -275,7 +275,7 @@ radius = 9.05539
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 position = Vector2(40, 29)
-script = ExtResource("1_inikx")
+script = ExtResource("1_wmp5u")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(1, 2)
