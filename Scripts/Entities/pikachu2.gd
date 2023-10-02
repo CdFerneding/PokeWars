@@ -23,14 +23,17 @@ func _physics_process(_delta: float) -> void:
 	var prev_vel = velocity
 	if self.position == target:
 		return
-	var dir = to_local(nav_agent.get_next_path_position()).normalized()
-	#print(nav_agent.get_next_path_position(), " : ", get_global_mouse_position()) 
+		
+	var next_pos = nav_agent.get_next_path_position()
+	var dir = to_local(next_pos).normalized()
 	velocity = dir * speed
-	if velocity.x + velocity.y <= 0.1:
+	
+	if position.distance_to(next_pos) < 1:
 		velocity = Vector2.ZERO
-		dir = self.position
+		if dir != Vector2.ZERO:
+			self.position = next_pos
 		target = self.position
-	apply_corresponding_animation(prev_vel)
+	apply_corresponding_animation(velocity)
 	
 	move_and_slide()
 	
@@ -61,7 +64,7 @@ func apply_corresponding_animation(prev):
 	
 	previous_direction = current_animation.left(current_animation.length() - 1)
 	current_animation = "walk_"+previous_direction
-	print(current_animation)
+
 	$AnimatedSprite2D.animation = current_animation
 	$AnimatedSprite2D.play()
 
