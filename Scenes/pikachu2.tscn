@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://bgxdshrc4i5u8"]
+[gd_scene load_steps=37 format=3 uid="uid://jbkfgig6x3sy"]
 
 [ext_resource type="Script" path="res://Scripts/Entities/pikachu2.gd" id="1_wmp5u"]
 [ext_resource type="Texture2D" uid="uid://dka0n2flxvea1" path="res://Assets/Sprites/Elektro/Pikachu/Walk-Anim.png" id="1_yf5c8"]
@@ -289,3 +289,7 @@ shape = SubResource("CircleShape2D_vg7x3")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 navigation_layers = 3
 debug_enabled = true
+
+[node name="FarmTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="FarmTimer" to="." method="_on_farm_timer_timeout"]

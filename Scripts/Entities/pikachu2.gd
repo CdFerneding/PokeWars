@@ -1,5 +1,11 @@
 extends CharacterBody2D
 
+# pikachu can hold 10 ressources (ressources being: berries, wood, stone) at a time.
+# if pikachu switches to farming a different ressource ...
+# without delivering the inventory to the pokecenter first the before farmed ressources get lost (macro)
+@export var ressource_inventory = 0 # this number must never be anything else than [0,10]
+var is_farming = false #
+
 #speed of moving Pikatchu
 const speed = 50
 
@@ -17,6 +23,7 @@ func _ready():
 
 func _process(delta:float):
 	pass
+		
 	
 func _physics_process(_delta: float) -> void:
 	
@@ -37,8 +44,10 @@ func _physics_process(_delta: float) -> void:
 	
 	move_and_slide()
 	
-func make_path() -> void:
-	nav_agent.target_position = get_global_mouse_position()
+# added is_farming = false to cancel farming when a new destination is issued for pikachu
+func make_path(ressource_position = get_global_mouse_position()) -> void:
+	is_farming = false
+	nav_agent.target_position = ressource_position
 	target = nav_agent.target_position
 	
 #toDo
@@ -75,8 +84,37 @@ func _input(event):
 	#this was a try to start pathfinding algorithem from Pikatchu and not from the main scene
 #	if event.is_action("left_click"):
 #		print("Pikachu clicked")
+
+
+
+# ----------------------------- farming berries -----------------------------
+func farm_berries():
+	is_farming = true
+	var ressource_position = get_global_mouse_position()
+	var pokecenter_position = Vector2(176.0 ,112.0) # x = 176; y = 112 is the position of a tileintersection in front of the pokecenter
+	while is_farming:
+		# walk to berryfield
+		make_path_to_ressource(ressource_position)
+		# stand there while "pikachu_inventory" goes up
+		$FarmTimer.start()
+		# when "ressource_inventory" hits 10 he delivers the (10) berries to the pokecenter
+		# FarmTimer.stop has to be handles in _process function
+		if ressource_inventory == 10:
+			$FarmTimer.stop()
+			make_path_to_ressource(pokecenter_position)
+			ressource_inventory = 0
 		
-		
-		
-		
-   
+		# when ressoure is delivered to pokecenter the ressource counterf (HUD) is updated
+		# repeat / while pikachu is to farm berries
+	
+# ----------------------------- helper functions -----------------------------
+# added ressource_position to make_path function with get_global_position as a default parameter
+# need an addition function that does not set is_farming to false
+func make_path_to_ressource(ressource_position = get_global_mouse_position()) -> void:
+	nav_agent.target_position = ressource_position
+	target = nav_agent.target_position
+
+func _on_farm_timer_timeout():
+	ressource_inventory += 1
+
+# ----------------------------- farming berries end -----------------------------

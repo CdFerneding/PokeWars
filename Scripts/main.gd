@@ -12,8 +12,15 @@ var pik_hover = false
 var gamemode = "Main"
 
 
+# ----------------------------- farming -----------------------------
+# var berry_locations = []
+var berryfield_hover = false
+
+
 #deprecated attributes
 var hover = false
+
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -34,19 +41,33 @@ func new_game():
 
 func _unhandled_input(event):
 	if selected_pikachu.size() != 0:
-		if Input.is_action_pressed("right_click"):
+		if Input.is_action_pressed("right_click") and !berryfield_hover:
 			# a star algorithm here
 			for p in selected_pikachu:
 				p.make_path()
 			# end of a star algorithm, pikachu arrived
+			
+		# check if
+		if Input.is_action_pressed("right_click") and berryfield_hover: 
+			for p in selected_pikachu:
+				p.farm_berries()
 	if pik_hover and Input.is_action_pressed("left_click"):
 		selected_pikachu.append($Pikachu_2)
 		pik_hover = false
+		
+	# leftclick on "nothing" to deselect units
 	elif Input.is_action_pressed("left_click"):
 		selected_pikachu = []
 		pik_hover = false
 
 
+# ----------------------------- register mouse hovering -----------------------------
+
+func _on_berryfield_mouse_entered():
+	berryfield_hover = true
+	
+func _on_berryfield_mouse_exited():
+	berryfield_hover = false
 
 func _on_pikachu_2_mouse_exited():
 	pik_hover = false
