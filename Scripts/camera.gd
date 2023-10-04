@@ -1,6 +1,7 @@
 extends Camera2D
 @export var tilemap: TileMap
 @export var moveOffset: int
+@export var UI: Label
 var visible_size
 var viewportYBy2
 var viewportXBy2
@@ -79,3 +80,4 @@ func _process(delta):
 	var new_position = position + velocity
 
 	position = new_position
+	UI.position = Vector2(new_position.x - 130,new_position.y - 80)

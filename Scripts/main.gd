@@ -1,12 +1,15 @@
 extends Node
 
 @export var mob_scene: PackedScene
+@export var UI: Label
 var score
 
 # storing the selected pikachu
 var selected_pikachu = []
 var selected_destination
 var pik_hover = false
+# for now gamemode 0 is general mode and 1 is buildmode
+var gamemode = "Main"
 
 
 #deprecated attributes
@@ -15,11 +18,13 @@ var hover = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	new_game() # Replace with function body.
-
+	UI.text = "Main"
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pikatchu_scale_on_hover()
+	_change_gamemode()
+	
 		
 	
 func new_game():
@@ -57,6 +62,16 @@ func pikatchu_scale_on_hover() -> void:
 	else:
 		$Pikachu_2.scale.x = 1.0
 		$Pikachu_2.scale.y = 1.0
+
+
+func _change_gamemode():
+	if Input.is_action_pressed("B"):
+		gamemode = "Build"
+		UI.text = gamemode
+	
+	if Input.is_action_pressed("R"):
+		gamemode = "Main"
+		UI.text = gamemode
 
 #deprecated functions
 
