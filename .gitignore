@@ -4,3 +4,5 @@
 # Jetbrains tools such as CLion, Rider or Intellij
 .idea
 Scripts/.idea
+.DS_Store
+*/.DS_Store
