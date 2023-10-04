@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://cn8ein6jc6frg"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_c7xow"]
-[ext_resource type="PackedScene" uid="uid://nmbqvlrbtkca" path="res://Scenes/kanto.tscn" id="2_35sft"]
+[ext_resource type="PackedScene" uid="uid://lveuxla3ydmf" path="res://Scenes/kanto.tscn" id="2_35sft"]
 [ext_resource type="PackedScene" uid="uid://213qfeta8ufe" path="res://Scenes/building.tscn" id="3_vioyy"]
 [ext_resource type="Script" path="res://Scripts/camera.gd" id="5_0705s"]
-[ext_resource type="PackedScene" uid="uid://bgxdshrc4i5u8" path="res://Scenes/pikachu2.tscn" id="6_ft3bd"]
+[ext_resource type="PackedScene" uid="uid://jbkfgig6x3sy" path="res://Scenes/pikachu2.tscn" id="6_ft3bd"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_c7xow")
@@ -24,7 +24,7 @@ limit_smoothed = true
 editor_draw_limits = true
 editor_draw_drag_margin = true
 script = ExtResource("5_0705s")
-tilemap = NodePath("")
+tilemap = NodePath("../TileMap")
 moveOffset = 300
 
 [node name="Pikachu_2" parent="." instance=ExtResource("6_ft3bd")]

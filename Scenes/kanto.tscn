@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://nmbqvlrbtkca"]
+[gd_scene load_steps=5 format=3 uid="uid://lveuxla3ydmf"]
 
 [ext_resource type="Texture2D" uid="uid://b0yuglgf5hf8t" path="res://Assets/BerryGardenTiles.png" id="1_un7bv"]
 [ext_resource type="Script" path="res://Scripts/kanto.gd" id="2_wrkmm"]
