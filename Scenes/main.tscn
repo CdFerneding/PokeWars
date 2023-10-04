@@ -6,8 +6,9 @@
 [ext_resource type="Script" path="res://Scripts/camera.gd" id="5_0705s"]
 [ext_resource type="PackedScene" uid="uid://jbkfgig6x3sy" path="res://Scenes/pikachu2.tscn" id="6_ft3bd"]
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" node_paths=PackedStringArray("UI")]
 script = ExtResource("1_c7xow")
+UI = NodePath("UI")
 
 [node name="TileMap" parent="." instance=ExtResource("2_35sft")]
 
@@ -17,7 +18,7 @@ position = Vector2(391, 203)
 [node name="Pokemon_center" parent="." instance=ExtResource("3_vioyy")]
 position = Vector2(181, 65)
 
-[node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("tilemap")]
+[node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("tilemap", "UI")]
 position = Vector2(144, 81)
 zoom = Vector2(4, 4)
 limit_smoothed = true
@@ -26,10 +27,20 @@ editor_draw_drag_margin = true
 script = ExtResource("5_0705s")
 tilemap = NodePath("../TileMap")
 moveOffset = 300
+UI = NodePath("../UI")
 
 [node name="Pikachu_2" parent="." instance=ExtResource("6_ft3bd")]
 position = Vector2(63, 117)
+collision_layer = 3
+collision_mask = 3
+collision_priority = 2.0
 input_pickable = true
+
+[node name="UI" type="Label" parent="."]
+offset_left = 10.0
+offset_top = 7.0
+offset_right = 50.0
+offset_bottom = 30.0
 
 [connection signal="mouse_entered" from="Pikachu_2" to="." method="_on_pikachu_2_mouse_entered"]
 [connection signal="mouse_exited" from="Pikachu_2" to="." method="_on_pikachu_2_mouse_exited"]
