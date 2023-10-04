@@ -36,14 +36,14 @@ func new_game():
 
 func _unhandled_input(event):
 	if selected_pikachu.size() != 0:
-		if Input.is_action_pressed("right_click"):
+		if Input.is_action_pressed("right_click") and !berryfield_hover:
 			# a star algorithm here
 			for p in selected_pikachu:
 				p.make_path()
 			# end of a star algorithm, pikachu arrived
 			
 		# check if
-		elif Input.is_action_pressed("right_click") and berryfield_hover: 
+		if Input.is_action_pressed("right_click") and berryfield_hover: 
 			for p in selected_pikachu:
 				p.farm_berries()
 	if pik_hover and Input.is_action_pressed("left_click"):
