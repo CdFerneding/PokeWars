@@ -1,9 +1,18 @@
 extends TileMap
 var no_obstacle = true
 @export var main: Node
+@onready var berryfield = preload("res://Scenes/berrybush.tscn")
+
+@export var TILE_SCENE = {
+	"1, 1, Vector2(1, 0)": berryfield 
+}
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	var berrybushes = get_used_cells_by_id(1, 1, Vector2(1, 0))
+	for i in range(berrybushes.size()):
+		print(berrybushes[i])
+	add_berrybush(berrybushes)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -23,6 +32,15 @@ Next Step:
 	depending on how we implement the functionality of the buildings add extra object
 	when the player places buildings
 '''
+
+func add_berrybush(berrybushes):
+	for i in range(berrybushes.size()):
+		var tile_pos = berrybushes[i]
+		var local_pos = map_to_local(tile_pos)
+		print(local_pos)
+		var bb = berryfield.instantiate() # create instance of bb scene
+		bb.set_position(local_pos)  # Set the world position
+		add_child(bb)
 
 func _input(event):
 	if Input.is_action_just_pressed("left_click") && main.gamemode == "Build":

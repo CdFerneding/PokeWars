@@ -1,5 +1,6 @@
 extends Node
 
+@onready var pikachu = preload("res://Scenes/pikachu2.tscn")
 @export var mob_scene: PackedScene
 @export var UI: Label
 var score
@@ -10,6 +11,7 @@ var selected_destination
 var pik_hover = false
 # for now gamemode 0 is general mode and 1 is buildmode
 var gamemode = "Main"
+var start_position = $StartPosition.position
 
 
 # ----------------------------- farming -----------------------------
@@ -26,13 +28,16 @@ var hover = false
 func _ready():
 	new_game() # Replace with function body.
 	UI.text = "Main"
+	var pikachu_first = pikachu.instantiate()
+	pikachu_first.position = start_position
+	add_child(pikachu_first)
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pikatchu_scale_on_hover()
 	_change_gamemode()
 	
-		
 	
 func new_game():
 	score = 0

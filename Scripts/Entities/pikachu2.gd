@@ -4,6 +4,7 @@ extends CharacterBody2D
 # if pikachu switches to farming a different ressource ...
 # without delivering the inventory to the pokecenter first the before farmed ressources get lost (macro)
 @export var ressource_inventory = 0 # this number must never be anything else than [0,10]
+@export var tilemap : TileMap 
 var is_farming = false #
 
 #speed of moving Pikatchu
@@ -22,7 +23,7 @@ func _ready():
 	$AnimatedSprite2D.animation = "walk_down"
 
 func _process(delta:float):
-	pass
+	print(ressource_inventory)
 		
 	
 func _physics_process(_delta: float) -> void:
@@ -91,9 +92,9 @@ func _input(event):
 func farm_berries():
 	is_farming = true
 	var ressource_position = get_global_mouse_position()
-	var pokecenter_position = Vector2(176.0 ,112.0) # x = 176; y = 112 is the position of a tileintersection in front of the pokecenter
+	var pokecenter_position = tilemap.get_used_cells_by_id(1, 1, Vector2(0, 0))
+	print(pokecenter_position)
 	while is_farming:
-		# walk to berryfield
 		make_path_to_ressource(ressource_position)
 		# stand there while "pikachu_inventory" goes up
 		$FarmTimer.start()
@@ -102,6 +103,7 @@ func farm_berries():
 		if ressource_inventory == 10:
 			$FarmTimer.stop()
 			make_path_to_ressource(pokecenter_position)
+			# food counter increase 
 			ressource_inventory = 0
 		
 		# when ressoure is delivered to pokecenter the ressource counterf (HUD) is updated

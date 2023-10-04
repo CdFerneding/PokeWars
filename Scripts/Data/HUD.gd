@@ -15,7 +15,7 @@ func update_game_timer():
 		time_formatted += str(minutes)+"m "
 	
 	time_formatted += str(time % 60)+"s"
-	print(time_formatted)
+#	print(time_formatted)
 	GameTimerLabel.text = str("Time : "+time_formatted)
 
 
