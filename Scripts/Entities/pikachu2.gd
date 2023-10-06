@@ -23,7 +23,8 @@ func _ready():
 	$AnimatedSprite2D.animation = "walk_down"
 
 func _process(delta:float):
-	print(ressource_inventory)
+	#print(ressource_inventory)
+	pass
 		
 	
 func _physics_process(_delta: float) -> void:
@@ -93,7 +94,7 @@ func farm_berries():
 	is_farming = true
 	var ressource_position = get_global_mouse_position()
 	var pokecenter_position = tilemap.get_used_cells_by_id(1, 1, Vector2(0, 0))
-	print(pokecenter_position)
+	#print(pokecenter_position)
 	while is_farming:
 		make_path_to_ressource(ressource_position)
 		# stand there while "pikachu_inventory" goes up

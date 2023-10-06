@@ -11,7 +11,9 @@ var selected_destination
 var pik_hover = false
 # for now gamemode 0 is general mode and 1 is buildmode
 var gamemode = "Main"
-var start_position = $StartPosition.position
+@onready var start_position = $StartPosition.position
+
+
 
 
 # ----------------------------- farming -----------------------------
@@ -83,11 +85,13 @@ func _on_pikachu_2_mouse_entered():
 	
 func pikatchu_scale_on_hover() -> void:
 	if pik_hover:
-		$Pikachu_2.scale.x = 1.1
-		$Pikachu_2.scale.y = 1.1
+		#$Pikachu_2.scale.x = 1.1
+		#$Pikachu_2.scale.y = 1.1
+		pass
 	else:
-		$Pikachu_2.scale.x = 1.0
-		$Pikachu_2.scale.y = 1.0
+		#$Pikachu_2.scale.x = 1.0
+		#$Pikachu_2.scale.y = 1.0
+		pass
 
 
 func _change_gamemode():

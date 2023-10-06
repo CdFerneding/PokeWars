@@ -48,7 +48,7 @@ func update_border():
 	minimum_x_to_move_camera_right = viewport_rect.size.x / 20
 	minimum_y_to_move_camera_down = viewport_rect.size.y / 20
 	
-	print(maximum_x_to_move_camera_left, maximum_y_to_move_camera_up, minimum_x_to_move_camera_right, minimum_y_to_move_camera_down)
+	#print(maximum_x_to_move_camera_left, maximum_y_to_move_camera_up, minimum_x_to_move_camera_right, minimum_y_to_move_camera_down)
 	
 
 func _process(delta):
