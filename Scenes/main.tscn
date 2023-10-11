@@ -1,10 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://cn8ein6jc6frg"]
+[gd_scene load_steps=17 format=3 uid="uid://cn8ein6jc6frg"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_c7xow"]
 [ext_resource type="Texture2D" uid="uid://b0yuglgf5hf8t" path="res://Assets/BerryGardenTiles.png" id="2_x2ryg"]
 [ext_resource type="Texture2D" uid="uid://c11lbgrfjcuo4" path="res://Assets/Sprites/Building/pokemon_center.png" id="3_vflf2"]
+[ext_resource type="Texture2D" uid="uid://foy76vonkqb3" path="res://Assets/Sprites/Building/fire_arena.png" id="4_q57d0"]
 [ext_resource type="Script" path="res://Scripts/building/TileSet.gd" id="4_vt6l8"]
 [ext_resource type="Script" path="res://Scripts/camera.gd" id="5_0705s"]
+[ext_resource type="Texture2D" uid="uid://0f62nxxobstl" path="res://Assets/Sprites/Building/plant_arena.png" id="5_a7c3a"]
+[ext_resource type="Texture2D" uid="uid://burruf170epwg" path="res://Assets/Sprites/Building/water_arena.png" id="6_frnui"]
 [ext_resource type="PackedScene" uid="uid://c5xbd3qrnk5vl" path="res://Scenes/HUD.tscn" id="6_xhnji"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_e562h"]
@@ -127,12 +130,36 @@ texture_region_size = Vector2i(64, 63)
 0:0/0/physics_layer_0/angular_velocity = 0.0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, 8, 8, 8, 8, 8, 8, 8, 8, 8)
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mkbit"]
+texture = ExtResource("4_q57d0")
+texture_region_size = Vector2i(80, 80)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_anl0r"]
+texture = ExtResource("5_a7c3a")
+texture_region_size = Vector2i(80, 80)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bou8u"]
+texture = ExtResource("6_frnui")
+texture_region_size = Vector2i(80, 80)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+
 [sub_resource type="TileSet" id="TileSet_7l2ml"]
 physics_layer_0/collision_layer = 1
 physics_layer_0/collision_mask = 2
 navigation_layer_0/layers = 1
 sources/1 = SubResource("TileSetAtlasSource_hi3h3")
 sources/2 = SubResource("TileSetAtlasSource_hyia4")
+sources/6 = SubResource("TileSetAtlasSource_mkbit")
+sources/7 = SubResource("TileSetAtlasSource_anl0r")
+sources/8 = SubResource("TileSetAtlasSource_bou8u")
 
 [node name="Main" type="Node" node_paths=PackedStringArray("UI")]
 script = ExtResource("1_c7xow")
