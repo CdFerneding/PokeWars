@@ -4,7 +4,7 @@ class_name PikachuBuilder
 
 
 static func _build_pikachu(main:Node,tileMap:TileMap, position:Vector2):
-	var scene = load("res://Scenes/pikachu2.tscn")
+	var scene = load("res://Scenes/pikachu.tscn")
 	var pikachu = scene.instantiate()
 	pikachu.position = position
 	pikachu.tilemap = tileMap
