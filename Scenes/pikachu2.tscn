@@ -271,10 +271,11 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vg7x3"]
-radius = 9.05539
+radius = 7.07107
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 position = Vector2(40, 29)
+input_pickable = true
 script = ExtResource("1_wmp5u")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -288,8 +289,12 @@ shape = SubResource("CircleShape2D_vg7x3")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 navigation_layers = 3
+avoidance_mask = 3
 debug_enabled = true
 
 [node name="FarmTimer" type="Timer" parent="."]
 
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
 [connection signal="timeout" from="FarmTimer" to="." method="_on_farm_timer_timeout"]

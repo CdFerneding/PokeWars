@@ -5,7 +5,9 @@ extends CharacterBody2D
 # without delivering the inventory to the pokecenter first the before farmed ressources get lost (macro)
 @export var ressource_inventory = 0 # this number must never be anything else than [0,10]
 @export var tilemap : TileMap 
+@export var main: Node
 var is_farming = false #
+var pik_hover = false
 
 #speed of moving Pikatchu
 const speed = 50
@@ -24,7 +26,7 @@ func _ready():
 
 func _process(delta:float):
 	#print(ressource_inventory)
-	pass
+	pikatchu_scale_on_hover()
 		
 	
 func _physics_process(_delta: float) -> void:
@@ -121,3 +123,40 @@ func _on_farm_timer_timeout():
 	ressource_inventory += 1
 
 # ----------------------------- farming berries end -----------------------------
+
+
+
+func _on_mouse_entered():
+	pik_hover = true
+
+
+
+func _on_mouse_exited():
+	pik_hover = false
+
+
+func _pika_hover_selected_check(event):
+	if pik_hover and Input.is_action_pressed("left_click"):
+		main.selected_pikachu.append(self)
+		print(main.selected_pikachu)
+		pik_hover = false
+		
+	# leftclick on "nothing" to deselect units
+	elif Input.is_action_pressed("left_click"):
+		main.selected_pikachu = []
+		pik_hover = false
+
+
+func pikatchu_scale_on_hover() -> void:
+	if pik_hover:
+		self.scale.x = 1.1
+		self.scale.y = 1.1
+
+	else:
+		self.scale.x = 1.0
+		self.scale.y = 1.0
+
+
+
+func _on_input_event(viewport, event, shape_idx):
+	_pika_hover_selected_check(event)

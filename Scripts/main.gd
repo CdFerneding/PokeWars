@@ -1,6 +1,6 @@
 extends Node
 
-@onready var pikachu = preload("res://Scenes/pikachu2.tscn")
+@onready var pikachuBuilder = preload("res://Scripts/Builder/PikachuBuilder.gd")
 @export var mob_scene: PackedScene
 @export var UI: Label
 var score
@@ -8,7 +8,7 @@ var score
 # storing the selected pikachu
 var selected_pikachu = []
 var selected_destination
-var pik_hover = false
+
 # for now gamemode 0 is general mode and 1 is buildmode
 var gamemode = "Main"
 @onready var start_position = $StartPosition.position
@@ -30,15 +30,15 @@ var hover = false
 func _ready():
 	new_game() # Replace with function body.
 	UI.text = "Main"
-	var pikachu_first = pikachu.instantiate()
-	pikachu_first.position = start_position
-	add_child(pikachu_first)
+	print(start_position)
+	pikachuBuilder._build_pikachu(self,self.find_child("TileMap"),start_position)
+	
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pikatchu_scale_on_hover()
 	_change_gamemode()
+
 	
 	
 func new_game():
@@ -47,26 +47,19 @@ func new_game():
 
 
 func _unhandled_input(event):
-	if selected_pikachu.size() != 0:
-		if Input.is_action_pressed("right_click") and !berryfield_hover:
-			# a star algorithm here
-			for p in selected_pikachu:
-				p.make_path()
-			# end of a star algorithm, pikachu arrived
-			
-		# check if
-		if Input.is_action_pressed("right_click") and berryfield_hover: 
-			for p in selected_pikachu:
-				p.farm_berries()
-	if pik_hover and Input.is_action_pressed("left_click"):
-		selected_pikachu.append($Pikachu_2)
-		pik_hover = false
-		
-	# leftclick on "nothing" to deselect units
-	elif Input.is_action_pressed("left_click"):
-		selected_pikachu = []
-		pik_hover = false
+	_berry_hover_check()
+	_add_new_pikachu(event)
 
+#When gamemode is in placemode you can place new pikachu
+#only for testing for now can be refactored for building pikachu
+func _add_new_pikachu(event):
+	if Input.is_action_pressed("left_click") && gamemode =="Place":
+		#var x_position = round(event)
+		#var y_position = round(event.position.y/3)
+		var position = Vector2(100,100)
+		print(position)
+		pikachuBuilder._build_pikachu(self,self.find_child("TileMap"),position)
+		
 
 # ----------------------------- register mouse hovering -----------------------------
 
@@ -76,31 +69,31 @@ func _on_berryfield_mouse_entered():
 func _on_berryfield_mouse_exited():
 	berryfield_hover = false
 
-func _on_pikachu_2_mouse_exited():
-	pik_hover = false
 
-
-func _on_pikachu_2_mouse_entered():
-	pik_hover = true
+func _berry_hover_check():
+	if selected_pikachu.size() != 0:
+		if Input.is_action_pressed("right_click") and !berryfield_hover:
+			# a star algorithm here
+			print(selected_pikachu.size())
+			for p in selected_pikachu:
+				p.make_path()
+			# end of a star algorithm, pikachu arrived
+			
+		# check if
+		if Input.is_action_pressed("right_click") and berryfield_hover: 
+			for p in selected_pikachu:
+				p.farm_berries()
 	
-func pikatchu_scale_on_hover() -> void:
-	if pik_hover:
-		#$Pikachu_2.scale.x = 1.1
-		#$Pikachu_2.scale.y = 1.1
-		pass
-	else:
-		#$Pikachu_2.scale.x = 1.0
-		#$Pikachu_2.scale.y = 1.0
-		pass
-
 
 func _change_gamemode():
 	if Input.is_action_pressed("B"):
 		gamemode = "Build"
 		UI.text = gamemode
-	
 	if Input.is_action_pressed("R"):
 		gamemode = "Main"
+		UI.text = gamemode
+	if Input.is_action_pressed("P"):
+		gamemode = "Place"
 		UI.text = gamemode
 
 #deprecated functions
@@ -110,3 +103,4 @@ func _change_gamemode():
 #
 #func _on_pikachu_mouse_exited():
 #	hover = false
+
