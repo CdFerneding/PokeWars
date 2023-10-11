@@ -30,7 +30,6 @@ var hover = false
 func _ready():
 	new_game() # Replace with function body.
 	UI.text = "Main"
-	print(start_position)
 	pikachuBuilder._build_pikachu(self,self.find_child("TileMap"),start_position)
 	
 	
@@ -57,7 +56,6 @@ func _add_new_pikachu(event):
 		#var x_position = round(event)
 		#var y_position = round(event.position.y/3)
 		var position = Vector2(100,100)
-		print(position)
 		pikachuBuilder._build_pikachu(self,self.find_child("TileMap"),position)
 		
 
@@ -65,6 +63,7 @@ func _add_new_pikachu(event):
 
 func _on_berryfield_mouse_entered():
 	berryfield_hover = true
+	print(berryfield_hover)
 	
 func _on_berryfield_mouse_exited():
 	berryfield_hover = false
@@ -74,7 +73,6 @@ func _berry_hover_check():
 	if selected_pikachu.size() != 0:
 		if Input.is_action_pressed("right_click") and !berryfield_hover:
 			# a star algorithm here
-			print(selected_pikachu.size())
 			for p in selected_pikachu:
 				p.make_path()
 			# end of a star algorithm, pikachu arrived

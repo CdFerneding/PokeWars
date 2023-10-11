@@ -25,7 +25,6 @@ func _ready():
 	$AnimatedSprite2D.animation = "walk_down"
 
 func _process(delta:float):
-	#print(ressource_inventory)
 	pikatchu_scale_on_hover()
 		
 	
@@ -87,7 +86,6 @@ func _input(event):
 	
 	#this was a try to start pathfinding algorithem from Pikatchu and not from the main scene
 #	if event.is_action("left_click"):
-#		print("Pikachu clicked")
 
 
 
@@ -96,7 +94,6 @@ func farm_berries():
 	is_farming = true
 	var ressource_position = get_global_mouse_position()
 	var pokecenter_position = tilemap.get_used_cells_by_id(1, 1, Vector2(0, 0))
-	#print(pokecenter_position)
 	while is_farming:
 		make_path_to_ressource(ressource_position)
 		# stand there while "pikachu_inventory" goes up
@@ -138,7 +135,6 @@ func _on_mouse_exited():
 func _pika_hover_selected_check(event):
 	if pik_hover and Input.is_action_pressed("left_click"):
 		main.selected_pikachu.append(self)
-		print(main.selected_pikachu)
 		pik_hover = false
 		
 	# leftclick on "nothing" to deselect units

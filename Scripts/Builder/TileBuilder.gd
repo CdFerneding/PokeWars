@@ -52,5 +52,5 @@ static func _tileBuilder(position, tileMap, id):
 	if(no_obstacle == true):
 		_tileSetter(position,tileMap,id)
 	else:
-		print("Not possible")
+		pass
 		
