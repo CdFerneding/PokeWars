@@ -11,7 +11,7 @@ var selected_destination
 
 # for now gamemode 0 is general mode and 1 is buildmode
 var gamemode = "Main"
-@onready var start_position = $StartPosition.position
+@onready var start_position = $TileMap.start_position
 
 
 

@@ -3,6 +3,8 @@ var no_obstacle = true
 @export var main: Node
 @onready var tileBuiler = preload("res://Scripts/Builder/TileBuilder.gd")
 @onready var berryfield = preload("res://Scenes/berrybush.tscn")
+@export var start_position = self.get_used_cells_by_id(1,2, Vector2(0,0))[0]
+
 
 @export var TILE_SCENE = {
 	"1, 1, Vector2(1, 0)": berryfield 
@@ -14,6 +16,8 @@ func _ready():
 	for i in range(berrybushes.size()):
 		pass
 	add_berrybush(berrybushes)
+	start_position.y += 3
+	start_position = map_to_local(start_position)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
