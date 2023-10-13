@@ -145,12 +145,12 @@ func _pika_hover_selected_check(event):
 
 func pikatchu_scale_on_hover() -> void:
 	if pik_hover:
-		self.scale.x = 1.1
-		self.scale.y = 1.1
+		self.scale.x = 0.6
+		self.scale.y = 0.6
 
 	else:
-		self.scale.x = 1.0
-		self.scale.y = 1.0
+		self.scale.x = 0.5
+		self.scale.y = 0.5
 
 
 

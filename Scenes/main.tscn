@@ -7,7 +7,6 @@
 [ext_resource type="Script" path="res://Scripts/building/TileSet.gd" id="4_vt6l8"]
 [ext_resource type="Script" path="res://Scripts/camera.gd" id="5_0705s"]
 [ext_resource type="Texture2D" uid="uid://0f62nxxobstl" path="res://Assets/Sprites/Building/plant_arena.png" id="5_a7c3a"]
-[ext_resource type="Texture2D" uid="uid://burruf170epwg" path="res://Assets/Sprites/Building/water_arena.png" id="6_frnui"]
 [ext_resource type="PackedScene" uid="uid://c5xbd3qrnk5vl" path="res://Scenes/HUD.tscn" id="6_xhnji"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_e562h"]
@@ -144,8 +143,11 @@ texture_region_size = Vector2i(80, 80)
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qkj1k"]
+load_path = "res://.godot/imported/water_arena.png-37e78d387a49b2aff1e2745a4620d039.ctex"
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bou8u"]
-texture = ExtResource("6_frnui")
+texture = SubResource("CompressedTexture2D_qkj1k")
 texture_region_size = Vector2i(80, 80)
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
