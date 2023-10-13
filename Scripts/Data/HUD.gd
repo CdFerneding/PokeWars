@@ -3,7 +3,7 @@ extends CanvasLayer
 var time = 0
 
 func update_game_timer():
-	var GameTimerLabel: Label = $VBoxContainer/HSplitContainer/GameTimerLabel
+	var GameTimerLabel: Label = $HUDMainSeparation/PlayerMenu/GameInformation/GameTimerLabel
 	var minutes
 	var hours
 	var time_formatted = ""
@@ -22,3 +22,9 @@ func update_game_timer():
 func _on_timer_timeout():
 	time+=1
 	update_game_timer()
+
+func _process(delta):
+	var size = get_viewport().size
+	$TextureRect.size.x = size.x
+	offset.y = size.y - $HUDMainSeparation/PlayerMenu.size.y
+	

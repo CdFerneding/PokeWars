@@ -190,6 +190,7 @@ position = Vector2(198, 146)
 position = Vector2(144, 81)
 zoom = Vector2(4, 4)
 limit_smoothed = true
+position_smoothing_enabled = true
 editor_draw_limits = true
 editor_draw_drag_margin = true
 script = ExtResource("5_0705s")
@@ -198,7 +199,6 @@ moveOffset = 300
 UI = NodePath("../UI")
 
 [node name="HUD" parent="Camera" instance=ExtResource("6_xhnji")]
-visible = false
 
 [node name="UI" type="Label" parent="."]
 offset_left = 10.0
