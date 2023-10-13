@@ -43,10 +43,10 @@ func update_border():
 	border_left = viewportXBy2
 	border_bottom = limit_bottom - viewportYBy2
 	border_top= viewportYBy2
-	maximum_x_to_move_camera_left = viewport_rect.size.x - viewport_rect.size.x / 20
-	maximum_y_to_move_camera_up = viewport_rect.size.y - viewport_rect.size.y / 20
-	minimum_x_to_move_camera_right = viewport_rect.size.x / 20
-	minimum_y_to_move_camera_down = viewport_rect.size.y / 20
+	maximum_x_to_move_camera_left = viewport_rect.size.x / 10
+	maximum_y_to_move_camera_up = viewport_rect.size.y / 10
+	minimum_x_to_move_camera_right = viewport_rect.size.x - viewport_rect.size.x / 10
+	minimum_y_to_move_camera_down = viewport_rect.size.y - viewport_rect.size.y / 10
 	
 	#print(maximum_x_to_move_camera_left, maximum_y_to_move_camera_up, minimum_x_to_move_camera_right, minimum_y_to_move_camera_down)
 	
@@ -80,4 +80,4 @@ func _process(delta):
 	var new_position = position + velocity
 
 	position = new_position
-	UI.position = Vector2(new_position.x - 130,new_position.y - 80)
+	#UI.position = Vector2(new_position.x - 130,new_position.y - 80)
