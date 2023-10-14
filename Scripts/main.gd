@@ -13,6 +13,11 @@ var selected_destination
 var gamemode = "Main"
 @onready var start_position = $TileMap.start_position
 
+#cursor
+var default_cursor = preload("res://Assets/Sprites/Cursor/test_cursor_2.png")
+#cursor 1 looks horrible - do not use
+#var hover_cursor = preload("res://Assets/Sprites/Cursor/test_cursor_2.png")
+
 
 
 
@@ -32,6 +37,9 @@ func _ready():
 	UI.text = "Main"
 	pikachuBuilder._build_pikachu(self,self.find_child("TileMap"),start_position)
 	
+	#set cursor to default
+	Input.set_custom_mouse_cursor(default_cursor, Input.CURSOR_ARROW, Vector2(5,0))
+		
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -42,6 +50,7 @@ func _process(delta):
 	
 func new_game():
 	score = 0
+	$Music.play()
 	# $Pikachu.start($StartPosition.position)
 
 
