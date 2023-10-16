@@ -5,6 +5,10 @@ extends CharacterBody2D
 var pik_hover = false
 signal pikachu_clicked
 
+# pikachu highlighting 
+@export var selected = false
+@onready var box = get_node("Selected")
+
 #speed of moving Pikatchu
 const speed = 50
 
@@ -21,6 +25,11 @@ func _ready():
 	$AnimatedSprite2D.animation = "walk_down"
 	var main_node = get_tree().get_root().get_node("Main")
 	connect("pikachu_clicked", Callable(main_node, "_on_pikachu_clicked"))
+	set_selected(selected)
+
+func set_selected(value):
+	selected = value
+	box.visible = value
 
 func _process(delta:float):
 	pikatchu_scale_on_hover()
@@ -79,9 +88,11 @@ func apply_corresponding_animation(prev):
 
 func _on_mouse_entered():
 	pik_hover = true
+	set_selected(!selected)
 
 func _on_mouse_exited():
 	pik_hover = false
+	set_selected(!selected)
 
 
 func _pika_hover_selected_check(event):

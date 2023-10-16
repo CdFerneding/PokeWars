@@ -53,13 +53,18 @@ func new_game():
 func _input(event):
 #	_berry_hover_check()
 #	_add_new_pikachu(event)
+	var no_pikachus_selected = true
 	if Input.is_action_just_pressed("left_click"):
 		for p in pikachus:
 			if p.pik_hover:
 				selected_pikachus.append(p)
+				no_pikachus_selected = false
+		if no_pikachus_selected:
+			selected_pikachus = []
 	if Input.is_action_just_pressed("right_click"):
 		for p in selected_pikachus:
 			p.make_path()
+	
 		
 
 
