@@ -48,17 +48,24 @@ text = "Stone :"
 
 [node name="GameTimer" type="Label" parent="."]
 offset_left = 8.0
-offset_top = 208.0
+offset_top = 232.0
 offset_right = 68.0
-offset_bottom = 234.0
+offset_bottom = 258.0
 text = "Time"
 
 [node name="GameMode" type="Label" parent="."]
 offset_left = 8.0
-offset_top = 176.0
+offset_top = 200.0
 offset_right = 102.0
-offset_bottom = 202.0
+offset_bottom = 226.0
 text = "GameMode:"
+
+[node name="Selected" type="Label" parent="."]
+offset_left = 8.0
+offset_top = 168.0
+offset_right = 82.0
+offset_bottom = 194.0
+text = "Selected :"
 
 [node name="HUDMainSeparation" type="HBoxContainer" parent="."]
 visible = false
@@ -72,10 +79,6 @@ layout_mode = 2
 [node name="GameInformation" type="HSplitContainer" parent="HUDMainSeparation/PlayerMenu"]
 layout_mode = 2
 split_offset = 200
-
-[node name="Selected" type="Label" parent="HUDMainSeparation/PlayerMenu/GameInformation"]
-layout_mode = 2
-text = "Selected :"
 
 [node name="Resources" type="HBoxContainer" parent="HUDMainSeparation/PlayerMenu"]
 layout_mode = 2

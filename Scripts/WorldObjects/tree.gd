@@ -1,9 +1,9 @@
 extends StaticBody2D
 
-var totalTime = 10
+var totalTime = 20
 var currTime
-# number of pikachus near resource are counted to adjust farming speed
-# this is named pikachus, since military units are not able to farm resources
+# number of pikachus near resource are counted to adjust choping speed
+# this is named pikachus, since military units are not able to chop resources
 var pikachus = 0
 @onready var bar = $ProgressBar
 @onready var timer = $Timer
@@ -14,16 +14,16 @@ func _ready():
 	
 func _process(_delta):
 	bar.value = currTime
-	# check if bush has been completely farmed 
+	# check if bush has been completely choped 
 	if currTime <= 0:
-		bushFarmed()
+		treeChopped()
 
-func _on_farm_area_body_entered(body):
+func _on_chop_area_body_entered(body):
 	if "Pikachu" in body.name:
 		pikachus += 1
-		startFarming()
+		startChopping()
 
-func _on_farm_area_body_exited(body):
+func _on_chop_area_body_exited(body):
 	if "Pikachu" in body.name:
 		pikachus -= 1
 		if pikachus <= 0:
@@ -31,8 +31,8 @@ func _on_farm_area_body_exited(body):
 
 
 func _on_timer_timeout():
-	var farmSpeed = 1*pikachus
-	currTime -= farmSpeed
+	var chopSpeed = 1*pikachus
+	currTime -= chopSpeed
 	# tweens are used to create smoothened animations
 	var tween = get_tree().create_tween()
 	# tween property anmates (here bar and value to current time, 
@@ -40,11 +40,11 @@ func _on_timer_timeout():
 	# .set_trans describes the style of the animation
 	tween.tween_property(bar, "value", currTime, 0.4).set_trans(Tween.TRANS_LINEAR)
 
-func startFarming():
+func startChopping():
 	timer.start()
 
-func bushFarmed():
-	Game.Food += 2
+func treeChopped():
+	Game.Wood += 4
 	# resetting ProgressBar and currentTime
 	_ready()
 

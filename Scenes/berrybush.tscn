@@ -1,13 +1,13 @@
 [gd_scene load_steps=8 format=3 uid="uid://weyowi1k0j0y"]
 
 [ext_resource type="Script" path="res://Scripts/WorldObjects/berrybush.gd" id="1_erh1v"]
-[ext_resource type="Texture2D" uid="uid://bxxo682hxtojr" path="res://Assets/berryBush.png" id="1_m0unl"]
+[ext_resource type="Texture2D" uid="uid://bxxo682hxtojr" path="res://Assets/Sprites/IngameResources/berryBush.png" id="2_r3wwu"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_14f56"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_m0unl")
+"texture": ExtResource("2_r3wwu")
 }],
 "loop": true,
 "name": &"default",
@@ -30,6 +30,7 @@ bg_color = Color(0.882353, 0.482353, 0, 1)
 script = ExtResource("1_erh1v")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+y_sort_enabled = true
 scale = Vector2(0.09, 0.09)
 sprite_frames = SubResource("SpriteFrames_14f56")
 
@@ -44,7 +45,7 @@ shape = SubResource("RectangleShape2D_rx8qq")
 [node name="ProgressBar" type="ProgressBar" parent="."]
 offset_left = -8.0
 offset_top = -12.0
-offset_right = 9.0
+offset_right = 8.0
 offset_bottom = -8.0
 theme_override_styles/background = SubResource("StyleBoxFlat_w6tkr")
 theme_override_styles/fill = SubResource("StyleBoxFlat_moimq")

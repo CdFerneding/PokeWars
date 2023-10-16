@@ -10,7 +10,7 @@ signal pikachu_clicked
 @onready var box = get_node("Selected")
 
 #speed of moving Pikatchu
-const speed = 50
+const speed = 25
 
 #used to detect when path is reached
 var target : Vector2
@@ -18,7 +18,7 @@ var target : Vector2
 var previous_direction
 
 #implements the pathfinding algorithm
-@onready var nav_agent:= $NavigationAgent2D as NavigationAgent2D
+@onready var nav_agent:= $NavigationAgent2D #as NavigationAgent2D
 
 func _ready():
 	previous_direction = "down"

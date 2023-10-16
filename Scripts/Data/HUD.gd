@@ -5,6 +5,7 @@ extends CanvasLayer
 @onready var StoneLabel = $Stone
 @onready var GameTimerLabel = $GameTimer
 @onready var GameModeLabel = $GameMode
+@onready var SelectedLabel = $Selected # (numbers of currently selected pikachus)
 
 var time = 0
 
@@ -35,4 +36,5 @@ func _process(_delta):
 	WoodLabel.text = "Wood: " + str(Game.Wood)
 	StoneLabel.text = "Stone: " + str(Game.Stone)
 	GameModeLabel.text = "Mode: " + Game.GameMode
+	SelectedLabel.text = "Selected: " + str(Game.Selected)
 	

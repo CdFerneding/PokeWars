@@ -58,9 +58,11 @@ func _input(_event):
 		for p in pikachus:
 			if p.pik_hover:
 				selected_pikachus.append(p)
+				Game.Selected = selected_pikachus.size()
 				no_pikachus_selected = false
 		if no_pikachus_selected:
 			selected_pikachus = []
+			Game.Selected = selected_pikachus.size()
 	if Input.is_action_just_pressed("right_click"):
 		for p in selected_pikachus:
 			p.make_path()

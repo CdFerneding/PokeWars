@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cn8ein6jc6frg"]
+[gd_scene load_steps=21 format=3 uid="uid://cn8ein6jc6frg"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_c7xow"]
 [ext_resource type="Texture2D" uid="uid://b0yuglgf5hf8t" path="res://Assets/BerryGardenTiles.png" id="2_x2ryg"]
@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://ddjyv1ho8uwv7" path="res://Assets/Music/escape from swag city.mp3" id="9_l55f3"]
 [ext_resource type="PackedScene" uid="uid://jbkfgig6x3sy" path="res://Scenes/pikachu.tscn" id="10_dhifx"]
 [ext_resource type="PackedScene" uid="uid://weyowi1k0j0y" path="res://Scenes/berrybush.tscn" id="11_u5ymy"]
+[ext_resource type="PackedScene" uid="uid://dw0dfm6o0ni0s" path="res://Scenes/tree.tscn" id="12_he3mb"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_e562h"]
 vertices = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -211,16 +212,28 @@ position = Vector2(156, 126)
 [node name="Pikachu2" parent="pikachus" instance=ExtResource("10_dhifx")]
 position = Vector2(183, 126)
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="Objects" type="Node2D" parent="."]
 
-[node name="BerryBush" parent="Node2D" instance=ExtResource("11_u5ymy")]
+[node name="BerryBush" parent="Objects" instance=ExtResource("11_u5ymy")]
 position = Vector2(247, 125)
 
-[node name="BerryBush2" parent="Node2D" instance=ExtResource("11_u5ymy")]
+[node name="BerryBush2" parent="Objects" instance=ExtResource("11_u5ymy")]
 position = Vector2(267, 125)
 
-[node name="BerryBush3" parent="Node2D" instance=ExtResource("11_u5ymy")]
+[node name="BerryBush3" parent="Objects" instance=ExtResource("11_u5ymy")]
 position = Vector2(247, 143)
 
-[node name="BerryBush4" parent="Node2D" instance=ExtResource("11_u5ymy")]
+[node name="BerryBush4" parent="Objects" instance=ExtResource("11_u5ymy")]
 position = Vector2(267, 143)
+
+[node name="Tree" parent="Objects" instance=ExtResource("12_he3mb")]
+position = Vector2(75, 125)
+
+[node name="Tree2" parent="Objects" instance=ExtResource("12_he3mb")]
+position = Vector2(61, 139)
+
+[node name="Tree3" parent="Objects" instance=ExtResource("12_he3mb")]
+position = Vector2(47, 135)
+
+[node name="Tree4" parent="Objects" instance=ExtResource("12_he3mb")]
+position = Vector2(51, 153)

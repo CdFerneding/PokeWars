@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bxxo682hxtojr"
-path="res://.godot/imported/berryBush.png-e7badbdb77437d7b9ee202e13d22acf3.ctex"
+uid="uid://bh8ihb6jtiibg"
+path="res://.godot/imported/Tree.png-3e9aebc08783086d20bcdcebe64e686c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/berryBush.png"
-dest_files=["res://.godot/imported/berryBush.png-e7badbdb77437d7b9ee202e13d22acf3.ctex"]
+source_file="res://Assets/Sprites/IngameResources/Tree.png"
+dest_files=["res://.godot/imported/Tree.png-3e9aebc08783086d20bcdcebe64e686c.ctex"]
 
 [params]
 
