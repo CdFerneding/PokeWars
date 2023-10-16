@@ -1,65 +1,119 @@
-extends Area2D
+extends CharacterBody2D
 
-signal hit
+#@export var main: Node
+#@export var main: Node
+var pik_hover = false
+signal pikachu_clicked
 
-@export var speed = 400 # How fast the player will move (pixels/sec).
-var screen_size # Size of the game window.
+# pikachu highlighting 
+@export var selected = false
+@onready var box = get_node("Selected")
+
+#speed of moving Pikatchu
+const speed = 25
+
+#used to detect when path is reached
+var target : Vector2
+
 var previous_direction
-var previous_position
+
+#implements the pathfinding algorithm
+@onready var nav_agent:= $NavigationAgent2D #as NavigationAgent2D
 
 func _ready():
-	screen_size = get_viewport_rect().size
 	previous_direction = "down"
-	$AnimatedSprite2D.animation = "idle_down"
-	hide()
+	$AnimatedSprite2D.animation = "walk_down"
+	var main_node = get_tree().get_root().get_node("Main")
+	connect("pikachu_clicked", Callable(main_node, "_on_pikachu_clicked"))
+	set_selected(selected)
 
-func _process(delta):
-	var velocity = Vector2.ZERO # The player's movement vector.
-	if Input.is_action_pressed("move_right"):
-		velocity.x += 1
-	if Input.is_action_pressed("move_left"):
-		velocity.x -= 1
-	if Input.is_action_pressed("move_down"):
-		velocity.y += 1
-	if Input.is_action_pressed("move_up"):
-		velocity.y -= 1
+func set_selected(value):
+	selected = value
+	box.visible = value
 
-	if velocity.length() > 0:
-		velocity = velocity.normalized() * speed
+func _process(_delta:float):
+	pikatchu_scale_on_hover()
+		
+	
+func _physics_process(_delta: float) -> void:
+#	var prev_vel = velocity
+	if self.position == target:
+		return
+		
+	var next_pos = nav_agent.get_next_path_position()
+	var dir = to_local(next_pos).normalized()
+	velocity = dir * speed
+	
+	if position.distance_to(next_pos) < 1:
+		velocity = Vector2.ZERO
+		if dir != Vector2.ZERO:
+			self.position = next_pos
+		target = self.position
+	apply_corresponding_animation(velocity)
+	
+	move_and_slide()
+	
+# added is_farming = false to cancel farming when a new destination is issued for pikachu
+func make_path(ressource_position = get_global_mouse_position()) -> void:
+	nav_agent.target_position = ressource_position
+	target = nav_agent.target_position
+	
+#toDo
+#not sufficient yet
+func apply_corresponding_animation(_prev):
+	var current_animation = ""
+	
+	#if prev.x == velocity.x and prev.y == velocity.y:
+	#	current_animation += "down_"
+		
+	if velocity.y > 0:
+		current_animation+="down_"
+	elif velocity.y < 0:
+		current_animation+="up_"
+		
+	if velocity.x < 0:
+		current_animation+="left_"
+	elif velocity.x > 0:
+		current_animation += "right_"
+		
+	if current_animation == "":
+		current_animation = previous_direction+"_"
+	
+	previous_direction = current_animation.left(current_animation.length() - 1)
+	current_animation = "walk_"+previous_direction
+
+	$AnimatedSprite2D.animation = current_animation
 	$AnimatedSprite2D.play()
-	
-	position += velocity * delta
-	position = position.clamp(Vector2.ZERO, screen_size)
-	previous_position = position
-	
-	if velocity == Vector2.ZERO:
-		$AnimatedSprite2D.animation = "idle_"+previous_direction
+
+
+func _on_mouse_entered():
+	pik_hover = true
+	set_selected(!selected)
+
+func _on_mouse_exited():
+	pik_hover = false
+	set_selected(!selected)
+
+
+func _pika_hover_selected_check(_event):
+	if pik_hover and Input.is_action_pressed("left_click"):
+		emit_signal("pikachu_clicked", self)
+		pik_hover = false
+		
+	# leftclick on "nothing" to deselect units
+	elif Input.is_action_pressed("left_click"):
+		pik_hover = false
+
+
+func pikatchu_scale_on_hover() -> void:
+	if pik_hover:
+		self.scale.x = 0.6
+		self.scale.y = 0.6
+
 	else:
-		var current_animation = ""
-		
-		if velocity.y < 0:
-			current_animation+="up_"
-		elif velocity.y > 0:
-			current_animation+="down_"
-			
-		if velocity.x < 0:
-			current_animation+="left_"
-		elif velocity.x > 0:
-			current_animation += "right_"
-		
-		previous_direction = current_animation.left(current_animation.length() - 1)
-		current_animation = "walking_"+previous_direction
-		$AnimatedSprite2D.animation = current_animation
-		
-func _on_body_entered(body):
-	print("colision")
-	hit.emit()
-	position = previous_position
-	# Must be deferred as we can't change physics properties on a physics callback.
-	$CollisionShape2D.set_deferred("disabled", true)
-	
-	
-func start(pos):
-	position = pos
-	show()
-	$CollisionShape2D.disabled = false
+		self.scale.x = 0.5
+		self.scale.y = 0.5
+
+func _on_input_event(_viewport, event, _shape_idx):
+	if pik_hover:
+		_pika_hover_selected_check(event)
