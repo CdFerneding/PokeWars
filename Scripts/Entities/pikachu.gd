@@ -1,13 +1,9 @@
 extends CharacterBody2D
 
-# pikachu can hold 10 ressources (ressources being: berries, wood, stone) at a time.
-# if pikachu switches to farming a different ressource ...
-# without delivering the inventory to the pokecenter first the before farmed ressources get lost (macro)
-@export var ressource_inventory = 0 # this number must never be anything else than [0,10]
-@export var tilemap : TileMap 
-@export var main: Node
-var is_farming = false #
+#@export var main: Node
+#@export var main: Node
 var pik_hover = false
+signal pikachu_clicked
 
 #speed of moving Pikatchu
 const speed = 50
@@ -23,13 +19,14 @@ var previous_direction
 func _ready():
 	previous_direction = "down"
 	$AnimatedSprite2D.animation = "walk_down"
+	var main_node = get_tree().get_root().get_node("Main")
+	connect("pikachu_clicked", Callable(main_node, "_on_pikachu_clicked"))
 
 func _process(delta:float):
 	pikatchu_scale_on_hover()
 		
 	
 func _physics_process(_delta: float) -> void:
-	
 	var prev_vel = velocity
 	if self.position == target:
 		return
@@ -49,7 +46,6 @@ func _physics_process(_delta: float) -> void:
 	
 # added is_farming = false to cancel farming when a new destination is issued for pikachu
 func make_path(ressource_position = get_global_mouse_position()) -> void:
-	is_farming = false
 	nav_agent.target_position = ressource_position
 	target = nav_agent.target_position
 	
@@ -80,66 +76,22 @@ func apply_corresponding_animation(prev):
 	$AnimatedSprite2D.animation = current_animation
 	$AnimatedSprite2D.play()
 
-	
-func _input(event):
-	pass
-	
-	#this was a try to start pathfinding algorithem from Pikatchu and not from the main scene
-#	if event.is_action("left_click"):
-
-
-
-# ----------------------------- farming berries -----------------------------
-func farm_berries():
-	is_farming = true
-	var ressource_position = get_global_mouse_position()
-	var pokecenter_position = tilemap.get_used_cells_by_id(1, 1, Vector2(0, 0))
-	while is_farming:
-		make_path_to_ressource(ressource_position)
-		# stand there while "pikachu_inventory" goes up
-		$FarmTimer.start()
-		# when "ressource_inventory" hits 10 he delivers the (10) berries to the pokecenter
-		# FarmTimer.stop has to be handles in _process function
-		if ressource_inventory == 10:
-			$FarmTimer.stop()
-			make_path_to_ressource(pokecenter_position)
-			# food counter increase 
-			ressource_inventory = 0
-		
-		# when ressoure is delivered to pokecenter the ressource counterf (HUD) is updated
-		# repeat / while pikachu is to farm berries
-	
-# ----------------------------- helper functions -----------------------------
-# added ressource_position to make_path function with get_global_position as a default parameter
-# need an addition function that does not set is_farming to false
-func make_path_to_ressource(ressource_position = get_global_mouse_position()) -> void:
-	nav_agent.target_position = ressource_position
-	target = nav_agent.target_position
-
-func _on_farm_timer_timeout():
-	ressource_inventory += 1
-
-# ----------------------------- farming berries end -----------------------------
-
-
 
 func _on_mouse_entered():
 	pik_hover = true
-
-
 
 func _on_mouse_exited():
 	pik_hover = false
 
 
 func _pika_hover_selected_check(event):
+	var mainPath = get_tree().get_root().get_node("Main")
 	if pik_hover and Input.is_action_pressed("left_click"):
-		main.selected_pikachu.append(self)
+		emit_signal("pikachu_clicked", self)
 		pik_hover = false
 		
 	# leftclick on "nothing" to deselect units
 	elif Input.is_action_pressed("left_click"):
-		main.selected_pikachu = []
 		pik_hover = false
 
 
@@ -155,4 +107,5 @@ func pikatchu_scale_on_hover() -> void:
 
 
 func _on_input_event(viewport, event, shape_idx):
-	_pika_hover_selected_check(event)
+	if pik_hover:
+		_pika_hover_selected_check(event)
