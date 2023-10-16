@@ -27,7 +27,7 @@ func _on_timer_timeout():
 	time+=1
 	update_game_timer()
 
-func _process(delta):
+func _process(_delta):
 #	var size = get_viewport().size
 #	$TextureRect.size.x = size.x
 #	offset.y = size.y - $HUDMainSeparation/PlayerMenu.size.y

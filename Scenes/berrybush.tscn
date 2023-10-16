@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://weyowi1k0j0y"]
+[gd_scene load_steps=8 format=3 uid="uid://weyowi1k0j0y"]
 
+[ext_resource type="Script" path="res://Scripts/WorldObjects/berrybush.gd" id="1_erh1v"]
 [ext_resource type="Texture2D" uid="uid://bxxo682hxtojr" path="res://Assets/berryBush.png" id="1_m0unl"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_14f56"]
@@ -13,16 +14,44 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_wphw0"]
-radius = 14.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_d6hni"]
+radius = 7.0
 
-[node name="BerryBush" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rx8qq"]
+size = Vector2(32, 32)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w6tkr"]
+bg_color = Color(0.192157, 0.917647, 0, 0.886275)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_moimq"]
+bg_color = Color(0.882353, 0.482353, 0, 1)
+
+[node name="BerryBush" type="StaticBody2D"]
+script = ExtResource("1_erh1v")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.09, 0.09)
 sprite_frames = SubResource("SpriteFrames_14f56")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_d6hni")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_wphw0")
+[node name="farmArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="farmArea"]
+shape = SubResource("RectangleShape2D_rx8qq")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -8.0
+offset_top = -12.0
+offset_right = 9.0
+offset_bottom = -8.0
+theme_override_styles/background = SubResource("StyleBoxFlat_w6tkr")
+theme_override_styles/fill = SubResource("StyleBoxFlat_moimq")
+show_percentage = false
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="farmArea" to="." method="_on_farm_area_body_entered"]
+[connection signal="body_exited" from="farmArea" to="." method="_on_farm_area_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

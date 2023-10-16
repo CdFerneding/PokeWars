@@ -45,7 +45,7 @@ static func _tileBuilder(position, tileMap, id):
 	for n in range(position[2]+3,position[3]-1,-1):
 		for m in range(position[1]-1,position[0]-4, -1):
 			var current_position = Vector2i(m,n)
-			var obstacle_layer1 = is_instance_valid(tileMap.get_cell_tile_data(1,Vector2i(m, n)))
+			var obstacle_layer1 = is_instance_valid(tileMap.get_cell_tile_data(1,current_position))
 			if(obstacle_layer1):
 				no_obstacle = false
 				

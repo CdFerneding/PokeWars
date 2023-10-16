@@ -31,12 +31,12 @@ func set_selected(value):
 	selected = value
 	box.visible = value
 
-func _process(delta:float):
+func _process(_delta:float):
 	pikatchu_scale_on_hover()
 		
 	
 func _physics_process(_delta: float) -> void:
-	var prev_vel = velocity
+#	var prev_vel = velocity
 	if self.position == target:
 		return
 		
@@ -60,7 +60,7 @@ func make_path(ressource_position = get_global_mouse_position()) -> void:
 	
 #toDo
 #not sufficient yet
-func apply_corresponding_animation(prev):
+func apply_corresponding_animation(_prev):
 	var current_animation = ""
 	
 	#if prev.x == velocity.x and prev.y == velocity.y:
@@ -95,8 +95,7 @@ func _on_mouse_exited():
 	set_selected(!selected)
 
 
-func _pika_hover_selected_check(event):
-	var mainPath = get_tree().get_root().get_node("Main")
+func _pika_hover_selected_check(_event):
 	if pik_hover and Input.is_action_pressed("left_click"):
 		emit_signal("pikachu_clicked", self)
 		pik_hover = false
@@ -117,6 +116,6 @@ func pikatchu_scale_on_hover() -> void:
 
 
 
-func _on_input_event(viewport, event, shape_idx):
+func _on_input_event(_viewport, event, _shape_idx):
 	if pik_hover:
 		_pika_hover_selected_check(event)

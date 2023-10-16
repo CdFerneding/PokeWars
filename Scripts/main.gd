@@ -40,7 +40,7 @@ func get_pikachus():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	_change_gamemode()
 	
 	
@@ -50,7 +50,7 @@ func new_game():
 	# $Pikachu.start($StartPosition.position)
 
 
-func _input(event):
+func _input(_event):
 #	_berry_hover_check()
 #	_add_new_pikachu(event)
 	var no_pikachus_selected = true

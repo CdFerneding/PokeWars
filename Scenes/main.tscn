@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cn8ein6jc6frg"]
+[gd_scene load_steps=20 format=3 uid="uid://cn8ein6jc6frg"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_c7xow"]
 [ext_resource type="Texture2D" uid="uid://b0yuglgf5hf8t" path="res://Assets/BerryGardenTiles.png" id="2_x2ryg"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://c5xbd3qrnk5vl" path="res://Scenes/HUD.tscn" id="6_xhnji"]
 [ext_resource type="AudioStream" uid="uid://ddjyv1ho8uwv7" path="res://Assets/Music/escape from swag city.mp3" id="9_l55f3"]
 [ext_resource type="PackedScene" uid="uid://jbkfgig6x3sy" path="res://Scenes/pikachu.tscn" id="10_dhifx"]
+[ext_resource type="PackedScene" uid="uid://weyowi1k0j0y" path="res://Scenes/berrybush.tscn" id="11_u5ymy"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_e562h"]
 vertices = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -181,7 +182,7 @@ layer_1/modulate = Color(1, 1, 1, 1)
 layer_1/y_sort_enabled = false
 layer_1/y_sort_origin = 0
 layer_1/z_index = 0
-layer_1/tile_data = PackedInt32Array(524304, 65537, 0, 458768, 65537, 0, 458769, 65537, 0, 524305, 65537, 0, 262154, 2, 0, -8, 1, 4, 65528, 1, 4, 131064, 1, 4, 196600, 1, 4, 262136, 1, 4, 327672, 1, 4, 393208, 1, 4, 458744, 1, 4, 524280, 1, 4, 589816, 1, 4, 655352, 1, 4, 720888, 1, 4, 786424, 1, 4, 851960, 1, 4, 917496, 1, 4, 983032, 1, 4, 983033, 1, 4, 983034, 1, 4, 983035, 1, 4, 983036, 1, 4, 983037, 1, 4, 983038, 1, 4, 983039, 1, 4, 917504, 1, 4, 917505, 1, 4, 917506, 1, 4, 917507, 1, 4, 917508, 1, 4, 917509, 1, 4, 917510, 1, 4, 917511, 1, 4, 917512, 1, 4, 917513, 1, 4, 917514, 1, 4, 917515, 1, 4, 917516, 1, 4, 917517, 1, 4, 917518, 1, 4, 917519, 1, 4, 917520, 1, 4, 917521, 1, 4, 917522, 1, 4, 917523, 1, 4, 917524, 1, 4, 917525, 1, 4, 917526, 1, 4, 917527, 1, 4, 917528, 1, 4, 917529, 1, 4, 917532, 1, 4, 917533, 1, 4, 917534, 1, 4, 917535, 1, 4, 917530, 1, 4, 917531, 1, 4, 851999, 1, 4, 786463, 1, 4, 720927, 1, 4, 655391, 1, 4, 589855, 1, 4, 524319, 1, 4, 458783, 1, 4, 393247, 1, 4, 327711, 1, 4, 262175, 1, 4, 196639, 1, 4, 131103, 1, 4, 65567, 1, 4, 31, 1, 4, -65505, 1, 4, -7, 1, 4, -6, 1, 4, -5, 1, 4, -4, 1, 4, -3, 1, 4, -2, 1, 4, -1, 1, 4, -65536, 1, 4, -65535, 1, 4, -65534, 1, 4, -65533, 1, 4, -65532, 1, 4, -65531, 1, 4, -65530, 1, 4, -65529, 1, 4, -65528, 1, 4, -65527, 1, 4, -65522, 1, 4, -65521, 1, 4, -65520, 1, 4, -65519, 1, 4, -65518, 1, 4, -65517, 1, 4, -65516, 1, 4, -65515, 1, 4, -65514, 1, 4, -65513, 1, 4, -65512, 1, 4, -65506, 1, 4, -65507, 1, 4, -65508, 1, 4, -65509, 1, 4, -65510, 1, 4, -65511, 1, 4, -65523, 1, 4, -65524, 1, 4, -65525, 1, 4, -65526, 1, 4)
+layer_1/tile_data = PackedInt32Array(262154, 2, 0, -8, 1, 4, 65528, 1, 4, 131064, 1, 4, 196600, 1, 4, 262136, 1, 4, 327672, 1, 4, 393208, 1, 4, 458744, 1, 4, 524280, 1, 4, 589816, 1, 4, 655352, 1, 4, 720888, 1, 4, 786424, 1, 4, 851960, 1, 4, 917496, 1, 4, 983032, 1, 4, 983033, 1, 4, 983034, 1, 4, 983035, 1, 4, 983036, 1, 4, 983037, 1, 4, 983038, 1, 4, 983039, 1, 4, 917504, 1, 4, 917505, 1, 4, 917506, 1, 4, 917507, 1, 4, 917508, 1, 4, 917509, 1, 4, 917510, 1, 4, 917511, 1, 4, 917512, 1, 4, 917513, 1, 4, 917514, 1, 4, 917515, 1, 4, 917516, 1, 4, 917517, 1, 4, 917518, 1, 4, 917519, 1, 4, 917520, 1, 4, 917521, 1, 4, 917522, 1, 4, 917523, 1, 4, 917524, 1, 4, 917525, 1, 4, 917526, 1, 4, 917527, 1, 4, 917528, 1, 4, 917529, 1, 4, 917532, 1, 4, 917533, 1, 4, 917534, 1, 4, 917535, 1, 4, 917530, 1, 4, 917531, 1, 4, 851999, 1, 4, 786463, 1, 4, 720927, 1, 4, 655391, 1, 4, 589855, 1, 4, 524319, 1, 4, 458783, 1, 4, 393247, 1, 4, 327711, 1, 4, 262175, 1, 4, 196639, 1, 4, 131103, 1, 4, 65567, 1, 4, 31, 1, 4, -65505, 1, 4, -7, 1, 4, -6, 1, 4, -5, 1, 4, -4, 1, 4, -3, 1, 4, -2, 1, 4, -1, 1, 4, -65536, 1, 4, -65535, 1, 4, -65534, 1, 4, -65533, 1, 4, -65532, 1, 4, -65531, 1, 4, -65530, 1, 4, -65529, 1, 4, -65528, 1, 4, -65527, 1, 4, -65522, 1, 4, -65521, 1, 4, -65520, 1, 4, -65519, 1, 4, -65518, 1, 4, -65517, 1, 4, -65516, 1, 4, -65515, 1, 4, -65514, 1, 4, -65513, 1, 4, -65512, 1, 4, -65506, 1, 4, -65507, 1, 4, -65508, 1, 4, -65509, 1, 4, -65510, 1, 4, -65511, 1, 4, -65523, 1, 4, -65524, 1, 4, -65525, 1, 4, -65526, 1, 4)
 script = ExtResource("4_vt6l8")
 main = NodePath("..")
 
@@ -204,8 +205,22 @@ stream = ExtResource("9_l55f3")
 [node name="pikachus" type="Node2D" parent="."]
 y_sort_enabled = true
 
-[node name="pikachu" parent="pikachus" instance=ExtResource("10_dhifx")]
+[node name="Pikachu" parent="pikachus" instance=ExtResource("10_dhifx")]
 position = Vector2(156, 126)
 
-[node name="pikachu2" parent="pikachus" instance=ExtResource("10_dhifx")]
+[node name="Pikachu2" parent="pikachus" instance=ExtResource("10_dhifx")]
 position = Vector2(183, 126)
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="BerryBush" parent="Node2D" instance=ExtResource("11_u5ymy")]
+position = Vector2(247, 125)
+
+[node name="BerryBush2" parent="Node2D" instance=ExtResource("11_u5ymy")]
+position = Vector2(267, 125)
+
+[node name="BerryBush3" parent="Node2D" instance=ExtResource("11_u5ymy")]
+position = Vector2(247, 143)
+
+[node name="BerryBush4" parent="Node2D" instance=ExtResource("11_u5ymy")]
+position = Vector2(267, 143)

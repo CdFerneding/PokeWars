@@ -9,6 +9,3 @@ var GameMode = "play"
 
 var Player_name : String
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass

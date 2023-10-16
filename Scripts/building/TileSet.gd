@@ -19,9 +19,6 @@ func _ready():
 	start_position.y += 3
 	start_position = map_to_local(start_position)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
 
 '''
 Description:
@@ -46,7 +43,7 @@ func add_berrybush(berrybushes):
 		bb.set_position(local_pos)  # Set the world position
 		add_child(bb)
 
-func _input(event):
+func _input(_event):
 	if Input.is_action_just_pressed("left_click") && main.gamemode == "Build":
 		_place_poke_center()
 
