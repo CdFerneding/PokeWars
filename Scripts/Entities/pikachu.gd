@@ -114,8 +114,6 @@ func pikatchu_scale_on_hover() -> void:
 		self.scale.x = 0.5
 		self.scale.y = 0.5
 
-
-
 func _on_input_event(_viewport, event, _shape_idx):
 	if pik_hover:
 		_pika_hover_selected_check(event)

@@ -2,22 +2,7 @@ extends TileMap
 var no_obstacle = true
 @export var main: Node
 @onready var tileBuiler = preload("res://Scripts/Builder/TileBuilder.gd")
-@onready var berryfield = preload("res://Scenes/berrybush.tscn")
-@export var start_position = self.get_used_cells_by_id(1,2, Vector2(0,0))[0]
-
-
-@export var TILE_SCENE = {
-	"1, 1, Vector2(1, 0)": berryfield 
-}
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	var berrybushes = get_used_cells_by_id(1, 1, Vector2(1, 0))
-	for i in range(berrybushes.size()):
-		pass
-	add_berrybush(berrybushes)
-	start_position.y += 3
-	start_position = map_to_local(start_position)
+@onready var pikachu = preload("res://Scenes/pikachu.tscn")
 
 
 '''
@@ -35,17 +20,11 @@ Next Step:
 	when the player places buildings
 '''
 
-func add_berrybush(berrybushes):
-	for i in range(berrybushes.size()):
-		var tile_pos = berrybushes[i]
-		var local_pos = map_to_local(tile_pos)
-		var bb = berryfield.instantiate() # create instance of bb scene
-		bb.set_position(local_pos)  # Set the world position
-		add_child(bb)
-
 func _input(_event):
-	if Input.is_action_just_pressed("left_click") && main.gamemode == "Build":
+	if Input.is_action_just_pressed("left_click") && Game.GameMode == "build":
 		_place_poke_center()
+	if Input.is_action_pressed("left_click") && Game.GameMode == "place":
+		_add_new_pikachu()
 
 
 func _place_poke_center():
@@ -59,3 +38,24 @@ func _place_poke_center():
 	
 	var position_array = [x_pos_offset_left, x_pos_offset_right, y_pos_offset_up, y_pos_offset_down]
 	tileBuiler._tileBuilder(position_array, self, 2)
+
+func _add_new_pikachu():
+	if Input.is_action_just_pressed("left_click") && Game.GameMode == "place":
+		var pikachuPath = get_tree().get_root().get_node("Main/Pikachus")
+		var mainPath = get_tree().get_root().get_node("Main")
+		
+		var pikachu1 = pikachu.instantiate()
+		pikachu1.position = get_global_mouse_position()
+		pikachu1.position.y += 3
+		pikachuPath.add_child(pikachu1)
+		# pikachus need the name Pikachu, to be recognized by resources farming-area
+		pikachu1.name = "Pikachu"
+		
+		# recall to have all pikachus from the "pikachus"-group in "pikachus"-variable again
+		mainPath.get_pikachus()
+		
+		
+#		var x_position = round(event)
+#		var y_position = round(event.position.y/3)
+#		var position = Vector2(100,100)
+#		pikachuBuilder._build_pikachu(self,self.find_child("TileMap"),position)
