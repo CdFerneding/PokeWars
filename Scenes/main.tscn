@@ -201,6 +201,7 @@ moveOffset = 300
 [node name="HUD" parent="." instance=ExtResource("6_xhnji")]
 
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
 stream = ExtResource("9_l55f3")
 
 [node name="Pikachus" type="Node2D" parent="."]

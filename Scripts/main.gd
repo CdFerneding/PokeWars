@@ -51,6 +51,17 @@ func new_game():
 
 
 func _input(_event):
+	if Input.is_action_pressed("Esc"):
+		var childrenHUD = $HUD.get_children()
+		for child in childrenHUD:
+			if "Menu" in child.name:
+				return
+		var menu = preload("res://Scenes/menu.tscn")
+		var pathHUD = get_tree().get_root().get_node("Main/HUD")
+		var menuOverlay = menu.instantiate()
+		Game.set_game_paused(true)
+		pathHUD.add_child(menuOverlay)
+	
 #	_add_new_pikachu(event)
 	var no_pikachus_selected = true
 	# this check needs to check for "release". Otherwise when placing new pikachus they get instantly selected
