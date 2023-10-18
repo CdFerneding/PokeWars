@@ -1,11 +1,11 @@
 extends CanvasLayer
 
-@onready var FoodLabel = $Food
-@onready var WoodLabel = $Wood
-@onready var StoneLabel = $Stone
-@onready var GameTimerLabel = $GameTimer
-@onready var GameModeLabel = $GameMode
-@onready var SelectedLabel = $Selected # (numbers of currently selected pikachus)
+@onready var FoodLabel = $VBoxContainer/Food
+@onready var WoodLabel = $VBoxContainer/Wood
+@onready var StoneLabel = $VBoxContainer/Stone
+@onready var GameTimerLabel = $VBoxContainer/GameTimer
+@onready var GameModeLabel = $VBoxContainer/GameMode
+@onready var SelectedLabel = $VBoxContainer/Selected # (numbers of currently selected pikachus)
 
 var time = 0
 
@@ -28,10 +28,9 @@ func _on_timer_timeout():
 	time+=1
 	update_game_timer()
 
+
+
 func _process(_delta):
-#	var size = get_viewport().size
-#	$TextureRect.size.x = size.x
-#	offset.y = size.y - $HUDMainSeparation/PlayerMenu.size.y
 	FoodLabel.text = "Food: " + str(Game.Food)
 	WoodLabel.text = "Wood: " + str(Game.Wood)
 	StoneLabel.text = "Stone: " + str(Game.Stone)
