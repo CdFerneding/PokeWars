@@ -3,7 +3,7 @@ extends Object
 class_name PikachuBuilder
 
 
-static func _build_unit(main: Node, scene, position:Vector2,y_offset):
+static func _build_unit(main: Node, scene, position:Vector2, y_offset):
 	var pikachuPath = main.get_tree().get_root().get_node("Main/Pikachus")
 	var mainPath = main.get_tree().get_root().get_node("Main")
 		

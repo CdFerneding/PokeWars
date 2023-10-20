@@ -117,11 +117,9 @@ units and move them around.
 found a small bug if it is not fixed yet where you can select the same
 pikachu multiple times and increases selected count
 '
-func _handle_play_input(event):
-	#_add_new_pikachu(event)
 
 
-fun _handle_esc():
+func _handle_esc():
 	if Input.is_action_pressed("Esc"):
 		var childrenHUD = $HUD.get_children()
 		for child in childrenHUD:
@@ -132,8 +130,10 @@ fun _handle_esc():
 		var menuOverlay = menu.instantiate()
 		Game.set_game_paused(true)
 		pathHUD.add_child(menuOverlay)
-	
-#	_add_new_pikachu(event)
+
+
+func _handle_play_input(event):
+	#_add_new_pikachu(event)
 	var no_pikachus_selected = true
 	# this check needs to check for "release". Otherwise when placing new pikachus they get instantly selected
 	if Input.is_action_just_released("left_click"):
@@ -155,7 +155,8 @@ only for debugging to place units manually
 '
 func _handle_place_input(event):
 	if Input.is_action_just_pressed("left_click"):
-		unitBuilder._build_unit(self, pikachu,tileMap.get_global_mouse_position(),0)
+		var position = tileMap.get_global_mouse_position()
+		unitBuilder._build_unit(self, pikachu,position,0)
 
 '
 change gamemode depending on different button presses

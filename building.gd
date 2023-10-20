@@ -5,6 +5,9 @@ var buildingHover = false
 
 'until we have other units every building produces Pikachu'
 @onready var pikachu = preload("res://Scenes/pikachu.tscn")
+@onready var squirtle = preload("res://Scenes/squirtle.tscn")
+@onready var charmander = preload("res://Scenes/charmander.tscn")
+@onready var bulbasaur = preload("res://Scenes/bulbasaur.tscn")
 
 @export var main: Node
 
@@ -45,10 +48,15 @@ func _on_timer_timeout():
 func _training_finished():
 	timer.stop()
 	currently_training = false
-	if self.name == "PokeCenter":
-		unitBuilder._build_unit(main,pikachu,self.position, 3)
-	else:
-		unitBuilder._build_unit(main,pikachu,self.position, 4)
+	match self.name:
+		"PokeCenter":
+			unitBuilder._build_unit(main,pikachu,self.position, 3)
+		"FireArena":
+			unitBuilder._build_unit(main,charmander,self.position, 4)
+		"WaterArena":
+			unitBuilder._build_unit(main,squirtle,self.position, 4)
+		"PlantArena":
+			unitBuilder._build_unit(main,bulbasaur,self.position, 4)
 
 
 
