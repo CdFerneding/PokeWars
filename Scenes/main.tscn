@@ -203,6 +203,8 @@ moveOffset = 300
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("9_l55f3")
 
+[node name="Ennemies" type="Node2D" parent="."]
+
 [node name="Pikachus" type="Node2D" parent="."]
 y_sort_enabled = true
 
@@ -237,3 +239,9 @@ position = Vector2(47, 135)
 
 [node name="Tree4" parent="Objects" instance=ExtResource("12_he3mb")]
 position = Vector2(51, 153)
+
+[node name="EnnemySpawnerTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="EnnemySpawnerTimer" to="." method="_on_ennemy_spawner_timer_timeout"]
