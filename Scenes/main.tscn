@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://jbkfgig6x3sy" path="res://Scenes/pikachu.tscn" id="10_dhifx"]
 [ext_resource type="PackedScene" uid="uid://weyowi1k0j0y" path="res://Scenes/berrybush.tscn" id="11_u5ymy"]
 [ext_resource type="PackedScene" uid="uid://dw0dfm6o0ni0s" path="res://Scenes/tree.tscn" id="12_he3mb"]
-[ext_resource type="PackedScene" uid="uid://ctnohtufkqyj3" path="res://Scenes/building.tscn" id="13_ot5q2"]
+[ext_resource type="PackedScene" uid="uid://213qfeta8ufe" path="res://Scenes/building.tscn" id="13_ot5q2"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_e562h"]
 vertices = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -175,7 +175,7 @@ sources/5 = SubResource("TileSetAtlasSource_bou8u")
 script = ExtResource("1_c7xow")
 tileMap = NodePath("TileMap")
 
-[node name="TileMap" type="TileMap" parent="." node_paths=PackedStringArray("main")]
+[node name="TileMap" type="TileMap" parent="."]
 y_sort_enabled = true
 position = Vector2(0, 2)
 tile_set = SubResource("TileSet_7l2ml")
@@ -190,7 +190,7 @@ layer_1/y_sort_origin = 0
 layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array(262154, 2, 0)
 script = ExtResource("4_vt6l8")
-main = NodePath("..")
+main = null
 
 [node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("tilemap")]
 position = Vector2(144, 81)

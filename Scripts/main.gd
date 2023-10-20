@@ -139,7 +139,8 @@ func _handle_play_input(event):
 	if Input.is_action_just_released("left_click"):
 		for p in pikachus:
 			if p.pik_hover:
-				selected_pikachus.append(p)
+				if p not in selected_pikachus:
+					selected_pikachus.append(p)
 				Game.Selected = selected_pikachus.size()
 				no_pikachus_selected = false
 		if no_pikachus_selected:
