@@ -45,6 +45,7 @@ func startChopping():
 
 func treeChopped():
 	Game.Wood += 4
+	$Sound.play()
 	# resetting ProgressBar and currentTime
 	_ready()
 

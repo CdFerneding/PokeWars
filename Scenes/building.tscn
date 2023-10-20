@@ -1,53 +1,37 @@
-[gd_scene load_steps=5 format=3 uid="uid://213qfeta8ufe"]
+[gd_scene load_steps=4 format=3 uid="uid://ctnohtufkqyj3"]
 
-[ext_resource type="Texture2D" uid="uid://c11lbgrfjcuo4" path="res://Assets/Sprites/Building/pokemon_center.png" id="1_x8o6u"]
+[ext_resource type="Script" path="res://building.gd" id="1_lom46"]
+[ext_resource type="AudioStream" uid="uid://bax1jdg1h7v4f" path="res://Assets/Sounds/new unit.wav" id="2_b3j5e"]
 
-[sub_resource type="GDScript" id="GDScript_hyqow"]
-script/source = "extends Area2D
+[sub_resource type="CircleShape2D" id="CircleShape2D_pixci"]
+radius = 29.0172
 
-@export var speed = 200
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-"
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dl8gx"]
-size = Vector2(64, 62)
-
-[sub_resource type="GDScript" id="GDScript_brjnm"]
-script/source = "extends CollisionShape2D
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-"
-
-[node name="PokeCenter" type="Area2D"]
-y_sort_enabled = true
-collision_layer = 2
-collision_mask = 3
-script = SubResource("GDScript_hyqow")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_x8o6u")
+[node name="Building" type="StaticBody2D"]
+input_pickable = true
+script = ExtResource("1_lom46")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_dl8gx")
-debug_color = Color(0, 0.6, 0.701961, 0.419608)
-script = SubResource("GDScript_brjnm")
+y_sort_enabled = true
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_pixci")
 
-[connection signal="area_entered" from="." to="." method="_on_area_entered"]
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
+one_shot = true
+
+[node name="Label" type="Label" parent="."]
+offset_left = -7.0
+offset_top = -38.0
+offset_right = 33.0
+offset_bottom = -15.0
+
+[node name="Created_Unit_Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_b3j5e")
+volume_db = 1.246
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_entered" from="." to="CollisionShape2D" method="_on_static_body_2d_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="mouse_exited" from="." to="CollisionShape2D" method="_on_static_body_2d_mouse_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
