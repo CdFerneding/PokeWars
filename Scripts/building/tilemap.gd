@@ -38,21 +38,7 @@ func _place_poke_center():
 	
 	var position_array = [x_pos_offset_left, x_pos_offset_right, y_pos_offset_up, y_pos_offset_down]
 	tileBuiler._tileBuilder(position_array, self, 2)
-
-func _add_new_pikachu():
-	if Input.is_action_just_pressed("left_click") && Game.GameMode == "place":
-		var pikachuPath = get_tree().get_root().get_node("Main/Pikachus")
-		var mainPath = get_tree().get_root().get_node("Main")
-		
-		var pikachu1 = pikachu.instantiate()
-		pikachu1.position = get_global_mouse_position()
-		pikachu1.position.y += 3
-		pikachuPath.add_child(pikachu1)
-		# pikachus need the name Pikachu, to be recognized by resources farming-area
-		pikachu1.name = "Pikachu"
-		
-		# recall to have all pikachus from the "pikachus"-group in "pikachus"-variable again
-		mainPath.get_pikachus()
+	
 		
 		
 #		var x_position = round(event)

@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=3 uid="uid://con2q5dmjbcvt"]
+
+[ext_resource type="Script" path="res://Scripts/settings.gd" id="1_cyd4t"]
+
+[node name="Settings" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_cyd4t")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 576.0
+offset_top = 88.0
+offset_right = 640.0
+offset_bottom = 114.0
+text = "music"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="."]
+offset_left = 392.0
+offset_top = 144.0
+offset_right = 824.0
+offset_bottom = 160.0
+min_value = -50.0
+max_value = 50.0
+
+[node name="Exit" type="Button" parent="."]
+offset_left = 856.0
+offset_top = 72.0
+offset_right = 896.0
+offset_bottom = 104.0
+text = "Exit
+"
+
+[connection signal="value_changed" from="HSlider" to="." method="_on_h_slider_value_changed"]
+[connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]

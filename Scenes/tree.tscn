@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dw0dfm6o0ni0s"]
+[gd_scene load_steps=8 format=3 uid="uid://dw0dfm6o0ni0s"]
 
 [ext_resource type="Script" path="res://Scripts/WorldObjects/tree.gd" id="1_68ayq"]
 [ext_resource type="Texture2D" uid="uid://bh8ihb6jtiibg" path="res://Assets/Sprites/IngameResources/Tree.png" id="1_go8go"]
+[ext_resource type="AudioStream" uid="uid://cspxi1oc1jheh" path="res://Assets/Sounds/mixkit-fish-dropped-hit-2920.wav" id="3_8c52a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5q5v4"]
 size = Vector2(6, 7)
@@ -44,6 +45,10 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_moimq")
 show_percentage = false
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_8c52a")
+volume_db = 1.5
 
 [connection signal="body_entered" from="chopArea" to="." method="_on_chop_area_body_entered"]
 [connection signal="body_exited" from="chopArea" to="." method="_on_chop_area_body_exited"]
