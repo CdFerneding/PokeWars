@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+class_name Ennemy
+
 #@export var main: Node
 #@export var main: Node
 var ennemy_hover = false
@@ -21,6 +23,8 @@ var previous_direction
 
 var updaterPikachus : Node
 
+var current_target: Node
+
 
 #implements the pathfinding algorithm
 @onready var nav_agent:= $NavigationAgent2D #as NavigationAgent2D
@@ -28,6 +32,7 @@ var updaterPikachus : Node
 func _ready():
 	previous_direction = "down"
 	$AnimatedSprite2D.animation = "walk_down"
+	$AttackCooldown.start()
 	#var main_node = get_tree().get_root().get_node("Main")
 	set_selected(selected)
 
@@ -38,6 +43,10 @@ func set_selected(value):
 func _process(_delta:float):
 	ennemy_scale_on_hover()
 		
+func attack():
+	if current_target is Pikachu:
+		(current_target as Pikachu)._on_hit(1)
+	$AttackCooldown.start()
 	
 func _physics_process(_delta: float) -> void:
 #	var prev_vel = velocity
@@ -48,11 +57,11 @@ func _physics_process(_delta: float) -> void:
 	var dir = to_local(next_pos).normalized()
 	velocity = dir * speed
 	
-	if position.distance_to(next_pos) < 1:
+	if position.distance_to(next_pos) < 10:
 		velocity = Vector2.ZERO
-		if dir != Vector2.ZERO:
-			self.position = next_pos
-		target = self.position
+		if $AttackCooldown.is_stopped() and current_target:
+			attack()
+			
 	apply_corresponding_animation(velocity)
 	
 	move_and_slide()
@@ -126,10 +135,9 @@ func _on_input_event(_viewport, event, _shape_idx):
 func _on_retarget_timer_timeout():
 	possible_targets = updaterPikachus.pikachus
 	for target in possible_targets:
-		if nearest_target == null:
+		if nearest_target == null or target.position.distance_to(position) < nearest_target.position.distance_to(position):
 			nearest_target = target
-		elif target.position.distance_to(position) < nearest_target.position.distance_to(position):
-			nearest_target = target
+			current_target = target
 	
 	nav_agent.target_position = nearest_target.position
 	target = nav_agent.target_position

@@ -318,6 +318,9 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_e1720")
 wait_time = 0.5
 autostart = true
 
+[node name="AttackCooldown" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

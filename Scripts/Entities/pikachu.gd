@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+class_name Pikachu
+
 #@export var main: Node
 #@export var main: Node
 var pik_hover = false
@@ -117,3 +119,6 @@ func pikatchu_scale_on_hover() -> void:
 func _on_input_event(_viewport, event, _shape_idx):
 	if pik_hover:
 		_pika_hover_selected_check(event)
+
+func _on_hit(damage):
+	print("damage received !")
