@@ -1,6 +1,8 @@
 extends GoodPokemon
 #extends CharacterBody2D
 
+class_name Pikachu
+
 var pik_hover = false
 signal pikachu_clicked
 

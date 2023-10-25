@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://jbkfgig6x3sy" path="res://Scenes/pikachu.tscn" id="10_dhifx"]
 [ext_resource type="PackedScene" uid="uid://weyowi1k0j0y" path="res://Scenes/berrybush.tscn" id="11_u5ymy"]
 [ext_resource type="PackedScene" uid="uid://dw0dfm6o0ni0s" path="res://Scenes/tree.tscn" id="12_he3mb"]
-[ext_resource type="PackedScene" uid="uid://ctnohtufkqyj3" path="res://Scenes/building.tscn" id="13_ot5q2"]
+[ext_resource type="PackedScene" uid="uid://213qfeta8ufe" path="res://Scenes/building.tscn" id="13_ot5q2"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_e562h"]
 vertices = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)

@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends BadPokemon
 
 class_name Ennemy
 
@@ -13,11 +13,7 @@ signal ennemy_clicked
 
 @export var possible_targets: Array[Node] = []
 @export var nearest_target: CharacterBody2D
-#speed of moving Pikatchu
-const speed = 25
 
-#used to detect when path is reached
-var target : Vector2
 
 var previous_direction
 
@@ -35,6 +31,7 @@ func _ready():
 	$AttackCooldown.start()
 	#var main_node = get_tree().get_root().get_node("Main")
 	set_selected(selected)
+	super()
 
 func set_selected(value):
 	selected = value

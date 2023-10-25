@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://cfk8t2gwxewpm"]
+[gd_scene load_steps=40 format=3 uid="uid://60t425d06bmo"]
 
 [ext_resource type="Script" path="res://Scripts/Entities/ennemy.gd" id="1_41be8"]
 [ext_resource type="Texture2D" uid="uid://dka0n2flxvea1" path="res://Assets/Sprites/Elektro/Pikachu/Walk-Anim.png" id="2_xg1wp"]
@@ -286,6 +286,12 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sug2m"]
+bg_color = Color(0.192157, 0.917647, 0, 0.886275)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_egc8v"]
+bg_color = Color(0.882353, 0.482353, 0, 1)
+
 [node name="Ennemy" type="CharacterBody2D" groups=["ennemies"]]
 y_sort_enabled = true
 scale = Vector2(0.6, 0.6)
@@ -320,6 +326,15 @@ autostart = true
 
 [node name="AttackCooldown" type="Timer" parent="."]
 one_shot = true
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -12.0
+offset_top = -25.0
+offset_right = 14.0
+offset_bottom = -19.0
+theme_override_styles/background = SubResource("StyleBoxFlat_sug2m")
+theme_override_styles/fill = SubResource("StyleBoxFlat_egc8v")
+show_percentage = false
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
