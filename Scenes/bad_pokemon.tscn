@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://byd8dh8to7mwk"]
+
+[ext_resource type="Script" path="res://Scripts/Entities/bad_pokemon.gd" id="1_55p3d"]
+
+[node name="BadPokemon" type="Node2D"]
+script = ExtResource("1_55p3d")
