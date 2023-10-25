@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://jbkfgig6x3sy"]
+[gd_scene load_steps=40 format=3 uid="uid://jbkfgig6x3sy"]
 
 [ext_resource type="Script" path="res://Scripts/Entities/pikachu.gd" id="1_11rav"]
 [ext_resource type="Texture2D" uid="uid://dka0n2flxvea1" path="res://Assets/Sprites/Elektro/Pikachu/Walk-Anim.png" id="2_h7ctf"]
@@ -286,6 +286,12 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_siqhp"]
+bg_color = Color(0.192157, 0.917647, 0, 0.886275)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jwy1r"]
+bg_color = Color(0.882353, 0.482353, 0, 1)
+
 [node name="Pikachu" type="CharacterBody2D" groups=["pikachus"]]
 y_sort_enabled = true
 scale = Vector2(0.6, 0.6)
@@ -307,11 +313,20 @@ avoidance_enabled = true
 avoidance_mask = 3
 
 [node name="Selected" type="Panel" parent="."]
-offset_left = -4.8
-offset_top = -10.8
-offset_right = 13.2
-offset_bottom = 14.2
+offset_left = -8.33333
+offset_top = -16.6667
+offset_right = 9.66667
+offset_bottom = 8.33334
 theme_override_styles/panel = SubResource("StyleBoxFlat_mu04t")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -12.0
+offset_top = -25.0
+offset_right = 14.0
+offset_bottom = -19.0
+theme_override_styles/background = SubResource("StyleBoxFlat_siqhp")
+theme_override_styles/fill = SubResource("StyleBoxFlat_jwy1r")
+show_percentage = false
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

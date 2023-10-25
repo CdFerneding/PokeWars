@@ -1,7 +1,6 @@
 extends GoodPokemon
+#extends CharacterBody2D
 
-#@export var main: Node
-#@export var main: Node
 var pik_hover = false
 signal pikachu_clicked
 
@@ -15,11 +14,8 @@ func _ready():
 	$AnimatedSprite2D.animation = "walk_down"
 	var main_node = get_tree().get_root().get_node("Main")
 	connect("pikachu_clicked", Callable(main_node, "_on_pikachu_clicked"))
-	#set_selected(selected)
+	super()
 
-func set_selected(value):
-	selected = value
-	box.visible = value
 
 func _process(_delta:float):
 	pikatchu_scale_on_hover()
@@ -78,11 +74,11 @@ func apply_corresponding_animation(_prev):
 
 func _on_mouse_entered():
 	pik_hover = true
-	super.set_selected(!selected)
+	set_selected(!selected)
 
 func _on_mouse_exited():
 	pik_hover = false
-	super.set_selected(!selected)
+	set_selected(!selected)
 
 
 func _pika_hover_selected_check(_event):
