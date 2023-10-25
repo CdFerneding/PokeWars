@@ -38,8 +38,10 @@ func update_limit():
 	var mapRect = tilemap.get_used_rect()
 	var tileSize = tilemap.cell_quadrant_size
 	var worldSizeInPixels = mapRect.size * tileSize
+	#print(tileSize, " ", mapRect.size)
 	limit_right = worldSizeInPixels.x
 	limit_bottom = worldSizeInPixels.y
+	#print(limit_right, " ", limit_bottom)
 	limit_left = 0
 	limit_top = 0
 	update_border()
@@ -56,18 +58,19 @@ func update_border():
 	border_left = viewportXBy2
 	border_bottom = limit_bottom - viewportYBy2
 	border_top= viewportYBy2
+	#print(border_right," ", border_left," ", border_top ," ", border_bottom)
 	maximum_x_to_move_camera_left = viewport_rect.size.x / 10
 	maximum_y_to_move_camera_up = viewport_rect.size.y / 10
 	minimum_x_to_move_camera_right = viewport_rect.size.x - viewport_rect.size.x / 10
 	minimum_y_to_move_camera_down = viewport_rect.size.y - viewport_rect.size.y / 10
 	
-	#print(maximum_x_to_move_camera_left, maximum_y_to_move_camera_up, minimum_x_to_move_camera_right, minimum_y_to_move_camera_down)
+	#print(maximum_x_to_move_camera_left, " ", maximum_y_to_move_camera_up, " ", minimum_x_to_move_camera_right, " ", minimum_y_to_move_camera_down)
 	
 
 func _process(delta):
 	
 	var mouse_position = get_viewport().get_mouse_position()
-	
+	#print(position)
 	var velocity = Vector2.ZERO # The player's movement vector.
 	var mouse_on_right = mouse_position.x > minimum_x_to_move_camera_right
 	var mouse_on_left = mouse_position.x < maximum_x_to_move_camera_left
@@ -83,14 +86,28 @@ func _process(delta):
 		velocity.y += moveOffset * delta
 	if (Input.is_action_pressed("move_up") or mouse_on_up) and position.y > border_top:
 		velocity.y -= moveOffset * delta
+		
+	var new_position = position + velocity
+	
 	if Input.is_action_pressed("zoom_out") and zoom.x > 3:
 		zoom.x -= 0.15
 		zoom.y -= 0.15
+		update_border()
+		if new_position.x < border_left:
+			new_position.x = maximum_x_to_move_camera_left
+		elif new_position.x > border_right:
+			new_position.x = minimum_x_to_move_camera_right
+			
+		if new_position.y < border_top:
+			new_position.y = maximum_y_to_move_camera_up
+		elif new_position.y > border_bottom:
+			new_position.y = minimum_y_to_move_camera_down
+
+		
 	if Input.is_action_pressed("zoom_in") and zoom.x < 7:
 		zoom.x += 0.15
 		zoom.y += 0.15
-		
-	var new_position = position + velocity
+
 
 	position = new_position
 	#UI.position = Vector2(new_position.x - 130,new_position.y - 80)
