@@ -2,7 +2,7 @@ extends Node
 
 signal setUpdater(scene)
 
-@onready var pikachuBuilder = preload("res://Scripts/Builder/PikachuBuilder.gd")
+@onready var pikachuBuilder = preload("res://Scripts/Builder/UnitBuilder.gd")
 @onready var unitBuilder = preload("res://Scripts/Builder/UnitBuilder.gd")
 @onready var pikachu = preload("res://Scenes/pikachu.tscn")
 @onready var ennemy = preload("res://Scenes/ennemy.tscn")
@@ -182,11 +182,6 @@ func _change_gamemode():
 		Game.GameMode = "play"
 	if Input.is_action_pressed("P"):
 		Game.GameMode = "place"
-
-
-# connected through funciton in pikachu._ready()
-func _on_pikachu_clicked(object: CharacterBody2D):
-	selected_pikachus.append(object)
 
 
 func _on_ennemy_spawner_timer_timeout():
