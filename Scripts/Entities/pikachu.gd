@@ -108,3 +108,4 @@ func _on_input_event(_viewport, event, _shape_idx):
 
 func _on_hit(damage):
 	print("damage received !")
+	bar.value = bar.value - 1
