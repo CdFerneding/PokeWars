@@ -17,8 +17,21 @@ var maximum_y_to_move_camera_up
 var minimum_x_to_move_camera_right
 var minimum_y_to_move_camera_down
 
+
+var mousePos = Vector2()
+var mousePosGlobal = Vector2()
+var start = Vector2()
+var startV = Vector2()
+var end = Vector2()
+var endV = Vector2()
+var isDragging = false
+signal area_selected
+signal start_move_selection
+@onready var box = get_node("../HUD/Panel")
+
 func _ready():
 	update_limit()
+	connect("area_selected", Callable(get_parent(), "_on_area_selected"))
 
 # if the tilemap is updated, we need to go through this method
 func update_limit():
@@ -81,3 +94,46 @@ func _process(delta):
 
 	position = new_position
 	#UI.position = Vector2(new_position.x - 130,new_position.y - 80)
+	
+	
+	
+	# drag-select
+	if Input.is_action_just_pressed("left_click"):
+		start = mousePosGlobal
+		startV = mousePos
+		isDragging = true
+
+	if isDragging:
+		end = mousePosGlobal
+		endV = mousePos
+		draw_area()
+	
+	if Input.is_action_just_released("left_click"):
+		if startV.distance_to(mousePos) > 20:
+			end = mousePosGlobal
+			endV = mousePos
+			isDragging = false
+			draw_area(false)
+			emit_signal("area_selected", self)
+		else:
+			end = start
+			isDragging = false
+			draw_area(false)
+
+func draw_area(s = true):
+	box.size = Vector2(abs(startV.x - endV.x), abs(startV.y - endV.y))
+	var pos = Vector2()
+	pos.x = min(startV.x, endV.x)
+	pos.y = min(startV.y, endV.y)
+	box.position = pos
+	
+	# let the rectangle dissapear after drawing
+	box.size *= int(s)
+
+func _input(event):
+	if event is InputEventMouse:
+		# pos depending on zoom of the camera
+		mousePos = event.position
+		
+		# global (unchanging) pos on the canvas layer
+		mousePosGlobal = get_global_mouse_position()

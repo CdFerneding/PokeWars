@@ -76,21 +76,11 @@ func apply_corresponding_animation(_prev):
 
 func _on_mouse_entered():
 	pik_hover = true
-	set_selected(!selected)
+	set_selected(true)
 
 func _on_mouse_exited():
 	pik_hover = false
-	set_selected(!selected)
-
-
-func _pika_hover_selected_check(_event):
-	if pik_hover and Input.is_action_pressed("left_click"):
-		emit_signal("pikachu_clicked", self)
-		pik_hover = false
-		
-	# leftclick on "nothing" to deselect units
-	elif Input.is_action_pressed("left_click"):
-		pik_hover = false
+	set_selected(false)
 
 
 func pikatchu_scale_on_hover() -> void:
@@ -102,9 +92,5 @@ func pikatchu_scale_on_hover() -> void:
 		self.scale.x = 0.5
 		self.scale.y = 0.5
 
-func _on_input_event(_viewport, event, _shape_idx):
-	if pik_hover:
-		_pika_hover_selected_check(event)
-
 func _on_hit(damage):
-	print("damage received !")
+	bar.value = bar.value - 1

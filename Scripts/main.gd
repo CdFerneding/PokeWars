@@ -68,6 +68,38 @@ func new_game():
 	# $Pikachu.start($StartPosition.position)
 
 '
+this is code for the drag-selection
+part of it is in the camera.gd file
+'
+# object is the camera that is passed through to analyse the selected area
+func _on_area_selected(object: Camera2D):
+	var start = object.start
+	var end = object.end
+	var area = []
+	area.append(Vector2(min(start.x, end.x), min(start.y, end.y)))
+	area.append(Vector2(max(start.x, end.x), max(start.y, end.y)))
+	var pk = get_pikachus_in_area(area)
+	for p in pk:
+		selected_pikachus.append(p)
+	Game.Selected = pk.size()
+#	Game.SelectedUnits = ut.size()
+	# deselect all units
+	for p in pikachus:
+		p.set_selected(false)
+	# select all units in the area (of drag_selection)
+	#for u in pk:
+	#	u.set_selected(true)
+	
+		
+func get_pikachus_in_area(area):
+	var ps = []
+	for pikachu in pikachus:
+		if pikachu.position.x > area[0].x and pikachu.position.x < area[1].x:
+			if pikachu.position.y > area[0].y and pikachu.position.y < area[1].y:
+				ps.append(pikachu)
+	return ps
+
+'
 first checks if button pressed for a change in gamemode
 and then depending on what is the current gamemode goes to
 the correlating _handle_input function
@@ -86,8 +118,9 @@ func _input(_event):
 
 
 # connected through funciton in pikachu._ready()
-func _on_pikachu_clicked(object: CharacterBody2D):
-	selected_pikachus.append(object)
+#func _on_pikachu_clicked(object: CharacterBody2D):
+#	selected_pikachus = []
+#	selected_pikachus.append(object)
 	
 '
 different input functions get called depending on what 
@@ -153,6 +186,7 @@ func _handle_play_input(event):
 		for p in pikachus:
 			if p.pik_hover:
 				if p not in selected_pikachus:
+					selected_pikachus = []
 					selected_pikachus.append(p)
 				Game.Selected = selected_pikachus.size()
 				no_pikachus_selected = false
@@ -161,8 +195,9 @@ func _handle_play_input(event):
 			Game.Selected = selected_pikachus.size()
 			
 	if Input.is_action_just_pressed("right_click"):
-		for p in selected_pikachus:
-			p.make_path()
+		if selected_pikachus.size() != 0:
+			for p in selected_pikachus:
+				p.make_path()
 
 '
 only for debugging to place units manually
