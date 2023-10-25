@@ -1,19 +1,9 @@
-extends CharacterBody2D
+extends GoodPokemon
 
 #@export var main: Node
 #@export var main: Node
 var pik_hover = false
 signal pikachu_clicked
-
-# pikachu highlighting 
-@export var selected = false
-@onready var box = get_node("Selected")
-
-#speed of moving Pikatchu
-const speed = 25
-
-#used to detect when path is reached
-var target : Vector2
 
 var previous_direction
 
@@ -25,7 +15,7 @@ func _ready():
 	$AnimatedSprite2D.animation = "walk_down"
 	var main_node = get_tree().get_root().get_node("Main")
 	connect("pikachu_clicked", Callable(main_node, "_on_pikachu_clicked"))
-	set_selected(selected)
+	#set_selected(selected)
 
 func set_selected(value):
 	selected = value
@@ -37,8 +27,8 @@ func _process(_delta:float):
 	
 func _physics_process(_delta: float) -> void:
 #	var prev_vel = velocity
-	if self.position == target:
-		return
+	#if int(nav_agent.distance_to_target() < 2):
+		#return
 		
 	var next_pos = nav_agent.get_next_path_position()
 	var dir = to_local(next_pos).normalized()
@@ -88,11 +78,11 @@ func apply_corresponding_animation(_prev):
 
 func _on_mouse_entered():
 	pik_hover = true
-	set_selected(!selected)
+	super.set_selected(!selected)
 
 func _on_mouse_exited():
 	pik_hover = false
-	set_selected(!selected)
+	super.set_selected(!selected)
 
 
 func _pika_hover_selected_check(_event):

@@ -273,7 +273,7 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_vg7x3"]
 radius = 7.07107
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e1720"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mu04t"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 border_width_left = 4
 border_width_top = 4
@@ -307,11 +307,11 @@ avoidance_enabled = true
 avoidance_mask = 3
 
 [node name="Selected" type="Panel" parent="."]
-offset_left = -8.0
-offset_top = -18.0
-offset_right = 10.0
-offset_bottom = 7.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_e1720")
+offset_left = -4.8
+offset_top = -10.8
+offset_right = 13.2
+offset_bottom = 14.2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mu04t")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
