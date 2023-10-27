@@ -2,8 +2,8 @@ extends Node
 
 @onready var pikachuBuilder = preload("res://Scripts/Builder/UnitBuilder.gd")
 @onready var unitBuilder = preload("res://Scripts/Builder/UnitBuilder.gd")
-@onready var pikachu = preload("res://Scenes/pikachu.tscn")
-@onready var enemy = preload("res://Scenes/enemy.tscn")
+@onready var pikachu = preload("res://Scenes/pokemon/pikachu.tscn")
+@onready var enemy = preload("res://Scenes/pokemon/enemy.tscn")
 @export var mob_scene: PackedScene
 @export var tileMap: TileMap
 # @Justin "UILabel is now as a "GameMode" Label in the HUD. 
@@ -172,7 +172,7 @@ func _handle_esc():
 		for child in childrenHUD:
 			if "Menu" in child.name:
 				return
-		var menu = preload("res://Scenes/menu.tscn")
+		var menu = preload("res://Scenes/GUI/menu.tscn")
 		var pathHUD = get_tree().get_root().get_node("Main/HUD")
 		var menuOverlay = menu.instantiate()
 		Game.set_game_paused(true)

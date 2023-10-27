@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://i0wnycl36eg"]
-
-[ext_resource type="Script" path="res://Scripts/Entities/pokemon.gd" id="1_qxhlj"]
-
-[node name="Pokemon" type="CharacterBody2D"]
-script = ExtResource("1_qxhlj")

@@ -2,7 +2,7 @@ extends TileMap
 var no_obstacle = true
 @export var main: Node
 @onready var tileBuiler = preload("res://Scripts/Builder/TileBuilder.gd")
-@onready var berryfield = preload("res://Scenes/berrybush.tscn")
+@onready var berryfield = preload("res://Scenes/WorldObjects/berrybush.tscn")
 @export var start_position = Vector2()
 # even though you can place multiple pokemon_centers you have only one pokecenter which the enemies will attack
 @export var home_base = Vector2()

@@ -1,10 +1,10 @@
 [gd_scene load_steps=2 format=3 uid="uid://con2q5dmjbcvt"]
 
-[ext_resource type="Script" path="res://Scripts/settings.gd" id="1_cyd4t"]
+[ext_resource type="Script" path="res://Scripts/GUI/settings.gd" id="1_r85bn"]
 
 [node name="Settings" type="Node2D"]
 process_mode = 3
-script = ExtResource("1_cyd4t")
+script = ExtResource("1_r85bn")
 
 [node name="Label" type="Label" parent="."]
 offset_left = 576.0

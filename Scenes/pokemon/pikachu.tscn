@@ -1,134 +1,134 @@
-[gd_scene load_steps=40 format=3 uid="uid://brrm0257s8t1h"]
+[gd_scene load_steps=40 format=3 uid="uid://jbkfgig6x3sy"]
 
-[ext_resource type="Script" path="res://Scripts/Entities/enemy.gd" id="1_ge151"]
-[ext_resource type="Texture2D" uid="uid://dka0n2flxvea1" path="res://Assets/Sprites/Elektro/Pikachu/Walk-Anim.png" id="2_1l42h"]
+[ext_resource type="Script" path="res://Scripts/Entities/pikachu.gd" id="1_1uykh"]
+[ext_resource type="Texture2D" uid="uid://dka0n2flxvea1" path="res://Assets/Sprites/Elektro/Pikachu/Walk-Anim.png" id="2_s0o3v"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gbxyb"]
-atlas = ExtResource("2_1l42h")
+atlas = ExtResource("2_s0o3v")
 region = Rect2(0, 0, 32, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7ldwc"]
-atlas = ExtResource("2_1l42h")
+atlas = ExtResource("2_s0o3v")
 region = Rect2(32, 0, 32, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8ow3o"]
-atlas = ExtResource("2_1l42h")
+atlas = ExtResource("2_s0o3v")
 region = Rect2(64, 0, 32, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jnjrc"]
-atlas = ExtResource("2_1l42h")
+atlas = ExtResource("2_s0o3v")
 region = Rect2(96, 0, 32, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s8uc1"]
-atlas = ExtResource("2_1l42h")
+atlas = ExtResource("2_s0o3v")
 region = Rect2(0, 280, 32, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kb2ya"]
-atlas = ExtResource("2_1l42h")
+atlas = ExtResource("2_s0o3v")
 region = Rect2(32, 280, 32, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o2m7f"]
-atlas = ExtResource("2_1l42h")
+atlas = ExtResource("2_s0o3v")
 region = Rect2(64, 280, 32, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vhyf1"]
-atlas = ExtResource("2_1l42h")
+atlas = ExtResource("2_s0o3v")
 region = Rect2(96, 280, 32, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jmq5x"]
-atlas = ExtResource("2_1l42h")
+atlas = ExtResource("2_s0o3v")
 region = Rect2(0, 40, 32, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tyfrt"]
-atlas = ExtResource("2_1l42h")
+atlas = ExtResource("2_s0o3v")
 region = Rect2(32, 40, 32, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_winfi"]
-atlas = ExtResource("2_1l42h")
+atlas = ExtResource("2_s0o3v")
 region = Rect2(64, 40, 32, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fewmi"]
-atlas = ExtResource("2_1l42h")
+atlas = ExtResource("2_s0o3v")
 region = Rect2(96, 40, 32, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_brdbi"]
-atlas = ExtResource("2_1l42h")
+atlas = ExtResource("2_s0o3v")
 region = Rect2(0, 240, 32, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kj5r4"]
-atlas = ExtResource("2_1l42h")
+atlas = ExtResource("2_s0o3v")
 region = Rect2(32, 240, 32, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j328h"]
-atlas = ExtResource("2_1l42h")
+atlas = ExtResource("2_s0o3v")
 region = Rect2(64, 240, 32, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1sm0y"]
-atlas = ExtResource("2_1l42h")
+atlas = ExtResource("2_s0o3v")
 region = Rect2(96, 240, 32, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b7jyk"]
-atlas = ExtResource("2_1l42h")
+atlas = ExtResource("2_s0o3v")
 region = Rect2(0, 80, 32, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xstnc"]
-atlas = ExtResource("2_1l42h")
+atlas = ExtResource("2_s0o3v")
 region = Rect2(32, 80, 32, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ape8b"]
-atlas = ExtResource("2_1l42h")
+atlas = ExtResource("2_s0o3v")
 region = Rect2(64, 80, 32, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sh1ug"]
-atlas = ExtResource("2_1l42h")
+atlas = ExtResource("2_s0o3v")
 region = Rect2(96, 80, 32, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_16ii8"]
-atlas = ExtResource("2_1l42h")
+atlas = ExtResource("2_s0o3v")
 region = Rect2(0, 160, 32, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_77k0n"]
-atlas = ExtResource("2_1l42h")
+atlas = ExtResource("2_s0o3v")
 region = Rect2(32, 160, 32, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3gs3q"]
-atlas = ExtResource("2_1l42h")
+atlas = ExtResource("2_s0o3v")
 region = Rect2(64, 160, 32, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2g5sn"]
-atlas = ExtResource("2_1l42h")
+atlas = ExtResource("2_s0o3v")
 region = Rect2(96, 160, 32, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_44vi5"]
-atlas = ExtResource("2_1l42h")
+atlas = ExtResource("2_s0o3v")
 region = Rect2(0, 200, 32, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gxrow"]
-atlas = ExtResource("2_1l42h")
+atlas = ExtResource("2_s0o3v")
 region = Rect2(32, 200, 32, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7qwyx"]
-atlas = ExtResource("2_1l42h")
+atlas = ExtResource("2_s0o3v")
 region = Rect2(64, 200, 32, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y0sdb"]
-atlas = ExtResource("2_1l42h")
+atlas = ExtResource("2_s0o3v")
 region = Rect2(96, 200, 32, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_26ust"]
-atlas = ExtResource("2_1l42h")
+atlas = ExtResource("2_s0o3v")
 region = Rect2(0, 120, 32, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6vqjb"]
-atlas = ExtResource("2_1l42h")
+atlas = ExtResource("2_s0o3v")
 region = Rect2(32, 120, 32, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c3uk6"]
-atlas = ExtResource("2_1l42h")
+atlas = ExtResource("2_s0o3v")
 region = Rect2(64, 120, 32, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wi4ow"]
-atlas = ExtResource("2_1l42h")
+atlas = ExtResource("2_s0o3v")
 region = Rect2(96, 120, 32, 40)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_oglag"]
@@ -292,14 +292,13 @@ bg_color = Color(0.192157, 0.917647, 0, 0.886275)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_moimq"]
 bg_color = Color(0.882353, 0.482353, 0, 1)
 
-[node name="Enemy" type="CharacterBody2D" groups=["enemies"]]
+[node name="Pikachu" type="CharacterBody2D" groups=["pikachus"]]
 y_sort_enabled = true
 scale = Vector2(0.6, 0.6)
 input_pickable = true
-script = ExtResource("1_ge151")
+script = ExtResource("1_1uykh")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-modulate = Color(0.560784, 0.560784, 0.560784, 1)
 position = Vector2(1, 2)
 sprite_frames = SubResource("SpriteFrames_oglag")
 animation = &"walk_down"
@@ -322,21 +321,12 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_e1720")
 
 [node name="HealthBar" type="ProgressBar" parent="."]
 offset_left = -8.33333
-offset_top = -21.6667
+offset_top = -23.3333
 offset_right = 8.66667
-offset_bottom = -17.6667
+offset_bottom = -19.3333
 theme_override_styles/background = SubResource("StyleBoxFlat_w6tkr")
 theme_override_styles/fill = SubResource("StyleBoxFlat_moimq")
 show_percentage = false
 
-[node name="RetargetTimer" type="Timer" parent="."]
-wait_time = 0.5
-autostart = true
-
-[node name="AttackCooldown" type="Timer" parent="."]
-one_shot = true
-
-[connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
-[connection signal="timeout" from="RetargetTimer" to="." method="_on_retarget_timer_timeout"]

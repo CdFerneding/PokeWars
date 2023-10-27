@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-@onready var settings = preload("res://Scenes/settings.tscn")
+@onready var settings = preload("res://Scenes/GUI/settings.tscn")
 
 
 func _on_settings_button_pressed():
