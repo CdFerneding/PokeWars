@@ -1,11 +1,9 @@
 extends Node
 
-signal setUpdater(scene)
-
 @onready var pikachuBuilder = preload("res://Scripts/Builder/UnitBuilder.gd")
 @onready var unitBuilder = preload("res://Scripts/Builder/UnitBuilder.gd")
 @onready var pikachu = preload("res://Scenes/pikachu.tscn")
-@onready var ennemy = preload("res://Scenes/ennemy.tscn")
+@onready var enemy = preload("res://Scenes/enemy.tscn")
 @export var mob_scene: PackedScene
 @export var tileMap: TileMap
 # @Justin "UILabel is now as a "GameMode" Label in the HUD. 
@@ -19,7 +17,7 @@ var selected_pikachus = []
 # all pikachus in the group "pikachus"
 @export var pikachus = []
 
-@export var ennemies = []
+@export var enemies = []
 
 var buildings = []
 #cursor
@@ -39,17 +37,16 @@ func _ready():
 	
 	get_pikachus()
 	get_buildings()
-	get_ennemies()
-	setUpdater.emit(self)
+	get_enemies()
 		
 
 func get_pikachus():
 	pikachus = []
 	pikachus = get_tree().get_nodes_in_group("pikachus")
 
-func get_ennemies():
-	ennemies = []
-	ennemies = get_tree().get_nodes_in_group("ennemies")
+func get_enemies():
+	enemies = []
+	enemies = get_tree().get_nodes_in_group("enemies")
 
 
 func get_buildings():
@@ -85,6 +82,8 @@ func _on_area_selected(object: Camera2D):
 #	Game.SelectedUnits = ut.size()
 	# deselect all units
 	for p in pikachus:
+		if p == null:
+			continue
 		p.set_selected(false)
 	# select all units in the area (of drag_selection)
 	#for u in pk:
@@ -94,6 +93,8 @@ func _on_area_selected(object: Camera2D):
 func get_pikachus_in_area(area):
 	var ps = []
 	for pikachu in pikachus:
+		if pikachu == null:
+			continue
 		if pikachu.position.x > area[0].x and pikachu.position.x < area[1].x:
 			if pikachu.position.y > area[0].y and pikachu.position.y < area[1].y:
 				ps.append(pikachu)
@@ -184,9 +185,11 @@ func _handle_play_input(event):
 	# this check needs to check for "release". Otherwise when placing new pikachus they get instantly selected
 	if Input.is_action_just_released("left_click"):
 		for p in pikachus:
+			if p == null:
+				continue
 			if p.pik_hover:
 				if p not in selected_pikachus:
-					selected_pikachus = []
+					selected_pikachus.clear()
 					selected_pikachus.append(p)
 				Game.Selected = selected_pikachus.size()
 				no_pikachus_selected = false
@@ -219,21 +222,22 @@ func _change_gamemode():
 		Game.GameMode = "place"
 
 
-func _on_ennemy_spawner_timer_timeout():
-	var ennemyPath = get_tree().get_root().get_node("Main/Ennemies")
-	var mainPath = get_tree().get_root().get_node("Main")
+func _on_enemy_spawner_timer_timeout():
+	var enemyPath = $Enemies
 	
-	var new_ennemy = ennemy.instantiate()
-	new_ennemy.position.x = rng.randf_range(20, 200)
-	new_ennemy.position.y = rng.randf_range(20, 200)
-	ennemyPath.add_child(new_ennemy)
-	connect("setUpdater", Callable(new_ennemy, "_on_main_set_updater"))
+	# stop spawning enemies if there are more than 10 
+	if $Enemies.get_child_count() >= 10:
+		return
+	
+	var new_enemy = enemy.instantiate()
+	new_enemy.position.x = rng.randf_range(20, 200)
+	new_enemy.position.y = rng.randf_range(20, 200)
+	enemyPath.add_child(new_enemy)
 	# pikachus need the name Pikachu, to be recognized by resources farming-area
-	new_ennemy.name = "Bad Pokachu"
-	setUpdater.emit(self)
+	new_enemy.name = "Bad Pokachu"
 
-	# recall to have all pikachus from the "pikachus"-group in "pikachus"-variable again
-	mainPath.get_ennemies()
+	# recall to have all pokachus from the "pokachus"-group in "pokachus"-variable again
+	get_enemies()
 	
 	
 #		var x_position = round(event)

@@ -1,47 +1,55 @@
 extends BadPokemon
 
-class_name Ennemy
+class_name enemy
 
 #@export var main: Node
 #@export var main: Node
-var ennemy_hover = false
-signal ennemy_clicked
+var enemy_hover = false
+signal enemy_clicked
+
+# this is the position that the enemy will attack when all pikachus are dead
+# initializing home_base position
+var pathTilemap = Game.get_tree().get_root().get_node("Main/TileMap")
+var home_base = pathTilemap.home_base
 
 # pikachu highlighting 
 @export var selected = false
-@onready var box = get_node("Selected")
+#@onready var box = $Selected
 
 @export var possible_targets: Array[Node] = []
 @export var nearest_target: CharacterBody2D
 
-
 var previous_direction
-
-var updaterPikachus : Node
 
 var current_target: Node
 
+@onready var box = $Selected
 
 #implements the pathfinding algorithm
 @onready var nav_agent:= $NavigationAgent2D #as NavigationAgent2D
 
 func _ready():
+	# make the enemies significantly slower than economy pokemon
+	speed = 18
+	
 	previous_direction = "down"
 	$AnimatedSprite2D.animation = "walk_down"
 	$AttackCooldown.start()
 	#var main_node = get_tree().get_root().get_node("Main")
+	selected = false
 	set_selected(selected)
 	super()
+	
 
 func set_selected(value):
 	selected = value
 	box.visible = value
 
 func _process(_delta:float):
-	ennemy_scale_on_hover()
+	enemy_scale_on_hover()
 		
 func attack():
-	if current_target is Pikachu:
+	if "Pikachu" in current_target.name:
 		(current_target as Pikachu)._on_hit(1)
 	$AttackCooldown.start()
 	
@@ -56,7 +64,7 @@ func _physics_process(_delta: float) -> void:
 	
 	if position.distance_to(next_pos) < 10:
 		velocity = Vector2.ZERO
-		if $AttackCooldown.is_stopped() and current_target:
+		if $AttackCooldown.is_stopped() and current_target != null:
 			attack()
 			
 	apply_corresponding_animation(velocity)
@@ -97,26 +105,28 @@ func apply_corresponding_animation(_prev):
 
 
 func _on_mouse_entered():
-	ennemy_hover = true
-	set_selected(!selected)
+	enemy_hover = true
+	selected = true
+	set_selected(selected)
 
 func _on_mouse_exited():
-	ennemy_hover = false
-	set_selected(!selected)
+	enemy_hover = false
+	selected = false
+	set_selected(selected)
 
 
-func _ennemy_hover_selected_check(_event):
-	if ennemy_hover and Input.is_action_pressed("left_click"):
+func _enemy_hover_selected_check(_event):
+	if enemy_hover and Input.is_action_pressed("left_click"):
 		#emit_signal("pikachu_clicked", self)
-		ennemy_hover = false
+		enemy_hover = false
 		
 	# leftclick on "nothing" to deselect units
 	elif Input.is_action_pressed("left_click"):
-		ennemy_hover = false
+		enemy_hover = false
 
 
-func ennemy_scale_on_hover() -> void:
-	if ennemy_hover:
+func enemy_scale_on_hover() -> void:
+	if enemy_hover:
 		self.scale.x = 0.6
 		self.scale.y = 0.6
 
@@ -125,19 +135,23 @@ func ennemy_scale_on_hover() -> void:
 		self.scale.y = 0.5
 
 func _on_input_event(_viewport, event, _shape_idx):
-	if ennemy_hover:
-		_ennemy_hover_selected_check(event)
+	if enemy_hover:
+		_enemy_hover_selected_check(event)
 
 
 func _on_retarget_timer_timeout():
-	possible_targets = updaterPikachus.pikachus
+	var pathMain = get_tree().get_root().get_node("Main")
+	possible_targets = pathMain.pikachus
+	if possible_targets.size() == 0:
+		pass
 	for target in possible_targets:
+		if target == null:
+			continue
 		if nearest_target == null or target.position.distance_to(position) < nearest_target.position.distance_to(position):
 			nearest_target = target
 			current_target = target
-	
-	nav_agent.target_position = nearest_target.position
-	target = nav_agent.target_position
 
-func _on_main_set_updater(scene: Node):
-	updaterPikachus = scene
+	if nearest_target != null:
+		nav_agent.target_position = nearest_target.position
+		target = nav_agent.target_position
+

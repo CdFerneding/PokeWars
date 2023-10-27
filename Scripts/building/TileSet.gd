@@ -3,7 +3,9 @@ var no_obstacle = true
 @export var main: Node
 @onready var tileBuiler = preload("res://Scripts/Builder/TileBuilder.gd")
 @onready var berryfield = preload("res://Scenes/berrybush.tscn")
-@export var start_position = self.get_used_cells_by_id(1,2, Vector2(0,0))[0]
+@export var start_position = Vector2()
+# even though you can place multiple pokemon_centers you have only one pokecenter which the enemies will attack
+@export var home_base = Vector2()
 var selectedBuilding = "PokeCenter"
 
 
@@ -13,25 +15,13 @@ var selectedBuilding = "PokeCenter"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var berrybushes = get_used_cells_by_id(1, 1, Vector2(1, 0))
-	for i in range(berrybushes.size()):
-		pass
-	add_berrybush(berrybushes)
-	start_position.y += 3
-	start_position = map_to_local(start_position)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
-
-func add_berrybush(berrybushes):
-	for i in range(berrybushes.size()):
-		var tile_pos = berrybushes[i]
-		var local_pos = map_to_local(tile_pos)
-		var bb = berryfield.instantiate() # create instance of bb scene
-		bb.set_position(local_pos)  # Set the world position
-		add_child(bb)
+	var all_pokemon_centers = get_used_cells_by_id(1,2, Vector2(0,0))
+	
+	if all_pokemon_centers.size() == 0:
+		start_position = all_pokemon_centers[0]
+		start_position = map_to_local(start_position)
+		home_base = all_pokemon_centers[0]
+		home_base = map_to_local(home_base)
 
 
 '''

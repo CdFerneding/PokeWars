@@ -16,6 +16,8 @@ func _ready():
 	$AnimatedSprite2D.animation = "walk_down"
 	var main_node = get_tree().get_root().get_node("Main")
 	connect("pikachu_clicked", Callable(main_node, "_on_pikachu_clicked"))
+	
+	# super initializes the healthbar 
 	super()
 
 
@@ -106,6 +108,15 @@ func _on_input_event(_viewport, event, _shape_idx):
 	if pik_hover:
 		_pika_hover_selected_check(event)
 
+# function to reduce pikachus health, number damage is reducted from pikachus health_bar
 func _on_hit(damage):
-	print("damage received !")
-	bar.value = bar.value - 1
+	var pathMain = get_tree().get_root().get_node("Main")
+	health_bar.value -= damage
+	if health_bar.value == 0:
+		self.queue_free()
+		pathMain.get_pikachus()
+		if self in pathMain.selected_pikachus:
+			pathMain.selected_pikachus.erase(self)
+			Game.Selected = pathMain.selected_pikachus.size()
+		
+
