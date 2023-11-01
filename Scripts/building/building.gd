@@ -4,10 +4,10 @@ var buildingHover = false
 @onready var unitBuilder = preload("res://Scripts/Builder/UnitBuilder.gd")
 
 'until we have other units every building produces Pikachu'
-@onready var pikachu = preload("res://Scenes/Pokemon/pikachu.tscn")
-@onready var squirtle = preload("res://Scenes/Pokemon/squirtle.tscn")
-@onready var charmander = preload("res://Scenes/Pokemon/charmander.tscn")
-@onready var bulbasaur = preload("res://Scenes/Pokemon/bulbasaur.tscn")
+@onready var pikachu = preload("res://Scenes/pokemon/pikachu.tscn")
+@onready var squirtle = preload("res://Scenes/pokemon/squirtle.tscn")
+@onready var charmander = preload("res://Scenes/pokemon/charmander.tscn")
+@onready var bulbasaur = preload("res://Scenes/pokemon/bulbasaur.tscn")
 
 var main: Node
 

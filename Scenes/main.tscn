@@ -206,7 +206,6 @@ tilemap = NodePath("../TileMap")
 moveOffset = 300
 
 [node name="HUD" parent="." instance=ExtResource("6_xhnji")]
-visible = false
 
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
 process_mode = 3

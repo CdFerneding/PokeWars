@@ -23,13 +23,13 @@ static func _build_unit(main: Node, name:String, position:Vector2, y_offset):
 static func _select_scene(name:String):
 	match name:
 		"Pikachu":
-			return preload("res://Scenes/Pokemon/pikachu.tscn")
+			return preload("res://Scenes/pokemon/pikachu.tscn")
 		"Charmander":
-			return preload("res://Scenes/Pokemon/charmander.tscn")
+			return preload("res://Scenes/pokemon/charmander.tscn")
 		"bulbasaur":
-			return preload("res://Scenes/Pokemon/bulbasaur.tscn")
+			return preload("res://Scenes/pokemon/bulbasaur.tscn")
 		"Squirtle":
-			return preload("res://Scenes/Pokemon/squirtle.tscn")
+			return preload("res://Scenes/pokemon/squirtle.tscn")
 			
 static func _select_path(main:Node,name:String):
 	match name:
