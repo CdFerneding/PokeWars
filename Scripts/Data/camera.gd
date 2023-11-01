@@ -27,7 +27,7 @@ var endV = Vector2()
 var isDragging = false
 signal area_selected
 signal start_move_selection
-@onready var box = get_node("../UI/Panel")
+@onready var box = get_node("../HUD/Panel")
 
 func _ready():
 	update_limit()

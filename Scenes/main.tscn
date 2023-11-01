@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cn8ein6jc6frg"]
+[gd_scene load_steps=22 format=3 uid="uid://cn8ein6jc6frg"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_c7xow"]
 [ext_resource type="Texture2D" uid="uid://b0yuglgf5hf8t" path="res://Assets/BerryGardenTiles.png" id="2_x2ryg"]
@@ -7,13 +7,12 @@
 [ext_resource type="Script" path="res://Scripts/building/TileSet.gd" id="4_vt6l8"]
 [ext_resource type="Script" path="res://Scripts/Data/camera.gd" id="5_0705s"]
 [ext_resource type="Texture2D" uid="uid://0f62nxxobstl" path="res://Assets/Sprites/Building/plant_arena.png" id="5_a7c3a"]
-[ext_resource type="PackedScene" uid="uid://c5xbd3qrnk5vl" path="res://Scenes/GUI/UI.tscn" id="6_xhnji"]
+[ext_resource type="PackedScene" uid="uid://c5xbd3qrnk5vl" path="res://Scenes/GUI/HUD.tscn" id="6_xhnji"]
 [ext_resource type="AudioStream" uid="uid://ddjyv1ho8uwv7" path="res://Assets/Music/escape from swag city.mp3" id="9_l55f3"]
 [ext_resource type="PackedScene" uid="uid://jbkfgig6x3sy" path="res://Scenes/pokemon/pikachu.tscn" id="10_dhifx"]
 [ext_resource type="PackedScene" uid="uid://weyowi1k0j0y" path="res://Scenes/WorldObjects/berrybush.tscn" id="11_u5ymy"]
 [ext_resource type="PackedScene" uid="uid://dw0dfm6o0ni0s" path="res://Scenes/WorldObjects/tree.tscn" id="12_he3mb"]
 [ext_resource type="PackedScene" uid="uid://ctnohtufkqyj3" path="res://Scenes/WorldObjects/building.tscn" id="13_ot5q2"]
-[ext_resource type="PackedScene" path="res://Scenes/GUI/hud.tscn" id="14_svr1w"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_e562h"]
 vertices = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -269,7 +268,5 @@ position = Vector2(168, 77)
 [node name="EnnemySpawnerTimer" type="Timer" parent="."]
 wait_time = 2.0
 autostart = true
-
-[node name="HUD" parent="." instance=ExtResource("14_svr1w")]
 
 [connection signal="timeout" from="EnnemySpawnerTimer" to="." method="_on_enemy_spawner_timer_timeout"]
