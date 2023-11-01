@@ -7,11 +7,11 @@ process_mode = 3
 script = ExtResource("1_r85bn")
 
 [node name="Label" type="Label" parent="."]
-offset_left = 576.0
+offset_left = 552.0
 offset_top = 88.0
-offset_right = 640.0
+offset_right = 667.0
 offset_bottom = 114.0
-text = "music"
+text = "overall volume"
 horizontal_alignment = 1
 vertical_alignment = 1
 
