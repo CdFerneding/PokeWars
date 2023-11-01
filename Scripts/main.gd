@@ -22,6 +22,10 @@ var squirtles = []
 
 @export var enemies = []
 
+# control the number of spawning enemies:
+var num_of_enemies = 3
+
+
 var buildings = []
 #cursor
 var default_cursor = preload("res://Assets/Sprites/Cursor/test_cursor_2.png")
@@ -68,7 +72,6 @@ func _process(_delta):
 	
 func new_game():
 	score = 0
-	$Music.play()
 	# $Pikachu.start($StartPosition.position)
 
 '
@@ -193,9 +196,8 @@ func _handle_play_input(event):
 			if p == null:
 				continue
 			if p.pik_hover:
-				if p not in selected_pikachus:
-					selected_pikachus.clear()
-					selected_pikachus.append(p)
+				selected_pikachus = []
+				selected_pikachus.append(p)
 				Game.Selected = selected_pikachus.size()
 				no_pikachus_selected = false
 		if no_pikachus_selected:
@@ -230,8 +232,7 @@ func _change_gamemode():
 func _on_enemy_spawner_timer_timeout():
 	var enemyPath = $Enemies
 	
-	# stop spawning enemies if there are more than 10 
-	if $Enemies.get_child_count() >= 10:
+	if $Enemies.get_child_count() >= num_of_enemies:
 		return
 	
 	var new_enemy = enemy.instantiate()
