@@ -37,3 +37,26 @@ func _process(_delta):
 	GameModeLabel.text = "Mode: " + Game.GameMode
 	SelectedLabel.text = "Selected: " + str(Game.Selected)
 	
+
+
+func _on_fire_arena_pressed():
+	if Game.GameMode == "play":
+		Game.GameMode = "build"
+		Game.selectedBuilding = "FireBuilding"
+
+
+func _on_water_arena_pressed():
+	if Game.GameMode == "play":
+		Game.GameMode = "build"
+		Game.selectedBuilding = "WaterBuilding"
+
+func _on_plant_arena_pressed():
+	if Game.GameMode == "play":
+		Game.GameMode = "build"
+		Game.selectedBuilding = "PlantBuilding"
+
+
+func _on_delete_button_pressed():
+	if Game.GameMode == "play":
+		Game.GameMode = "delete"
+

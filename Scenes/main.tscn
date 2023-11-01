@@ -175,7 +175,7 @@ sources/5 = SubResource("TileSetAtlasSource_bou8u")
 script = ExtResource("1_c7xow")
 tileMap = NodePath("TileMap")
 
-[node name="TileMap" type="TileMap" parent="."]
+[node name="TileMap" type="TileMap" parent="." node_paths=PackedStringArray("main")]
 y_sort_enabled = true
 position = Vector2(0, 2)
 tile_set = SubResource("TileSet_7l2ml")
@@ -190,6 +190,7 @@ layer_1/y_sort_origin = 0
 layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array(262154, 2, 0)
 script = ExtResource("4_vt6l8")
+main = NodePath("..")
 
 [node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("tilemap")]
 position = Vector2(200, 120)
@@ -210,16 +211,25 @@ moveOffset = 300
 process_mode = 3
 stream = ExtResource("9_l55f3")
 
+[node name="Units" type="Node2D" parent="."]
+
+[node name="Pikachus" type="Node2D" parent="Units"]
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="Pikachus" type="Node2D" parent="."]
 y_sort_enabled = true
 
-[node name="Pikachu" parent="Pikachus" instance=ExtResource("10_dhifx")]
+[node name="Pikachu" parent="Units/Pikachus" instance=ExtResource("10_dhifx")]
 position = Vector2(156, 126)
 
-[node name="Pikachu2" parent="Pikachus" instance=ExtResource("10_dhifx")]
+[node name="Pikachu2" parent="Units/Pikachus" instance=ExtResource("10_dhifx")]
 position = Vector2(183, 126)
+
+[node name="Charmanders" type="Node2D" parent="Units"]
+
+[node name="Bulbasaurs" type="Node2D" parent="Units"]
+
+[node name="Squirtles" type="Node2D" parent="Units"]
 
 [node name="Objects" type="Node2D" parent="."]
 
@@ -250,7 +260,7 @@ position = Vector2(51, 153)
 [node name="Buildings" type="Node2D" parent="."]
 y_sort_enabled = true
 
-[node name="Building" parent="Buildings" node_paths=PackedStringArray("main") groups=["buildings"] instance=ExtResource("13_ot5q2")]
+[node name="PokeCenter" parent="Buildings" groups=["buildings"] instance=ExtResource("13_ot5q2")]
 position = Vector2(168, 77)
 main = NodePath("../..")
 

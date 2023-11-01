@@ -14,7 +14,10 @@ var score
 
 # storing the selected pikachu
 var selected_pikachus = []
-# all pikachus in the group "pikachus"
+# all units in the group their groups
+var charmanders = []
+var bulbasaurs = []
+var squirtles = []
 @export var pikachus = []
 
 @export var enemies = []
@@ -35,14 +38,17 @@ func _ready():
 	Input.set_custom_mouse_cursor(default_cursor, Input.CURSOR_ARROW, Vector2(5,0))
 	#pikachuBuilder._build_pikachu(self,self.find_child("TileMap"),start_position)
 	
-	get_pikachus()
+	get_units()
 	get_buildings()
 	get_enemies()
 		
 
-func get_pikachus():
-	pikachus = []
+func get_units():
+	pikachu = []
 	pikachus = get_tree().get_nodes_in_group("pikachus")
+	charmanders = get_tree().get_nodes_in_group("Charmanders")
+	bulbasaurs = get_tree().get_nodes_in_group("Bulbasaurs")
+	squirtles = get_tree().get_nodes_in_group("Squirtles")
 
 func get_enemies():
 	enemies = []
@@ -50,7 +56,6 @@ func get_enemies():
 
 
 func get_buildings():
-	buildings = []
 	buildings = get_tree().get_nodes_in_group("buildings")
 
 
@@ -142,9 +147,7 @@ func _handle_building_input(event):
 		Game.selectedBuilding = "WaterBuilding"
 			
 	elif Input.is_action_just_pressed("left_click"):
-		var y_position = floor(tileMap.get_global_mouse_position().y/16)
-		var x_position = floor(tileMap.get_global_mouse_position().x/16)
-		var tile_position = Vector2(x_position,y_position)
+		var tile_position = tileMap.get_global_mouse_position()
 		var selected = Game.selectedBuilding
 		match selected:
 			"PokeCenter":
@@ -208,7 +211,7 @@ only for debugging to place units manually
 func _handle_place_input(event):
 	if Input.is_action_just_pressed("left_click"):
 		var position = tileMap.get_global_mouse_position()
-		unitBuilder._build_unit(self, pikachu,position,0)
+		unitBuilder._build_unit(self,"Pikachu", position, 0)
 
 '
 change gamemode depending on different button presses
