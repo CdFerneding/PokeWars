@@ -51,7 +51,7 @@ func _place_building(position:Vector2, x_offset, y_offset, tileId):
 
 func _initiate_building(position:Vector2, main:Node):
 
-	var scene = load("res://Scenes/building.tscn")
+	var scene = load("res://Scenes/WorldObjects/building.tscn")
 	var mainPath = get_tree().get_root().get_node("Main")
 	var buildingPath = get_tree().get_root().get_node("Main/Buildings")
 	

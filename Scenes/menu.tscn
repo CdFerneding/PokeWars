@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://csm3nnu04axwn"]
+
+[ext_resource type="Script" path="res://Scripts/menu.gd" id="1_ifu4s"]
+
+[node name="Menu" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_ifu4s")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 448.0
+offset_top = 64.0
+offset_right = 704.0
+offset_bottom = 128.0
+text = "Game is paused"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SettingsButton" type="Button" parent="."]
+offset_left = 448.0
+offset_top = 160.0
+offset_right = 704.0
+offset_bottom = 224.0
+text = "Settings"
+
+[connection signal="pressed" from="SettingsButton" to="." method="_on_settings_button_pressed"]

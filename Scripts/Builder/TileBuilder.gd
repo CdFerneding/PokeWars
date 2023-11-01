@@ -62,7 +62,7 @@ static func _tile_builder(position:Array, tileMap:TileMap, tileId:int):
 			if(obstacle_layer1):
 				no_obstacle = false
 				
-	if(no_obstacle == true):
+	if(no_obstacle == true && Game.Wood >= Game.buildingCost):
 		_tile_setter(position,tileMap,tileId)
 		var counter = Game.buildCounter
 		Game.buildCounter = counter + 1

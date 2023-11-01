@@ -54,6 +54,8 @@ func get_enemies():
 	enemies = []
 	enemies = get_tree().get_nodes_in_group("enemies")
 
+func get_pikachus():
+	pikachus = get_tree().get_nodes_in_group("Pikachus")
 
 func get_buildings():
 	buildings = get_tree().get_nodes_in_group("buildings")
