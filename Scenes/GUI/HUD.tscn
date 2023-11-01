@@ -1,16 +1,71 @@
-[gd_scene load_steps=2 format=3 uid="uid://5fl4ns3ghx7f"]
 
-[ext_resource type="Script" path="res://Scripts/GUI/hud.gd" id="1_4w1lg"]
+[ext_resource type="Script" path="res://Scripts/Data/HUD.gd" id="1_xrsjc"]
+[ext_resource type="Texture2D" uid="uid://dv0lqqmit4txc" path="res://Assets/Menu/background.png" id="2_uxs8v"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c22t0"]
+bg_color = Color(0.352941, 0.352941, 0.352941, 0.580392)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 
 [node name="HUD" type="CanvasLayer"]
-process_mode = 3
-script = ExtResource("1_4w1lg")
+script = ExtResource("1_xrsjc")
 
-[node name="StartButton" type="Button" parent="."]
-offset_left = 384.0
-offset_top = 256.0
-offset_right = 768.0
-offset_bottom = 384.0
-text = "Start Game"
+[node name="Panel" type="Panel" parent="."]
+theme_override_styles/panel = SubResource("StyleBoxFlat_c22t0")
 
-[connection signal="pressed" from="StartButton" to="." method="_on_button_pressed"]
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 200.0
+offset_bottom = 268.0
+texture = ExtResource("2_uxs8v")
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 50.0
+offset_top = 20.0
+offset_right = 144.0
+offset_bottom = 196.0
+alignment = 1
+
+[node name="Food" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Food :"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Wood" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Wood :"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Stone" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Stone :"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameTimer" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Time"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameMode" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "GameMode:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Selected" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Selected :"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+
