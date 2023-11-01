@@ -33,12 +33,15 @@ static func _tile_setter(position:Array,tileMap:TileMap,tileId:int):
 			x = x +1
 		y = y + 1
 
-
+static func _delete_building(position:Array, tileMap:TileMap):
+	for n in range(position[2]+2,position[3]+1,-1):
+		for m in range(position[1]-2,position[0]-3, -1):
+			tileMap.set_cell(0,Vector2(m,n),1, Vector2(1,4))
+	tileMap.set_cell(1,Vector2(position[0], position[2]), -1)
 
 static func _tile_builder(position:Array, tileMap:TileMap, tileId:int):
 	var no_obstacle = true
-
-
+	
 	var right_offeset = 0
 	var left_offset = 0
 	var top_offset = 0
@@ -59,7 +62,7 @@ static func _tile_builder(position:Array, tileMap:TileMap, tileId:int):
 			if(obstacle_layer1):
 				no_obstacle = false
 				
-	if(no_obstacle == true && Game.Wood >=20):
+	if(no_obstacle == true):
 		_tile_setter(position,tileMap,tileId)
 		var counter = Game.buildCounter
 		Game.buildCounter = counter + 1

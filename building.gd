@@ -9,7 +9,7 @@ var buildingHover = false
 @onready var charmander = preload("res://Scenes/charmander.tscn")
 @onready var bulbasaur = preload("res://Scenes/bulbasaur.tscn")
 
-@export var main: Node
+var main: Node
 
 @onready var timer = $Timer
 
@@ -20,7 +20,7 @@ var currently_training = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	main = get_tree().get_root().get_node("Main")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -40,6 +40,7 @@ func _on_timer_timeout():
 		$Label.text = str(currentTime)
 		timer.start()
 	else:
+		print("sda")
 		$Label.text = ""
 		$Created_Unit_Sound.play()
 		_training_finished()
@@ -48,15 +49,15 @@ func _on_timer_timeout():
 func _training_finished():
 	timer.stop()
 	currently_training = false
-	match self.name:
-		"PokeCenter":
-			unitBuilder._build_unit(main,pikachu,self.position, 3)
-		"FireArena":
-			unitBuilder._build_unit(main,charmander,self.position, 4)
-		"WaterArena":
-			unitBuilder._build_unit(main,squirtle,self.position, 4)
-		"PlantArena":
-			unitBuilder._build_unit(main,bulbasaur,self.position, 4)
+	print(self.name)
+	if "PokeCenter" in self.name:
+		unitBuilder._build_unit(main,"Pikachu",self.position, 3)
+	if "FireBuilding" in self.name:
+			unitBuilder._build_unit(main,"Charmander",self.position, 4)
+	if "WaterBuilding" in self.name:
+			unitBuilder._build_unit(main,"Squirtle",self.position, 4)
+	if "PlantBuilding" in self.name:
+			unitBuilder._build_unit(main,"Bulbasaur",self.position, 4)
 
 
 
@@ -71,14 +72,21 @@ func _on_mouse_exited():
 
 func _on_input_event(viewport, event, shape_idx):
 	if buildingHover:
-		_train_unit(event)
+		if Game.GameMode == "delete":
+			_delete_building(event)
+		elif Game.GameMode == "play":
+			_train_unit(event)
 
 func _train_unit(event):
-	if Input.is_action_just_pressed("left_click") && Game.GameMode == "play" && Game.Food >=10 && !currently_training:
+	if Input.is_action_just_pressed("left_click") && !currently_training:
 		Game.Food = Game.Food - 10
 		currently_training = true
 		_start_training()
 
-
+func _delete_building(event):
+	if Input.is_action_just_pressed("left_click") && !currently_training:
+		var tileMap = get_tree().get_root().get_node("Main/TileMap")
+		tileMap._delete_building(self.position)
+		self.queue_free()
 
 
