@@ -142,6 +142,7 @@ func _on_input_event(_viewport, event, _shape_idx):
 func _on_retarget_timer_timeout():
 	var pathMain = get_tree().get_root().get_node("Main")
 	possible_targets = pathMain.pikachus
+	nearest_target = null
 	if possible_targets.size() == 0:
 		pass
 	for target in possible_targets:

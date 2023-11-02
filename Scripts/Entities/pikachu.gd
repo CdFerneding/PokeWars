@@ -113,6 +113,7 @@ func _on_hit(damage):
 	var pathMain = get_tree().get_root().get_node("Main")
 	health_bar.value -= damage
 	if health_bar.value == 0:
+		pathMain.pikachus.erase(self)
 		self.queue_free()
 		pathMain.get_pikachus()
 		if self in pathMain.selected_pikachus:
