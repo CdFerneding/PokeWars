@@ -160,11 +160,11 @@ func _handle_building_input(event):
 		match selected:
 			"PokeCenter":
 				tileMap._place_building(tile_position,4,3,2)
-			"FireBuilding":
+			"Fire Arena":
 				tileMap._place_building(tile_position,4,4,3)
-			"PlantBuilding":
+			"Plant Arena":
 				tileMap._place_building(tile_position,4,4,4)
-			"WaterBuilding":
+			"Water Arena":
 				tileMap._place_building(tile_position,4,4,5)
 
 
@@ -225,9 +225,11 @@ change gamemode depending on different button presses
 '
 func _change_gamemode():
 	if Input.is_action_pressed("B"):
-		Game.GameMode = "build"
+		Game.GameMode = "select"
+		$UI/BuildingButtonPanel.position = Vector2(4,1600)
 	if Input.is_action_pressed("R"):
 		Game.GameMode = "play"
+		$UI/BuildingButtonPanel.position = Vector2(4,1800)
 	if Input.is_action_pressed("P"):
 		Game.GameMode = "place"
 

@@ -51,11 +51,11 @@ func _training_finished():
 	print(self.name)
 	if "PokeCenter" in self.name:
 		unitBuilder._build_unit(main,"Pikachu",self.position, 3)
-	if "FireBuilding" in self.name:
+	if "Fire Arena" in self.name:
 			unitBuilder._build_unit(main,"Charmander",self.position, 4)
-	if "WaterBuilding" in self.name:
+	if "Water Arena" in self.name:
 			unitBuilder._build_unit(main,"Squirtle",self.position, 4)
-	if "PlantBuilding" in self.name:
+	if "Plant Arena" in self.name:
 			unitBuilder._build_unit(main,"Bulbasaur",self.position, 4)
 
 
@@ -72,7 +72,8 @@ func _on_mouse_exited():
 
 func _on_input_event(viewport, event, shape_idx):
 	if buildingHover:
-		if Game.GameMode == "delete":
+		if Game.selectedBuilding == "Delete":
+			print("test")
 			_delete_building(event)
 		elif Game.GameMode == "play":
 			_train_unit(event)
@@ -90,5 +91,4 @@ func _delete_building(event):
 		tileMap._delete_building(self.position)
 		Game.buildCounter -= 1
 		self.queue_free()
-
 
