@@ -72,6 +72,7 @@ func _process(_delta):
 	
 func new_game():
 	score = 0
+	$Music.play()
 	# $Pikachu.start($StartPosition.position)
 
 '

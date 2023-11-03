@@ -1,128 +1,28 @@
-[gd_scene load_steps=7 format=3 uid="uid://c5xbd3qrnk5vl"]
+[gd_scene load_steps=2 format=3 uid="uid://dhqtohkvg0you"]
 
-[ext_resource type="Script" path="res://Scripts/Data/HUD.gd" id="1_xrsjc"]
-[ext_resource type="Texture2D" uid="uid://dv0lqqmit4txc" path="res://Assets/Menu/background.png" id="2_uxs8v"]
-[ext_resource type="Texture2D" uid="uid://foy76vonkqb3" path="res://Assets/Sprites/Building/fire_arena.png" id="3_m3wr8"]
-[ext_resource type="Texture2D" uid="uid://b67a3mttwb0ld" path="res://Assets/Sprites/Building/water_arena.png" id="4_5w1dp"]
-[ext_resource type="Texture2D" uid="uid://0f62nxxobstl" path="res://Assets/Sprites/Building/plant_arena.png" id="5_4o1px"]
+[sub_resource type="GDScript" id="GDScript_2paxu"]
+script/source = "extends CanvasLayer
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c22t0"]
-bg_color = Color(0.352941, 0.352941, 0.352941, 0.580392)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	Game.set_game_paused(true)
+
+
+func _on_start_game_pressed():
+	Game.set_game_paused(false)
+	self.queue_free()
+"
 
 [node name="HUD" type="CanvasLayer"]
-script = ExtResource("1_xrsjc")
+process_mode = 3
+script = SubResource("GDScript_2paxu")
 
-[node name="Panel" type="Panel" parent="."]
-theme_override_styles/panel = SubResource("StyleBoxFlat_c22t0")
+[node name="StartGame" type="Button" parent="."]
+offset_left = 448.0
+offset_top = 256.0
+offset_right = 704.0
+offset_bottom = 320.0
+text = "Start Game"
 
-[node name="TextureRect" type="TextureRect" parent="."]
-offset_right = 200.0
-offset_bottom = 268.0
-texture = ExtResource("2_uxs8v")
-metadata/_edit_use_anchors_ = true
-
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-offset_left = 50.0
-offset_top = 20.0
-offset_right = 144.0
-offset_bottom = 196.0
-alignment = 1
-
-[node name="Food" type="Label" parent="VBoxContainer"]
-layout_mode = 2
-text = "Food :"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Wood" type="Label" parent="VBoxContainer"]
-layout_mode = 2
-text = "Wood :"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Stone" type="Label" parent="VBoxContainer"]
-layout_mode = 2
-text = "Stone :"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="GameTimer" type="Label" parent="VBoxContainer"]
-layout_mode = 2
-text = "Time"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="GameMode" type="Label" parent="VBoxContainer"]
-layout_mode = 2
-text = "GameMode:"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Selected" type="Label" parent="VBoxContainer"]
-layout_mode = 2
-text = "Selected :"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Timer" type="Timer" parent="."]
-autostart = true
-
-[node name="Fire Arena Button" type="Button" parent="."]
-anchors_preset = -1
-anchor_right = 0.007
-anchor_bottom = 0.012
-offset_left = -2.0
-offset_top = 522.0
-offset_right = 118.936
-offset_bottom = 643.224
-text = "Fire Arena"
-icon = ExtResource("3_m3wr8")
-icon_alignment = 1
-vertical_icon_alignment = 0
-
-[node name="Water Arena Button" type="Button" parent="."]
-anchors_preset = -1
-anchor_right = 0.007
-anchor_bottom = 0.012
-offset_left = 136.0
-offset_top = 523.0
-offset_right = 256.936
-offset_bottom = 649.224
-text = "Water Arena"
-icon = ExtResource("4_5w1dp")
-icon_alignment = 1
-vertical_icon_alignment = 0
-
-[node name="Plant Arena Button" type="Button" parent="."]
-anchors_preset = -1
-anchor_right = 0.007
-anchor_bottom = 0.012
-offset_left = 277.0
-offset_top = 524.0
-offset_right = 397.936
-offset_bottom = 650.224
-text = "Plant Arena"
-icon = ExtResource("5_4o1px")
-icon_alignment = 1
-vertical_icon_alignment = 0
-
-[node name="Delete Button" type="Button" parent="."]
-offset_left = 424.0
-offset_top = 523.0
-offset_right = 552.0
-offset_bottom = 658.0
-text = "Delete"
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="pressed" from="Fire Arena Button" to="." method="_on_fire_arena_pressed"]
-[connection signal="pressed" from="Water Arena Button" to="." method="_on_water_arena_pressed"]
-[connection signal="pressed" from="Plant Arena Button" to="." method="_on_plant_arena_pressed"]
-[connection signal="pressed" from="Delete Button" to="." method="_on_delete_button_pressed"]
+[connection signal="pressed" from="StartGame" to="." method="_on_start_game_pressed"]
