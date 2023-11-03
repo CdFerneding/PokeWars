@@ -1,6 +1,7 @@
 extends Camera2D
 @export var tilemap: TileMap
 @export var moveOffset: int
+@export var moveCameraBorderOffset: int
 @export var UI: Label
 var visible_size
 var viewportYBy2
@@ -54,15 +55,15 @@ func update_border():
 	viewportXBy2 = visible_size.x/2 # Will be use to calculate 
 	viewportYBy2 = visible_size.y/2
 	
-	border_right = limit_right - viewportXBy2
-	border_left = viewportXBy2
-	border_bottom = limit_bottom - viewportYBy2
-	border_top= viewportYBy2
+	border_right = limit_right - moveCameraBorderOffset
+	border_left = moveCameraBorderOffset
+	border_bottom = limit_bottom - moveCameraBorderOffset
+	border_top= moveCameraBorderOffset
 	#print(border_right," ", border_left," ", border_top ," ", border_bottom)
-	maximum_x_to_move_camera_left = viewport_rect.size.x / 10
-	maximum_y_to_move_camera_up = viewport_rect.size.y / 10
-	minimum_x_to_move_camera_right = viewport_rect.size.x - viewport_rect.size.x / 10
-	minimum_y_to_move_camera_down = viewport_rect.size.y - viewport_rect.size.y / 10
+	maximum_x_to_move_camera_left = moveCameraBorderOffset
+	maximum_y_to_move_camera_up = moveCameraBorderOffset
+	minimum_x_to_move_camera_right = viewport_rect.size.x - moveCameraBorderOffset
+	minimum_y_to_move_camera_down = viewport_rect.size.y - moveCameraBorderOffset
 	
 	#print(maximum_x_to_move_camera_left, " ", maximum_y_to_move_camera_up, " ", minimum_x_to_move_camera_right, " ", minimum_y_to_move_camera_down)
 	

@@ -205,6 +205,7 @@ editor_draw_drag_margin = true
 script = ExtResource("5_0705s")
 tilemap = NodePath("../TileMap")
 moveOffset = 300
+moveCameraBorderOffset = 25
 
 [node name="UI" parent="." instance=ExtResource("6_xhnji")]
 
