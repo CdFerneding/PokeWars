@@ -140,49 +140,51 @@ vertical_alignment = 1
 autostart = true
 
 [node name="Fire Arena Button" type="Button" parent="."]
-anchors_preset = -1
-anchor_right = 0.007
-anchor_bottom = 0.012
-offset_left = -2.0
-offset_top = 522.0
-offset_right = 118.936
-offset_bottom = 643.224
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -134.0
+offset_right = 120.936
+grow_vertical = 0
 text = "Fire Arena"
 icon = ExtResource("3_0v2bx")
 icon_alignment = 1
 vertical_icon_alignment = 0
 
 [node name="Water Arena Button" type="Button" parent="."]
-anchors_preset = -1
-anchor_right = 0.007
-anchor_bottom = 0.012
-offset_left = 136.0
-offset_top = 523.0
-offset_right = 256.936
-offset_bottom = 649.224
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 134.0
+offset_top = -134.0
+offset_right = 120.936
+grow_vertical = 0
 text = "Water Arena"
 icon = ExtResource("4_a0tl4")
 icon_alignment = 1
 vertical_icon_alignment = 0
 
 [node name="Plant Arena Button" type="Button" parent="."]
-anchors_preset = -1
-anchor_right = 0.007
-anchor_bottom = 0.012
-offset_left = 277.0
-offset_top = 524.0
-offset_right = 397.936
-offset_bottom = 650.224
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 260.0
+offset_top = -134.0
+offset_right = 359.0
+grow_vertical = 0
 text = "Plant Arena"
 icon = ExtResource("5_7q0qc")
 icon_alignment = 1
 vertical_icon_alignment = 0
 
 [node name="Delete Button" type="Button" parent="."]
-offset_left = 424.0
-offset_top = 523.0
-offset_right = 552.0
-offset_bottom = 658.0
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 370.0
+offset_top = -135.0
+offset_right = 498.0
+grow_vertical = 0
 text = "Delete"
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
