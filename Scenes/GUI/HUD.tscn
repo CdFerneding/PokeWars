@@ -1,12 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://dhqtohkvg0you"]
+[gd_scene load_steps=3 format=3 uid="uid://dhqtohkvg0you"]
 
 [sub_resource type="GDScript" id="GDScript_2paxu"]
 script/source = "extends CanvasLayer
 
 
+var screensize = Vector2()
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Game.set_game_paused(true)
+
+
+func _process(delta):
+	screensize = get_viewport().size
+	print(screensize)
+	$Background.set_size(screensize)
 
 
 func _on_start_game_pressed():
@@ -14,9 +22,16 @@ func _on_start_game_pressed():
 	self.queue_free()
 "
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y8k7y"]
+
 [node name="HUD" type="CanvasLayer"]
 process_mode = 3
 script = SubResource("GDScript_2paxu")
+
+[node name="Background" type="Panel" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_y8k7y")
 
 [node name="StartGame" type="Button" parent="."]
 anchors_preset = 8
