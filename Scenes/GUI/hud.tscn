@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhqtohkvg0you"]
+
+[ext_resource type="Script" path="res://Scripts/GUI/hud.gd" id="1_ujmyc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x3l27"]
+
+[node name="HUD" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_ujmyc")
+
+[node name="Background" type="Panel" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_x3l27")
+
+[node name="StartGame" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -32.0
+offset_right = 128.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Start Game"
+
+[connection signal="pressed" from="StartGame" to="." method="_on_start_game_pressed"]
