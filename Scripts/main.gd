@@ -177,12 +177,12 @@ pikachu multiple times and increases selected count
 
 func _handle_esc():
 	if Input.is_action_pressed("Esc"):
-		var childrenHUD = $HUD.get_children()
+		var childrenHUD = $UI.get_children()
 		for child in childrenHUD:
 			if "Menu" in child.name:
 				return
 		var menu = preload("res://Scenes/GUI/menu.tscn")
-		var pathHUD = get_tree().get_root().get_node("Main/HUD")
+		var pathHUD = get_tree().get_root().get_node("Main/UI")
 		var menuOverlay = menu.instantiate()
 		Game.set_game_paused(true)
 		pathHUD.add_child(menuOverlay)
