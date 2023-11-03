@@ -37,7 +37,7 @@ var rng = RandomNumberGenerator.new()
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
-	get_window().connect("size_changed", Callable(get_node("Camera"), "update_limit"))
+	get_viewport().size_changed.connect(Callable(get_node("Camera"), "update_limit"))
 	new_game() # Replace with function body.
 	
 	#set cursor to default
