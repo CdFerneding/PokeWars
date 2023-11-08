@@ -226,10 +226,10 @@ change gamemode depending on different button presses
 func _change_gamemode():
 	if Input.is_action_pressed("B"):
 		Game.GameMode = "select"
-		$UI/BuildingButtonPanel.position = Vector2(4,1600)
+		#$UI/BuildingButtonPanel.position = Vector2(4,1600)
 	if Input.is_action_pressed("R"):
 		Game.GameMode = "play"
-		$UI/BuildingButtonPanel.position = Vector2(4,1800)
+		#$UI/BuildingButtonPanel.position = Vector2(4,1800)
 	if Input.is_action_pressed("P"):
 		Game.GameMode = "place"
 

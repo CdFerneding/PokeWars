@@ -12,18 +12,12 @@ signal enemy_clicked
 var pathTilemap = Game.get_tree().get_root().get_node("Main/TileMap")
 var home_base = pathTilemap.home_base
 
-# pikachu highlighting 
-@export var selected = false
-#@onready var box = $Selected
-
 @export var possible_targets: Array[Node] = []
 @export var nearest_target: CharacterBody2D
 
 var previous_direction
 
 var current_target: Node
-
-@onready var box = $Selected
 
 #implements the pathfinding algorithm
 @onready var nav_agent:= $NavigationAgent2D #as NavigationAgent2D
@@ -36,14 +30,9 @@ func _ready():
 	$AnimatedSprite2D.animation = "walk_down"
 	$AttackCooldown.start()
 	#var main_node = get_tree().get_root().get_node("Main")
-	selected = false
-	set_selected(selected)
+	
 	super()
 	
-
-func set_selected(value):
-	selected = value
-	box.visible = value
 
 func _process(_delta:float):
 	enemy_scale_on_hover()
