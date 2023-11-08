@@ -26,6 +26,7 @@ var startV = Vector2()
 var end = Vector2()
 var endV = Vector2()
 var isDragging = false
+var previous_viewport_rect = Rect2()
 signal area_selected
 signal start_move_selection
 @onready var box = get_node("../UI/Panel")
@@ -39,6 +40,9 @@ func update_limit():
 	var mapRect = tilemap.get_used_rect()
 	var tileSize = tilemap.cell_quadrant_size
 	var worldSizeInPixels = mapRect.size * tileSize
+	if get_viewport_rect() == previous_viewport_rect:
+		return
+	previous_viewport_rect = get_viewport_rect()
 	#print(tileSize, " ", mapRect.size)
 	limit_right = worldSizeInPixels.x
 	limit_bottom = worldSizeInPixels.y
