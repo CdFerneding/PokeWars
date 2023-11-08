@@ -9,3 +9,8 @@ func _on_settings_button_pressed():
 	var settingsOverlay = settings.instantiate()
 	pathHUD.add_child(settingsOverlay)
 	self.queue_free()
+
+
+
+func _on_quit_game_button_pressed():
+	get_tree().quit()
