@@ -272,4 +272,10 @@ autostart = true
 
 [node name="HUD" parent="." instance=ExtResource("14_aq381")]
 
+[node name="UpdateCameraBorderFix" type="Timer" parent="."]
+editor_description = "This is a fix for the camera because the border to move the camera isn't updated on Windows and MacOS. An event to now when the windows size is updated exists but work only on Linux (Ubuntu with Gnome)"
+wait_time = 0.1
+autostart = true
+
 [connection signal="timeout" from="EnnemySpawnerTimer" to="." method="_on_enemy_spawner_timer_timeout"]
+[connection signal="timeout" from="UpdateCameraBorderFix" to="Camera" method="update_limit"]
