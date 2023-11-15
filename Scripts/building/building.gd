@@ -17,6 +17,8 @@ var totalTime = 10
 var currentTime
 var currently_training = false
 
+var tileId:int
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -72,23 +74,25 @@ func _on_mouse_exited():
 
 func _on_input_event(viewport, event, shape_idx):
 	if buildingHover:
-		if Game.selectedBuilding == "Delete":
-			print("test")
+		if Game.selectedBuilding == "delete":
 			_delete_building(event)
-		elif Game.GameMode == "play":
-			_train_unit(event)
+		elif Game.GameMode == "play" && Input.is_action_just_pressed("left_click"):
+			var UI = main.get_node("UI")
+			UI.currentBuilding = self
+			UI.get_node("TrainBox").show()
+			
 
 
 func _train_unit(event):
-	if Input.is_action_just_pressed("left_click") && !currently_training:
+	if  !currently_training:
 		Game.Food = Game.Food - 10
 		currently_training = true
 		_start_training()
 
 func _delete_building(event):
-	if Input.is_action_just_pressed("left_click") && !currently_training:
+	if Input.is_action_just_pressed("left_click") && !currently_training && self.name != "PokeCenter":
 		var tileMap = get_tree().get_root().get_node("Main/TileMap")
-		tileMap._delete_building(self.position)
+		tileMap._delete_building(self.position, tileId)
 		Game.buildCounter -= 1
 		self.queue_free()
 

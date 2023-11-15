@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 Game="*res://Scripts/Data/Game.gd"
 
+[display]
+
+window/size/mode=3
+
 [input]
 
 move_right={
