@@ -290,8 +290,7 @@ script = ExtResource("15_l8rfb")
 scale = Vector2(0.6, 0.586)
 texture = ExtResource("16_b2245")
 
-[node name="EnnemySpawnerTimer" type="Timer" parent="BigBadPokemon"]
-process_callback = 0
+[node name="EnemySpawnerTimer" type="Timer" parent="BigBadPokemon"]
 wait_time = 5.0
 autostart = true
 
@@ -311,4 +310,4 @@ shape = SubResource("CircleShape2D_qvrhp")
 
 [connection signal="timeout" from="EnnemySpawnerTimer" to="." method="_on_enemy_spawner_timer_timeout"]
 [connection signal="timeout" from="UpdateCameraBorderFix" to="Camera" method="update_limit"]
-[connection signal="timeout" from="BigBadPokemon/EnnemySpawnerTimer" to="BigBadPokemon" method="_on_ennemy_spawner_timer_timeout"]
+[connection signal="timeout" from="BigBadPokemon/EnemySpawnerTimer" to="BigBadPokemon" method="_on_enemy_spawner_timer_timeout"]

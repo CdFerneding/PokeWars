@@ -12,7 +12,7 @@ func _ready():
 func _process(delta):
 	pass
 
-func _on_ennemy_spawner_timer_timeout():
+func _on_enemy_spawner_timer_timeout():
 	
 	var mainPath = get_tree().get_root().get_node("Main")
 	var enemyPath = get_tree().get_root().get_node("Main/Enemies")
@@ -29,3 +29,5 @@ func _on_ennemy_spawner_timer_timeout():
 
 	# recall to have all pokachus from the "pokachus"-group in "pokachus"-variable again
 	mainPath.get_enemies()
+
+
