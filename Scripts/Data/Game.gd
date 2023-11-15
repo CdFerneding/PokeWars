@@ -15,6 +15,8 @@ var militaryCost = 10
 var pikachuCost = 8
 var Player_name : String
 
+var screenWidth: int
+var screenHeight: int
 # game state can be paused (false) or running (true)
 # if the game is paused, no more _process funcions are getting called
 # do not use
