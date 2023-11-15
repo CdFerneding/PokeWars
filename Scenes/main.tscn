@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cn8ein6jc6frg"]
+[gd_scene load_steps=26 format=3 uid="uid://cn8ein6jc6frg"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_c7xow"]
 [ext_resource type="Texture2D" uid="uid://b0yuglgf5hf8t" path="res://Assets/BerryGardenTiles.png" id="2_x2ryg"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://ctnohtufkqyj3" path="res://Scenes/WorldObjects/building.tscn" id="13_ot5q2"]
 [ext_resource type="PackedScene" uid="uid://dhqtohkvg0you" path="res://Scenes/GUI/hud.tscn" id="14_aq381"]
 [ext_resource type="Script" path="res://Scenes/BigBadPokemon.gd" id="15_l8rfb"]
+[ext_resource type="Texture2D" uid="uid://cpllwe7c3l70r" path="res://icon.svg" id="16_b2245"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_e562h"]
 vertices = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -173,6 +174,9 @@ sources/3 = SubResource("TileSetAtlasSource_mkbit")
 sources/4 = SubResource("TileSetAtlasSource_anl0r")
 sources/5 = SubResource("TileSetAtlasSource_bou8u")
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_qvrhp"]
+radius = 44.5702
+
 [node name="Main" type="Node" node_paths=PackedStringArray("tileMap")]
 script = ExtResource("1_c7xow")
 tileMap = NodePath("TileMap")
@@ -277,8 +281,34 @@ autostart = true
 editor_description = "This is a fix for the camera because the border to move the camera isn't updated on Windows and MacOS. An event to now when the windows size is updated exists but work only on Linux (Ubuntu with Gnome)"
 wait_time = 0.1
 autostart = true
+
 [node name="BigBadPokemon" type="CharacterBody2D" parent="."]
+position = Vector2(1591, 143)
 script = ExtResource("15_l8rfb")
+
+[node name="Sprite2D" type="Sprite2D" parent="BigBadPokemon"]
+scale = Vector2(0.6, 0.586)
+texture = ExtResource("16_b2245")
+
+[node name="EnnemySpawnerTimer" type="Timer" parent="BigBadPokemon"]
+process_callback = 0
+wait_time = 5.0
+autostart = true
+
+[node name="HealthBar" type="ProgressBar" parent="BigBadPokemon"]
+offset_right = 4.0
+offset_bottom = 27.0
+
+[node name="Selected" type="Panel" parent="BigBadPokemon"]
+offset_left = -37.0
+offset_top = -36.0
+offset_right = 38.0
+offset_bottom = 38.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BigBadPokemon"]
+position = Vector2(-0.5, -0.5)
+shape = SubResource("CircleShape2D_qvrhp")
 
 [connection signal="timeout" from="EnnemySpawnerTimer" to="." method="_on_enemy_spawner_timer_timeout"]
 [connection signal="timeout" from="UpdateCameraBorderFix" to="Camera" method="update_limit"]
+[connection signal="timeout" from="BigBadPokemon/EnnemySpawnerTimer" to="BigBadPokemon" method="_on_ennemy_spawner_timer_timeout"]
