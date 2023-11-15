@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://weyowi1k0j0y" path="res://Scenes/WorldObjects/berrybush.tscn" id="11_u5ymy"]
 [ext_resource type="PackedScene" uid="uid://dw0dfm6o0ni0s" path="res://Scenes/WorldObjects/tree.tscn" id="12_he3mb"]
 [ext_resource type="PackedScene" uid="uid://ctnohtufkqyj3" path="res://Scenes/WorldObjects/building.tscn" id="13_ot5q2"]
-[ext_resource type="PackedScene" uid="uid://bxlqywquk2y85" path="res://Scenes/GUI/hud.tscn" id="14_aq381"]
+[ext_resource type="PackedScene" uid="uid://dhqtohkvg0you" path="res://Scenes/GUI/hud.tscn" id="14_aq381"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_e562h"]
 vertices = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)

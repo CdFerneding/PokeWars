@@ -12,7 +12,7 @@ func _on_settings_button_pressed():
 
 
 func _input(event):
-	if Input.is_action_pressed("Esc"):
+	if Input.is_action_just_pressed("Esc"):
 		_on_exit_pressed()
 
 

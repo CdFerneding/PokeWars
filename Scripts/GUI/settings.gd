@@ -8,7 +8,7 @@ func _on_h_slider_value_changed(value):
 
 
 func _input(event):
-	if Input.is_action_pressed("Esc"):
+	if Input.is_action_just_pressed("Esc"):
 		_on_exit_pressed()
 
 

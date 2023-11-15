@@ -50,14 +50,5 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Quit game"
 
-[node name="Exit" type="Button" parent="."]
-offset_left = 1088.0
-offset_right = 1147.0
-offset_bottom = 32.0
-text = "Exit"
-icon_alignment = 2
-vertical_icon_alignment = 0
-
 [connection signal="pressed" from="SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="QuitGameButton" to="." method="_on_quit_game_button_pressed"]
-[connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
