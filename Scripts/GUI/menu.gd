@@ -11,6 +11,15 @@ func _on_settings_button_pressed():
 	self.queue_free()
 
 
+func _input(event):
+	if Input.is_action_pressed("Esc"):
+		_on_exit_pressed()
+
 
 func _on_quit_game_button_pressed():
 	get_tree().quit()
+
+
+func _on_exit_pressed():
+	Game.set_game_paused(false)
+	self.queue_free()

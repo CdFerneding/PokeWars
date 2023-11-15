@@ -10,6 +10,11 @@ func _ready():
 func _process(delta):
 	screensize = get_viewport().size
 	$Background.set_size(screensize)
+	
+
+func _input(event):
+	if Input.is_action_pressed("enter"):
+		_on_start_game_pressed()
 
 
 func _on_start_game_pressed():
