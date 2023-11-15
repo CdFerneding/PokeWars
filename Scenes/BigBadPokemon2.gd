@@ -21,8 +21,8 @@ func _on_enemy_spawner_timer_timeout():
 		return
 	
 	var new_enemy = mainPath.enemy.instantiate()
-	new_enemy.position.x = 1598 + rng.randf_range(-40, 40)
-	new_enemy.position.y = 143 + rng.randf_range(-40, 40)
+	new_enemy.position.x = 1648 + rng.randf_range(-40, 40)
+	new_enemy.position.y = 723 + rng.randf_range(-40, 40)
 	enemyPath.add_child(new_enemy)
 	# pikachus need the name Pikachu, to be recognized by resources farming-area
 	new_enemy.name = "Bad Pokachu"

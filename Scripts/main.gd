@@ -222,9 +222,10 @@ func _change_gamemode():
 	if Input.is_action_pressed("P"):
 		Game.GameMode = "place"
 
-
+'''
 func _on_enemy_spawner_timer_timeout():
 	var enemyPath = $Enemies
+	print("Test")
 	
 	if $Enemies.get_child_count() >= num_of_enemies:
 		return
@@ -244,3 +245,4 @@ func _on_enemy_spawner_timer_timeout():
 #		var y_position = round(event.position.y/3)
 #		var position = Vector2(100,100)
 #		pikachuBuilder._build_pikachu(self,self.find_child("TileMap"),position)
+'''
