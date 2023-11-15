@@ -39,6 +39,7 @@ func _ready():
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	get_viewport().size_changed.connect(Callable(get_node("Camera"), "update_limit"))
 	new_game() # Replace with function body.
+	$UI/TrainBox.hide()
 	
 	#set cursor to default
 	Input.set_custom_mouse_cursor(default_cursor, Input.CURSOR_ARROW, Vector2(5,0))
@@ -144,17 +145,7 @@ building is for when you want to build a building
 you can select different types of buildings and build them
 '
 func _handle_building_input(event):
-
-	if Input.is_action_just_pressed("1"):
-		Game.selectedBuilding = "PokeCenter"
-	elif Input.is_action_just_pressed("2"):
-		Game.selectedBuilding = "FireBuilding"
-	elif Input.is_action_just_pressed("3"):
-		Game.selectedBuilding = "PlantBuilding"
-	elif Input.is_action_just_pressed("4"):
-		Game.selectedBuilding = "WaterBuilding"
-			
-	elif Input.is_action_just_pressed("left_click"):
+	if Input.is_action_just_pressed("left_click"):
 		var tile_position = tileMap.get_global_mouse_position()
 		var selected = Game.selectedBuilding
 		match selected:
@@ -226,10 +217,8 @@ change gamemode depending on different button presses
 func _change_gamemode():
 	if Input.is_action_pressed("B"):
 		Game.GameMode = "select"
-		#$UI/BuildingButtonPanel.position = Vector2(4,1600)
 	if Input.is_action_pressed("R"):
 		Game.GameMode = "play"
-		#$UI/BuildingButtonPanel.position = Vector2(4,1800)
 	if Input.is_action_pressed("P"):
 		Game.GameMode = "place"
 

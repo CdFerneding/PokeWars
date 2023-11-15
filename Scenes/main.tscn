@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://dhqtohkvg0you" path="res://Scenes/GUI/hud.tscn" id="14_aq381"]
 [ext_resource type="Script" path="res://Scenes/BigBadPokemon.gd" id="15_l8rfb"]
 [ext_resource type="Texture2D" uid="uid://cpllwe7c3l70r" path="res://icon.svg" id="16_b2245"]
+[ext_resource type="PackedScene" uid="uid://bxlqywquk2y85" path="res://Scenes/GUI/hud.tscn" id="14_aq381"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_e562h"]
 vertices = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)

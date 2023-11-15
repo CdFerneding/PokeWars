@@ -1,13 +1,15 @@
 extends CanvasLayer
 
-@onready var FoodLabel = $VBoxContainer/Food
-@onready var WoodLabel = $VBoxContainer/Wood
-@onready var StoneLabel = $VBoxContainer/Stone
-@onready var GameTimerLabel = $VBoxContainer/GameTimer
-@onready var GameModeLabel = $VBoxContainer/GameMode
-@onready var SelectedLabel = $VBoxContainer/Selected # (numbers of currently selected pikachus)
+@onready var FoodLabel = $GameStateBox/VBoxContainer/Food
+@onready var WoodLabel = $GameStateBox/VBoxContainer/Wood
+@onready var StoneLabel = $GameStateBox/VBoxContainer/Stone
+@onready var GameTimerLabel = $GameStateBox/VBoxContainer/GameTimer
+@onready var GameModeLabel = $GameStateBox/VBoxContainer/GameMode
+@onready var GameModeBuilding = $GameStateBox/VBoxContainer/CurrentBuilding
+@onready var SelectedLabel = $GameStateBox/VBoxContainer/Selected # (numbers of currently selected pikachus)
 
 var time = 0
+var currentBuilding
 
 func update_game_timer():
 	var minutes
@@ -36,27 +38,46 @@ func _process(_delta):
 	StoneLabel.text = "Stone: " + str(Game.Stone)
 	GameModeLabel.text = "Mode: " + Game.GameMode
 	SelectedLabel.text = "Selected: " + str(Game.Selected)
+	GameModeBuilding.text = "Building: \n" + Game.selectedBuilding
+	checkGameMode()
 	
 
 
 func _on_fire_arena_pressed():
-	if Game.GameMode == "play":
+	if Game.GameMode == "select":
 		Game.GameMode = "build"
-		Game.selectedBuilding = "FireBuilding"
+		Game.selectedBuilding = "Fire Arena"
 
 
 func _on_water_arena_pressed():
-	if Game.GameMode == "play":
+	if Game.GameMode == "select":
 		Game.GameMode = "build"
-		Game.selectedBuilding = "WaterBuilding"
+		Game.selectedBuilding = "Water Arena"
 
 func _on_plant_arena_pressed():
-	if Game.GameMode == "play":
+	if Game.GameMode == "select":
 		Game.GameMode = "build"
-		Game.selectedBuilding = "PlantBuilding"
+		Game.selectedBuilding = "Plant Arena"
 
 
 func _on_delete_button_pressed():
-	if Game.GameMode == "play":
-		Game.GameMode = "delete"
+	if Game.GameMode == "select":
+		Game.selectedBuilding = "delete"
 
+func checkGameMode():
+	if Game.GameMode == "play":
+		$BuildingButtonBox.hide()
+		$GameStateBox/VBoxContainer/CurrentBuilding.hide()
+	elif Game.GameMode == "select":
+		$BuildingButtonBox.show()
+		$GameStateBox/VBoxContainer/CurrentBuilding.show()
+	elif Game.GameMode =="build":
+		$BuildingButtonBox.hide()
+		$GameStateBox/VBoxContainer/CurrentBuilding.show()
+
+
+
+
+
+func _on_train_unit_button_pressed():
+	pass
