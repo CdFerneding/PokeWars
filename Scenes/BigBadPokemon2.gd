@@ -4,10 +4,13 @@ var num_of_enemies = 100
 
 var rng = RandomNumberGenerator.new()
 
+@onready var animatedSprite = $AnimatedSprite2D
+
 func _ready():
 	
 	super()
 	speed = 0
+	animatedSprite.play()
 	
 func _process(delta):
 	pass
