@@ -1,13 +1,22 @@
 extends GoodPokemon
-#extends CharacterBody2D
 
-class_name Pikachu
+class_name Charmander
 
-var pik_hover = false
-signal pikachu_clicked
+var pok_hover = false
+signal charmander_clicked
 
 var previous_direction
 
+var current_target: Node
+
+@export var attack_damage = 5
+
+enum AttackModeEnum {ATTACK, PROTECT, STILL}
+
+#Mode describes how the ennemy should interract.
+# attack : It attack the nearest ennemy
+# still : It doesn't move but attack ennemies in his range
+@export var mode: AttackModeEnum = AttackModeEnum.ATTACK
 #implements the pathfinding algorithm
 @onready var nav_agent:= $NavigationAgent2D #as NavigationAgent2D
 
@@ -15,14 +24,14 @@ func _ready():
 	previous_direction = "down"
 	$AnimatedSprite2D.animation = "walk_down"
 	var main_node = get_tree().get_root().get_node("Main")
-	connect("pikachu_clicked", Callable(main_node, "_on_pikachu_clicked"))
+	connect("charmander_clicked", Callable(main_node, "_on_charmander_clicked"))
 	
 	# super initializes the healthbar 
 	super()
 
 
 func _process(_delta:float):
-	pikachu_scale_on_hover()
+	charmander_scale_on_hover()
 		
 	
 func _physics_process(_delta: float) -> void:
@@ -41,9 +50,19 @@ func _physics_process(_delta: float) -> void:
 		target = self.position
 	apply_corresponding_animation(velocity)
 	
+	if position.distance_to(next_pos) < 7:
+		velocity = Vector2.ZERO
+		if $AttackCooldown.is_stopped() and current_target != null and position.distance_to(current_target.position) < 15:
+			attack()
+	
 	move_and_slide()
 	
-# added is_farming = false to cancel farming when a new destination is issued for pikachu
+func attack():
+	if (current_target as BadPokemon) != null:
+		(current_target as BadPokemon)._on_hit(attack_damage)
+	$AttackCooldown.start()
+	
+# added is_farming = false to cancel farming when a new destination is issued for charmander
 func make_path(ressource_position = get_global_mouse_position()) -> void:
 	nav_agent.target_position = ressource_position
 	target = nav_agent.target_position
@@ -77,26 +96,26 @@ func apply_corresponding_animation(_prev):
 
 
 func _on_mouse_entered():
-	pik_hover = true
+	pok_hover = true
 	set_selected(!selected)
 
 func _on_mouse_exited():
-	pik_hover = false
+	pok_hover = false
 	set_selected(!selected)
 
 
-func _pika_hover_selected_check(_event):
-	if pik_hover and Input.is_action_pressed("left_click"):
-		emit_signal("pikachu_clicked", self)
-		pik_hover = false
+func _char_hover_selected_check(_event):
+	if pok_hover and Input.is_action_pressed("left_click"):
+		emit_signal("charmander_clicked", self)
+		pok_hover = false
 		
 	# leftclick on "nothing" to deselect units
 	elif Input.is_action_pressed("left_click"):
-		pik_hover = false
+		pok_hover = false
 
 
-func pikachu_scale_on_hover() -> void:
-	if pik_hover:
+func charmander_scale_on_hover() -> void:
+	if pok_hover:
 		self.scale.x = 0.6
 		self.scale.y = 0.6
 
@@ -105,19 +124,41 @@ func pikachu_scale_on_hover() -> void:
 		self.scale.y = 0.5
 
 func _on_input_event(_viewport, event, _shape_idx):
-	if pik_hover:
-		_pika_hover_selected_check(event)
+	if pok_hover:
+		_char_hover_selected_check(event)
 
-# function to reduce pikachus health, number damage is reducted from pikachus health_bar
+# function to reduce charmanders health, number damage is reducted from charmanders health_bar
 func _on_hit(damage):
 	var pathMain = get_tree().get_root().get_node("Main")
 	health_bar.value -= damage
 	if health_bar.value == 0:
-		pathMain.pikachus.erase(self)
+		pathMain.charmanders.erase(self)
 		self.queue_free()
-		pathMain.get_pikachus()
+		pathMain.get_units()
 		if self in pathMain.selected_pokemon:
 			pathMain.selected_pokemon.erase(self)
 			Game.Selected = pathMain.selected_pokemon.size()
+			
+func _on_retarget_timer_timeout():
 		
+	var pathMain = get_tree().get_root().get_node("Main")
+	var possible_targets = pathMain.get_bad_pokemon()
+	var nearest_target = null
+	if possible_targets.size() == 0:
+		pass
+	for target in possible_targets:
+		if target == null:
+			continue
+		if nearest_target == null or target.position.distance_to(position) < nearest_target.position.distance_to(position):
+			nearest_target = target
+			current_target = target
 
+	if nearest_target != null:
+		target = nav_agent.target_position
+		nav_agent.target_position = nearest_target.position
+
+func change_gamemode():
+	if mode == AttackModeEnum.ATTACK:
+		mode = AttackModeEnum.STILL
+	elif mode == AttackModeEnum.STILL:
+		mode = AttackModeEnum.ATTACK

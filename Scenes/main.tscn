@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://cn8ein6jc6frg"]
+[gd_scene load_steps=29 format=3 uid="uid://cn8ein6jc6frg"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_c7xow"]
 [ext_resource type="Texture2D" uid="uid://b0yuglgf5hf8t" path="res://Assets/BerryGardenTiles.png" id="2_x2ryg"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://c5xbd3qrnk5vl" path="res://Scenes/GUI/UI.tscn" id="6_xhnji"]
 [ext_resource type="AudioStream" uid="uid://ddjyv1ho8uwv7" path="res://Assets/Music/escape from swag city.mp3" id="9_l55f3"]
 [ext_resource type="PackedScene" uid="uid://jbkfgig6x3sy" path="res://Scenes/pokemon/pikachu.tscn" id="10_dhifx"]
+[ext_resource type="PackedScene" uid="uid://ceq3pwudksxl" path="res://Scenes/pokemon/charmander.tscn" id="11_8bxx8"]
 [ext_resource type="PackedScene" uid="uid://weyowi1k0j0y" path="res://Scenes/WorldObjects/berrybush.tscn" id="11_u5ymy"]
 [ext_resource type="PackedScene" uid="uid://dw0dfm6o0ni0s" path="res://Scenes/WorldObjects/tree.tscn" id="12_he3mb"]
 [ext_resource type="PackedScene" uid="uid://ctnohtufkqyj3" path="res://Scenes/WorldObjects/building.tscn" id="13_ot5q2"]
@@ -341,6 +342,9 @@ position = Vector2(156, 126)
 position = Vector2(183, 126)
 
 [node name="Charmanders" type="Node2D" parent="Units"]
+
+[node name="CharacterBody2D" parent="Units/Charmanders" instance=ExtResource("11_8bxx8")]
+position = Vector2(200, 200)
 
 [node name="Bulbasaurs" type="Node2D" parent="Units"]
 

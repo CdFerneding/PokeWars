@@ -13,7 +13,7 @@ extends Node
 var score
 
 # storing the selected pikachu
-var selected_pikachus = []
+var selected_pokemon = []
 # all units in the group their groups
 var charmanders = []
 var bulbasaurs = []
@@ -25,6 +25,7 @@ var squirtles = []
 # control the number of spawning enemies:
 var num_of_enemies = 3
 
+var type_of_pokemon_to_place = 0
 
 var buildings = []
 #cursor
@@ -36,7 +37,7 @@ var rng = RandomNumberGenerator.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	#DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	get_viewport().size_changed.connect(Callable(get_node("Camera"), "update_limit"))
 	new_game() # Replace with function body.
 	$UI/TrainBox.hide()
@@ -53,7 +54,7 @@ func _ready():
 func get_units():
 	pikachu = []
 	pikachus = get_tree().get_nodes_in_group("pikachus")
-	charmanders = get_tree().get_nodes_in_group("Charmanders")
+	charmanders = get_tree().get_nodes_in_group("charmanders")
 	bulbasaurs = get_tree().get_nodes_in_group("Bulbasaurs")
 	squirtles = get_tree().get_nodes_in_group("Squirtles")
 
@@ -91,7 +92,7 @@ func _on_area_selected(object: Camera2D):
 	area.append(Vector2(max(start.x, end.x), max(start.y, end.y)))
 	var pk = get_pikachus_in_area(area)
 	for p in pk:
-		selected_pikachus.append(p)
+		selected_pokemon.append(p)
 	Game.Selected = pk.size()
 #	Game.SelectedUnits = ut.size()
 	# deselect all units
@@ -120,6 +121,7 @@ and then depending on what is the current gamemode goes to
 the correlating _handle_input function
 '
 func _input(_event):
+	
 	_change_gamemode()
 	_handle_esc()
 	if Game.GameMode == "play":
@@ -134,8 +136,8 @@ func _input(_event):
 
 # connected through funciton in pikachu._ready()
 #func _on_pikachu_clicked(object: CharacterBody2D):
-#	selected_pikachus = []
-#	selected_pikachus.append(object)
+#	selected_pokemon = []
+#	selected_pokemon.append(object)
 	
 '
 different input functions get called depending on what 
@@ -186,21 +188,32 @@ func _handle_play_input(event):
 	var no_pikachus_selected = true
 	# this check needs to check for "release". Otherwise when placing new pikachus they get instantly selected
 	if Input.is_action_just_released("left_click"):
+		for c in charmanders:
+			if c == null:
+				continue
+			if c.pok_hover:
+				selected_pokemon = []
+				selected_pokemon.append(c)
+				Game.Selected = selected_pokemon.size()
+				no_pikachus_selected = false
+				if (event as InputEventMouseButton) != null and event.double_click:
+					print("change mode")
+					c._change_gamemode()
 		for p in pikachus:
 			if p == null:
 				continue
 			if p.pik_hover:
-				selected_pikachus = []
-				selected_pikachus.append(p)
-				Game.Selected = selected_pikachus.size()
+				selected_pokemon = []
+				selected_pokemon.append(p)
+				Game.Selected = selected_pokemon.size()
 				no_pikachus_selected = false
 		if no_pikachus_selected:
-			selected_pikachus = []
-			Game.Selected = selected_pikachus.size()
+			selected_pokemon = []
+			Game.Selected = selected_pokemon.size()
 			
 	if Input.is_action_just_pressed("right_click"):
-		if selected_pikachus.size() != 0:
-			for p in selected_pikachus:
+		if selected_pokemon.size() != 0:
+			for p in selected_pokemon:
 				p.make_path()
 
 '
@@ -209,7 +222,11 @@ only for debugging to place units manually
 func _handle_place_input(event):
 	if Input.is_action_just_pressed("left_click"):
 		var position = tileMap.get_global_mouse_position()
-		unitBuilder._build_unit(self,"Pikachu", position, 0)
+		if type_of_pokemon_to_place == 0:
+			unitBuilder._build_unit(self,"Pikachu", position, 0)
+		else:
+			unitBuilder._build_unit(self,"Charmander", position, 0)
+			
 
 '
 change gamemode depending on different button presses
@@ -220,6 +237,9 @@ func _change_gamemode():
 	if Input.is_action_pressed("R"):
 		Game.GameMode = "play"
 	if Input.is_action_pressed("P"):
+		if Game.GameMode == "place":
+			type_of_pokemon_to_place = (type_of_pokemon_to_place + 1) % 2
+			print(type_of_pokemon_to_place)
 		Game.GameMode = "place"
 
 '''
@@ -246,3 +266,9 @@ func _on_enemy_spawner_timer_timeout():
 #		var position = Vector2(100,100)
 #		pikachuBuilder._build_pikachu(self,self.find_child("TileMap"),position)
 '''
+
+func get_good_pokemon() -> Array[Node]:
+	return charmanders + pikachus + bulbasaurs + squirtles
+
+func get_bad_pokemon() -> Array[Node]:
+	return enemies
