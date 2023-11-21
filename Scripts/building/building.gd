@@ -18,6 +18,8 @@ var currentTime
 var currently_training = false
 
 var tileId:int
+var maxHealth = 200
+var currentHealth
 
 
 # Called when the node enters the scene tree for the first time.
@@ -77,13 +79,11 @@ func _on_input_event(viewport, event, shape_idx):
 		if Game.selectedBuilding == "delete":
 			_delete_building(event)
 		elif Game.GameMode == "play" && Input.is_action_just_pressed("left_click"):
-			var UI = main.get_node("UI")
-			UI.currentBuilding = self
-			UI.get_node("TrainBox").show()
+			_show_train_UI()
 			
 
 
-func _train_unit(event):
+func train_unit():
 	if  !currently_training:
 		Game.Food = Game.Food - 10
 		currently_training = true
@@ -96,3 +96,8 @@ func _delete_building(event):
 		Game.buildCounter -= 1
 		self.queue_free()
 
+func _show_train_UI():
+	var UI = main.get_node("UI")
+	UI.currentBuilding = self
+	UI.get_node("TrainBox").show()
+	UI.show_training_button()

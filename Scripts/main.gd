@@ -185,7 +185,8 @@ func _handle_play_input(event):
 	#_add_new_pikachu(event)
 	var no_pikachus_selected = true
 	# this check needs to check for "release". Otherwise when placing new pikachus they get instantly selected
-	if Input.is_action_just_released("left_click"):
+	if Input.is_action_just_released("left_click") && Game.UIHover == false:
+		$UI/TrainBox.hide()
 		for p in pikachus:
 			if p == null:
 				continue
