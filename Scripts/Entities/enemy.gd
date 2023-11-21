@@ -38,8 +38,7 @@ func _process(_delta:float):
 	enemy_scale_on_hover()
 		
 func attack():
-	if "Pikachu" in current_target.name:
-		(current_target as Pikachu)._on_hit(1)
+	(current_target as GoodPokemon)._on_hit(1)
 	$AttackCooldown.start()
 	
 func _physics_process(_delta: float) -> void:
@@ -130,7 +129,7 @@ func _on_input_event(_viewport, event, _shape_idx):
 
 func _on_retarget_timer_timeout():
 	var pathMain = get_tree().get_root().get_node("Main")
-	possible_targets = pathMain.pikachus
+	possible_targets = pathMain.get_good_pokemon()
 	nearest_target = null
 	if possible_targets.size() == 0:
 		pass
@@ -145,3 +144,10 @@ func _on_retarget_timer_timeout():
 		nav_agent.target_position = nearest_target.position
 		target = nav_agent.target_position
 
+func _on_hit(damage):
+	var pathMain = get_tree().get_root().get_node("Main")
+	health_bar.value -= damage
+	if health_bar.value == 0:
+		pathMain.enemies.erase(self)
+		self.queue_free()
+		pathMain.get_units()

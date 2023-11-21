@@ -1,6 +1,7 @@
-[gd_scene load_steps=36 format=3 uid="uid://ceq3pwudksxl"]
+[gd_scene load_steps=40 format=3 uid="uid://ceq3pwudksxl"]
 
 [ext_resource type="Texture2D" uid="uid://dkpxu5gui5e0m" path="res://Assets/Sprites/Fire/Charmander/Walk-Anim.png" id="1_85sdf"]
+[ext_resource type="Script" path="res://Scripts/Entities/charmander.gd" id="1_s71sf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gfh6e"]
 atlas = ExtResource("1_85sdf")
@@ -270,15 +271,70 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y5mt7"]
-radius = 11.0
-height = 22.0
+radius = 6.0
+height = 12.0
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gs3kq"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.0470588, 0.6, 1, 1)
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vp6du"]
+bg_color = Color(0.192157, 0.917647, 0, 0.886275)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mp2ck"]
+bg_color = Color(0.882353, 0.482353, 0, 1)
+
+[node name="Charmander" type="CharacterBody2D" groups=["charmanders"]]
+y_sort_enabled = true
+input_pickable = true
+script = ExtResource("1_s71sf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, 0)
 sprite_frames = SubResource("SpriteFrames_f2uc2")
 animation = &"walk_down_left"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, -4)
+position = Vector2(1, -2)
 shape = SubResource("CapsuleShape2D_y5mt7")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+navigation_layers = 3
+avoidance_enabled = true
+avoidance_mask = 3
+
+[node name="Selected" type="Panel" parent="."]
+offset_left = -7.0
+offset_top = -17.0
+offset_right = 12.0
+offset_bottom = 8.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_gs3kq")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = -8.33333
+offset_top = -23.3333
+offset_right = 8.66667
+offset_bottom = -19.3333
+theme_override_styles/background = SubResource("StyleBoxFlat_vp6du")
+theme_override_styles/fill = SubResource("StyleBoxFlat_mp2ck")
+show_percentage = false
+
+[node name="AttackCooldown" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="RetargetTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="timeout" from="RetargetTimer" to="." method="_on_retarget_timer_timeout"]
