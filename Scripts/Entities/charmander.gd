@@ -140,7 +140,9 @@ func _on_hit(damage):
 			Game.Selected = pathMain.selected_pokemon.size()
 			
 func _on_retarget_timer_timeout():
-		
+		self.call_thread_safe("retarget")
+
+func retarget():
 	var pathMain = get_tree().get_root().get_node("Main")
 	var possible_targets = pathMain.get_bad_pokemon()
 	var nearest_target = null
@@ -156,6 +158,10 @@ func _on_retarget_timer_timeout():
 	if nearest_target != null:
 		target = nav_agent.target_position
 		nav_agent.target_position = nearest_target.position
+		if nearest_target.position.distance_to(position) > 100:
+			$RetargetTimer.wait_time = 2
+		else:
+			$RetargetTimer.wait_time = 0.5
 
 func change_gamemode():
 	if mode == AttackModeEnum.ATTACK:

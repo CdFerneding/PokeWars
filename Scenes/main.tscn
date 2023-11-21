@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cn8ein6jc6frg"]
+[gd_scene load_steps=44 format=3 uid="uid://cn8ein6jc6frg"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_c7xow"]
 [ext_resource type="Texture2D" uid="uid://b0yuglgf5hf8t" path="res://Assets/BerryGardenTiles.png" id="2_x2ryg"]
@@ -15,10 +15,8 @@
 [ext_resource type="PackedScene" uid="uid://dw0dfm6o0ni0s" path="res://Scenes/WorldObjects/tree.tscn" id="12_he3mb"]
 [ext_resource type="PackedScene" uid="uid://ctnohtufkqyj3" path="res://Scenes/WorldObjects/building.tscn" id="13_ot5q2"]
 [ext_resource type="PackedScene" uid="uid://dhqtohkvg0you" path="res://Scenes/GUI/hud.tscn" id="14_aq381"]
-[ext_resource type="Script" path="res://Scenes/BigBadPokemon.gd" id="15_l8rfb"]
+[ext_resource type="Script" path="res://Scripts/Entities/BigBadPokemon.gd" id="16_mwle3"]
 [ext_resource type="Texture2D" uid="uid://di45pnuqtfhuh" path="res://Assets/Sprites/Fire/Moltres/Idle-Anim.png" id="17_sdfoi"]
-[ext_resource type="Script" path="res://Scenes/BigBadPokemon2.gd" id="17_vgwc2"]
-[ext_resource type="Script" path="res://Scenes/BigBadPokemon3.gd" id="18_rw1gt"]
 [ext_resource type="Texture2D" uid="uid://b2ad87iiw8j3w" path="res://Assets/Sprites/Grass/Zapdos/Idle-Anim.png" id="19_bkhy1"]
 [ext_resource type="Texture2D" uid="uid://2uctvkx3s3i2" path="res://Assets/Sprites/Water/Artikuno/Idle-Anim.png" id="21_rur0q"]
 
@@ -398,9 +396,11 @@ editor_description = "This is a fix for the camera because the border to move th
 wait_time = 0.1
 autostart = true
 
-[node name="BigBadPokemon" type="CharacterBody2D" parent="."]
+[node name="BigBadPokemon" type="CharacterBody2D" parent="." groups=["arena1"]]
 position = Vector2(1598, 143)
-script = ExtResource("15_l8rfb")
+script = ExtResource("16_mwle3")
+current_x_spawn_location = 1598
+current_y_spawn_location = 143
 
 [node name="EnemySpawnerTimer" type="Timer" parent="BigBadPokemon"]
 wait_time = 5.0
@@ -427,9 +427,11 @@ position = Vector2(2, 0)
 sprite_frames = SubResource("SpriteFrames_tgpkn")
 animation = &"idle_down"
 
-[node name="BigBadPokemon2" type="CharacterBody2D" parent="."]
+[node name="BigBadPokemon2" type="CharacterBody2D" parent="." groups=["arena2"]]
 position = Vector2(1648, 723)
-script = ExtResource("17_vgwc2")
+script = ExtResource("16_mwle3")
+current_x_spawn_location = 1648
+current_y_spawn_location = 723
 
 [node name="EnemySpawnerTimer_2" type="Timer" parent="BigBadPokemon2"]
 wait_time = 5.0
@@ -457,9 +459,11 @@ position = Vector2(-1, -2)
 sprite_frames = SubResource("SpriteFrames_6h60r")
 animation = &"idle_down"
 
-[node name="BigBadPokemon3" type="CharacterBody2D" parent="."]
+[node name="BigBadPokemon3" type="CharacterBody2D" parent="." groups=["arena3"]]
 position = Vector2(256, 750)
-script = ExtResource("18_rw1gt")
+script = ExtResource("16_mwle3")
+current_x_spawn_location = 256
+current_y_spawn_location = 750
 
 [node name="EnemySpawnerTimer_3" type="Timer" parent="BigBadPokemon3"]
 wait_time = 5.0

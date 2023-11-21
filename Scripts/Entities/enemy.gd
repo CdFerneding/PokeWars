@@ -15,6 +15,8 @@ var home_base = pathTilemap.home_base
 @export var possible_targets: Array[Node] = []
 @export var nearest_target: CharacterBody2D
 
+@export var arena : Node = null
+
 var previous_direction
 
 var current_target: Node
@@ -128,6 +130,9 @@ func _on_input_event(_viewport, event, _shape_idx):
 
 
 func _on_retarget_timer_timeout():
+	self.call_thread_safe("retarget")
+	
+func retarget():
 	var pathMain = get_tree().get_root().get_node("Main")
 	possible_targets = pathMain.get_good_pokemon()
 	nearest_target = null
@@ -143,6 +148,10 @@ func _on_retarget_timer_timeout():
 	if nearest_target != null:
 		nav_agent.target_position = nearest_target.position
 		target = nav_agent.target_position
+		if nearest_target.position.distance_to(position) > 100:
+			$RetargetTimer.wait_time = 2
+		else:
+			$RetargetTimer.wait_time = 0.5
 
 func _on_hit(damage):
 	var pathMain = get_tree().get_root().get_node("Main")
