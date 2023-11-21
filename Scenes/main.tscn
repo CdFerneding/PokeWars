@@ -385,10 +385,6 @@ y_sort_enabled = true
 [node name="PokeCenter" parent="Buildings" groups=["buildings"] instance=ExtResource("13_ot5q2")]
 position = Vector2(168, 77)
 
-[node name="EnnemySpawnerTimer" type="Timer" parent="."]
-wait_time = 2.0
-autostart = true
-
 [node name="HUD" parent="." instance=ExtResource("14_aq381")]
 
 [node name="UpdateCameraBorderFix" type="Timer" parent="."]
@@ -490,7 +486,6 @@ position = Vector2(-2, 3)
 sprite_frames = SubResource("SpriteFrames_u25gm")
 animation = &"idle_down"
 
-[connection signal="timeout" from="EnnemySpawnerTimer" to="." method="_on_enemy_spawner_timer_timeout"]
 [connection signal="timeout" from="UpdateCameraBorderFix" to="Camera" method="update_limit"]
 [connection signal="timeout" from="BigBadPokemon/EnemySpawnerTimer" to="BigBadPokemon" method="_on_enemy_spawner_timer_timeout"]
 [connection signal="timeout" from="BigBadPokemon2/EnemySpawnerTimer_2" to="BigBadPokemon2" method="_on_enemy_spawner_timer_timeout"]
