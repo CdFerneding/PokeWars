@@ -31,10 +31,15 @@ func _ready():
 
 
 func _process(_delta:float):
+	if Game.is_paused:
+		pass
+	
 	charmander_scale_on_hover()
 		
 	
 func _physics_process(_delta: float) -> void:
+	if Game.is_paused:
+		pass
 #	var prev_vel = velocity
 	#if int(nav_agent.distance_to_target() < 2):
 		#return
@@ -58,6 +63,8 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 	
 func attack():
+	if Game.is_paused:
+		pass
 	if (current_target as BadPokemon) != null:
 		(current_target as BadPokemon)._on_hit(attack_damage)
 	$AttackCooldown.start()
@@ -70,6 +77,8 @@ func make_path(ressource_position = get_global_mouse_position()) -> void:
 #toDo
 #not sufficient yet
 func apply_corresponding_animation(_prev):
+	if Game.is_paused:
+		pass
 	var current_animation = ""
 	
 	#if prev.x == velocity.x and prev.y == velocity.y:
@@ -96,15 +105,21 @@ func apply_corresponding_animation(_prev):
 
 
 func _on_mouse_entered():
+	if Game.is_paused:
+		pass
 	pok_hover = true
 	set_selected(!selected)
 
 func _on_mouse_exited():
+	if Game.is_paused:
+		pass
 	pok_hover = false
 	set_selected(!selected)
 
 
 func _char_hover_selected_check(_event):
+	if Game.is_paused:
+		pass
 	if pok_hover and Input.is_action_pressed("left_click"):
 		emit_signal("charmander_clicked", self)
 		pok_hover = false
@@ -124,11 +139,15 @@ func charmander_scale_on_hover() -> void:
 		self.scale.y = 0.5
 
 func _on_input_event(_viewport, event, _shape_idx):
+	if Game.is_paused:
+		pass
 	if pok_hover:
 		_char_hover_selected_check(event)
 
 # function to reduce charmanders health, number damage is reducted from charmanders health_bar
 func _on_hit(damage):
+	if Game.is_paused:
+		pass
 	var pathMain = get_tree().get_root().get_node("Main")
 	health_bar.value -= damage
 	if health_bar.value == 0:
@@ -140,7 +159,9 @@ func _on_hit(damage):
 			Game.Selected = pathMain.selected_pokemon.size()
 			
 func _on_retarget_timer_timeout():
-		self.call_thread_safe("retarget")
+	if Game.is_paused:
+		pass
+	self.call_thread_safe("retarget")
 
 func retarget():
 	var pathMain = get_tree().get_root().get_node("Main")

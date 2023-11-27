@@ -13,5 +13,6 @@ func _input(event):
 
 
 func _on_exit_pressed():
-	Game.set_game_paused(false)
+	var pathui = get_tree().get_root().get_node("Main/UI")
+	pathui.set_timer_state(true)
 	self.queue_free()

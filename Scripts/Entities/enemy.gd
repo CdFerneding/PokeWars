@@ -12,7 +12,7 @@ signal enemy_clicked
 var pathTilemap = Game.get_tree().get_root().get_node("Main/TileMap")
 var home_base = pathTilemap.home_base
 
-@export var possible_targets: Array[Node] = []
+@export var possible_targets = []
 @export var nearest_target: CharacterBody2D
 
 @export var arena : Node = null
@@ -37,6 +37,8 @@ func _ready():
 	
 
 func _process(_delta:float):
+	if Game.is_paused == true:
+		return
 	enemy_scale_on_hover()
 		
 func attack():
@@ -44,6 +46,8 @@ func attack():
 	$AttackCooldown.start()
 	
 func _physics_process(_delta: float) -> void:
+	if Game.is_paused == true:
+		return
 #	var prev_vel = velocity
 	if self.position == target:
 		return
@@ -95,17 +99,23 @@ func apply_corresponding_animation(_prev):
 
 
 func _on_mouse_entered():
+	if Game.is_paused == true:
+		return
 	enemy_hover = true
 	selected = true
 	set_selected(selected)
 
 func _on_mouse_exited():
+	if Game.is_paused == true:
+		return
 	enemy_hover = false
 	selected = false
 	set_selected(selected)
 
 
 func _enemy_hover_selected_check(_event):
+	if Game.is_paused == true:
+		return
 	if enemy_hover and Input.is_action_pressed("left_click"):
 		#emit_signal("pikachu_clicked", self)
 		enemy_hover = false
@@ -125,19 +135,25 @@ func enemy_scale_on_hover() -> void:
 		self.scale.y = 0.5
 
 func _on_input_event(_viewport, event, _shape_idx):
+	if Game.is_paused == true:
+		return
 	if enemy_hover:
 		_enemy_hover_selected_check(event)
 
 
 func _on_retarget_timer_timeout():
+	if Game.is_paused == true:
+		return
 	self.call_thread_safe("retarget")
 	
 func retarget():
+	if Game.is_paused == true:
+		return
 	var pathMain = get_tree().get_root().get_node("Main")
 	possible_targets = pathMain.get_good_pokemon()
 	nearest_target = null
 	if possible_targets.size() == 0:
-		pass
+		return
 	for target in possible_targets:
 		if target == null:
 			continue

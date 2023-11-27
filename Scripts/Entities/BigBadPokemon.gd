@@ -27,9 +27,13 @@ func _ready():
 	get_tree().get_root().get_node("Main/Enemies").add_child(group)
 	
 func _process(delta):
-	pass
+	if Game.is_paused:
+		return
+	
 
 func _on_enemy_spawner_timer_timeout():
+	if Game.is_paused == true:
+		return
 	
 	var mainPath = get_tree().get_root().get_node("Main")
 	var enemyPath = get_tree().get_root().get_node("Main/Enemies/"+current_group)

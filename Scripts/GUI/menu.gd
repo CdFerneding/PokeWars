@@ -4,7 +4,6 @@ extends CanvasLayer
 
 
 func _on_settings_button_pressed():
-	print("settings pressed")
 	var pathHUD = get_tree().get_root().get_node("Main/UI")
 	var settingsOverlay = settings.instantiate()
 	pathHUD.add_child(settingsOverlay)
@@ -22,4 +21,5 @@ func _on_quit_game_button_pressed():
 
 func _on_exit_pressed():
 	Game.set_game_paused(false)
+	var pathui = get_tree().get_root().get_node("Main/UI")
 	self.queue_free()
