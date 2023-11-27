@@ -15,10 +15,6 @@ y_sort_enabled = true
 position = Vector2(0, 1)
 shape = SubResource("CircleShape2D_pixci")
 
-[node name="Timer" type="Timer" parent="."]
-process_callback = 0
-one_shot = true
-
 [node name="Label" type="Label" parent="."]
 offset_left = -7.0
 offset_top = -38.0
@@ -32,4 +28,3 @@ volume_db = 1.246
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -2,6 +2,17 @@ extends Node
 
 class_name PlayerData
 
+const pikachu = "res://Scenes/pokemon/pikachu.tscn"
+const squirtle = "res://Scenes/pokemon/squirtle.tscn"
+const charmander = "res://Scenes/pokemon/charmander.tscn"
+const bulbasaur = "res://Scenes/pokemon/bulbasaur.tscn"
+
+var pikachuIcon = "res://Assets/Potraits/pikachu Angry.png"
+var CharmanderIcon = "res://Assets/Potraits/charmander Angry.png"
+var SquirleIcon = "res://Assets/Potraits/squirtle Angry.png"
+var BulbasaurIcon = "res://Assets/Potraits/bulbasaur Angry.png"
+
+
 var Food = 0
 var Wood = 0
 var Stone = 0
@@ -18,6 +29,7 @@ var Player_name : String
 var screenWidth: int
 var screenHeight: int
 
+var UIHover = false
 
 # dialogue attributes:
 var playerName: String = "player"

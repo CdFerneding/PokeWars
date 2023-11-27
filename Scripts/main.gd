@@ -191,18 +191,8 @@ func _handle_play_input(event):
 	#_add_new_pikachu(event)
 	var no_pikachus_selected = true
 	# this check needs to check for "release". Otherwise when placing new pikachus they get instantly selected
-	if Input.is_action_just_released("left_click"):
-		for c in charmanders:
-			if c == null:
-				continue
-			if c.pok_hover:
-				selected_pokemon = []
-				selected_pokemon.append(c)
-				Game.Selected = selected_pokemon.size()
-				no_pikachus_selected = false
-				if (event as InputEventMouseButton) != null and event.double_click:
-					print("change mode")
-					c._change_gamemode()
+	if Input.is_action_just_released("left_click") && Game.UIHover == false:
+		$UI/TrainBox.hide()
 		for p in pikachus:
 			if p == null:
 				continue
@@ -236,7 +226,7 @@ func _handle_place_input(event):
 change gamemode depending on different button presses
 '
 func _change_gamemode():
-	if Input.is_action_pressed("B"):
+	if Input.is_action_pressed("B") && !get_node("UI/TrainBox").is_visible():
 		Game.GameMode = "select"
 	if Input.is_action_pressed("R"):
 		Game.GameMode = "play"
@@ -274,5 +264,5 @@ func _on_enemy_spawner_timer_timeout():
 func get_good_pokemon():
 	return charmanders + pikachus + bulbasaurs + squirtles
 
-func get_bad_pokemon() -> Array[Node]:
+func get_bad_pokemon() -> Array:
 	return enemies
