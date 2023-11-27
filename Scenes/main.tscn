@@ -288,9 +288,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Main" type="Node" node_paths=PackedStringArray("tileMap")]
+[node name="Main" type="Node"]
 script = ExtResource("1_c7xow")
-tileMap = NodePath("TileMap")
 
 [node name="UI" parent="." instance=ExtResource("6_xhnji")]
 

@@ -274,5 +274,5 @@ func _on_enemy_spawner_timer_timeout():
 func get_good_pokemon():
 	return charmanders + pikachus + bulbasaurs + squirtles
 
-func get_bad_pokemon() -> Array[Node]:
+func get_bad_pokemon() -> Array:
 	return enemies
