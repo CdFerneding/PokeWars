@@ -22,10 +22,14 @@ func _ready():
 
 
 func _process(_delta:float):
+	if Game.is_paused == true:
+		return
 	pikachu_scale_on_hover()
 		
 	
 func _physics_process(_delta: float) -> void:
+	if Game.is_paused == true:
+		return
 #	var prev_vel = velocity
 	#if int(nav_agent.distance_to_target() < 2):
 		#return
@@ -45,6 +49,8 @@ func _physics_process(_delta: float) -> void:
 	
 # added is_farming = false to cancel farming when a new destination is issued for pikachu
 func make_path(ressource_position = get_global_mouse_position()) -> void:
+	if Game.is_paused == true:
+		return
 	nav_agent.target_position = ressource_position
 	target = nav_agent.target_position
 	
@@ -77,15 +83,21 @@ func apply_corresponding_animation(_prev):
 
 
 func _on_mouse_entered():
+	if Game.is_paused == true:
+		return
 	pik_hover = true
 	set_selected(!selected)
 
 func _on_mouse_exited():
+	if Game.is_paused == true:
+		return
 	pik_hover = false
 	set_selected(!selected)
 
 
 func _pika_hover_selected_check(_event):
+	if Game.is_paused == true:
+		return
 	if pik_hover and Input.is_action_pressed("left_click"):
 		emit_signal("pikachu_clicked", self)
 		pik_hover = false
@@ -96,6 +108,8 @@ func _pika_hover_selected_check(_event):
 
 
 func pikachu_scale_on_hover() -> void:
+	if Game.is_paused == true:
+		return
 	if pik_hover:
 		self.scale.x = 0.6
 		self.scale.y = 0.6

@@ -31,6 +31,9 @@ func _ready():
 
 
 func _process(_delta:float):
+	if Game.is_paused:
+		pass
+	
 	charmander_scale_on_hover()
 		
 	

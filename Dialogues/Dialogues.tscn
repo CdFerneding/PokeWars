@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://dha1nkqy3j4ke"]
+
+[ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_label.gd" id="1_k8clx"]
+
+[node name="Dialogues" type="Node2D"]
+
+[node name="DialogueLabel" type="RichTextLabel" parent="."]
+offset_top = 520.0
+offset_right = 1152.0
+offset_bottom = 608.0
+text = "Hello, there! Glad to meet you! Welcome to the world of Pokémon! My name is Pikachu. People affectionately refer to me as the Pokémon Professor. This world is inhabited far and wide by creatures called Pokémon! For some, Pokémon are pets. Other use them for battling. As for myself, I battle Pokemon as a profession. 
+But first, tell me a little about yourself. Let's begin with your name. What is it? "
+script = ExtResource("1_k8clx")

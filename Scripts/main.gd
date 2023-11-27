@@ -37,23 +37,30 @@ var rng = RandomNumberGenerator.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
-	get_viewport().size_changed.connect(Callable(get_node("Camera"), "update_limit"))
-	new_game() # Replace with function body.
-	$UI/TrainBox.hide()
-	
 	#set cursor to default
 	Input.set_custom_mouse_cursor(default_cursor, Input.CURSOR_ARROW, Vector2(5,0))
-	#pikachuBuilder._build_pikachu(self,self.find_child("TileMap"),start_position)
 	
+		
+func on_intro_finished():
+	score = 0
+	$UI/Timer.start()
 	get_units()
 	get_buildings()
 	get_enemies()
-		
+	Game.set_game_paused(false)
+
+func on_start_game():
+	$Music.play()
+	#DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	get_viewport().size_changed.connect(Callable(get_node("Camera"), "update_limit"))
+	$UI/TrainBox.hide()
+	# print first dialogue
+	var dialogueResource = preload("res://Dialogues/introduction.dialogue")
+	await DialogueManager.show_example_dialogue_balloon(dialogueResource, "start_game_greeting")
 
 func get_units():
 	pikachu = []
-	pikachus = get_tree().get_nodes_in_group("pikachus")
+	get_pikachus()
 	charmanders = get_tree().get_nodes_in_group("charmanders")
 	bulbasaurs = get_tree().get_nodes_in_group("Bulbasaurs")
 	squirtles = get_tree().get_nodes_in_group("Squirtles")
@@ -71,13 +78,8 @@ func get_buildings():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	pass
-	
-	
-func new_game():
-	score = 0
-	$Music.play()
-	# $Pikachu.start($StartPosition.position)
+	if Game.is_paused == true:
+		return
 
 '
 this is code for the drag-selection
@@ -121,7 +123,8 @@ and then depending on what is the current gamemode goes to
 the correlating _handle_input function
 '
 func _input(_event):
-	
+	if Game.is_paused == true:
+		return
 	_change_gamemode()
 	_handle_esc()
 	if Game.GameMode == "play":
@@ -169,9 +172,10 @@ found a small bug if it is not fixed yet where you can select the same
 pikachu multiple times and increases selected count
 '
 
-
 func _handle_esc():
 	if Input.is_action_pressed("Esc"):
+		print("Esc pressed")
+		var pathui = get_tree().get_root().get_node("Main/UI")
 		var childrenHUD = $UI.get_children()
 		for child in childrenHUD:
 			if "Menu" in child.name:
@@ -267,7 +271,7 @@ func _on_enemy_spawner_timer_timeout():
 #		pikachuBuilder._build_pikachu(self,self.find_child("TileMap"),position)
 '''
 
-func get_good_pokemon() -> Array[Node]:
+func get_good_pokemon():
 	return charmanders + pikachus + bulbasaurs + squirtles
 
 func get_bad_pokemon() -> Array[Node]:
