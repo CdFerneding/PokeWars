@@ -11,6 +11,9 @@ extends CanvasLayer
 var time = 0
 var currentBuilding
 
+func _ready():
+	checkGameMode()
+
 func update_game_timer():
 	var minutes
 	var hours
@@ -30,9 +33,13 @@ func _on_timer_timeout():
 	time+=1
 	update_game_timer()
 
-
-
 func _process(_delta):
+	if Game.is_paused:
+		$Timer.paused = true
+		return
+	
+	$Timer.paused = false
+	
 	FoodLabel.text = "Food: " + str(Game.Food)
 	WoodLabel.text = "Wood: " + str(Game.Wood)
 	StoneLabel.text = "Stone: " + str(Game.Stone)

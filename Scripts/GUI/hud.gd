@@ -18,5 +18,6 @@ func _input(event):
 
 
 func _on_start_game_pressed():
-	Game.set_game_paused(false)
+	var mainPath = get_tree().get_root().get_node("Main")
+	mainPath.on_start_game()
 	self.queue_free()

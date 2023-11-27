@@ -1,0 +1,15 @@
+~ start_game_greeting
+
+Master Pikachu: Hello, there! Glad to meet you! Welcome to the world of Pokémon! My name is Pikachu. People affectionately refer to me as the Pokémon Professor. This world is inhabited far and wide by creatures called Pokémon! For some, Pokémon are pets. Other use them for battling. As for myself, I battle Pokemon as a profession. 
+But first, tell me a little about yourself. Let's begin with your name. What is it? 
+- Charmander
+	set Game.playerName = "Charmander"
+- Bulbasaur
+	set Game.playerName = "Bulbasaur"
+- Shiggy
+	set Game.playerName = "Shiggy"
+Master Pikachu: Right, so your name is {{Game.playerName}}. Your own Pokémon legend is about to unfold! A world of dreams and adventures with Pokémon awaits! Let's go!
+set Game.introDialoguePlayed = true
+do Game.run_intro_finished()
+
+=> END

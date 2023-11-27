@@ -73,6 +73,8 @@ func update_border():
 	
 
 func _process(delta):
+	if Game.is_paused == true:
+		return
 	
 	var mouse_position = get_viewport().get_mouse_position()
 	#print(position)
@@ -153,6 +155,8 @@ func draw_area(s = true):
 	box.size *= int(s)
 
 func _input(event):
+	if Game.is_paused == true:
+		return
 	if event is InputEventMouse:
 		# pos depending on zoom of the camera
 		mousePos = event.position

@@ -292,6 +292,11 @@ animations = [{
 script = ExtResource("1_c7xow")
 tileMap = NodePath("TileMap")
 
+[node name="UI" parent="." instance=ExtResource("6_xhnji")]
+
+[node name="HUD" parent="." instance=ExtResource("14_aq381")]
+process_mode = 0
+
 [node name="TileMap" type="TileMap" parent="." node_paths=PackedStringArray("main")]
 y_sort_enabled = true
 position = Vector2(0, 2)
@@ -323,10 +328,7 @@ tilemap = NodePath("../TileMap")
 moveOffset = 300
 moveCameraBorderOffset = 25
 
-[node name="UI" parent="." instance=ExtResource("6_xhnji")]
-
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
-process_mode = 3
 stream = ExtResource("9_l55f3")
 
 [node name="Units" type="Node2D" parent="."]
@@ -384,8 +386,6 @@ y_sort_enabled = true
 
 [node name="PokeCenter" parent="Buildings" groups=["buildings"] instance=ExtResource("13_ot5q2")]
 position = Vector2(168, 77)
-
-[node name="HUD" parent="." instance=ExtResource("14_aq381")]
 
 [node name="UpdateCameraBorderFix" type="Timer" parent="."]
 editor_description = "This is a fix for the camera because the border to move the camera isn't updated on Windows and MacOS. An event to now when the windows size is updated exists but work only on Linux (Ubuntu with Gnome)"
