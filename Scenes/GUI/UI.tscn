@@ -177,6 +177,13 @@ icon = ExtResource("6_a3ebk")
 icon_alignment = 1
 expand_icon = true
 
+[node name="TrainingQueue" type="HBoxContainer" parent="."]
+offset_left = 202.0
+offset_top = 2.0
+offset_right = 573.0
+offset_bottom = 55.0
+theme_override_constants/separation = 0
+
 [connection signal="pressed" from="BuildingButtonBox/Fire Arena Button" to="." method="_on_fire_arena_pressed"]
 [connection signal="pressed" from="BuildingButtonBox/Water Arena Button" to="." method="_on_water_arena_pressed"]
 [connection signal="pressed" from="BuildingButtonBox/Plant Arena Button" to="." method="_on_plant_arena_pressed"]

@@ -22,7 +22,7 @@ func _ready():
 
 
 func _process(_delta:float):
-	pikatchu_scale_on_hover()
+	pikachu_scale_on_hover()
 		
 	
 func _physics_process(_delta: float) -> void:
@@ -95,7 +95,7 @@ func _pika_hover_selected_check(_event):
 		pik_hover = false
 
 
-func pikatchu_scale_on_hover() -> void:
+func pikachu_scale_on_hover() -> void:
 	if pik_hover:
 		self.scale.x = 0.6
 		self.scale.y = 0.6
@@ -116,8 +116,8 @@ func _on_hit(damage):
 		pathMain.pikachus.erase(self)
 		self.queue_free()
 		pathMain.get_pikachus()
-		if self in pathMain.selected_pikachus:
-			pathMain.selected_pikachus.erase(self)
-			Game.Selected = pathMain.selected_pikachus.size()
+		if self in pathMain.selected_pokemon:
+			pathMain.selected_pokemon.erase(self)
+			Game.Selected = pathMain.selected_pokemon.size()
 		
 

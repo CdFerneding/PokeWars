@@ -41,7 +41,6 @@ static func _delete_building(position:Array, tileMap:TileMap):
 
 static func _tile_builder(position:Array, tileMap:TileMap, tileId:int):
 	var no_obstacle = true
-	print("Test")
 	var right_offeset = 0
 	var left_offset = 0
 	var top_offset = 0
@@ -62,7 +61,10 @@ static func _tile_builder(position:Array, tileMap:TileMap, tileId:int):
 			if(obstacle_layer1):
 				no_obstacle = false
 				
+	print(Game.selectedBuilding)
+	print(no_obstacle)
 	if(no_obstacle == true && Game.Wood >= Game.buildingCost):
+		print("faknfind")
 		_tile_setter(position,tileMap,tileId)
 		var counter = Game.buildCounter
 		Game.buildCounter = counter + 1

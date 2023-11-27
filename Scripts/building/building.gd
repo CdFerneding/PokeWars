@@ -10,11 +10,8 @@ var buildingHover = false
 @onready var bulbasaur = preload("res://Scenes/pokemon/bulbasaur.tscn")
 
 var main: Node
+var UI: Node
 
-@onready var timer = $Timer
-
-var totalTime = 10
-var currentTime
 var currently_training = false
 
 var tileId:int
@@ -24,7 +21,9 @@ var currentHealth
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	Game.GameMode = "play"
 	main = get_tree().get_root().get_node("Main")
+	UI = main.get_node("UI")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -35,24 +34,14 @@ func _process(delta):
 timer functions
 '
 func _start_training():
-	currentTime = 0
-	timer.start()
-	
-func _on_timer_timeout():
-	currentTime += 1
-	if currentTime < totalTime:
-		$Label.text = str(currentTime)
-		timer.start()
-	else:
-		$Label.text = ""
-		$Created_Unit_Sound.play()
-		_training_finished()
+	var scene = load("res://Scenes/GUI/Trainicon.tscn")
+	var queueItem = scene.instantiate()
+	queueItem.get_node("UnitIcon").texture = check_current_pokemon()
+	queueItem.building = self
+	UI.get_node("TrainingQueue").add_child(queueItem)
 
-
-func _training_finished():
-	timer.stop()
+func training_finished():
 	currently_training = false
-	print(self.name)
 	if "PokeCenter" in self.name:
 		unitBuilder._build_unit(main,"Pikachu",self.position, 3)
 	if "Fire Arena" in self.name:
@@ -78,9 +67,9 @@ func _on_input_event(viewport, event, shape_idx):
 	if buildingHover:
 		if Game.selectedBuilding == "delete":
 			_delete_building(event)
-		elif Game.GameMode == "play" && Input.is_action_just_pressed("left_click"):
+		elif Game.GameMode == "play" && Input.is_action_just_released("left_click"):
 			_show_train_UI()
-			
+
 
 
 func train_unit():
@@ -88,6 +77,7 @@ func train_unit():
 		Game.Food = Game.Food - 10
 		currently_training = true
 		_start_training()
+		
 
 func _delete_building(event):
 	if Input.is_action_just_pressed("left_click") && !currently_training && self.name != "PokeCenter":
@@ -97,7 +87,16 @@ func _delete_building(event):
 		self.queue_free()
 
 func _show_train_UI():
-	var UI = main.get_node("UI")
 	UI.currentBuilding = self
 	UI.get_node("TrainBox").show()
 	UI.show_training_button()
+	
+func check_current_pokemon():
+	if "PokeCenter" in self.name:
+		return load(Game.pikachuIcon)
+	if "Fire Arena" in self.name:
+			return load(Game.CharmanderIcon)
+	if "Water Arena" in self.name:
+			return load(Game.SquirleIcon)
+	if "Plant Arena" in self.name:
+			return load(Game.BulbasaurIcon)

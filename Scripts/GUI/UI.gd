@@ -91,7 +91,6 @@ func show_training_button():
 	elif("PokeCenter" in currentBuilding.name):
 		button.icon = pikachuIcon
 	
-	Game.UIHover = true
 	$TrainBox.show()
 
 
