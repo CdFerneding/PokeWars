@@ -835,7 +835,7 @@ bg_color = Color(0.192157, 0.917647, 0, 0.886275)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5b1lp"]
 bg_color = Color(0.882353, 0.482353, 0, 1)
 
-[node name="Squirtle" type="CharacterBody2D"]
+[node name="Squirtle" type="CharacterBody2D" groups=["squirtles"]]
 script = ExtResource("1_6lpe6")
 
 [node name="squirtle" type="AnimatedSprite2D" parent="."]
@@ -914,3 +914,5 @@ autostart = true
 autostart = true
 
 [node name="PlayerNavigationAgent" type="NavigationAgent2D" parent="."]
+
+[connection signal="timeout" from="RetargetTimer" to="." method="_on_retarget_timer_timeout"]

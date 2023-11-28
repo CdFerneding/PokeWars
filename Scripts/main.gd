@@ -62,8 +62,8 @@ func get_units():
 	pikachu = []
 	get_pikachus()
 	charmanders = get_tree().get_nodes_in_group("charmanders")
-	bulbasaurs = get_tree().get_nodes_in_group("Bulbasaurs")
-	squirtles = get_tree().get_nodes_in_group("Squirtles")
+	bulbasaurs = get_tree().get_nodes_in_group("bulbasaurs")
+	squirtles = get_tree().get_nodes_in_group("squirtles")
 
 func get_enemies():
 	enemies = []
@@ -229,7 +229,7 @@ func _handle_place_input(event):
 	
 	if Input.is_action_just_pressed("left_click"):
 		var position = tileMap.get_global_mouse_position()
-		print(position)
+#		print(position)
 		if type_of_pokemon_to_place == 0:
 			unitBuilder._build_unit(self,"Pikachu", position, 0)
 		elif type_of_pokemon_to_place == 1:
