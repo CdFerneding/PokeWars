@@ -174,7 +174,6 @@ pikachu multiple times and increases selected count
 
 func _handle_esc():
 	if Input.is_action_pressed("Esc"):
-		print("Esc pressed")
 		var pathui = get_tree().get_root().get_node("Main/UI")
 		var childrenHUD = $UI.get_children()
 		for child in childrenHUD:
@@ -219,12 +218,26 @@ func _handle_play_input(event):
 only for debugging to place units manually
 '
 func _handle_place_input(event):
+	if Input.is_action_just_pressed("1"):
+		type_of_pokemon_to_place = 0
+	elif Input.is_action_just_pressed("2"):
+		type_of_pokemon_to_place = 1
+	elif Input.is_action_just_pressed("3"):
+		type_of_pokemon_to_place = 2
+	elif Input.is_action_just_pressed("4"):
+		type_of_pokemon_to_place = 3
+	
 	if Input.is_action_just_pressed("left_click"):
 		var position = tileMap.get_global_mouse_position()
+		print(position)
 		if type_of_pokemon_to_place == 0:
 			unitBuilder._build_unit(self,"Pikachu", position, 0)
-		else:
+		elif type_of_pokemon_to_place == 1:
 			unitBuilder._build_unit(self,"Charmander", position, 0)
+		elif type_of_pokemon_to_place == 2:
+			unitBuilder._build_unit(self,"Squirtle", position, 0)
+		else:
+			unitBuilder._build_unit(self,"Bulbasaur", position, 0)
 			
 
 '
@@ -237,8 +250,7 @@ func _change_gamemode():
 		Game.GameMode = "play"
 	if Input.is_action_pressed("P"):
 		if Game.GameMode == "place":
-			type_of_pokemon_to_place = (type_of_pokemon_to_place + 1) % 2
-			print(type_of_pokemon_to_place)
+			type_of_pokemon_to_place = (type_of_pokemon_to_place + 1) % 4
 		Game.GameMode = "place"
 
 '''

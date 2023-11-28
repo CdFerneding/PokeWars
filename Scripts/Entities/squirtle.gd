@@ -1,15 +1,261 @@
 extends GoodPokemon
 
+class_name Squirtle
 
-const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
+signal squirtle_clicked
 
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var previous_direction
+
+var current_target: Node
+
+@export var attack_damage = 5
+
+var followPlayerOrder: bool = false
+
+enum AttackModeEnum {ATTACK, PROTECT, STILL}
+
+# handling evolution differences
+@export var evolution = 0
+@onready var animationSprite = $squirtle
+@export var selected = false 
+@onready var box = $SquirtleSelected
+
+#Mode describes how the ennemy should interract.
+# attack : It attack the nearest ennemy
+# still : It doesn't move but attack ennemies in his range
+@export var mode: AttackModeEnum = AttackModeEnum.ATTACK
+#implements the pathfinding algorithm
+@onready var nav_agent:= $NavigationAgent2D #as NavigationAgent2D
+
+func _ready():
+	previous_direction = "down"
+	animationSprite.animation = "walk_down"
+	var main_node = get_tree().get_root().get_node("Main")
+	$PlayerNavigationAgent.target_position = position
+	connect("squirtle_clicked", Callable(main_node, "_on_squirtle_clicked"))
+	
+	# super initializes the healthbar 
+	super()
+	
+	set_selected(false)
+	# check evolution level and apply corresponding sprite
+	check_evolution()
 
 
-func _physics_process(delta):
-	pass
+func _process(_delta:float):
+	if Game.is_paused:
+		return
+	
+	charmander_scale_on_hover()
+		
+	
+func _physics_process(_delta: float) -> void:
+	if Game.is_paused:
+		return
+#	var prev_vel = velocity
+	#if int(nav_agent.distance_to_target() < 2):
+		#return
+	var next_pos: Vector2
+	if followPlayerOrder:
+		next_pos = $PlayerNavigationAgent.get_next_path_position()
+	elif mode != AttackModeEnum.STILL:
+		next_pos = nav_agent.get_next_path_position()
+		$PlayerNavigationAgent.target_position = position
+	else:
+		next_pos = position
+	
+	var dir = to_local(next_pos).normalized()
+	velocity = dir * speed
+	
+	if position.distance_to(next_pos) < 1:
+		velocity = Vector2.ZERO
+		if dir != Vector2.ZERO:
+			self.position = next_pos
+		target = self.position
+		followPlayerOrder = false
+	apply_corresponding_animation(velocity)
+	
+	if $AttackCooldown.is_stopped() and current_target != null and position.distance_to(current_target.position) < 10:
+		attack()
+	
+	move_and_slide()
+	
+func attack():
+	if Game.is_paused:
+		return
+	if (current_target as BadPokemon) != null:
+		(current_target as BadPokemon)._on_hit(attack_damage)
+	$AttackCooldown.start()
+	
+
+func make_path(ressource_position = get_global_mouse_position()) -> void:
+	$PlayerNavigationAgent.target_position = ressource_position
+	target = $PlayerNavigationAgent.target_position
+	followPlayerOrder = true
+	
+#toDo
+#not sufficient yet
+func apply_corresponding_animation(_prev):
+	if Game.is_paused:
+		return
+	
+	# check evolution level and apply corresponding sprite
+	check_evolution()
+	
+	var current_animation = ""
+	
+	#if prev.x == velocity.x and prev.y == velocity.y:
+	#	current_animation += "down_"
+		
+	if velocity.y > 0:
+		current_animation+="down_"
+	elif velocity.y < 0:
+		current_animation+="up_"
+		
+	if velocity.x < 0:
+		current_animation+="left_"
+	elif velocity.x > 0:
+		current_animation += "right_"
+		
+	if current_animation == "":
+		current_animation = previous_direction+"_"
+	
+	previous_direction = current_animation.left(current_animation.length() - 1)
+	current_animation = "walk_"+previous_direction
+
+	animationSprite.animation = current_animation
+	animationSprite.play()
+
+func check_evolution():
+	# check current evolution of charmander and enable / disable according boxes, shapes and sprites
+	if evolution == 0:
+		$squirtle.visible = true
+		$CollisionShapeSquirtle.visible = true
+		animationSprite = $squirtle
+		box = $SquirtleSelected
+		## disable charmeleon and charizard sprites
+		$wartortle.visible = false
+		$blastoise.visible = false
+		## disable collision shapes
+		$CollisionShapeWartortle.visible = false
+		$CollisionShapeBlastoise.visible = false
+		## disable selection boxes
+		$WartortleSelected.visible = false
+		$BlastoiseSelected.visible = false
+	elif evolution == 1:
+		$wartortle.visible = true
+		$CollisionShapeWartortle.visible = true
+		animationSprite = $wartortle
+		box = $WartortleSelected
+		## disable charmander and charizard
+		$squirtle.visible = false
+		$blastoise.visible = false
+		## disable collision shapes
+		$CollisionShapeSquirtle.visible = false
+		$CollisionShapeBlastoise.visible = false
+		## disable selection boxes
+		$SquirtleSelected.visible = false
+		$BlastoiseSelected.visible = false
+	else:
+		$blastoise.visible = true
+		$CollisionShapeBlastoise.visible = true
+		animationSprite = $blastoise
+		box = $BlastoiseSelected
+		## diable charmander and charmeleon
+		$squirtle.visible = false
+		$wartortle.visible = false
+		## disable collision shapes
+		$CollisionShapeSquirtle.visible = false
+		$CollisionShapeWartortle.visible = false
+		## disable selection boxes
+		$SquirtleSelected.visible = false
+		$WartortleSelected.visible = false
+
+func _on_mouse_entered():
+	if Game.is_paused:
+		return
+	pok_hover = true
+	set_selected(true)
+
+func _on_mouse_exited():
+	if Game.is_paused:
+		return
+	pok_hover = false
+	set_selected(false)
+
+func set_selected(value):
+	selected = value
+	box.visible = value
+
+func _char_hover_selected_check(_event):
+	if Game.is_paused:
+		return
+	if pok_hover and Input.is_action_pressed("left_click"):
+		emit_signal("squirtle_clicked", self)
+		pok_hover = false
+		
+	# leftclick on "nothing" to deselect units
+	elif Input.is_action_pressed("left_click"):
+		pok_hover = false
 
 
+func charmander_scale_on_hover() -> void:
+	if pok_hover:
+		self.scale.x = 0.6
+		self.scale.y = 0.6
 
+	else:
+		self.scale.x = 0.5
+		self.scale.y = 0.5
+
+func _on_input_event(_viewport, event, _shape_idx):
+	if Game.is_paused:
+		return
+	if pok_hover:
+		_char_hover_selected_check(event)
+
+# function to reduce charmanders health, number damage is reducted from charmanders health_bar
+func _on_hit(damage):
+	if Game.is_paused:
+		return
+	var pathMain = get_tree().get_root().get_node("Main")
+	health_bar.value -= damage
+	if health_bar.value == 0:
+		pathMain.charmanders.erase(self)
+		self.queue_free()
+		pathMain.get_units()
+		if self in pathMain.selected_pokemon:
+			pathMain.selected_pokemon.erase(self)
+			Game.Selected = pathMain.selected_pokemon.size()
+			
+func _on_retarget_timer_timeout():
+	if Game.is_paused:
+		return
+	self.call_thread_safe("retarget")
+
+func retarget():
+	var pathMain = get_tree().get_root().get_node("Main")
+	var possible_targets = pathMain.get_bad_pokemon()
+	var nearest_target = null
+	if possible_targets.size() == 0:
+		pass
+	for target in possible_targets:
+		if target == null:
+			continue
+		if nearest_target == null or target.position.distance_to(position) < nearest_target.position.distance_to(position):
+			nearest_target = target
+			current_target = target
+
+	if nearest_target != null:
+		target = nav_agent.target_position
+		nav_agent.target_position = nearest_target.position
+		if nearest_target.position.distance_to(position) > 100:
+			$RetargetTimer.wait_time = 2
+		else:
+			$RetargetTimer.wait_time = 0.5
+
+func change_gamemode():
+	if mode == AttackModeEnum.ATTACK:
+		mode = AttackModeEnum.STILL
+	elif mode == AttackModeEnum.STILL:
+		mode = AttackModeEnum.ATTACK

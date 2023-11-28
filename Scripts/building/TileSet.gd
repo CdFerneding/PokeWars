@@ -44,8 +44,6 @@ func _place_building(position:Vector2, x_offset, y_offset, tileId):
 	var position_array = _create_offset(tileId, tile_position)
 	if tileBuiler._tile_builder(position_array, self, tileId):
 		_initiate_building(tile_position, main, tileId)
-		print(get_cell_source_id(1,tile_position))
-		print(tile_position)
 		
 
 

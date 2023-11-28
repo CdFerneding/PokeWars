@@ -7,6 +7,9 @@ signal pikachu_clicked
 
 var previous_direction
 
+@export var selected = false
+@onready var box = get_node("Selected")
+
 #implements the pathfinding algorithm
 @onready var nav_agent:= $NavigationAgent2D #as NavigationAgent2D
 
@@ -92,6 +95,10 @@ func _on_mouse_exited():
 		return
 	pok_hover = false
 	set_selected(!selected)
+
+func set_selected(value):
+	selected = value
+	box.visible = value
 
 
 func _pika_hover_selected_check(_event):

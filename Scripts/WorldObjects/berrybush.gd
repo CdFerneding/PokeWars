@@ -13,6 +13,8 @@ func _ready():
 	bar.max_value = totalTime
 	
 func _process(_delta):
+	if Game.is_paused:
+		return
 	bar.value = currTime
 	# check if bush has been completely farmed 
 	if currTime <= 0:
@@ -31,6 +33,8 @@ func _on_farm_area_body_exited(body):
 
 
 func _on_timer_timeout():
+	if Game.is_paused:
+		return
 	var farmSpeed = 1*pikachus
 	currTime -= farmSpeed
 	# tweens are used to create smoothened animations

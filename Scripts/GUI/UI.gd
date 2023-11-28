@@ -30,7 +30,7 @@ func update_game_timer():
 		time_formatted += str(minutes)+"m "
 	
 	time_formatted += str(time % 60)+"s"
-	GameTimerLabel.text = "Time : " + str(time_formatted)
+	GameTimerLabel.text = "Time: " + str(time_formatted)
 
 
 func _on_timer_timeout():
@@ -109,9 +109,7 @@ func _on_train_unit_button_pressed():
 
 func _on_train_box_mouse_entered():
 	Game.UIHover = true
-	print(Game.UIHover)
 
 
 func _on_train_box_mouse_exited():
 	Game.UIHover = false
-	print(Game.UIHover)
