@@ -2,7 +2,6 @@ extends GoodPokemon
 
 class_name Charmander
 
-var pok_hover = false
 signal charmander_clicked
 
 var previous_direction
@@ -10,6 +9,8 @@ var previous_direction
 var current_target: Node
 
 @export var attack_damage = 5
+
+var followPlayerOrder: bool = false
 
 enum AttackModeEnum {ATTACK, PROTECT, STILL}
 
@@ -24,6 +25,7 @@ func _ready():
 	previous_direction = "down"
 	$AnimatedSprite2D.animation = "walk_down"
 	var main_node = get_tree().get_root().get_node("Main")
+	$PlayerNavigationAgent.target_position = position
 	connect("charmander_clicked", Callable(main_node, "_on_charmander_clicked"))
 	
 	# super initializes the healthbar 
@@ -43,8 +45,15 @@ func _physics_process(_delta: float) -> void:
 #	var prev_vel = velocity
 	#if int(nav_agent.distance_to_target() < 2):
 		#return
-		
-	var next_pos = nav_agent.get_next_path_position()
+	var next_pos: Vector2
+	if followPlayerOrder:
+		next_pos = $PlayerNavigationAgent.get_next_path_position()
+	elif mode != AttackModeEnum.STILL:
+		next_pos = nav_agent.get_next_path_position()
+		$PlayerNavigationAgent.target_position = position
+	else:
+		next_pos = position
+	
 	var dir = to_local(next_pos).normalized()
 	velocity = dir * speed
 	
@@ -53,12 +62,11 @@ func _physics_process(_delta: float) -> void:
 		if dir != Vector2.ZERO:
 			self.position = next_pos
 		target = self.position
+		followPlayerOrder = false
 	apply_corresponding_animation(velocity)
 	
-	if position.distance_to(next_pos) < 7:
-		velocity = Vector2.ZERO
-		if $AttackCooldown.is_stopped() and current_target != null and position.distance_to(current_target.position) < 15:
-			attack()
+	if $AttackCooldown.is_stopped() and current_target != null and position.distance_to(current_target.position) < 10:
+		attack()
 	
 	move_and_slide()
 	
@@ -71,8 +79,9 @@ func attack():
 	
 # added is_farming = false to cancel farming when a new destination is issued for charmander
 func make_path(ressource_position = get_global_mouse_position()) -> void:
-	nav_agent.target_position = ressource_position
-	target = nav_agent.target_position
+	$PlayerNavigationAgent.target_position = ressource_position
+	target = $PlayerNavigationAgent.target_position
+	followPlayerOrder = true
 	
 #toDo
 #not sufficient yet

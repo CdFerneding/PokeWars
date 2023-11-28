@@ -3,7 +3,6 @@ extends GoodPokemon
 
 class_name Pikachu
 
-var pik_hover = false
 signal pikachu_clicked
 
 var previous_direction
@@ -85,32 +84,32 @@ func apply_corresponding_animation(_prev):
 func _on_mouse_entered():
 	if Game.is_paused == true:
 		return
-	pik_hover = true
+	pok_hover = true
 	set_selected(!selected)
 
 func _on_mouse_exited():
 	if Game.is_paused == true:
 		return
-	pik_hover = false
+	pok_hover = false
 	set_selected(!selected)
 
 
 func _pika_hover_selected_check(_event):
 	if Game.is_paused == true:
 		return
-	if pik_hover and Input.is_action_pressed("left_click"):
+	if pok_hover and Input.is_action_pressed("left_click"):
 		emit_signal("pikachu_clicked", self)
-		pik_hover = false
+		pok_hover = false
 		
 	# leftclick on "nothing" to deselect units
 	elif Input.is_action_pressed("left_click"):
-		pik_hover = false
+		pok_hover = false
 
 
 func pikachu_scale_on_hover() -> void:
 	if Game.is_paused == true:
 		return
-	if pik_hover:
+	if pok_hover:
 		self.scale.x = 0.6
 		self.scale.y = 0.6
 
@@ -119,7 +118,7 @@ func pikachu_scale_on_hover() -> void:
 		self.scale.y = 0.5
 
 func _on_input_event(_viewport, event, _shape_idx):
-	if pik_hover:
+	if pok_hover:
 		_pika_hover_selected_check(event)
 
 # function to reduce pikachus health, number damage is reducted from pikachus health_bar

@@ -92,13 +92,13 @@ func _on_area_selected(object: Camera2D):
 	var area = []
 	area.append(Vector2(min(start.x, end.x), min(start.y, end.y)))
 	area.append(Vector2(max(start.x, end.x), max(start.y, end.y)))
-	var pk = get_pikachus_in_area(area)
+	var pk = get_pokemons_in_area(area)
 	for p in pk:
 		selected_pokemon.append(p)
 	Game.Selected = pk.size()
 #	Game.SelectedUnits = ut.size()
 	# deselect all units
-	for p in pikachus:
+	for p in pikachus + bulbasaurs + charmanders + squirtles:
 		if p == null:
 			continue
 		p.set_selected(false)
@@ -107,14 +107,14 @@ func _on_area_selected(object: Camera2D):
 	#	u.set_selected(true)
 	
 		
-func get_pikachus_in_area(area):
+func get_pokemons_in_area(area):
 	var ps = []
-	for pikachu in pikachus:
-		if pikachu == null:
+	for pok in pikachus + bulbasaurs + charmanders + squirtles:
+		if pok == null:
 			continue
-		if pikachu.position.x > area[0].x and pikachu.position.x < area[1].x:
-			if pikachu.position.y > area[0].y and pikachu.position.y < area[1].y:
-				ps.append(pikachu)
+		if pok.position.x > area[0].x and pok.position.x < area[1].x:
+			if pok.position.y > area[0].y and pok.position.y < area[1].y:
+				ps.append(pok)
 	return ps
 
 '
@@ -193,10 +193,10 @@ func _handle_play_input(event):
 	# this check needs to check for "release". Otherwise when placing new pikachus they get instantly selected
 	if Input.is_action_just_released("left_click") && Game.UIHover == false:
 		$UI/TrainBox.hide()
-		for p in pikachus:
+		for p in pikachus + charmanders + bulbasaurs + squirtles:
 			if p == null:
 				continue
-			if p.pik_hover:
+			if p.pok_hover:
 				selected_pokemon = []
 				selected_pokemon.append(p)
 				Game.Selected = selected_pokemon.size()
@@ -209,6 +209,11 @@ func _handle_play_input(event):
 		if selected_pokemon.size() != 0:
 			for p in selected_pokemon:
 				p.make_path()
+	
+	if Input.is_action_just_pressed("G"):
+		for p in selected_pokemon:
+			if p is Charmander:
+				p.change_gamemode()
 
 '
 only for debugging to place units manually
