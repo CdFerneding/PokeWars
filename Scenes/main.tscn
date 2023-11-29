@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://ceq3pwudksxl" path="res://Scenes/pokemon/charmander.tscn" id="11_8bxx8"]
 [ext_resource type="PackedScene" uid="uid://weyowi1k0j0y" path="res://Scenes/WorldObjects/berrybush.tscn" id="11_u5ymy"]
 [ext_resource type="PackedScene" uid="uid://dw0dfm6o0ni0s" path="res://Scenes/WorldObjects/tree.tscn" id="12_he3mb"]
-[ext_resource type="PackedScene" uid="uid://ctnohtufkqyj3" path="res://Scenes/WorldObjects/pokecenter.tscn" id="13_ot5q2"]
+[ext_resource type="PackedScene" uid="uid://ctnohtufkqyj3" path="res://Scenes/WorldObjects/building.tscn" id="13_ot5q2"]
 [ext_resource type="PackedScene" uid="uid://bxlqywquk2y85" path="res://Scenes/GUI/hud.tscn" id="14_aq381"]
 [ext_resource type="Script" path="res://Scripts/Entities/BigBadPokemon.gd" id="16_mwle3"]
 [ext_resource type="Texture2D" uid="uid://di45pnuqtfhuh" path="res://Assets/Sprites/Fire/Moltres/Idle-Anim.png" id="17_sdfoi"]

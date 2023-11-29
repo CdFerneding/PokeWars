@@ -73,10 +73,8 @@ func _on_input_event(viewport, event, shape_idx):
 
 
 func train_unit():
-	if  !currently_training:
-		Game.Food = Game.Food - 10
-		currently_training = true
-		_start_training()
+	Game.Food = Game.Food - 10
+	_start_training()
 		
 
 func _delete_building(event):

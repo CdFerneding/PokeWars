@@ -111,34 +111,88 @@ func _on_train_box_mouse_exited():
 ####################################################################
 ########## buttons that can be called in the "Laboratory" ##########
 ####################################################################
+# this could also be handled in a specific file for upgrading military
 func show_upgrade_military():
 	$UpgradeMilitary.show()
 	print("upgrade military ui is visible")
 
 
 func _on_upgrade_to_wartortle_pressed():
-	if Game.
-	$UpgradeMilitary/timerWartortle.start()
+	if Game.waterUnitLvl > 0:
+		return
+	if Game.plantUnitLvl > 0 and Game.fireUnitLvl > 0:
+		$UpgradeMilitary/timerWartortle.start(150)
+	elif Game.plantUnitLvl > 0 and Game.fireUnitLvl == 0:
+		$UpgradeMilitary/timerWartortle.start(120)
+	elif Game.plantUnitLvl == 0 and Game.fireUnitLvl > 0:
+		$UpgradeMilitary/timerWartortle.start(120)
+	else:
+		$UpgradeMilitary/timerWartortle.start(90)
 
 
 func _on_upgrade_to_blastoise_pressed():
-	$UpgradeMilitary/timerBlastoise.start()
+	if Game.waterUnitLvl > 1:
+		return
+	if Game.plantUnitLvl > 0 and Game.fireUnitLvl > 0:
+		$UpgradeMilitary/timerWartortle.start(210)
+	elif Game.plantUnitLvl > 0 and Game.fireUnitLvl == 0:
+		$UpgradeMilitary/timerWartortle.start(180)
+	elif Game.plantUnitLvl == 0 and Game.fireUnitLvl > 0:
+		$UpgradeMilitary/timerWartortle.start(180)
+	else:
+		$UpgradeMilitary/timerWartortle.start(150)
 
 
 func _on_upgrade_to_charmeleon_pressed():
-	$UpgradeMilitary/timerCharmeleon.start()
+	if Game.fireUnitLvl > 0:
+		return
+	if Game.plantUnitLvl > 0 and Game.waterUnitLvl > 0:
+		$UpgradeMilitary/timerWartortle.start(150)
+	elif Game.plantUnitLvl > 0 and Game.waterUnitLvl == 0:
+		$UpgradeMilitary/timerWartortle.start(120)
+	elif Game.plantUnitLvl == 0 and Game.waterUnitLvl > 0:
+		$UpgradeMilitary/timerWartortle.start(120)
+	else:
+		$UpgradeMilitary/timerWartortle.start(90)
 
 
 func _on_upgrade_to_charizard_pressed():
-	$UpgradeMilitary/timerCharizard.start()
+	if Game.fireUnitLvl > 1:
+		return
+	if Game.plantUnitLvl > 0 and Game.waterUnitLvl > 0:
+		$UpgradeMilitary/timerWartortle.start(210)
+	elif Game.plantUnitLvl > 0 and Game.waterUnitLvl == 0:
+		$UpgradeMilitary/timerWartortle.start(180)
+	elif Game.plantUnitLvl == 0 and Game.waterUnitLvl > 0:
+		$UpgradeMilitary/timerWartortle.start(180)
+	else:
+		$UpgradeMilitary/timerWartortle.start(150)
 
 
 func _on_upgrade_to_ivysaur_pressed():
-	$UpgradeMilitary/timerIvysaur.start()
+	if Game.plantUnitLvl > 0:
+		return
+	if Game.fireUnitLvl > 0 and Game.waterUnitLvl > 0:
+		$UpgradeMilitary/timerWartortle.start(150)
+	elif Game.fireUnitLvl > 0 and Game.waterUnitLvl == 0:
+		$UpgradeMilitary/timerWartortle.start(120)
+	elif Game.fireUnitLvl == 0 and Game.waterUnitLvl > 0:
+		$UpgradeMilitary/timerWartortle.start(120)
+	else:
+		$UpgradeMilitary/timerWartortle.start(90)
 
 
 func _on_upgrade_to_venusaur_pressed():
-	$UpgradeMilitary/timerVenusaur.start()
+	if Game.plantUnitLvl > 1:
+		return
+	if Game.fireUnitLvl > 0 and Game.waterUnitLvl > 0:
+		$UpgradeMilitary/timerWartortle.start(210)
+	elif Game.fireUnitLvl > 0 and Game.waterUnitLvl == 0:
+		$UpgradeMilitary/timerWartortle.start(180)
+	elif Game.fireUnitLvl == 0 and Game.waterUnitLvl > 0:
+		$UpgradeMilitary/timerWartortle.start(180)
+	else:
+		$UpgradeMilitary/timerWartortle.start(150)
 
 
 func _on_upgrade_military_mouse_entered():
@@ -151,24 +205,24 @@ func _on_upgrade_military_mouse_exited():
 
 
 func _on_timer_wartortle_timeout():
-	pass # Replace with function body.
+	Game.waterUnitLvl = 1
 
 
 func _on_timer_blastoise_timeout():
-	pass # Replace with function body.
+	Game.waterUnitLvl = 2
 
 
 func _on_timer_charmeleon_timeout():
-	pass # Replace with function body.
+	Game.fireUnitLvl = 1
 
 
 func _on_timer_charizard_timeout():
-	pass # Replace with function body.
+	Game.fireUnitLvl = 2
 
 
 func _on_timer_ivysaur_timeout():
-	pass # Replace with function body.
+	Game.plantUnitLvl = 1
 
 
 func _on_timer_venusaur_timeout():
-	pass # Replace with function body.
+	Game.plantUnitLvl = 2

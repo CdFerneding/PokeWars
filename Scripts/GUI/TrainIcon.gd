@@ -3,7 +3,10 @@ extends Control
 var building: Node
 
 var currentTime
-var totalTime = 10
+# this needs to be an export, because the train time for different units will be different
+# also because it can be used for training units and researching which has different times-
+# (ten seconds is the default training time for pikachu, and all military units lvl 0)
+@export var totalTime = 10
 var timer
 
 

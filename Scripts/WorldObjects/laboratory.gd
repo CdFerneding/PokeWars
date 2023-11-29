@@ -52,7 +52,6 @@ func _on_mouse_exited():
 	if Game.is_paused:
 		return
 	buildingHover = false
-	print(buildingHover)
 
 func _input(event):
 	if Game.is_paused:

@@ -48,6 +48,11 @@ func _process(_delta:float):
 	
 	charmander_scale_on_hover()
 		
+
+# Setter-Funktion for evolution var
+func set_evolution(value: int) -> void:
+	# var is only allowed to be 0,1 or 2
+	evolution = clamp(value, 0, 2)
 	
 func _physics_process(_delta: float) -> void:
 	if Game.is_paused:
