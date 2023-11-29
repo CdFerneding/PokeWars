@@ -212,7 +212,7 @@ func _handle_play_input(event):
 	
 	if Input.is_action_just_pressed("G"):
 		for p in selected_pokemon:
-			if p is Charmander:
+			if p is Charmander or p is Bulbasaur or p is Squirtle:
 				p.change_gamemode()
 
 '
@@ -230,7 +230,6 @@ func _handle_place_input(event):
 	
 	if Input.is_action_just_pressed("left_click"):
 		var position = tileMap.get_global_mouse_position()
-#		print(position)
 		if type_of_pokemon_to_place == 0:
 			unitBuilder._build_unit(self,"Pikachu", position, 0)
 		elif type_of_pokemon_to_place == 1:
@@ -245,7 +244,7 @@ func _handle_place_input(event):
 change gamemode depending on different button presses
 '
 func _change_gamemode():
-	if Input.is_action_pressed("B") && !get_node("UI/TrainBox").is_visible():
+	if Input.is_action_pressed("B") && !get_node("UI/TrainBox").is_visible() && !get_node("UI/UpgradeMilitary").is_visible():
 		Game.GameMode = "select"
 	if Input.is_action_pressed("R"):
 		Game.GameMode = "play"

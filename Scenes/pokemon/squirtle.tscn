@@ -836,6 +836,7 @@ bg_color = Color(0.192157, 0.917647, 0, 0.886275)
 bg_color = Color(0.882353, 0.482353, 0, 1)
 
 [node name="Squirtle" type="CharacterBody2D" groups=["squirtles"]]
+input_pickable = true
 script = ExtResource("1_6lpe6")
 
 [node name="squirtle" type="AnimatedSprite2D" parent="."]

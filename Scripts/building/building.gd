@@ -64,6 +64,8 @@ func _on_mouse_exited():
 	buildingHover = false
 
 func _on_input_event(viewport, event, shape_idx):
+	if Game.is_paused:
+		return
 	if buildingHover:
 		if Game.selectedBuilding == "delete":
 			_delete_building(event)

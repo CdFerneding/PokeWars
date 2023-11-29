@@ -26,6 +26,7 @@ bg_color = Color(0.192157, 0.917647, 0, 0.886275)
 bg_color = Color(0.882353, 0.482353, 0, 1)
 
 [node name="Laboratory" type="StaticBody2D" groups=["buildings"]]
+input_pickable = true
 script = ExtResource("1_6tr4f")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -40,8 +41,8 @@ position = Vector2(1.5, 9.5)
 shape = SubResource("RectangleShape2D_n8kxw")
 
 [node name="Selected" type="Panel" parent="."]
-offset_left = -30.0
-offset_top = -30.0
+offset_left = -31.0
+offset_top = -31.0
 offset_right = 33.0
 offset_bottom = 34.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_e1720")

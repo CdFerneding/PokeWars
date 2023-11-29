@@ -29,24 +29,12 @@ func _process(delta):
 	bar.value = currentHealth
 
 '
-timer functions
-'
-func _start_training():
-	var scene = load("res://Scenes/GUI/Trainicon.tscn")
-	var queueItem = scene.instantiate()
-	queueItem.get_node("UnitIcon").texture = check_current_pokemon()
-	queueItem.building = self
-	UI.get_node("TrainingQueue").add_child(queueItem)
-
-
-'
 Input managment functions
 '
 func _on_mouse_entered():
 	if Game.is_paused:
 		return
 	buildingHover = true
-	print(buildingHover)
 
 func _on_mouse_exited():
 	if Game.is_paused:
@@ -60,7 +48,7 @@ func _input(event):
 		if Game.selectedBuilding == "delete":
 			_delete_building(event)
 		elif Input.is_action_just_released("left_click"):
-			UI.show_upgrade_military()
+			UI.show_upgrade_military(true)
 
 func _delete_building(event):
 	if Input.is_action_just_pressed("left_click") && !currently_training && self.name != "PokeCenter":
@@ -72,13 +60,4 @@ func _delete_building(event):
 func _show_upgrade_UI():
 	UI.currentBuilding = self
 	UI.get_node("UpgradeMilitary").show()
-	
-func check_current_pokemon():
-	if "PokeCenter" in self.name:
-		return load(Game.pikachuIcon)
-	if "Fire Arena" in self.name:
-			return load(Game.CharmanderIcon)
-	if "Water Arena" in self.name:
-			return load(Game.SquirleIcon)
-	if "Plant Arena" in self.name:
-			return load(Game.BulbasaurIcon)
+

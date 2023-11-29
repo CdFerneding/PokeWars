@@ -225,12 +225,10 @@ offset_left = 56.0
 offset_top = 132.0
 offset_right = 120.0
 offset_bottom = 196.0
+text = "Q"
 icon = SubResource("AtlasTexture_b0gid")
 icon_alignment = 1
 expand_icon = true
-
-[node name="timerWartortle" type="Timer" parent="UpgradeMilitary"]
-wait_time = 90.0
 
 [node name="UpgradeToBlastoise" type="Button" parent="UpgradeMilitary"]
 layout_mode = 0
@@ -238,12 +236,10 @@ offset_left = 128.0
 offset_top = 132.0
 offset_right = 192.0
 offset_bottom = 196.0
+text = "W"
 icon = SubResource("AtlasTexture_righn")
 icon_alignment = 1
 expand_icon = true
-
-[node name="timerBlastoise" type="Timer" parent="UpgradeMilitary"]
-wait_time = 150.0
 
 [node name="UpgradeToCharmeleon" type="Button" parent="UpgradeMilitary"]
 layout_mode = 0
@@ -251,11 +247,10 @@ offset_left = 248.0
 offset_top = 132.0
 offset_right = 312.0
 offset_bottom = 196.0
+text = "E"
 icon = SubResource("AtlasTexture_1jcex")
 icon_alignment = 1
 expand_icon = true
-
-[node name="timerCharmeleon" type="Timer" parent="UpgradeMilitary"]
 
 [node name="UpgradeToCharizard" type="Button" parent="UpgradeMilitary"]
 layout_mode = 0
@@ -263,11 +258,10 @@ offset_left = 320.0
 offset_top = 132.0
 offset_right = 384.0
 offset_bottom = 196.0
+text = "R"
 icon = SubResource("AtlasTexture_rwfs6")
 icon_alignment = 1
 expand_icon = true
-
-[node name="timerCharizard" type="Timer" parent="UpgradeMilitary"]
 
 [node name="UpgradeToIvysaur" type="Button" parent="UpgradeMilitary"]
 layout_mode = 0
@@ -275,11 +269,10 @@ offset_left = 440.0
 offset_top = 132.0
 offset_right = 504.0
 offset_bottom = 196.0
+text = "A"
 icon = SubResource("AtlasTexture_my75t")
 icon_alignment = 1
 expand_icon = true
-
-[node name="timerIvysaur" type="Timer" parent="UpgradeMilitary"]
 
 [node name="UpgradeToVenusaur" type="Button" parent="UpgradeMilitary"]
 layout_mode = 0
@@ -287,11 +280,10 @@ offset_left = 512.0
 offset_top = 132.0
 offset_right = 576.0
 offset_bottom = 196.0
+text = "S"
 icon = SubResource("AtlasTexture_oqy1c")
 icon_alignment = 1
 expand_icon = true
-
-[node name="timerVenusaur" type="Timer" parent="UpgradeMilitary"]
 
 [node name="TrainingQueue" type="HBoxContainer" parent="."]
 offset_left = 202.0
@@ -308,17 +300,11 @@ theme_override_constants/separation = 0
 [connection signal="mouse_entered" from="TrainBox" to="." method="_on_train_box_mouse_entered"]
 [connection signal="mouse_exited" from="TrainBox" to="." method="_on_train_box_mouse_exited"]
 [connection signal="pressed" from="TrainBox/TrainUnitButton" to="." method="_on_train_unit_button_pressed"]
-[connection signal="mouse_entered" from="UpgradeMilitary" to="." method="_on_upgrade_military_mouse_entered"]
-[connection signal="mouse_exited" from="UpgradeMilitary" to="." method="_on_upgrade_military_mouse_exited"]
+[connection signal="mouse_entered" from="UpgradeMilitary" to="." method="_on_train_box_mouse_entered"]
+[connection signal="mouse_exited" from="UpgradeMilitary" to="." method="_on_train_box_mouse_exited"]
 [connection signal="pressed" from="UpgradeMilitary/UpgradeToWartortle" to="." method="_on_upgrade_to_wartortle_pressed"]
-[connection signal="timeout" from="UpgradeMilitary/timerWartortle" to="." method="_on_timer_wartortle_timeout"]
 [connection signal="pressed" from="UpgradeMilitary/UpgradeToBlastoise" to="." method="_on_upgrade_to_blastoise_pressed"]
-[connection signal="timeout" from="UpgradeMilitary/timerBlastoise" to="." method="_on_timer_blastoise_timeout"]
 [connection signal="pressed" from="UpgradeMilitary/UpgradeToCharmeleon" to="." method="_on_upgrade_to_charmeleon_pressed"]
-[connection signal="timeout" from="UpgradeMilitary/timerCharmeleon" to="." method="_on_timer_charmeleon_timeout"]
 [connection signal="pressed" from="UpgradeMilitary/UpgradeToCharizard" to="." method="_on_upgrade_to_charizard_pressed"]
-[connection signal="timeout" from="UpgradeMilitary/timerCharizard" to="." method="_on_timer_charizard_timeout"]
 [connection signal="pressed" from="UpgradeMilitary/UpgradeToIvysaur" to="." method="_on_upgrade_to_ivysaur_pressed"]
-[connection signal="timeout" from="UpgradeMilitary/timerIvysaur" to="." method="_on_timer_ivysaur_timeout"]
 [connection signal="pressed" from="UpgradeMilitary/UpgradeToVenusaur" to="." method="_on_upgrade_to_venusaur_pressed"]
-[connection signal="timeout" from="UpgradeMilitary/timerVenusaur" to="." method="_on_timer_venusaur_timeout"]

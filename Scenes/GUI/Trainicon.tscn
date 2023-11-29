@@ -39,7 +39,6 @@ show_percentage = false
 
 [node name="Timer" type="Timer" parent="."]
 process_callback = 0
-one_shot = true
 
 [connection signal="value_changed" from="ProgressBar" to="." method="_on_progress_bar_value_changed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

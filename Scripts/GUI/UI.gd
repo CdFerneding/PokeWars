@@ -12,11 +12,12 @@ extends CanvasLayer
 var time = 0
 var currentBuilding
 
+
+# variables to remember if the upgrade timers where running before the game was paused
+
 func _ready():
 	$GameStateBox.visible = true
 	$BuildingButtonBox.visible = true
-	$TrainBox.visible = true
-	$UpgradeMilitary.hide()
 	checkGameMode()
 
 func update_game_timer():
@@ -44,6 +45,9 @@ func _process(_delta):
 		return
 	
 	$Timer.paused = false
+
+	if $UpgradeMilitary.is_visible():
+		check_upgrade_military_buttons()
 	
 	FoodLabel.text = "Food: " + str(Game.Food)
 	WoodLabel.text = "Wood: " + str(Game.Wood)
@@ -52,7 +56,6 @@ func _process(_delta):
 	SelectedLabel.text = "Selected: " + str(Game.Selected)
 	GameModeBuilding.text = "Building: \n" + Game.selectedBuilding
 	checkGameMode()
-	
 
 
 func _on_fire_arena_pressed():
@@ -94,7 +97,8 @@ func show_training_button():
 		button.icon = pikachuIcon
 	
 	$TrainBox.show()
-
+	$UpgradeMilitary.hide()
+	$BuildingButtonBox.hide()
 
 
 func _on_train_unit_button_pressed():
@@ -104,125 +108,168 @@ func _on_train_unit_button_pressed():
 func _on_train_box_mouse_entered():
 	Game.UIHover = true
 
-
 func _on_train_box_mouse_exited():
 	Game.UIHover = false
+
+func _input(event):
+	if Input.is_action_just_pressed("left_click") && Game.UIHover == false:
+		show_upgrade_military(false)
+	if $UpgradeMilitary.is_visible():
+		if Input.is_action_just_pressed("Q"):
+			_on_upgrade_to_wartortle_pressed()
+		elif Input.is_action_just_pressed("W"):
+			_on_upgrade_to_blastoise_pressed()
+		elif Input.is_action_just_pressed("E"):
+			_on_upgrade_to_charmeleon_pressed()
+		elif Input.is_action_just_pressed("R"):
+			_on_upgrade_to_charizard_pressed()
+		elif Input.is_action_just_pressed("A"):
+			_on_upgrade_to_ivysaur_pressed()
+		elif Input.is_action_just_pressed("S"):
+			_on_upgrade_to_venusaur_pressed()
+		else:
+			pass
+
+func set_timer_state(state):
+	if state:
+		$Timer.paused = true
+	else:
+		$Timer.paused = false
 
 ####################################################################
 ########## buttons that can be called in the "Laboratory" ##########
 ####################################################################
 # this could also be handled in a specific file for upgrading military
-func show_upgrade_military():
-	$UpgradeMilitary.show()
-	print("upgrade military ui is visible")
+func show_upgrade_military(state):
+	if state:
+		$TrainBox.hide()
+		$BuildingButtonBox.hide()
+		$UpgradeMilitary.show()
+	else: 
+		$UpgradeMilitary.hide()
 
 
 func _on_upgrade_to_wartortle_pressed():
-	if Game.waterUnitLvl > 0:
+	if Game.waterUnitLvl != 0 or is_upgrade_ongoing("Wartortle"):
 		return
-	if Game.plantUnitLvl > 0 and Game.fireUnitLvl > 0:
-		$UpgradeMilitary/timerWartortle.start(150)
-	elif Game.plantUnitLvl > 0 and Game.fireUnitLvl == 0:
-		$UpgradeMilitary/timerWartortle.start(120)
-	elif Game.plantUnitLvl == 0 and Game.fireUnitLvl > 0:
-		$UpgradeMilitary/timerWartortle.start(120)
+	if (Game.plantUnitLvl > 0 or is_upgrade_ongoing("Ivysaur")) and (Game.fireUnitLvl > 0 or is_upgrade_ongoing("Charmeleon")):
+		start_upgrade(150, "Wartortle")
+	elif (Game.plantUnitLvl > 0 or is_upgrade_ongoing("Ivysaur")) and (Game.fireUnitLvl == 0 or is_upgrade_ongoing("Charmeleon")):
+		start_upgrade(120, "Wartortle")
+	elif (Game.plantUnitLvl == 0 or is_upgrade_ongoing("Ivysaur")) and (Game.fireUnitLvl > 0 or is_upgrade_ongoing("Charmeleon")):
+		start_upgrade(120, "Wartortle")
 	else:
-		$UpgradeMilitary/timerWartortle.start(90)
+		start_upgrade(90, "Wartortle")
 
 
 func _on_upgrade_to_blastoise_pressed():
-	if Game.waterUnitLvl > 1:
+	if Game.waterUnitLvl != 1 or is_upgrade_ongoing("Blastoise"):
 		return
-	if Game.plantUnitLvl > 0 and Game.fireUnitLvl > 0:
-		$UpgradeMilitary/timerWartortle.start(210)
-	elif Game.plantUnitLvl > 0 and Game.fireUnitLvl == 0:
-		$UpgradeMilitary/timerWartortle.start(180)
-	elif Game.plantUnitLvl == 0 and Game.fireUnitLvl > 0:
-		$UpgradeMilitary/timerWartortle.start(180)
+	if (Game.plantUnitLvl > 1 or is_upgrade_ongoing("Venusaur")) and (Game.fireUnitLvl > 1 or is_upgrade_ongoing("Charizard")):
+		start_upgrade(210, "Blastoise")
+	elif (Game.plantUnitLvl > 1 or is_upgrade_ongoing("Venusaur")) and (Game.fireUnitLvl == 1 or is_upgrade_ongoing("Charizard")):
+		start_upgrade(180, "Blastoise")
+	elif (Game.plantUnitLvl == 1 or is_upgrade_ongoing("Venusaur")) and (Game.fireUnitLvl > 1 or is_upgrade_ongoing("Charizard")):
+		start_upgrade(180, "Blastoise")
 	else:
-		$UpgradeMilitary/timerWartortle.start(150)
+		start_upgrade(150, "Blastoise")
 
 
 func _on_upgrade_to_charmeleon_pressed():
-	if Game.fireUnitLvl > 0:
+	if Game.fireUnitLvl != 0 or is_upgrade_ongoing("Charmeleon"):
 		return
-	if Game.plantUnitLvl > 0 and Game.waterUnitLvl > 0:
-		$UpgradeMilitary/timerWartortle.start(150)
-	elif Game.plantUnitLvl > 0 and Game.waterUnitLvl == 0:
-		$UpgradeMilitary/timerWartortle.start(120)
-	elif Game.plantUnitLvl == 0 and Game.waterUnitLvl > 0:
-		$UpgradeMilitary/timerWartortle.start(120)
+	if (Game.plantUnitLvl > 0 or is_upgrade_ongoing("Ivysaur")) and (Game.waterUnitLvl > 0 or is_upgrade_ongoing("Wartortle")):
+		start_upgrade(150, "Charmeleon")
+	elif (Game.plantUnitLvl > 0 or is_upgrade_ongoing("Ivysaur")) and (Game.waterUnitLvl == 0 or is_upgrade_ongoing("Wartortle")):
+		start_upgrade(120, "Charmeleon")
+	elif (Game.plantUnitLvl == 0 or is_upgrade_ongoing("Ivysaur")) and (Game.waterUnitLvl > 0 or is_upgrade_ongoing("Wartortle")):
+		start_upgrade(120, "Charmeleon")
 	else:
-		$UpgradeMilitary/timerWartortle.start(90)
+		start_upgrade(90, "Charmeleon")
 
 
 func _on_upgrade_to_charizard_pressed():
-	if Game.fireUnitLvl > 1:
+	if Game.fireUnitLvl != 1 or is_upgrade_ongoing("Charizard"):
 		return
-	if Game.plantUnitLvl > 0 and Game.waterUnitLvl > 0:
-		$UpgradeMilitary/timerWartortle.start(210)
-	elif Game.plantUnitLvl > 0 and Game.waterUnitLvl == 0:
-		$UpgradeMilitary/timerWartortle.start(180)
-	elif Game.plantUnitLvl == 0 and Game.waterUnitLvl > 0:
-		$UpgradeMilitary/timerWartortle.start(180)
+	if (Game.plantUnitLvl > 1 or is_upgrade_ongoing("Venusaur")) and (Game.waterUnitLvl > 1 or is_upgrade_ongoing("Blastoise")):
+		start_upgrade(210, "Charizard")
+	elif (Game.plantUnitLvl > 1 or is_upgrade_ongoing("Venusaur")) and (Game.waterUnitLvl == 1 or is_upgrade_ongoing("Blastoise")):
+		start_upgrade(180, "Charizard")
+	elif (Game.plantUnitLvl == 1 or is_upgrade_ongoing("Venusaur")) and (Game.waterUnitLvl > 1 or is_upgrade_ongoing("Blastoise")):
+		start_upgrade(180, "Charizard")
 	else:
-		$UpgradeMilitary/timerWartortle.start(150)
+		start_upgrade(150, "Charizard")
 
 
 func _on_upgrade_to_ivysaur_pressed():
-	if Game.plantUnitLvl > 0:
+	if Game.plantUnitLvl != 0 or is_upgrade_ongoing("Ivysaur"):
 		return
-	if Game.fireUnitLvl > 0 and Game.waterUnitLvl > 0:
-		$UpgradeMilitary/timerWartortle.start(150)
-	elif Game.fireUnitLvl > 0 and Game.waterUnitLvl == 0:
-		$UpgradeMilitary/timerWartortle.start(120)
-	elif Game.fireUnitLvl == 0 and Game.waterUnitLvl > 0:
-		$UpgradeMilitary/timerWartortle.start(120)
+	if (Game.fireUnitLvl > 0 or is_upgrade_ongoing("Charmeleon")) and (Game.waterUnitLvl > 0 or is_upgrade_ongoing("Wartortle")):
+		start_upgrade(150, "Ivysaur")
+	elif (Game.fireUnitLvl > 0 or is_upgrade_ongoing("Charmeleon")) and (Game.waterUnitLvl == 0 or is_upgrade_ongoing("Wartortle")):
+		start_upgrade(120, "Ivysaur")
+	elif (Game.fireUnitLvl == 0 or is_upgrade_ongoing("Charmeleon")) and (Game.waterUnitLvl > 0 or is_upgrade_ongoing("Wartortle")):
+		start_upgrade(120, "Ivysaur")
 	else:
-		$UpgradeMilitary/timerWartortle.start(90)
+		start_upgrade(90, "Ivysaur")
 
 
 func _on_upgrade_to_venusaur_pressed():
-	if Game.plantUnitLvl > 1:
+	if Game.plantUnitLvl != 1 or is_upgrade_ongoing("Venusaur"):
 		return
-	if Game.fireUnitLvl > 0 and Game.waterUnitLvl > 0:
-		$UpgradeMilitary/timerWartortle.start(210)
-	elif Game.fireUnitLvl > 0 and Game.waterUnitLvl == 0:
-		$UpgradeMilitary/timerWartortle.start(180)
-	elif Game.fireUnitLvl == 0 and Game.waterUnitLvl > 0:
-		$UpgradeMilitary/timerWartortle.start(180)
+	
+	if (Game.fireUnitLvl > 1 or is_upgrade_ongoing("Charizard")) and (Game.waterUnitLvl > 1 or is_upgrade_ongoing("Blastoise")):
+		start_upgrade(210, "Venusaur")
+	elif (Game.fireUnitLvl > 1 or is_upgrade_ongoing("Charizard")) and (Game.waterUnitLvl == 1 or is_upgrade_ongoing("Blastoise")):
+		start_upgrade(180, "Venusaur")
+	elif (Game.fireUnitLvl == 1 or is_upgrade_ongoing("Charizard")) and (Game.waterUnitLvl > 1 or is_upgrade_ongoing("Blastoise")):
+		start_upgrade(180, "Venusaur")
 	else:
-		$UpgradeMilitary/timerWartortle.start(150)
+		start_upgrade(150, "Venusaur")
 
 
-func _on_upgrade_military_mouse_entered():
-	Game.UIHover = true
+func start_upgrade(time, upgrade_to):
+	if Game.is_paused:
+		return
+	var trainIconScene = load("res://Scenes/GUI/Trainicon.tscn")
+	var queueItem = trainIconScene.instantiate()
+	var button = get_node("UpgradeMilitary/UpgradeTo"+upgrade_to)
+	queueItem.get_node("UnitIcon").texture = button.icon
+	queueItem.totalTime = time
+	queueItem.type = upgrade_to
+	$TrainingQueue.add_child(queueItem)
 
+func is_upgrade_ongoing(type_to_check: String) -> bool:
+	for child in $TrainingQueue.get_children():
+		if child.type == type_to_check:
+			return true
+	return false
 
-func _on_upgrade_military_mouse_exited():
-	Game.UIHover = false
+func check_upgrade_military_buttons():
+	$UpgradeMilitary/UpgradeToIvysaur.disabled = true
+	$UpgradeMilitary/UpgradeToCharmeleon.disabled = true
+	$UpgradeMilitary/UpgradeToWartortle.disabled = true
+	$UpgradeMilitary/UpgradeToVenusaur.disabled = true
+	$UpgradeMilitary/UpgradeToBlastoise.disabled = true
+	$UpgradeMilitary/UpgradeToCharizard.disabled = true
 
+	if Game.Food >= 20:
+		if Game.plantUnitLvl == 0 and !is_upgrade_ongoing("Ivysaur"):
+			$UpgradeMilitary/UpgradeToIvysaur.disabled = false
+		
+		if Game.fireUnitLvl == 0 and !is_upgrade_ongoing("Charmeleon"):
+			$UpgradeMilitary/UpgradeToCharmeleon.disabled = false
+		
+		if Game.waterUnitLvl == 0 and !is_upgrade_ongoing("Wartortle"):
+			$UpgradeMilitary/UpgradeToWartortle.disabled = false
 
+	if Game.Food >= 40:
+		if Game.plantUnitLvl == 1 and !is_upgrade_ongoing("Venusaur"):
+			$UpgradeMilitary/UpgradeToVenusaur.disabled = false
 
-func _on_timer_wartortle_timeout():
-	Game.waterUnitLvl = 1
+		if Game.waterUnitLvl == 1 and !is_upgrade_ongoing("Blastoise"):
+			$UpgradeMilitary/UpgradeToBlastoise.disabled = false
 
+		if Game.fireUnitLvl == 1 and !is_upgrade_ongoing("Charizard"):
+			$UpgradeMilitary/UpgradeToCharizard.disabled = false
 
-func _on_timer_blastoise_timeout():
-	Game.waterUnitLvl = 2
-
-
-func _on_timer_charmeleon_timeout():
-	Game.fireUnitLvl = 1
-
-
-func _on_timer_charizard_timeout():
-	Game.fireUnitLvl = 2
-
-
-func _on_timer_ivysaur_timeout():
-	Game.plantUnitLvl = 1
-
-
-func _on_timer_venusaur_timeout():
-	Game.plantUnitLvl = 2

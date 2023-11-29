@@ -8,7 +8,7 @@ const charmander = "res://Scenes/pokemon/charmander.tscn"
 const bulbasaur = "res://Scenes/pokemon/bulbasaur.tscn"
 
 var pikachuIcon = "res://Assets/Potraits/pikachu_and_evolutions/pikachu Angry.png"
-var CharmanderIcon = "res://Assets/Potraits/charmander Angry.png"
+var CharmanderIcon = "res://Assets/Potraits/charmander_and_evolutions/charmander Angry.png"
 var SquirleIcon = "res://Assets/Potraits/squirtle Angry.png"
 var BulbasaurIcon = "res://Assets/Potraits/bulbasaur Angry.png"
 
@@ -53,14 +53,7 @@ func set_game_paused(state):
 	
 	# this state varible is used to more specifically skip functions in the Game
 	is_paused = state
-	
-# true equals running
-func set_timer_state(state):
-	var pathUI = get_tree().get_root().get_node("Main/UI")
-	if state == true:
-		pathUI.set_timer_state(state)
-	else:
-		pathUI.set_timer_state(state)
+
 
 func run_intro_finished():
 	var mainPath = get_tree().get_root().get_node("Main")
