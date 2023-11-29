@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bwf68ss6issrh"
-path="res://.godot/imported/bulbasaur.png-a333132b2e049bd1e1666db5197b6152.ctex"
+path="res://.godot/imported/bulbasaur.png-d5af3faaf5166ba884698e249932a409.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Potraits/bulbasaur.png"
-dest_files=["res://.godot/imported/bulbasaur.png-a333132b2e049bd1e1666db5197b6152.ctex"]
+source_file="res://Assets/Potraits/bulbasaur_and_evolutions/bulbasaur.png"
+dest_files=["res://.godot/imported/bulbasaur.png-d5af3faaf5166ba884698e249932a409.ctex"]
 
 [params]
 

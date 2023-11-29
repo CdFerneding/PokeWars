@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cxmbtq8hta636"
-path="res://.godot/imported/pikachu Angry.png-8f16ca3388af7839d799b5e5a32db4c2.ctex"
+uid="uid://by7p7kmc1r5yr"
+path="res://.godot/imported/charmander Angry.png-56e597bcf3e4032e485ca9c64ae88405.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Potraits/pikachu Angry.png"
-dest_files=["res://.godot/imported/pikachu Angry.png-8f16ca3388af7839d799b5e5a32db4c2.ctex"]
+source_file="res://Assets/Potraits/charmander_and_evolutions/charmander Angry.png"
+dest_files=["res://.godot/imported/charmander Angry.png-56e597bcf3e4032e485ca9c64ae88405.ctex"]
 
 [params]
 

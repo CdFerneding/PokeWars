@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dn8vyv78nmqcd"
-path="res://.godot/imported/pikachu.png-de76cc6c9b25a3120d224ddcf8efaed4.ctex"
+uid="uid://b486ejlnb0awm"
+path="res://.godot/imported/ivysaur.png-3334da7acd656750b767028c4fd86d7a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Potraits/pikachu.png"
-dest_files=["res://.godot/imported/pikachu.png-de76cc6c9b25a3120d224ddcf8efaed4.ctex"]
+source_file="res://Assets/Potraits/bulbasaur_and_evolutions/ivysaur.png"
+dest_files=["res://.godot/imported/ivysaur.png-3334da7acd656750b767028c4fd86d7a.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cb5cjcmcspjxc"
-path="res://.godot/imported/charmander.png-6fcd7b0dfb6d900a475ddd809b78106d.ctex"
+uid="uid://dmyytmmonhstq"
+path="res://.godot/imported/squirtle.png-9d52548a4e5ff6212d823ac460b203cf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Potraits/charmander.png"
-dest_files=["res://.godot/imported/charmander.png-6fcd7b0dfb6d900a475ddd809b78106d.ctex"]
+source_file="res://Assets/Potraits/squirtle_and_evolutions/squirtle.png"
+dest_files=["res://.godot/imported/squirtle.png-9d52548a4e5ff6212d823ac460b203cf.ctex"]
 
 [params]
 

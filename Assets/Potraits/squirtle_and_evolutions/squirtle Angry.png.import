@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dqfw1xmgys5y7"
-path="res://.godot/imported/bulbasaur Angry.png-470368faaeaee2b77371e8af1e09c9ad.ctex"
+uid="uid://bw7cnnvc112s5"
+path="res://.godot/imported/squirtle Angry.png-3a80de88fb411cb05e75601535c43682.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Potraits/bulbasaur Angry.png"
-dest_files=["res://.godot/imported/bulbasaur Angry.png-470368faaeaee2b77371e8af1e09c9ad.ctex"]
+source_file="res://Assets/Potraits/squirtle_and_evolutions/squirtle Angry.png"
+dest_files=["res://.godot/imported/squirtle Angry.png-3a80de88fb411cb05e75601535c43682.ctex"]
 
 [params]
 

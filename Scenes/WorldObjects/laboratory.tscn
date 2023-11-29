@@ -1,0 +1,59 @@
+[gd_scene load_steps=7 format=3 uid="uid://b1esjwpt462wj"]
+
+[ext_resource type="Texture2D" uid="uid://ce85vujyj4kve" path="res://Assets/Sprites/Building/Game Boy Advance - Pokemon Ruby Sapphire - Buildings.png" id="1_4hxsq"]
+[ext_resource type="Script" path="res://Scripts/WorldObjects/laboratory.gd" id="1_6tr4f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n8kxw"]
+size = Vector2(61, 47)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e1720"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.0470588, 0.6, 1, 1)
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w6tkr"]
+bg_color = Color(0.192157, 0.917647, 0, 0.886275)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_moimq"]
+bg_color = Color(0.882353, 0.482353, 0, 1)
+
+[node name="Laboratory" type="StaticBody2D" groups=["buildings"]]
+script = ExtResource("1_6tr4f")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, -8)
+texture = ExtResource("1_4hxsq")
+hframes = 6
+vframes = 3
+frame = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.5, 9.5)
+shape = SubResource("RectangleShape2D_n8kxw")
+
+[node name="Selected" type="Panel" parent="."]
+offset_left = -30.0
+offset_top = -30.0
+offset_right = 33.0
+offset_bottom = 34.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_e1720")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = -16.0
+offset_top = -37.0
+offset_right = 17.0
+offset_bottom = -33.0
+theme_override_styles/background = SubResource("StyleBoxFlat_w6tkr")
+theme_override_styles/fill = SubResource("StyleBoxFlat_moimq")
+show_percentage = false
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

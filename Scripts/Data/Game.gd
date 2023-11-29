@@ -7,7 +7,7 @@ const squirtle = "res://Scenes/pokemon/squirtle.tscn"
 const charmander = "res://Scenes/pokemon/charmander.tscn"
 const bulbasaur = "res://Scenes/pokemon/bulbasaur.tscn"
 
-var pikachuIcon = "res://Assets/Potraits/pikachu Angry.png"
+var pikachuIcon = "res://Assets/Potraits/pikachu_and_evolutions/pikachu Angry.png"
 var CharmanderIcon = "res://Assets/Potraits/charmander Angry.png"
 var SquirleIcon = "res://Assets/Potraits/squirtle Angry.png"
 var BulbasaurIcon = "res://Assets/Potraits/bulbasaur Angry.png"
@@ -36,6 +36,11 @@ var playerName: String = "player"
 var introDialoguePlayed = false
 
 var is_paused = false
+
+# keeping track of available units (through laboratory)
+var fireUnitLvl = 0
+var waterUnitLvl = 0
+var plantUnitLvl = 0
 
 
 # game state can be paused (false) or running (true)

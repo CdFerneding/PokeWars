@@ -44,6 +44,7 @@ func _ready():
 func on_intro_finished():
 	score = 0
 	$UI/Timer.start()
+	$UI/GameStateBox.visible = true
 	get_units()
 	get_buildings()
 	get_enemies()
