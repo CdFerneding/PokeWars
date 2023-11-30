@@ -55,6 +55,7 @@ script = ExtResource("1_ivh8w")
 theme_override_styles/panel = SubResource("StyleBoxFlat_c22t0")
 
 [node name="GameStateBox" type="TextureRect" parent="."]
+visible = false
 offset_right = 200.0
 offset_bottom = 268.0
 texture = ExtResource("2_7x6ev")

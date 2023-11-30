@@ -3,7 +3,6 @@ extends Node
 @onready var pikachuBuilder = preload("res://Scripts/Builder/UnitBuilder.gd")
 @onready var unitBuilder = preload("res://Scripts/Builder/UnitBuilder.gd")
 @onready var pikachu = preload("res://Scenes/pokemon/pikachu.tscn")
-@onready var enemy = preload("res://Scenes/pokemon/enemy.tscn")
 @export var mob_scene: PackedScene
 @export var tileMap: TileMap
 # @Justin "UILabel is now as a "GameMode" Label in the HUD. 

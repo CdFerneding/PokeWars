@@ -21,20 +21,33 @@ var previous_direction
 
 var current_target: Node
 
+var animationSprite
+
 #implements the pathfinding algorithm
 @onready var nav_agent:= $NavigationAgent2D #as NavigationAgent2D
 
 func _ready():
+	assign_sprite()
+	
 	# make the enemies significantly slower than economy pokemon
 	speed = 18
 	
 	previous_direction = "down"
-	$AnimatedSprite2D.animation = "walk_down"
+	animationSprite.animation = "walk_down"
 	$AttackCooldown.start()
 	#var main_node = get_tree().get_root().get_node("Main")
 	
 	super()
-	
+
+# assign the child based on the scene name (alls enemy children have the same script)
+func assign_sprite():
+	if self.name == "WaltosChild":
+		animationSprite = $waltos
+	elif self.name == "PlantosChild":
+		animationSprite = $plantos
+		animationSprite.modulate = Color(0, 1, 0)
+	else:
+		animationSprite = $moltres
 
 func _process(_delta:float):
 	if Game.is_paused == true:
@@ -94,8 +107,8 @@ func apply_corresponding_animation(_prev):
 	previous_direction = current_animation.left(current_animation.length() - 1)
 	current_animation = "walk_"+previous_direction
 
-	$AnimatedSprite2D.animation = current_animation
-	$AnimatedSprite2D.play()
+	animationSprite.animation = current_animation
+	animationSprite.play()
 
 
 func _on_mouse_entered():
