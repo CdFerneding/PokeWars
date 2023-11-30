@@ -1,5 +1,21 @@
 # Pokewars
 
+## Members
+Justin Frauböse (J), Max Neubauer (M), Conrad Ferneding (C), Evan Fregeais (E)
+
+## Code claims 
+choose between All, Most, Half, Some, Touched
+| | Justin | Max | Conrad | Evan |
+|----|----|----|----|----|
+|Map Building & Tilemap|x| x | x | x | 
+|Wall of Death| x | x | x | x |  
+|Character Selection| x |x | x | x | 
+|Military Units and battle| x | x | x | x | 
+|Pokemon Spawner (+spawn rate)| x | x | x | x | 
+|Win/Loose condition trigger| x | x | x | x | 
+|Music| x | x | x | x | 
+|GUI| x | x | x | x | 
+
 ## Concept
 
 The concept behind the game is a mix between Age of Empires and Pokemon
