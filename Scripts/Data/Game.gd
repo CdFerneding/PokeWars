@@ -33,7 +33,7 @@ var UIHover = false
 
 # dialogue attributes:
 var playerName: String = "player"
-var introDialoguePlayed = false
+
 
 var is_paused = false
 
@@ -42,6 +42,8 @@ var fireUnitLvl = 0
 var waterUnitLvl = 0
 var plantUnitLvl = 0
 
+# this variable changes the finishing Game dialogue
+var player_win
 
 # game state can be paused (false) or running (true)
 # if the game is paused, no more _process funcions are getting called
@@ -58,3 +60,29 @@ func set_game_paused(state):
 func run_intro_finished():
 	var mainPath = get_tree().get_root().get_node("Main")
 	mainPath.on_intro_finished()
+
+func trigger_win_game():
+	player_win = true
+	var hud = preload("res://Scenes/GUI/hud.tscn")
+	var pathUI = get_tree().get_root().get_node("Main/UI")
+	var hudOverlay = hud.instantiate()
+	pathUI.add_child(hudOverlay)
+	
+	# call loosing overlay
+	hudOverlay.win_game_overlay()
+
+func trigger_loose_game():
+	player_win = false
+	var hud = preload("res://Scenes/GUI/hud.tscn")
+	var pathUI = get_tree().get_root().get_node("Main/UI")
+	var hudOverlay = hud.instantiate()
+	pathUI.add_child(hudOverlay)
+	
+	# call loosing overlay
+	hudOverlay.loose_game_overlay()
+
+func play_again():
+	get_tree().reload_current_scene()
+
+func exit_game():
+	get_tree().quit()
