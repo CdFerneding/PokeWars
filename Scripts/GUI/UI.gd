@@ -273,3 +273,10 @@ func check_upgrade_military_buttons():
 		if Game.fireUnitLvl == 1 and !is_upgrade_ongoing("Charizard"):
 			$UpgradeMilitary/UpgradeToCharizard.disabled = false
 
+
+func _on_win_game_pressed():
+	Game.trigger_win_game()
+
+
+func _on_loose_game_pressed():
+	Game.trigger_loose_game()

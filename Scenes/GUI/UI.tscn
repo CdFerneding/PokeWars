@@ -55,7 +55,6 @@ script = ExtResource("1_ivh8w")
 theme_override_styles/panel = SubResource("StyleBoxFlat_c22t0")
 
 [node name="GameStateBox" type="TextureRect" parent="."]
-visible = false
 offset_right = 200.0
 offset_bottom = 268.0
 texture = ExtResource("2_7x6ev")
@@ -292,6 +291,19 @@ offset_right = 573.0
 offset_bottom = 55.0
 theme_override_constants/separation = 0
 
+[node name="winGame" type="Button" parent="."]
+offset_left = 205.0
+offset_right = 301.0
+offset_bottom = 35.0
+text = "win game"
+
+[node name="looseGame" type="Button" parent="."]
+offset_left = 206.0
+offset_top = 40.0
+offset_right = 289.0
+offset_bottom = 75.0
+text = "loose game"
+
 [connection signal="pressed" from="BuildingButtonBox/Fire Arena Button" to="." method="_on_fire_arena_pressed"]
 [connection signal="pressed" from="BuildingButtonBox/Water Arena Button" to="." method="_on_water_arena_pressed"]
 [connection signal="pressed" from="BuildingButtonBox/Plant Arena Button" to="." method="_on_plant_arena_pressed"]
@@ -308,3 +320,5 @@ theme_override_constants/separation = 0
 [connection signal="pressed" from="UpgradeMilitary/UpgradeToCharizard" to="." method="_on_upgrade_to_charizard_pressed"]
 [connection signal="pressed" from="UpgradeMilitary/UpgradeToIvysaur" to="." method="_on_upgrade_to_ivysaur_pressed"]
 [connection signal="pressed" from="UpgradeMilitary/UpgradeToVenusaur" to="." method="_on_upgrade_to_venusaur_pressed"]
+[connection signal="pressed" from="winGame" to="." method="_on_win_game_pressed"]
+[connection signal="pressed" from="looseGame" to="." method="_on_loose_game_pressed"]

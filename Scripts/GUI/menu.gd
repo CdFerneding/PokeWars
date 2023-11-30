@@ -16,7 +16,7 @@ func _input(event):
 
 
 func _on_quit_game_button_pressed():
-	get_tree().quit()
+	Game.exit_game()
 
 
 func _on_exit_pressed():
