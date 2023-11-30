@@ -56,6 +56,7 @@ func _process(_delta):
 	SelectedLabel.text = "Selected: " + str(Game.Selected)
 	GameModeBuilding.text = "Building: \n" + Game.selectedBuilding
 	checkGameMode()
+	
 
 
 func _on_fire_arena_pressed():

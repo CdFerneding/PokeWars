@@ -222,7 +222,7 @@ func _on_hit(damage):
 	var pathMain = get_tree().get_root().get_node("Main")
 	health_bar.value -= damage
 	if health_bar.value == 0:
-		pathMain.charmanders.erase(self)
+		pathMain.bulbasaurs.erase(self)
 		self.queue_free()
 		pathMain.get_units()
 		if self in pathMain.selected_pokemon:
