@@ -35,6 +35,9 @@ var default_cursor = preload("res://Assets/Sprites/Cursor/test_cursor_2.png")
 
 var rng = RandomNumberGenerator.new()
 
+#flag that indicates, when 2,5 min are over that enemies can spawn
+var enemiesCanSpawn = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#set cursor to default
@@ -296,3 +299,10 @@ func get_good_pokemon():
 
 func get_bad_pokemon() -> Array:
 	return enemies
+
+
+
+
+func _on_start_enemy_spawn_timeout():
+	
+	enemiesCanSpawn = true
