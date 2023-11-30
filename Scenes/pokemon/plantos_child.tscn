@@ -663,6 +663,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vg7x3"]
+radius = 11.6667
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e1720"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -693,7 +694,7 @@ sprite_frames = SubResource("SpriteFrames_qgt2m")
 animation = &"walk_down_left"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.6, -1.2)
+position = Vector2(0, -20)
 scale = Vector2(0.6, 0.6)
 shape = SubResource("CircleShape2D_vg7x3")
 
@@ -703,10 +704,10 @@ avoidance_enabled = true
 avoidance_mask = 3
 
 [node name="Selected" type="Panel" parent="."]
-offset_left = -16.0
+offset_left = -14.0
 offset_top = -38.0
 offset_right = 15.0
-offset_bottom = -3.0
+offset_bottom = -5.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_e1720")
 
 [node name="HealthBar" type="ProgressBar" parent="."]
