@@ -7,8 +7,8 @@ const squirtle = "res://Scenes/pokemon/squirtle.tscn"
 const charmander = "res://Scenes/pokemon/charmander.tscn"
 const bulbasaur = "res://Scenes/pokemon/bulbasaur.tscn"
 
-var pikachuIcon = "res://Assets/Potraits/pikachu Angry.png"
-var CharmanderIcon = "res://Assets/Potraits/charmander Angry.png"
+var pikachuIcon = "res://Assets/Potraits/pikachu_and_evolutions/pikachu Angry.png"
+var CharmanderIcon = "res://Assets/Potraits/charmander_and_evolutions/charmander Angry.png"
 var SquirleIcon = "res://Assets/Potraits/squirtle Angry.png"
 var BulbasaurIcon = "res://Assets/Potraits/bulbasaur Angry.png"
 
@@ -37,6 +37,11 @@ var introDialoguePlayed = false
 
 var is_paused = false
 
+# keeping track of available units (through laboratory)
+var fireUnitLvl = 0
+var waterUnitLvl = 0
+var plantUnitLvl = 0
+
 
 # game state can be paused (false) or running (true)
 # if the game is paused, no more _process funcions are getting called
@@ -48,14 +53,7 @@ func set_game_paused(state):
 	
 	# this state varible is used to more specifically skip functions in the Game
 	is_paused = state
-	
-# true equals running
-func set_timer_state(state):
-	var pathUI = get_tree().get_root().get_node("Main/UI")
-	if state == true:
-		pathUI.set_timer_state(state)
-	else:
-		pathUI.set_timer_state(state)
+
 
 func run_intro_finished():
 	var mainPath = get_tree().get_root().get_node("Main")

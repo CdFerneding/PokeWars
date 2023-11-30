@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://c4ijkvga7t8qu"]
+
+[ext_resource type="Script" path="res://Scripts/building/building.gd" id="1_iewl2"]
+[ext_resource type="AudioStream" uid="uid://bax1jdg1h7v4f" path="res://Assets/Sounds/new unit.wav" id="2_xn8r5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pixci"]
+radius = 29.0172
+
+[node name="PokeCenter" type="StaticBody2D"]
+y_sort_enabled = true
+input_pickable = true
+script = ExtResource("1_iewl2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_pixci")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -7.0
+offset_top = -38.0
+offset_right = 33.0
+offset_bottom = -15.0
+
+[node name="Created_Unit_Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_xn8r5")
+volume_db = 1.246
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

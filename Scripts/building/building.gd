@@ -64,6 +64,8 @@ func _on_mouse_exited():
 	buildingHover = false
 
 func _on_input_event(viewport, event, shape_idx):
+	if Game.is_paused:
+		return
 	if buildingHover:
 		if Game.selectedBuilding == "delete":
 			_delete_building(event)
@@ -73,10 +75,8 @@ func _on_input_event(viewport, event, shape_idx):
 
 
 func train_unit():
-	if  !currently_training:
-		Game.Food = Game.Food - 10
-		currently_training = true
-		_start_training()
+	Game.Food = Game.Food - 10
+	_start_training()
 		
 
 func _delete_building(event):

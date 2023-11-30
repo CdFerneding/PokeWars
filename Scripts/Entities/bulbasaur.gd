@@ -1,8 +1,8 @@
 extends GoodPokemon
 
-class_name Squirtle
+class_name Bulbasaur
 
-signal squirtle_clicked
+signal bulbasaur_clicked
 
 var previous_direction
 
@@ -16,9 +16,9 @@ enum AttackModeEnum {ATTACK, PROTECT, STILL}
 
 # handling evolution differences
 @export var evolution = 0
-@onready var animationSprite = $squirtle
+@onready var animationSprite = $bulbasaur
 @export var selected = false 
-@onready var box = $SquirtleSelected
+@onready var box = $BulbasaurSelected
 
 #Mode describes how the ennemy should interract.
 # attack : It attack the nearest ennemy
@@ -32,7 +32,7 @@ func _ready():
 	animationSprite.animation = "walk_down"
 	var main_node = get_tree().get_root().get_node("Main")
 	$PlayerNavigationAgent.target_position = position
-	connect("squirtle_clicked", Callable(main_node, "_on_squirtle_clicked"))
+	connect("bulbasaur_clicked", Callable(main_node, "_on_bulbasaur_clicked"))
 	
 	# super initializes the healthbar 
 	super()
@@ -129,47 +129,48 @@ func apply_corresponding_animation(_prev):
 func check_evolution():
 	# check current evolution of charmander and enable / disable according boxes, shapes and sprites
 	if evolution == 0:
-		$squirtle.visible = true
-		$CollisionShapeSquirtle.visible = true
-		animationSprite = $squirtle
-		box = $SquirtleSelected
+		$bulbasaur.visible = true
+		$CollisionShapeBulbasaur.visible = true
+		animationSprite = $bulbasaur
+		box = $BulbasaurSelected
 		## disable charmeleon and charizard sprites
-		$wartortle.visible = false
-		$blastoise.visible = false
+		$ivysaur.visible = false
+		$venusaur.visible = false
 		## disable collision shapes
-		$CollisionShapeWartortle.visible = false
-		$CollisionShapeBlastoise.visible = false
+		$CollisionShapeIvysaur.visible = false
+		$CollisionShapeVenusaur.visible = false
 		## disable selection boxes
-		$WartortleSelected.visible = false
-		$BlastoiseSelected.visible = false
+		$IvysaurSelected.visible = false
+		$VenusaurSelected.visible = false
 	elif evolution == 1:
-		$wartortle.visible = true
-		$CollisionShapeWartortle.visible = true
-		animationSprite = $wartortle
-		box = $WartortleSelected
+		$ivysaur.visible = true
+		$CollisionShapeIvysaur.visible = true
+		animationSprite = $ivysaur
+		box = $IvysaurSelected
 		## disable charmander and charizard
-		$squirtle.visible = false
-		$blastoise.visible = false
+		$bulbasaur.visible = false
+		$venusaur.visible = false
 		## disable collision shapes
-		$CollisionShapeSquirtle.visible = false
-		$CollisionShapeBlastoise.visible = false
+		$CollisionShapeBulbasaur.visible = false
+		$CollisionShapeVenusaur.visible = false
 		## disable selection boxes
-		$SquirtleSelected.visible = false
-		$BlastoiseSelected.visible = false
+		$BulbasaurSelected.visible = false
+		$VenusaurSelected.visible = false
 	else:
-		$blastoise.visible = true
-		$CollisionShapeBlastoise.visible = true
-		animationSprite = $blastoise
-		box = $BlastoiseSelected
+		$venusaur.visible = true
+		$CollisionShapeVenusaur.visible = true
+		animationSprite = $venusaur
+		box = $VenusaurSelected
 		## diable charmander and charmeleon
-		$squirtle.visible = false
-		$wartortle.visible = false
+		$bulbasaur.visible = false
+		$ivysaur.visible = false
 		## disable collision shapes
-		$CollisionShapeSquirtle.visible = false
-		$CollisionShapeWartortle.visible = false
+		$CollisionShapeBulbasaur.visible = false
+		$CollisionShapeIvysaur.visible = false
 		## disable selection boxes
-		$SquirtleSelected.visible = false
-		$WartortleSelected.visible = false
+		$BulbasaurSelected.visible = false
+		$IvysaurSelected.visible = false
+
 
 func _on_mouse_entered():
 	if Game.is_paused:
@@ -191,7 +192,7 @@ func _char_hover_selected_check(_event):
 	if Game.is_paused:
 		return
 	if pok_hover and Input.is_action_pressed("left_click"):
-		emit_signal("squirtle_clicked", self)
+		emit_signal("bulbasaur_clicked", self)
 		pok_hover = false
 		
 	# leftclick on "nothing" to deselect units

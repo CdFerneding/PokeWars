@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://cn8ein6jc6frg"]
+[gd_scene load_steps=45 format=3 uid="uid://cn8ein6jc6frg"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_c7xow"]
 [ext_resource type="Texture2D" uid="uid://b0yuglgf5hf8t" path="res://Assets/BerryGardenTiles.png" id="2_x2ryg"]
@@ -18,6 +18,7 @@
 [ext_resource type="Script" path="res://Scripts/Entities/BigBadPokemon.gd" id="16_mwle3"]
 [ext_resource type="Texture2D" uid="uid://di45pnuqtfhuh" path="res://Assets/Sprites/Fire/Moltres/Idle-Anim.png" id="17_sdfoi"]
 [ext_resource type="Texture2D" uid="uid://b2ad87iiw8j3w" path="res://Assets/Sprites/Grass/Zapdos/Idle-Anim.png" id="19_bkhy1"]
+[ext_resource type="PackedScene" uid="uid://b1esjwpt462wj" path="res://Scenes/WorldObjects/laboratory.tscn" id="20_a52k6"]
 [ext_resource type="Texture2D" uid="uid://2uctvkx3s3i2" path="res://Assets/Sprites/Water/Artikuno/Idle-Anim.png" id="21_rur0q"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_e562h"]
@@ -292,11 +293,6 @@ animations = [{
 script = ExtResource("1_c7xow")
 tileMap = NodePath("TileMap")
 
-[node name="UI" parent="." instance=ExtResource("6_xhnji")]
-
-[node name="HUD" parent="." instance=ExtResource("14_aq381")]
-process_mode = 0
-
 [node name="TileMap" type="TileMap" parent="." node_paths=PackedStringArray("main")]
 y_sort_enabled = true
 position = Vector2(0, 2)
@@ -313,6 +309,11 @@ layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array(262154, 2, 0)
 script = ExtResource("4_vt6l8")
 main = NodePath("..")
+
+[node name="UI" parent="." instance=ExtResource("6_xhnji")]
+
+[node name="HUD" parent="." instance=ExtResource("14_aq381")]
+process_mode = 0
 
 [node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("tilemap")]
 position = Vector2(200, 120)
@@ -386,6 +387,9 @@ y_sort_enabled = true
 
 [node name="PokeCenter" parent="Buildings" groups=["buildings"] instance=ExtResource("13_ot5q2")]
 position = Vector2(168, 77)
+
+[node name="Laboratory" parent="Buildings" instance=ExtResource("20_a52k6")]
+position = Vector2(379, 129)
 
 [node name="UpdateCameraBorderFix" type="Timer" parent="."]
 editor_description = "This is a fix for the camera because the border to move the camera isn't updated on Windows and MacOS. An event to now when the windows size is updated exists but work only on Linux (Ubuntu with Gnome)"

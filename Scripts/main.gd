@@ -44,6 +44,7 @@ func _ready():
 func on_intro_finished():
 	score = 0
 	$UI/Timer.start()
+	$UI/GameStateBox.visible = true
 	get_units()
 	get_buildings()
 	get_enemies()
@@ -62,8 +63,8 @@ func get_units():
 	pikachu = []
 	get_pikachus()
 	charmanders = get_tree().get_nodes_in_group("charmanders")
-	bulbasaurs = get_tree().get_nodes_in_group("Bulbasaurs")
-	squirtles = get_tree().get_nodes_in_group("Squirtles")
+	bulbasaurs = get_tree().get_nodes_in_group("bulbasaurs")
+	squirtles = get_tree().get_nodes_in_group("squirtles")
 
 func get_enemies():
 	enemies = []
@@ -174,7 +175,6 @@ pikachu multiple times and increases selected count
 
 func _handle_esc():
 	if Input.is_action_pressed("Esc"):
-		print("Esc pressed")
 		var pathui = get_tree().get_root().get_node("Main/UI")
 		var childrenHUD = $UI.get_children()
 		for child in childrenHUD:
@@ -212,33 +212,45 @@ func _handle_play_input(event):
 	
 	if Input.is_action_just_pressed("G"):
 		for p in selected_pokemon:
-			if p is Charmander:
+			if p is Charmander or p is Bulbasaur or p is Squirtle:
 				p.change_gamemode()
 
 '
 only for debugging to place units manually
 '
 func _handle_place_input(event):
+	if Input.is_action_just_pressed("1"):
+		type_of_pokemon_to_place = 0
+	elif Input.is_action_just_pressed("2"):
+		type_of_pokemon_to_place = 1
+	elif Input.is_action_just_pressed("3"):
+		type_of_pokemon_to_place = 2
+	elif Input.is_action_just_pressed("4"):
+		type_of_pokemon_to_place = 3
+	
 	if Input.is_action_just_pressed("left_click"):
 		var position = tileMap.get_global_mouse_position()
 		if type_of_pokemon_to_place == 0:
 			unitBuilder._build_unit(self,"Pikachu", position, 0)
-		else:
+		elif type_of_pokemon_to_place == 1:
 			unitBuilder._build_unit(self,"Charmander", position, 0)
+		elif type_of_pokemon_to_place == 2:
+			unitBuilder._build_unit(self,"Squirtle", position, 0)
+		else:
+			unitBuilder._build_unit(self,"Bulbasaur", position, 0)
 			
 
 '
 change gamemode depending on different button presses
 '
 func _change_gamemode():
-	if Input.is_action_pressed("B") && !get_node("UI/TrainBox").is_visible():
+	if Input.is_action_pressed("B") && !get_node("UI/TrainBox").is_visible() && !get_node("UI/UpgradeMilitary").is_visible():
 		Game.GameMode = "select"
 	if Input.is_action_pressed("R"):
 		Game.GameMode = "play"
 	if Input.is_action_pressed("P"):
 		if Game.GameMode == "place":
-			type_of_pokemon_to_place = (type_of_pokemon_to_place + 1) % 2
-			print(type_of_pokemon_to_place)
+			type_of_pokemon_to_place = (type_of_pokemon_to_place + 1) % 4
 		Game.GameMode = "place"
 
 '''

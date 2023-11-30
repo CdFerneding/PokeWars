@@ -60,11 +60,8 @@ static func _tile_builder(position:Array, tileMap:TileMap, tileId:int):
 			var obstacle_layer1 = is_instance_valid(tileMap.get_cell_tile_data(1,Vector2i(m, n)))
 			if(obstacle_layer1):
 				no_obstacle = false
-				
-	print(Game.selectedBuilding)
-	print(no_obstacle)
+	
 	if(no_obstacle == true && Game.Wood >= Game.buildingCost):
-		print("faknfind")
 		_tile_setter(position,tileMap,tileId)
 		var counter = Game.buildCounter
 		Game.buildCounter = counter + 1

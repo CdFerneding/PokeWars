@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cxesue10asqli"]
 
 [ext_resource type="Script" path="res://Scripts/GUI/TrainIcon.gd" id="1_fohl6"]
-[ext_resource type="Texture2D" uid="uid://dqfw1xmgys5y7" path="res://Assets/Potraits/bulbasaur Angry.png" id="2_6pgxs"]
+[ext_resource type="Texture2D" uid="uid://dqfw1xmgys5y7" path="res://Assets/Potraits/bulbasaur_and_evolutions/bulbasaur Angry.png" id="2_6pgxs"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_auej5"]
 bg_color = Color(0.192157, 0.917647, 0, 0.886275)
@@ -39,7 +39,6 @@ show_percentage = false
 
 [node name="Timer" type="Timer" parent="."]
 process_callback = 0
-one_shot = true
 
 [connection signal="value_changed" from="ProgressBar" to="." method="_on_progress_bar_value_changed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

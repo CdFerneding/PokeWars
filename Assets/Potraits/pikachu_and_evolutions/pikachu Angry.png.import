@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmyytmmonhstq"
-path="res://.godot/imported/squirtle.png-d5ff84ba02540eb11c212212c4fa53ce.ctex"
+uid="uid://cxmbtq8hta636"
+path="res://.godot/imported/pikachu Angry.png-2724888f63f3a660d03412496dd673ce.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Potraits/squirtle.png"
-dest_files=["res://.godot/imported/squirtle.png-d5ff84ba02540eb11c212212c4fa53ce.ctex"]
+source_file="res://Assets/Potraits/pikachu_and_evolutions/pikachu Angry.png"
+dest_files=["res://.godot/imported/pikachu Angry.png-2724888f63f3a660d03412496dd673ce.ctex"]
 
 [params]
 
