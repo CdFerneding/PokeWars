@@ -32,9 +32,9 @@ var screenHeight: int
 var UIHover = false
 
 # dialogue attributes:
-var playerName: String = "player"
+var playerName: String = "Bulbasaur"
 
-
+var skipping_speeches = false
 var is_paused = false
 
 # keeping track of available units (through laboratory)

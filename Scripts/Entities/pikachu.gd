@@ -5,8 +5,6 @@ class_name Pikachu
 
 signal pikachu_clicked
 
-var previous_direction
-
 @export var selected = false
 @onready var box = get_node("Selected")
 
@@ -14,8 +12,9 @@ var previous_direction
 @onready var nav_agent:= $NavigationAgent2D #as NavigationAgent2D
 
 func _ready():
-	previous_direction = "down"
 	$AnimatedSprite2D.animation = "walk_down"
+	$AnimatedSprite2D.play()
+	
 	var main_node = get_tree().get_root().get_node("Main")
 	connect("pikachu_clicked", Callable(main_node, "_on_pikachu_clicked"))
 	
@@ -45,44 +44,49 @@ func _physics_process(_delta: float) -> void:
 		if dir != Vector2.ZERO:
 			self.position = next_pos
 		target = self.position
-	apply_corresponding_animation(velocity)
+	
+	apply_corresponding_animation()
 	
 	move_and_slide()
+
+
+func apply_corresponding_animation():
+	var current_animation
 	
+	# calculate the degrees of the walking direction
+	var current_velocity = get_real_velocity()
+	var radians = current_velocity.angle()
+	var degrees = radians * (180/PI)
+	if degrees < 0:
+		degrees = 360 - abs(degrees)
+	
+	if degrees >= 22.5 and degrees <= 67.5:
+		current_animation = "walk_down_right"
+	elif degrees > 67.5 and degrees <= 112.5:
+		current_animation = "walk_down"
+	elif degrees > 112.5 and degrees <= 157.5:
+		current_animation = "walk_down_left"
+	elif degrees > 157.5 and degrees <= 202.5:
+		current_animation = "walk_left"
+	elif degrees > 202.5 and degrees <= 247.5:
+		current_animation = "walk_up_left"
+	elif degrees > 247.5 and degrees <= 292.5:
+		current_animation = "walk_up"
+	elif degrees > 292.5 and degrees <= 337.5:
+		current_animation = "walk_up_right"
+	else:
+		current_animation = "walk_right"
+
+	$AnimatedSprite2D.animation = current_animation
+	$AnimatedSprite2D.play()
+
+
 # added is_farming = false to cancel farming when a new destination is issued for pikachu
 func make_path(ressource_position = get_global_mouse_position()) -> void:
 	if Game.is_paused == true:
 		return
 	nav_agent.target_position = ressource_position
 	target = nav_agent.target_position
-	
-#toDo
-#not sufficient yet
-func apply_corresponding_animation(_prev):
-	var current_animation = ""
-	
-	#if prev.x == velocity.x and prev.y == velocity.y:
-	#	current_animation += "down_"
-		
-	if velocity.y > 0:
-		current_animation+="down_"
-	elif velocity.y < 0:
-		current_animation+="up_"
-		
-	if velocity.x < 0:
-		current_animation+="left_"
-	elif velocity.x > 0:
-		current_animation += "right_"
-		
-	if current_animation == "":
-		current_animation = previous_direction+"_"
-	
-	previous_direction = current_animation.left(current_animation.length() - 1)
-	current_animation = "walk_"+previous_direction
-
-	$AnimatedSprite2D.animation = current_animation
-	$AnimatedSprite2D.play()
-
 
 func _on_mouse_entered():
 	if Game.is_paused == true:
