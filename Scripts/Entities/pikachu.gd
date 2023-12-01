@@ -18,6 +18,8 @@ func _ready():
 	var main_node = get_tree().get_root().get_node("Main")
 	connect("pikachu_clicked", Callable(main_node, "_on_pikachu_clicked"))
 	
+	set_selected(false)
+	
 	# super initializes the healthbar 
 	super()
 
@@ -92,13 +94,13 @@ func _on_mouse_entered():
 	if Game.is_paused == true:
 		return
 	pok_hover = true
-	set_selected(!selected)
+	set_selected(true)
 
 func _on_mouse_exited():
 	if Game.is_paused == true:
 		return
 	pok_hover = false
-	set_selected(!selected)
+	set_selected(false)
 
 func set_selected(value):
 	selected = value

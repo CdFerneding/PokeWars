@@ -273,7 +273,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y5mt7"]
-height = 22.0
+radius = 13.0
+height = 26.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wlnfl"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -834,33 +835,39 @@ input_pickable = true
 script = ExtResource("1_k16qi")
 
 [node name="charmander" type="AnimatedSprite2D" parent="."]
+visible = false
 position = Vector2(0, 1)
 sprite_frames = SubResource("SpriteFrames_f2uc2")
 animation = &"walk_down_left"
 
 [node name="CollisionShapeCharmander" type="CollisionShape2D" parent="."]
-position = Vector2(0, -2)
+visible = false
+position = Vector2(0, -3)
 shape = SubResource("CapsuleShape2D_y5mt7")
 
 [node name="CharmanderSelected" type="Panel" parent="."]
-offset_left = -8.0
+visible = false
+offset_left = -9.0
 offset_top = -13.0
-offset_right = 11.0
+offset_right = 10.0
 offset_bottom = 8.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_wlnfl")
 
 [node name="charmeleon" type="AnimatedSprite2D" parent="."]
+visible = false
 position = Vector2(1, 2)
 sprite_frames = SubResource("SpriteFrames_brruv")
 animation = &"walk_down_left"
 
 [node name="CollisionShapeCharmeleon" type="CollisionShape2D" parent="."]
-position = Vector2(0, -1)
+visible = false
+position = Vector2(0, -2)
 shape = SubResource("CapsuleShape2D_y5mt7")
 
 [node name="CharmeleonSelected" type="Panel" parent="."]
+visible = false
 offset_left = -9.0
-offset_top = -13.0
+offset_top = -14.0
 offset_right = 10.0
 offset_bottom = 9.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_wlnfl")
@@ -876,7 +883,7 @@ shape = SubResource("CapsuleShape2D_y5mt7")
 
 [node name="CharizardSelected" type="Panel" parent="."]
 offset_left = -13.0
-offset_top = -15.0
+offset_top = -16.0
 offset_right = 14.0
 offset_bottom = 10.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_wlnfl")
