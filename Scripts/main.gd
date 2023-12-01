@@ -62,6 +62,15 @@ func on_start_game():
 		# if we skip dialogues: jump to intro_finished function without playing it
 		on_intro_finished()
 
+func get_all_units():
+	var all = []
+	all += get_tree().get_nodes_in_group("pikachus")
+	all += get_tree().get_nodes_in_group("charmanders")
+	all += get_tree().get_nodes_in_group("bulbasaurs")
+	all += get_tree().get_nodes_in_group("squirtles")
+	all += get_tree().get_nodes_in_group("enemies")
+	return all
+
 func get_units():
 	pikachu = []
 	get_pikachus()

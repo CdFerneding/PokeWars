@@ -1,4 +1,4 @@
-[gd_scene load_steps=126 format=3 uid="uid://bl8k7gbx8o8vg"]
+[gd_scene load_steps=127 format=3 uid="uid://bl8k7gbx8o8vg"]
 
 [ext_resource type="Script" path="res://Scripts/Entities/bulbasaur.gd" id="1_eyn3n"]
 [ext_resource type="Texture2D" uid="uid://cif3wqv5xbhjk" path="res://Assets/Sprites/Grass/Bulbasaur/Walk-Anim.png" id="1_gf6vg"]
@@ -948,6 +948,9 @@ bg_color = Color(0.192157, 0.917647, 0, 0.886275)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5b1lp"]
 bg_color = Color(0.882353, 0.482353, 0, 1)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_l8x67"]
+radius = 41.0
+
 [node name="Bulbasaur" type="CharacterBody2D" groups=["bulbasaurs"]]
 y_sort_enabled = true
 input_pickable = true
@@ -1024,6 +1027,13 @@ autostart = true
 
 [node name="PlayerNavigationAgent" type="NavigationAgent2D" parent="."]
 
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_l8x67")
+
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
 [connection signal="timeout" from="RetargetTimer" to="." method="_on_retarget_timer_timeout"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

@@ -24,6 +24,7 @@ enum AttackModeEnum {ATTACK, PROTECT, STILL}
 @export var mode: AttackModeEnum = AttackModeEnum.ATTACK
 #implements the pathfinding algorithm
 @onready var nav_agent:= $NavigationAgent2D #as NavigationAgent2D
+var is_fighting = false
 
 func _ready():
 	animationSprite.animation = "walk_down"
@@ -76,7 +77,8 @@ func _physics_process(_delta: float) -> void:
 		target = self.position
 		followPlayerOrder = false
 	
-	apply_corresponding_animation()
+	if is_fighting == false:
+		apply_corresponding_animation()
 	
 	if $AttackCooldown.is_stopped() and current_target != null and position.distance_to(current_target.position) < 10:
 		attack()
@@ -261,3 +263,11 @@ func change_gamemode():
 		mode = AttackModeEnum.STILL
 	elif mode == AttackModeEnum.STILL:
 		mode = AttackModeEnum.ATTACK
+
+
+func _on_area_2d_area_entered(area):
+	is_fighting = true
+
+
+func _on_area_2d_area_exited(area):
+	is_fighting = false

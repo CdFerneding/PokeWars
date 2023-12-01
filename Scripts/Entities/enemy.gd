@@ -20,6 +20,7 @@ var home_base = pathTilemap.home_base
 var current_target: Node
 
 var animationSprite
+var is_fighting = false
 
 #implements the pathfinding algorithm
 @onready var nav_agent:= $NavigationAgent2D #as NavigationAgent2D
@@ -50,6 +51,13 @@ func _process(_delta:float):
 	if Game.is_paused == true:
 		return
 	enemy_scale_on_hover()
+	
+#	var main_path = get_tree().get_root().get_node("Main")
+#	var all_pokemon = main_path.get_all_units()
+#	if all_pokemon.position.distance_to(position) < 15:
+#		is_fighting = true
+#	else:
+#		is_fighting = false
 		
 func attack():
 	(current_target as GoodPokemon)._on_hit(1)
@@ -70,8 +78,9 @@ func _physics_process(_delta: float) -> void:
 		velocity = Vector2.ZERO
 		if $AttackCooldown.is_stopped() and current_target != null:
 			attack()
-			
-	apply_corresponding_animation()
+	
+	if is_fighting == false:
+		apply_corresponding_animation()
 	
 	move_and_slide()
 	
@@ -190,3 +199,11 @@ func _on_hit(damage):
 		pathMain.enemies.erase(self)
 		self.queue_free()
 		pathMain.get_units()
+
+
+func _on_area_2d_area_entered(area):
+	is_fighting = true
+
+
+func _on_area_2d_area_exited(area):
+	is_fighting = false

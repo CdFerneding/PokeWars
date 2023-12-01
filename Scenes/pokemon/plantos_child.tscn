@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://ddhm82jop3d84"]
+[gd_scene load_steps=41 format=3 uid="uid://ddhm82jop3d84"]
 
 [ext_resource type="Script" path="res://Scripts/Entities/enemy.gd" id="1_hb527"]
 [ext_resource type="Texture2D" uid="uid://cjwm3gi3jde8y" path="res://Assets/Sprites/Grass/Zapdos/Walk-Anim.png" id="2_f7wcg"]
@@ -271,7 +271,10 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vg7x3"]
-radius = 18.3333
+radius = 16.6667
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4gi7a"]
+radius = 70.0071
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e1720"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -302,9 +305,14 @@ sprite_frames = SubResource("SpriteFrames_qgt2m")
 animation = &"walk_down_left"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -19)
 scale = Vector2(0.6, 0.6)
 shape = SubResource("CircleShape2D_vg7x3")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="RegisterUnits" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -3)
+shape = SubResource("CircleShape2D_4gi7a")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 navigation_layers = 3
@@ -312,10 +320,9 @@ avoidance_enabled = true
 avoidance_mask = 3
 
 [node name="Selected" type="Panel" parent="."]
-offset_left = -14.0
-offset_top = -35.0
-offset_right = 15.0
-offset_bottom = -2.0
+offset_left = -15.0
+offset_top = -33.0
+offset_right = 14.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_e1720")
 
 [node name="HealthBar" type="ProgressBar" parent="."]
@@ -338,4 +345,6 @@ autostart = true
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
 [connection signal="timeout" from="RetargetTimer" to="." method="_on_retarget_timer_timeout"]

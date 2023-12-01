@@ -11,6 +11,8 @@ signal pikachu_clicked
 #implements the pathfinding algorithm
 @onready var nav_agent:= $NavigationAgent2D #as NavigationAgent2D
 
+var is_fighting = false
+
 func _ready():
 	$AnimatedSprite2D.animation = "walk_down"
 	$AnimatedSprite2D.play()
@@ -47,7 +49,8 @@ func _physics_process(_delta: float) -> void:
 			self.position = next_pos
 		target = self.position
 	
-	apply_corresponding_animation()
+	if is_fighting == true:
+		apply_corresponding_animation()
 	
 	move_and_slide()
 
@@ -147,3 +150,11 @@ func _on_hit(damage):
 			Game.Selected = pathMain.selected_pokemon.size()
 		
 
+
+
+func _on_area_2d_area_entered(area):
+	is_fighting = true
+
+
+func _on_area_2d_area_exited(area):
+	is_fighting = false
