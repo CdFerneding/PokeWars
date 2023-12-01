@@ -42,7 +42,7 @@ func _process(_delta:float):
 	enemy_scale_on_hover()
 		
 func attack():
-	(current_target as GoodPokemon)._on_hit(1)
+	(current_target as GoodPokemon)._on_hit(1, PokemonType.ELECTRICITY)
 	$AttackCooldown.start()
 	
 func _physics_process(_delta: float) -> void:
@@ -169,8 +169,9 @@ func retarget():
 		else:
 			$RetargetTimer.wait_time = 0.5
 
-func _on_hit(damage):
+func _on_hit(damage, type):
 	var pathMain = get_tree().get_root().get_node("Main")
+	damage = calculateDamage(damage, type)
 	health_bar.value -= damage
 	if health_bar.value == 0:
 		pathMain.enemies.erase(self)

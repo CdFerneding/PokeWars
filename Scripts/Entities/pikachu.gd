@@ -129,8 +129,9 @@ func _on_input_event(_viewport, event, _shape_idx):
 		_pika_hover_selected_check(event)
 
 # function to reduce pikachus health, number damage is reducted from pikachus health_bar
-func _on_hit(damage):
+func _on_hit(damage, type):
 	var pathMain = get_tree().get_root().get_node("Main")
+	damage = calculateDamage(damage, type)
 	health_bar.value -= damage
 	if health_bar.value == 0:
 		pathMain.pikachus.erase(self)

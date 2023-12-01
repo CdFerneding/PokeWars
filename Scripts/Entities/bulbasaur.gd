@@ -84,7 +84,7 @@ func attack():
 	if Game.is_paused:
 		return
 	if (current_target as BadPokemon) != null:
-		(current_target as BadPokemon)._on_hit(attack_damage)
+		(current_target as BadPokemon)._on_hit(attack_damage, PokemonType.GRASS)
 	$AttackCooldown.start()
 	
 
@@ -216,10 +216,11 @@ func _on_input_event(_viewport, event, _shape_idx):
 		_char_hover_selected_check(event)
 
 # function to reduce charmanders health, number damage is reducted from charmanders health_bar
-func _on_hit(damage):
+func _on_hit(damage, type):
 	if Game.is_paused:
 		return
 	var pathMain = get_tree().get_root().get_node("Main")
+	damage = calculateDamage(damage, type)
 	health_bar.value -= damage
 	if health_bar.value == 0:
 		pathMain.bulbasaurs.erase(self)
