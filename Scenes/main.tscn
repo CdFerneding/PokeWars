@@ -542,7 +542,7 @@ current_x_spawn_location = 1648
 current_y_spawn_location = 723
 
 [node name="EnemySpawnerTimer_2" type="Timer" parent="Plantos"]
-wait_time = 40.0
+wait_time = 45.0
 autostart = true
 
 [node name="HealthBar" type="ProgressBar" parent="Plantos"]
