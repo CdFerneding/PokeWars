@@ -75,7 +75,7 @@ func _physics_process(_delta: float) -> void:
 	if is_fighting == false:
 		apply_corresponding_animation()
 	
-	if $AttackCooldown.is_stopped() and current_target != null and position.distance_to(current_target.position) < 10:
+	if $AttackCooldown.is_stopped() and current_target != null and ((position.distance_to(current_target.position) < 10) or ((current_target as BigBadPokemon) != null and current_target.in_range(self))):
 		attack()
 	
 	move_and_slide()
@@ -84,7 +84,7 @@ func attack():
 	if Game.is_paused:
 		return
 	if (current_target as BadPokemon) != null:
-		(current_target as BadPokemon)._on_hit(attack_damage)
+		(current_target as BadPokemon)._on_hit(attack_damage, PokemonType.WATER)
 	$AttackCooldown.start()
 	
 
@@ -214,10 +214,11 @@ func _on_input_event(_viewport, event, _shape_idx):
 		_char_hover_selected_check(event)
 
 # function to reduce charmanders health, number damage is reducted from charmanders health_bar
-func _on_hit(damage):
+func _on_hit(damage, type):
 	if Game.is_paused:
 		return
 	var pathMain = get_tree().get_root().get_node("Main")
+	damage = calculateDamage(damage, type)
 	health_bar.value -= damage
 	if health_bar.value == 0:
 		pathMain.squirtles.erase(self)
@@ -244,7 +245,16 @@ func retarget():
 		if nearest_target == null or target.position.distance_to(position) < nearest_target.position.distance_to(position):
 			nearest_target = target
 			current_target = target
+	
+	var special_target = pathMain.get_arenas()
 
+	for target in special_target:
+		if target == null:
+			continue
+		if nearest_target == null or ( target.position.distance_to(position) < 200 and target.position.distance_to(position) < nearest_target.position.distance_to(position)):
+			nearest_target = target
+			current_target = target
+	
 	if nearest_target != null:
 		target = nav_agent.target_position
 		nav_agent.target_position = nearest_target.position

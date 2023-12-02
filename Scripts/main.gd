@@ -313,7 +313,8 @@ func get_good_pokemon():
 func get_bad_pokemon() -> Array:
 	return enemies
 
-
+func get_arenas() -> Array[Node]:
+	return get_tree().get_nodes_in_group("arena")
 
 
 func _on_start_enemy_spawn_timeout():
