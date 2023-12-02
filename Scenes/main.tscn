@@ -17,7 +17,7 @@
 [ext_resource type="Script" path="res://Scripts/Entities/BigBadPokemon.gd" id="16_mwle3"]
 [ext_resource type="Texture2D" uid="uid://di45pnuqtfhuh" path="res://Assets/Sprites/Fire/Moltres/Idle-Anim.png" id="17_sdfoi"]
 [ext_resource type="Texture2D" uid="uid://b2ad87iiw8j3w" path="res://Assets/Sprites/Grass/Zapdos/Idle-Anim.png" id="19_bkhy1"]
-[ext_resource type="PackedScene" path="res://Scenes/WorldObjects/laboratory.tscn" id="20_a52k6"]
+[ext_resource type="PackedScene" uid="uid://b1esjwpt462wj" path="res://Scenes/WorldObjects/laboratory.tscn" id="20_a52k6"]
 [ext_resource type="Texture2D" uid="uid://2uctvkx3s3i2" path="res://Assets/Sprites/Water/Artikuno/Idle-Anim.png" id="21_rur0q"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_n6h3u"]
@@ -503,109 +503,108 @@ editor_description = "This is a fix for the camera because the border to move th
 wait_time = 0.1
 autostart = true
 
-[node name="BigBadPokemon" type="CharacterBody2D" parent="." groups=["arena1"]]
+[node name="Moltres" type="CharacterBody2D" parent="." groups=["arena1"]]
 position = Vector2(1598, 143)
 script = ExtResource("16_mwle3")
 current_x_spawn_location = 1598
 current_y_spawn_location = 143
 
-[node name="EnemySpawnerTimer" type="Timer" parent="BigBadPokemon"]
+[node name="EnemySpawnerTimer" type="Timer" parent="Moltres"]
 wait_time = 25.0
 autostart = true
 
-[node name="HealthBar" type="ProgressBar" parent="BigBadPokemon"]
+[node name="HealthBar" type="ProgressBar" parent="Moltres"]
 offset_left = -21.0
 offset_top = -46.0
 offset_right = 25.0
 offset_bottom = -40.0
 show_percentage = false
 
-[node name="Selected" type="Panel" parent="BigBadPokemon"]
+[node name="Selected" type="Panel" parent="Moltres"]
 offset_left = -40.0
 offset_top = -42.0
 offset_right = 43.0
 offset_bottom = 13.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BigBadPokemon"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Moltres"]
 position = Vector2(2, -7)
 shape = SubResource("CircleShape2D_q25ka")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="BigBadPokemon"]
+[node name="Moltres" type="AnimatedSprite2D" parent="Moltres"]
 position = Vector2(2, 0)
 sprite_frames = SubResource("SpriteFrames_tgpkn")
 animation = &"idle_down"
 
-[node name="BigBadPokemon2" type="CharacterBody2D" parent="." groups=["arena2"]]
+[node name="Plantos" type="CharacterBody2D" parent="." groups=["arena2"]]
 position = Vector2(1648, 723)
 script = ExtResource("16_mwle3")
 current_x_spawn_location = 1648
 current_y_spawn_location = 723
 
-[node name="EnemySpawnerTimer_2" type="Timer" parent="BigBadPokemon2"]
+[node name="EnemySpawnerTimer_2" type="Timer" parent="Plantos"]
 wait_time = 40.0
 autostart = true
 
-[node name="HealthBar" type="ProgressBar" parent="BigBadPokemon2"]
+[node name="HealthBar" type="ProgressBar" parent="Plantos"]
 offset_left = -21.0
 offset_top = -49.0
 offset_right = 22.0
 offset_bottom = -42.0
 show_percentage = false
 
-[node name="Selected" type="Panel" parent="BigBadPokemon2"]
+[node name="Selected" type="Panel" parent="Plantos"]
 offset_left = -24.0
 offset_top = -42.0
 offset_right = 26.0
 offset_bottom = 10.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BigBadPokemon2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Plantos"]
 position = Vector2(0, -9)
 shape = SubResource("CircleShape2D_q25ka")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="BigBadPokemon2"]
+[node name="Plantos" type="AnimatedSprite2D" parent="Plantos"]
 position = Vector2(-1, -2)
 sprite_frames = SubResource("SpriteFrames_6h60r")
 animation = &"idle_down"
 
-[node name="BigBadPokemon3" type="CharacterBody2D" parent="." groups=["arena3"]]
+[node name="Waltos" type="CharacterBody2D" parent="." groups=["arena3"]]
 position = Vector2(256, 750)
 script = ExtResource("16_mwle3")
 current_x_spawn_location = 256
 current_y_spawn_location = 750
 
-[node name="EnemySpawnerTimer_3" type="Timer" parent="BigBadPokemon3"]
+[node name="EnemySpawnerTimer_3" type="Timer" parent="Waltos"]
 wait_time = 60.0
 autostart = true
 
-[node name="HealthBar" type="ProgressBar" parent="BigBadPokemon3"]
+[node name="HealthBar" type="ProgressBar" parent="Waltos"]
 offset_left = -24.0
 offset_top = -34.0
 offset_right = 23.0
 offset_bottom = -27.0
 show_percentage = false
 
-[node name="Selected" type="Panel" parent="BigBadPokemon3"]
+[node name="Selected" type="Panel" parent="Waltos"]
 offset_left = -33.0
 offset_top = -25.0
 offset_right = 32.0
 offset_bottom = 13.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BigBadPokemon3"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Waltos"]
 position = Vector2(0, -3)
 shape = SubResource("CircleShape2D_q25ka")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="BigBadPokemon3"]
+[node name="Waltos" type="AnimatedSprite2D" parent="Waltos"]
 position = Vector2(-2, 3)
 sprite_frames = SubResource("SpriteFrames_u25gm")
 animation = &"idle_down"
 
 [node name="StartEnemySpawn" type="Timer" parent="."]
 wait_time = 150.0
-one_shot = true
 autostart = true
 
 [connection signal="timeout" from="UpdateCameraBorderFix" to="Camera" method="update_limit"]
-[connection signal="timeout" from="BigBadPokemon/EnemySpawnerTimer" to="BigBadPokemon" method="_on_enemy_spawner_timer_timeout"]
-[connection signal="timeout" from="BigBadPokemon2/EnemySpawnerTimer_2" to="BigBadPokemon2" method="_on_enemy_spawner_timer_timeout"]
-[connection signal="timeout" from="BigBadPokemon3/EnemySpawnerTimer_3" to="BigBadPokemon3" method="_on_enemy_spawner_timer_timeout"]
+[connection signal="timeout" from="Moltres/EnemySpawnerTimer" to="Moltres" method="_on_enemy_spawner_timer_timeout"]
+[connection signal="timeout" from="Plantos/EnemySpawnerTimer_2" to="Plantos" method="_on_enemy_spawner_timer_timeout"]
+[connection signal="timeout" from="Waltos/EnemySpawnerTimer_3" to="Waltos" method="_on_enemy_spawner_timer_timeout"]
 [connection signal="timeout" from="StartEnemySpawn" to="." method="_on_start_enemy_spawn_timeout"]
