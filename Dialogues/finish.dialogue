@@ -1,17 +1,24 @@
 ~ finish_game
 
 if Game.player_win:
-	Master Pikachu: [speed=0.8]It seems you managed to win {{Game.playerName}}. The journey until here must have been a hard one. So take a rest now and enjoy your win with all the new friends you have gathered. [speed=0.3]... or maybe play again!
+	Master Pikachu: [speed=0.8]It seems you managed to win {{Game.playerName}}. The journey until here must have been a hard one. So take a rest now and enjoy your win with all the new friends you have gathered. [speed=0.3]... [speed=0.8]or maybe play again!
+	=> play_again
 else: 
-	[speed=0.7]...[speed=0.8] You lost :/
+	[speed=0.5]...[speed=0.8] You lost :/
 	% Master Pikachu: Looks like someone's got a bit of rust on those gaming gears. No worries, happens to the best of us.
 	% Master Pikachu: Ah, losing is just a detour on the road to victory, my friend. You'll get the hang of it. Remember, every pro was once a noob.
 	% Master Pikachu: Chin up, champ! It's not about how many times you fall, it's about how many times you get back up. Come on, let's dust off those pixels and give it another shot. I've got a good feeling about this round!
 	% Master Pikachu: That's the spirit! Get ready to respawn, reset, and reignite. You're on the brink of epicness, my friend. Let's show this game who's boss!
+	=> play_again
+	
+=> END
+
+~ play_again
 
 Master Pikachu: Do you want to play again?
 - yes
-	set Game.play_again()
+	do Game.play_again()
 - no (exit game)
 	do Game.exit_game()
+
 => END

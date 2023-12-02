@@ -17,29 +17,47 @@ var home_base = pathTilemap.home_base
 
 @export var arena : Node = null
 
-var previous_direction
-
 var current_target: Node
+
+var animationSprite
+var is_fighting = false
 
 #implements the pathfinding algorithm
 @onready var nav_agent:= $NavigationAgent2D #as NavigationAgent2D
 
 func _ready():
+	assign_sprite()
+	
 	# make the enemies significantly slower than economy pokemon
 	speed = 18
 	
-	previous_direction = "down"
-	$AnimatedSprite2D.animation = "walk_down"
+	animationSprite.animation = "walk_down"
 	$AttackCooldown.start()
 	#var main_node = get_tree().get_root().get_node("Main")
 	
 	super()
-	
+
+# assign the child based on the scene name (alls enemy children have the same script)
+func assign_sprite():
+	if self.name == "WaltosChild":
+		animationSprite = $waltos
+	elif self.name == "PlantosChild":
+		animationSprite = $plantos
+		animationSprite.modulate = Color(0, 1, 0)
+	else:
+		animationSprite = $moltres
 
 func _process(_delta:float):
 	if Game.is_paused == true:
 		return
 	enemy_scale_on_hover()
+	
+#	var main_path = get_tree().get_root().get_node("Main")
+#	var all_pokemon = main_path.get_all_units()
+#	if all_pokemon.position.distance_to(position) < 15:
+#		is_fighting = true
+#	else:
+#		is_fighting = false
 		
 func attack():
 	(current_target as GoodPokemon)._on_hit(1, PokemonType.ELECTRICITY)
@@ -60,8 +78,9 @@ func _physics_process(_delta: float) -> void:
 		velocity = Vector2.ZERO
 		if $AttackCooldown.is_stopped() and current_target != null:
 			attack()
-			
-	apply_corresponding_animation(velocity)
+	
+	if is_fighting == false:
+		apply_corresponding_animation()
 	
 	move_and_slide()
 	
@@ -70,32 +89,36 @@ func make_path(ressource_position = get_global_mouse_position()) -> void:
 	nav_agent.target_position = nearest_target.position
 	target = nav_agent.target_position
 	
-#toDo
-#not sufficient yet
-func apply_corresponding_animation(_prev):
-	var current_animation = ""
-	
-	#if prev.x == velocity.x and prev.y == velocity.y:
-	#	current_animation += "down_"
-		
-	if velocity.y > 0:
-		current_animation+="down_"
-	elif velocity.y < 0:
-		current_animation+="up_"
-		
-	if velocity.x < 0:
-		current_animation+="left_"
-	elif velocity.x > 0:
-		current_animation += "right_"
-		
-	if current_animation == "":
-		current_animation = previous_direction+"_"
-	
-	previous_direction = current_animation.left(current_animation.length() - 1)
-	current_animation = "walk_"+previous_direction
 
-	$AnimatedSprite2D.animation = current_animation
-	$AnimatedSprite2D.play()
+func apply_corresponding_animation():
+	var current_animation
+	
+	# calculate the degrees of the walking direction
+	var current_velocity = get_real_velocity()
+	var radians = current_velocity.angle()
+	var degrees = radians * (180/PI)
+	if degrees < 0:
+		degrees = 360 - abs(degrees)
+	
+	if degrees >= 22.5 and degrees <= 67.5:
+		current_animation = "walk_down_right"
+	elif degrees > 67.5 and degrees <= 112.5:
+		current_animation = "walk_down"
+	elif degrees > 112.5 and degrees <= 157.5:
+		current_animation = "walk_down_left"
+	elif degrees > 157.5 and degrees <= 202.5:
+		current_animation = "walk_left"
+	elif degrees > 202.5 and degrees <= 247.5:
+		current_animation = "walk_up_left"
+	elif degrees > 247.5 and degrees <= 292.5:
+		current_animation = "walk_up"
+	elif degrees > 292.5 and degrees <= 337.5:
+		current_animation = "walk_up_right"
+	else:
+		current_animation = "walk_right"
+
+	animationSprite.animation = current_animation
+	animationSprite.play()
 
 
 func _on_mouse_entered():
@@ -177,3 +200,11 @@ func _on_hit(damage, type):
 		pathMain.enemies.erase(self)
 		self.queue_free()
 		pathMain.get_units()
+
+
+func _on_area_2d_area_entered(area):
+	is_fighting = true
+
+
+func _on_area_2d_area_exited(area):
+	is_fighting = false
