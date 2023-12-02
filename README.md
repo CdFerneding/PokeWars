@@ -9,6 +9,7 @@ choose between All, Most, Half, Some, Touched
 |----|----|----|----|----|
 |Map Building & Tilemap|x| x | x | x | 
 |Wall of Death| x | x | x | x |  
+|Navigation| x | x | x | x |
 |Character Selection| x |x | x | x | 
 |Military Units and battle| x | x | x | x | 
 |Pokemon Spawner (+spawn rate)| x | x | x | x | 
