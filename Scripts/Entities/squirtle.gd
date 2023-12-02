@@ -4,8 +4,6 @@ class_name Squirtle
 
 signal squirtle_clicked
 
-var previous_direction
-
 var current_target: Node
 
 @export var attack_damage = 5
@@ -26,9 +24,9 @@ enum AttackModeEnum {ATTACK, PROTECT, STILL}
 @export var mode: AttackModeEnum = AttackModeEnum.ATTACK
 #implements the pathfinding algorithm
 @onready var nav_agent:= $NavigationAgent2D #as NavigationAgent2D
+var is_fighting = false
 
 func _ready():
-	previous_direction = "down"
 	animationSprite.animation = "walk_down"
 	var main_node = get_tree().get_root().get_node("Main")
 	$PlayerNavigationAgent.target_position = position
@@ -73,7 +71,9 @@ func _physics_process(_delta: float) -> void:
 			self.position = next_pos
 		target = self.position
 		followPlayerOrder = false
-	apply_corresponding_animation(velocity)
+	
+	if is_fighting == false:
+		apply_corresponding_animation()
 	
 	if $AttackCooldown.is_stopped() and current_target != null and position.distance_to(current_target.position) < 10:
 		attack()
@@ -93,35 +93,34 @@ func make_path(ressource_position = get_global_mouse_position()) -> void:
 	target = $PlayerNavigationAgent.target_position
 	followPlayerOrder = true
 	
-#toDo
-#not sufficient yet
-func apply_corresponding_animation(_prev):
-	if Game.is_paused:
-		return
+
+func apply_corresponding_animation():
+	var current_animation
 	
-	# check evolution level and apply corresponding sprite
-	check_evolution()
+	# calculate the degrees of the walking direction
+	var current_velocity = get_real_velocity()
+	var radians = current_velocity.angle()
+	var degrees = radians * (180/PI)
+	if degrees < 0:
+		degrees = 360 - abs(degrees)
 	
-	var current_animation = ""
-	
-	#if prev.x == velocity.x and prev.y == velocity.y:
-	#	current_animation += "down_"
-		
-	if velocity.y > 0:
-		current_animation+="down_"
-	elif velocity.y < 0:
-		current_animation+="up_"
-		
-	if velocity.x < 0:
-		current_animation+="left_"
-	elif velocity.x > 0:
-		current_animation += "right_"
-		
-	if current_animation == "":
-		current_animation = previous_direction+"_"
-	
-	previous_direction = current_animation.left(current_animation.length() - 1)
-	current_animation = "walk_"+previous_direction
+	if degrees >= 22.5 and degrees <= 67.5:
+		current_animation = "walk_down_right"
+	elif degrees > 67.5 and degrees <= 112.5:
+		current_animation = "walk_down"
+	elif degrees > 112.5 and degrees <= 157.5:
+		current_animation = "walk_down_left"
+	elif degrees > 157.5 and degrees <= 202.5:
+		current_animation = "walk_left"
+	elif degrees > 202.5 and degrees <= 247.5:
+		current_animation = "walk_up_left"
+	elif degrees > 247.5 and degrees <= 292.5:
+		current_animation = "walk_up"
+	elif degrees > 292.5 and degrees <= 337.5:
+		current_animation = "walk_up_right"
+	else:
+		current_animation = "walk_right"
+
 
 	animationSprite.animation = current_animation
 	animationSprite.play()
@@ -259,3 +258,11 @@ func change_gamemode():
 		mode = AttackModeEnum.STILL
 	elif mode == AttackModeEnum.STILL:
 		mode = AttackModeEnum.ATTACK
+
+
+func _on_area_2d_area_entered(area):
+	is_fighting = true
+
+
+func _on_area_2d_area_exited(area):
+	is_fighting = false

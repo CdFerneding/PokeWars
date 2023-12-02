@@ -26,7 +26,7 @@ func update_game_timer():
 	var hours
 	var time_formatted = ""
 	if time > 3600:
-		hours = time / 3600
+		hours = time / 3600.0
 		time_formatted += str(hours)+"h "
 	if time > 60:
 		minutes = (time / 60) % 60

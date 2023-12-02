@@ -3,7 +3,6 @@ extends Node
 @onready var pikachuBuilder = preload("res://Scripts/Builder/UnitBuilder.gd")
 @onready var unitBuilder = preload("res://Scripts/Builder/UnitBuilder.gd")
 @onready var pikachu = preload("res://Scenes/pokemon/pikachu.tscn")
-@onready var enemy = preload("res://Scenes/pokemon/enemy.tscn")
 @export var mob_scene: PackedScene
 @export var tileMap: TileMap
 # @Justin "UILabel is now as a "GameMode" Label in the HUD. 
@@ -45,6 +44,7 @@ func _ready():
 	
 		
 func on_intro_finished():
+	$StartEnemySpawn.start()
 	score = 0
 	$UI/Timer.start()
 	$UI/GameStateBox.visible = true
@@ -59,8 +59,21 @@ func on_start_game():
 	get_viewport().size_changed.connect(Callable(get_node("Camera"), "update_limit"))
 	$UI/TrainBox.hide()
 	# print first dialogue
-	var dialogueResource = preload("res://Dialogues/introduction.dialogue")
-	await DialogueManager.show_example_dialogue_balloon(dialogueResource, "start_game_greeting")
+	if Game.skipping_speeches == false:
+		var dialogueResource = preload("res://Dialogues/introduction.dialogue")
+		DialogueManager.show_example_dialogue_balloon(dialogueResource, "start_game_greeting")
+	else:
+		# if we skip dialogues: jump to intro_finished function without playing it
+		on_intro_finished()
+
+func get_all_units():
+	var all = []
+	all += get_tree().get_nodes_in_group("pikachus")
+	all += get_tree().get_nodes_in_group("charmanders")
+	all += get_tree().get_nodes_in_group("bulbasaurs")
+	all += get_tree().get_nodes_in_group("squirtles")
+	all += get_tree().get_nodes_in_group("enemies")
+	return all
 
 func get_units():
 	pikachu = []
@@ -190,7 +203,7 @@ pikachu multiple times and increases selected count
 '
 
 func _handle_esc():
-	if Input.is_action_pressed("Esc"):
+	if Input.is_action_just_pressed("Esc"):
 		var pathui = get_tree().get_root().get_node("Main/UI")
 		var childrenHUD = $UI.get_children()
 		for child in childrenHUD:
@@ -304,5 +317,5 @@ func get_bad_pokemon() -> Array:
 
 
 func _on_start_enemy_spawn_timeout():
-	
 	enemiesCanSpawn = true
+	print("on start enemey spawn timeout")
