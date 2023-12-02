@@ -1,10 +1,12 @@
 extends BadPokemon
 
+class_name BigBadPokemon
+
 signal ennemy_killed
 
 var num_of_enemies = 200
 
-
+var list_pokemon_in_area: Array[Node]
 
 var rng = RandomNumberGenerator.new()
 
@@ -30,7 +32,7 @@ func _ready():
 	speed = 0
 	animatedSprite.play()
 	for group in self.get_groups():
-		if group.begins_with("arena"):
+		if group.begins_with("arena") and !group.ends_with("arena"):
 			current_group = group
 			break
 	var group = Node2D.new()
@@ -52,7 +54,6 @@ func _process(delta):
 	
 
 func _on_enemy_spawner_timer_timeout():
-	
 	var mainPath = get_tree().get_root().get_node("Main")
 	
 	if Game.is_paused == true or (mainPath.enemiesCanSpawn == false):
@@ -98,3 +99,18 @@ func spawn_enemies(number) -> void:
 
 		# recall to have all pokachus from the "pokachus"-group in "pokachus"-variable again
 		mainPath.get_enemies()
+
+func in_range(pokemon):
+	return pokemon in list_pokemon_in_area
+
+func _on_attack_range_body_entered(body):
+	list_pokemon_in_area.append(body)
+	
+func _on_hit(damage, type):
+	var pathMain = get_tree().get_root().get_node("Main")
+	damage = calculateDamage(damage, type)
+	health_bar.value -= damage
+	if health_bar.value == 0:
+		pathMain.enemies.erase(self)
+		self.queue_free()
+		pathMain.get_units()

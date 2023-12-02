@@ -231,7 +231,7 @@ func show_upgrade_military(state):
 
 
 func _on_upgrade_to_wartortle_pressed():
-	if Game.waterUnitLvl != 0 or is_upgrade_ongoing("Wartortle"):
+	if Game.waterUnitLvl != 0 or is_upgrade_ongoing("Wartortle") or Game.Food < 20:
 		return
 	if (Game.plantUnitLvl > 0 or is_upgrade_ongoing("Ivysaur")) and (Game.fireUnitLvl > 0 or is_upgrade_ongoing("Charmeleon")):
 		start_upgrade(150, "Wartortle")
@@ -244,7 +244,7 @@ func _on_upgrade_to_wartortle_pressed():
 
 
 func _on_upgrade_to_blastoise_pressed():
-	if Game.waterUnitLvl != 1 or is_upgrade_ongoing("Blastoise"):
+	if Game.waterUnitLvl != 1 or is_upgrade_ongoing("Blastoise") or Game.Food < 20:
 		return
 	if (Game.plantUnitLvl > 1 or is_upgrade_ongoing("Venusaur")) and (Game.fireUnitLvl > 1 or is_upgrade_ongoing("Charizard")):
 		start_upgrade(210, "Blastoise")
@@ -257,7 +257,7 @@ func _on_upgrade_to_blastoise_pressed():
 
 
 func _on_upgrade_to_charmeleon_pressed():
-	if Game.fireUnitLvl != 0 or is_upgrade_ongoing("Charmeleon"):
+	if Game.fireUnitLvl != 0 or is_upgrade_ongoing("Charmeleon") or Game.Food < 20:
 		return
 	if (Game.plantUnitLvl > 0 or is_upgrade_ongoing("Ivysaur")) and (Game.waterUnitLvl > 0 or is_upgrade_ongoing("Wartortle")):
 		start_upgrade(150, "Charmeleon")
@@ -270,7 +270,7 @@ func _on_upgrade_to_charmeleon_pressed():
 
 
 func _on_upgrade_to_charizard_pressed():
-	if Game.fireUnitLvl != 1 or is_upgrade_ongoing("Charizard"):
+	if Game.fireUnitLvl != 1 or is_upgrade_ongoing("Charizard") or Game.Food < 20:
 		return
 	if (Game.plantUnitLvl > 1 or is_upgrade_ongoing("Venusaur")) and (Game.waterUnitLvl > 1 or is_upgrade_ongoing("Blastoise")):
 		start_upgrade(210, "Charizard")
@@ -283,7 +283,7 @@ func _on_upgrade_to_charizard_pressed():
 
 
 func _on_upgrade_to_ivysaur_pressed():
-	if Game.plantUnitLvl != 0 or is_upgrade_ongoing("Ivysaur"):
+	if Game.plantUnitLvl != 0 or is_upgrade_ongoing("Ivysaur") or Game.Food < 20:
 		return
 	if (Game.fireUnitLvl > 0 or is_upgrade_ongoing("Charmeleon")) and (Game.waterUnitLvl > 0 or is_upgrade_ongoing("Wartortle")):
 		start_upgrade(150, "Ivysaur")
@@ -296,7 +296,7 @@ func _on_upgrade_to_ivysaur_pressed():
 
 
 func _on_upgrade_to_venusaur_pressed():
-	if Game.plantUnitLvl != 1 or is_upgrade_ongoing("Venusaur"):
+	if Game.plantUnitLvl != 1 or is_upgrade_ongoing("Venusaur") or Game.Food < 20:
 		return
 	
 	if (Game.fireUnitLvl > 1 or is_upgrade_ongoing("Charizard")) and (Game.waterUnitLvl > 1 or is_upgrade_ongoing("Blastoise")):

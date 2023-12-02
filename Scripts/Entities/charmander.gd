@@ -80,7 +80,7 @@ func _physics_process(_delta: float) -> void:
 	if is_fighting == false:
 		apply_corresponding_animation()
 	
-	if $AttackCooldown.is_stopped() and current_target != null and position.distance_to(current_target.position) < 10:
+	if $AttackCooldown.is_stopped() and current_target != null and ((position.distance_to(current_target.position) < 10) or ((current_target as BigBadPokemon) != null and current_target.in_range(self))):
 		attack()
 	
 	move_and_slide()
@@ -103,7 +103,7 @@ func apply_corresponding_animation():
 	var current_animation
 	
 	# calculate the degrees of the walking direction
-	var current_velocity = get_real_velocity()
+	var current_velocity = velocity
 	var radians = current_velocity.angle()
 	var degrees = radians * (180/PI)
 	if degrees < 0:
@@ -248,6 +248,15 @@ func retarget():
 		if target == null:
 			continue
 		if nearest_target == null or target.position.distance_to(position) < nearest_target.position.distance_to(position):
+			nearest_target = target
+			current_target = target
+
+	var special_target = pathMain.get_arenas()
+
+	for target in special_target:
+		if target == null:
+			continue
+		if nearest_target == null or ( target.position.distance_to(position) < 200 and target.position.distance_to(position) < nearest_target.position.distance_to(position)):
 			nearest_target = target
 			current_target = target
 
