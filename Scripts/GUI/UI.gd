@@ -17,6 +17,7 @@ var currentBuilding
 func _ready():
 	$GameStateBox.visible = true
 	$BuildingButtonBox.visible = true
+	$TrainBox.visible = false
 	$TrainBox/TrainUnitButtonLvl2.disabled = true
 	$TrainBox/TrainUnitButtonLvl3.disabled = true
 	checkGameMode()
@@ -161,20 +162,54 @@ func _input(event):
 	if Input.is_action_just_pressed("left_click") && Game.UIHover == false:
 		show_upgrade_military(false)
 	if $UpgradeMilitary.is_visible():
-		if Input.is_action_just_pressed("Q"):
+		_manage_upgrade_inputs()
+	elif $TrainBox.is_visible():
+		_manage_train_inputs()
+
+
+func _manage_upgrade_inputs():
+	if Input.is_action_just_pressed("Q"):
 			_on_upgrade_to_wartortle_pressed()
+	elif Input.is_action_just_pressed("W"):
+		_on_upgrade_to_blastoise_pressed()
+	elif Input.is_action_just_pressed("E"):
+		_on_upgrade_to_charmeleon_pressed()
+	elif Input.is_action_just_pressed("R"):
+		_on_upgrade_to_charizard_pressed()
+	elif Input.is_action_just_pressed("A"):
+		_on_upgrade_to_ivysaur_pressed()
+	elif Input.is_action_just_pressed("S"):
+		_on_upgrade_to_venusaur_pressed()
+	else:
+		pass
+
+
+func _manage_train_inputs():
+	if "PokeCenter" in currentBuilding.name:
+		if Input.is_action_just_pressed("Q"):
+			currentBuilding.train_unit(0)
+	elif "Fire" in currentBuilding.name:
+		if Input.is_action_just_pressed("Q"):
+			currentBuilding.train_unit(0)
 		elif Input.is_action_just_pressed("W"):
-			_on_upgrade_to_blastoise_pressed()
+				currentBuilding.train_unit(1)
 		elif Input.is_action_just_pressed("E"):
-			_on_upgrade_to_charmeleon_pressed()
-		elif Input.is_action_just_pressed("R"):
-			_on_upgrade_to_charizard_pressed()
-		elif Input.is_action_just_pressed("A"):
-			_on_upgrade_to_ivysaur_pressed()
-		elif Input.is_action_just_pressed("S"):
-			_on_upgrade_to_venusaur_pressed()
-		else:
-			pass
+			currentBuilding.train_unit(2)
+	elif "Water" in currentBuilding:
+		if Input.is_action_just_pressed("Q"):
+			currentBuilding.train_unit(0)
+		elif Input.is_action_just_pressed("W"):
+			currentBuilding.train_unit(1)
+		elif Input.is_action_just_pressed("E"):
+			currentBuilding.train_unit(2)
+	elif "Plant" in currentBuilding:
+		if Input.is_action_just_pressed("Q"):
+			currentBuilding.train_unit(0)
+		elif Input.is_action_just_pressed("W"):
+			currentBuilding.train_unit(1)
+		elif Input.is_action_just_pressed("E"):
+			currentBuilding.train_unit(2)
+	
 
 func set_timer_state(state):
 	if state:
@@ -196,7 +231,6 @@ func show_upgrade_military(state):
 
 
 func _on_upgrade_to_wartortle_pressed():
-	print("fwdwad")
 	if Game.waterUnitLvl != 0 or is_upgrade_ongoing("Wartortle"):
 		return
 	if (Game.plantUnitLvl > 0 or is_upgrade_ongoing("Ivysaur")) and (Game.fireUnitLvl > 0 or is_upgrade_ongoing("Charmeleon")):

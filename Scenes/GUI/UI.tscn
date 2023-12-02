@@ -209,6 +209,13 @@ icon = ExtResource("6_a3ebk")
 icon_alignment = 1
 expand_icon = true
 
+[node name="QPress" type="Label" parent="TrainBox/TrainUnitButtonLvl1"]
+offset_left = 38.0
+offset_top = 100.0
+offset_right = 54.0
+offset_bottom = 126.0
+text = "Q"
+
 [node name="TrainUnitButtonLvl2" type="Button" parent="TrainBox"]
 layout_mode = 0
 offset_left = 150.0
@@ -217,6 +224,13 @@ offset_right = 238.0
 offset_bottom = 190.0
 icon = ExtResource("7_ft57y")
 expand_icon = true
+
+[node name="WPress" type="Label" parent="TrainBox/TrainUnitButtonLvl2"]
+offset_left = 35.0
+offset_top = 100.0
+offset_right = 51.0
+offset_bottom = 126.0
+text = "W"
 
 [node name="TrainUnitButtonLvl3" type="Button" parent="TrainBox"]
 layout_mode = 0
@@ -227,7 +241,15 @@ offset_bottom = 190.0
 icon = ExtResource("7_ft57y")
 expand_icon = true
 
+[node name="EPress" type="Label" parent="TrainBox/TrainUnitButtonLvl3"]
+offset_left = 39.0
+offset_top = 100.0
+offset_right = 48.0
+offset_bottom = 126.0
+text = "E"
+
 [node name="UpgradeMilitary" type="TextureRect" parent="."]
+visible = false
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0

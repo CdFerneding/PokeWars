@@ -44,23 +44,23 @@ func _start_training(evolution):
 func training_finished(evolution):
 	currently_training = false
 	if "PokeCenter" in self.name:
-		unitBuilder._build_unit(main,"Pikachu",self.position, 3,0)
+		unitBuilder._build_unit(main,"Pikachu",self.position, 16,0)
 	if "Fire Arena" in self.name:
 		print(evolution)
 		match evolution:
-			0: unitBuilder._build_unit(main,"Charmander",self.position, 8,0)
-			1: unitBuilder._build_unit(main,"Charmander",self.position, 8,1)
-			2: unitBuilder._build_unit(main,"Charmander",self.position, 8,2)
+			0: unitBuilder._build_unit(main,"Charmander",self.position, 48,0)
+			1: unitBuilder._build_unit(main,"Charmander",self.position, 48,1)
+			2: unitBuilder._build_unit(main,"Charmander",self.position, 48,2)
 	if "Water Arena" in self.name:
 		match evolution:
-			0: unitBuilder._build_unit(main,"Squirtle",self.position, 8,0)
-			1: unitBuilder._build_unit(main,"Squirtle",self.position, 8,1)
-			2: unitBuilder._build_unit(main,"Squirtle",self.position, 8,2)
+			0: unitBuilder._build_unit(main,"Squirtle",self.position, 48,0)
+			1: unitBuilder._build_unit(main,"Squirtle",self.position, 48,1)
+			2: unitBuilder._build_unit(main,"Squirtle",self.position, 48,2)
 	if "Plant Arena" in self.name:
 			match evolution:
-				0: unitBuilder._build_unit(main,"Bulbasaur",self.position, 8,0)
-				1: unitBuilder._build_unit(main,"Bulbasaur",self.position, 8,1)
-				2: unitBuilder._build_unit(main,"Bulbasaur",self.position, 8,2)
+				0: unitBuilder._build_unit(main,"Bulbasaur",self.position,48,0)
+				1: unitBuilder._build_unit(main,"Bulbasaur",self.position, 48,1)
+				2: unitBuilder._build_unit(main,"Bulbasaur",self.position, 48,2)
 
 
 
@@ -86,7 +86,7 @@ func _on_input_event(viewport, event, shape_idx):
 
 
 func train_unit(evolution):
-	if Game.Food > _check_food():
+	if Game.Food >= _check_food():
 		Game.Food = Game.Food - _check_food()
 		_start_training(evolution)
 		

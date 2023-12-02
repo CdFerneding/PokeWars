@@ -4,7 +4,7 @@ static func _tile_setter(position:Array,tileMap:TileMap,tileId:int):
 	var y_range = (position[2]+2) - (position[3]+1)
 	var x_range = (position[1]-2) - (position[0]-3)
 	
-	#tileMap.set_cell(1,Vector2(position[0], position[2]),tileId,Vector2i(0,0))
+	tileMap.set_cell(1,Vector2(position[0], position[2]),tileId,Vector2i(0,0))
 	
 	for n in range(position[2]+2,position[3]+1,-1):
 		var x = 0
