@@ -49,7 +49,7 @@ func _physics_process(_delta: float) -> void:
 			self.position = next_pos
 		target = self.position
 	
-	if is_fighting == true:
+	if is_fighting == false:
 		apply_corresponding_animation()
 	
 	move_and_slide()
