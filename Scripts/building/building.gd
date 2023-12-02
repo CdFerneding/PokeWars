@@ -18,7 +18,6 @@ var tileId:int
 var maxHealth = 200
 var currentHealth
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Game.GameMode = "play"
@@ -39,14 +38,33 @@ func _start_training(evolution):
 	queueItem.get_node("UnitIcon").texture = check_current_pokemon(evolution)
 	queueItem.building = self
 	queueItem.evolution = evolution
+	queueItem.type = check_training_name(evolution)
 	UI.get_node("TrainingQueue").add_child(queueItem)
+
+func check_training_name(evolution):
+	if "PokeCenter" in self.name:
+		return "Pikachu"
+	if "Fire Arena" in self.name:
+		match evolution:
+			0: return "Charmander"
+			1: return "Charmeleon"
+			2: return "Charizard"
+	if "Water Arena" in self.name:
+		match evolution:
+			0: return "Squirtle"
+			1: return "Wartortle"
+			2: return "Blastoise"
+	if "Plant Arena" in self.name:
+		match evolution:
+			0: return "Bulbasaur"
+			1: return "Ivysaur"
+			2: return "Venusaur"
 
 func training_finished(evolution):
 	currently_training = false
 	if "PokeCenter" in self.name:
 		unitBuilder._build_unit(main,"Pikachu",self.position, 16,0)
 	if "Fire Arena" in self.name:
-		print(evolution)
 		match evolution:
 			0: unitBuilder._build_unit(main,"Charmander",self.position, 48,0)
 			1: unitBuilder._build_unit(main,"Charmander",self.position, 48,1)
@@ -61,7 +79,8 @@ func training_finished(evolution):
 				0: unitBuilder._build_unit(main,"Bulbasaur",self.position,48,0)
 				1: unitBuilder._build_unit(main,"Bulbasaur",self.position, 48,1)
 				2: unitBuilder._build_unit(main,"Bulbasaur",self.position, 48,2)
-
+	# increase unit counter
+	Game.friendlyUnits += 1
 
 
 '
@@ -86,8 +105,8 @@ func _on_input_event(viewport, event, shape_idx):
 
 
 func train_unit(evolution):
-	if Game.Food >= _check_food():
-		Game.Food = Game.Food - _check_food()
+	if Game.Food >= _check_food(evolution):
+		Game.Food -=  _check_food(evolution)
 		_start_training(evolution)
 		
 
@@ -123,8 +142,21 @@ func check_current_pokemon(evolution):
 				2: return load(Game.VenusaurIcon)
 
 
-func _check_food():
+func _check_food(evolution):
 	if "PokeCenter" in self.name:
-		return Game.pikachuCost
-	else:
-		return Game.militaryCost
+		return Game.PIKACHU_COST
+	if "Fire Arena" in self.name:
+		match evolution:
+			0: return Game.CHARMANDER_COST
+			1: return Game.CHARMELEON_COST
+			2: return Game.CHARIZARD_COST
+	if "Water Arena" in self.name:
+		match evolution:
+			0: return Game.SQUIRTLE_COST
+			1: return Game.WARTORTLE_COST
+			2: return Game.BLASTOISE_COST
+	if "Plant Arena" in self.name:
+		match evolution:
+			0: return Game.BULBASAUR_COST
+			1: return Game.IVYSAUR_COST
+			2: return Game.VENUSAUR_COST

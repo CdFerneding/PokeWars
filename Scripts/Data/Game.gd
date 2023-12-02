@@ -27,7 +27,6 @@ var selectedBuilding = "Fire Arena"
 var buildCounter = 0
 var Selected = 0
 
-var buildingCost = 0
 var militaryCost = 10
 var pikachuCost = 8
 var Player_name : String
@@ -51,6 +50,43 @@ var plantUnitLvl = 0
 # this variable changes the finishing Game dialogue
 var player_win
 
+# training Queues
+var pikachuQueue = []
+var fireQueue = []
+var waterQueue = []
+var plantQueue = []
+
+# upgrade time and cost constants (food)
+var FIRST_UPGRADE_COST = 10
+var SECOND_UPGRADE_COST = 20
+var FIRST_UPGRADE_TIME = 10
+var SECOND_UPGRADE_TIME = 20
+
+# unit costs (food)
+var PIKACHU_COST = 8
+var CHARMANDER_COST = 10
+var CHARMELEON_COST = 20
+var CHARIZARD_COST = 30
+var SQUIRTLE_COST = 10
+var WARTORTLE_COST = 20
+var BLASTOISE_COST = 30
+var BULBASAUR_COST = 10
+var IVYSAUR_COST = 20
+var VENUSAUR_COST = 30
+
+# building costs (wood)
+var FIRE_ARENA_COST = 20 
+var PLANT_ARENA_COST = 20 
+var WATER_ARENA_COST = 20 
+
+# unit count (start with two pikachus)
+var friendlyUnits = 2
+var hostileUnits = 0
+
+# unit caps
+var POP_CAP_FRIENDLY = 70
+var POP_CAP_HOSTILE = 50
+
 # game state can be paused (false) or running (true)
 # if the game is paused, no more _process funcions are getting called
 # do not use
@@ -61,6 +97,7 @@ func set_game_paused(state):
 	
 	# this state varible is used to more specifically skip functions in the Game
 	is_paused = state
+
 '''
 func _process(delta):
 	if is_paused == false:

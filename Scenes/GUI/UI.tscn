@@ -57,17 +57,21 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_c22t0")
 
 [node name="GameStateBox" type="TextureRect" parent="."]
 visible = false
+anchors_preset = -1
+anchor_right = 0.0208333
 offset_right = 200.0
 offset_bottom = 268.0
 texture = ExtResource("2_7x6ev")
+expand_mode = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GameStateBox"]
+layout_direction = 1
 layout_mode = 0
-offset_left = 50.0
-offset_top = 20.0
-offset_right = 144.0
-offset_bottom = 196.0
+offset_left = 34.0
+offset_top = 24.0
+offset_right = 192.0
+offset_bottom = 232.0
 alignment = 1
 
 [node name="Food" type="Label" parent="GameStateBox/VBoxContainer"]
@@ -82,9 +86,9 @@ text = "Wood :"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Stone" type="Label" parent="GameStateBox/VBoxContainer"]
+[node name="PopCap" type="Label" parent="GameStateBox/VBoxContainer"]
 layout_mode = 2
-text = "Stone :"
+text = "Trained Units: x / y"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -129,10 +133,10 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 53.0
-offset_top = -190.0
-offset_right = 173.936
-offset_bottom = -56.0
+offset_left = 48.0
+offset_top = -176.0
+offset_right = 168.936
+offset_bottom = -42.0
 grow_vertical = 0
 text = "Fire Arena"
 icon = ExtResource("3_0v2bx")
@@ -144,10 +148,10 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 187.0
-offset_top = -190.0
-offset_right = 293.0
-offset_bottom = -56.0
+offset_left = 192.0
+offset_top = -176.0
+offset_right = 298.0
+offset_bottom = -42.0
 grow_vertical = 0
 text = "Water Arena"
 icon = ExtResource("4_a0tl4")
@@ -159,10 +163,10 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 313.0
-offset_top = -190.0
-offset_right = 412.0
-offset_bottom = -56.0
+offset_left = 320.0
+offset_top = -176.0
+offset_right = 419.0
+offset_bottom = -42.0
 grow_vertical = 0
 text = "Plant Arena"
 icon = ExtResource("5_7q0qc")
@@ -174,10 +178,10 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 423.0
-offset_top = -191.0
-offset_right = 551.0
-offset_bottom = -56.0
+offset_left = 448.0
+offset_top = -176.0
+offset_right = 544.0
+offset_bottom = -40.0
 grow_vertical = 0
 text = "Delete"
 
@@ -188,9 +192,18 @@ offset_top = 33.0
 offset_right = 266.0
 offset_bottom = 73.0
 
+[node name="Label" type="Label" parent="BuildingButtonBox"]
+layout_mode = 0
+offset_left = 152.0
+offset_top = 36.0
+offset_right = 329.0
+offset_bottom = 62.0
+text = "Building Cost: 20 Wood"
+
 [node name="Timer" type="Timer" parent="."]
 
 [node name="TrainBox" type="TextureRect" parent="."]
+visible = false
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -210,11 +223,20 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="QPress" type="Label" parent="TrainBox/TrainUnitButtonLvl1"]
+layout_mode = 0
 offset_left = 38.0
 offset_top = 100.0
 offset_right = 54.0
 offset_bottom = 126.0
 text = "Q"
+
+[node name="Label" type="Label" parent="TrainBox/TrainUnitButtonLvl1"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = -32.0
+offset_right = 54.0
+offset_bottom = -6.0
+text = "10"
 
 [node name="TrainUnitButtonLvl2" type="Button" parent="TrainBox"]
 layout_mode = 0
@@ -226,11 +248,20 @@ icon = ExtResource("7_ft57y")
 expand_icon = true
 
 [node name="WPress" type="Label" parent="TrainBox/TrainUnitButtonLvl2"]
+layout_mode = 0
 offset_left = 35.0
 offset_top = 100.0
 offset_right = 51.0
 offset_bottom = 126.0
 text = "W"
+
+[node name="Label" type="Label" parent="TrainBox/TrainUnitButtonLvl2"]
+layout_mode = 0
+offset_left = 34.0
+offset_top = -32.0
+offset_right = 74.0
+offset_bottom = -6.0
+text = "20"
 
 [node name="TrainUnitButtonLvl3" type="Button" parent="TrainBox"]
 layout_mode = 0
@@ -242,11 +273,20 @@ icon = ExtResource("7_ft57y")
 expand_icon = true
 
 [node name="EPress" type="Label" parent="TrainBox/TrainUnitButtonLvl3"]
+layout_mode = 0
 offset_left = 39.0
 offset_top = 100.0
 offset_right = 48.0
 offset_bottom = 126.0
 text = "E"
+
+[node name="Label" type="Label" parent="TrainBox/TrainUnitButtonLvl3"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = -32.0
+offset_right = 70.0
+offset_bottom = -6.0
+text = "30"
 
 [node name="UpgradeMilitary" type="TextureRect" parent="."]
 visible = false
@@ -392,10 +432,9 @@ second evolutions: 40 Berries"
 horizontal_alignment = 1
 
 [node name="TrainingQueue" type="HBoxContainer" parent="."]
-offset_left = 202.0
-offset_top = 2.0
-offset_right = 573.0
-offset_bottom = 55.0
+offset_left = 256.0
+offset_right = 627.0
+offset_bottom = 53.0
 theme_override_constants/separation = 0
 
 [connection signal="pressed" from="BuildingButtonBox/Fire Arena Button" to="." method="_on_fire_arena_pressed"]

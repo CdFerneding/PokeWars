@@ -2,7 +2,7 @@ extends CanvasLayer
 
 @onready var FoodLabel = $GameStateBox/VBoxContainer/Food
 @onready var WoodLabel = $GameStateBox/VBoxContainer/Wood
-@onready var StoneLabel = $GameStateBox/VBoxContainer/Stone
+@onready var PopCapLabel = $GameStateBox/VBoxContainer/PopCap
 @onready var GameTimerLabel = $GameStateBox/VBoxContainer/GameTimer
 @onready var GameModeLabel = $GameStateBox/VBoxContainer/GameMode
 @onready var GameModeBuilding = $GameStateBox/VBoxContainer/CurrentBuilding
@@ -10,7 +10,6 @@ extends CanvasLayer
 
 var time = 0
 var currentBuilding
-
 
 # variables to remember if the upgrade timers where running before the game was paused
 
@@ -21,6 +20,11 @@ func _ready():
 	$TrainBox/TrainUnitButtonLvl2.disabled = true
 	$TrainBox/TrainUnitButtonLvl3.disabled = true
 	checkGameMode()
+	$UpgradeMilitary/Label.text = "First evolutions: " + str(Game.FIRST_UPGRADE_COST) + " Berries\nSecond evolutions: " + str(Game.SECOND_UPGRADE_COST) + " Berries"
+	$BuildingButtonBox/Label.text = "Building Cost: " + str(Game.FIRE_ARENA_COST)
+	$TrainBox/TrainUnitButtonLvl1/Label.text = str(Game.BULBASAUR_COST)
+	$TrainBox/TrainUnitButtonLvl2/Label.text = str(Game.IVYSAUR_COST)
+	$TrainBox/TrainUnitButtonLvl3/Label.text = str(Game.VENUSAUR_COST)
 
 func update_game_timer():
 	var minutes
@@ -53,7 +57,7 @@ func _process(_delta):
 	
 	FoodLabel.text = "Food: " + str(Game.Food)
 	WoodLabel.text = "Wood: " + str(Game.Wood)
-	StoneLabel.text = "Stone: " + str(Game.Stone)
+	PopCapLabel.text = "Trained units: " + str(Game.friendlyUnits) + " / " + str(Game.POP_CAP_FRIENDLY)
 	GameModeLabel.text = "Mode: " + Game.GameMode
 	SelectedLabel.text = "Selected: " + str(Game.Selected)
 	GameModeBuilding.text = "Building: \n" + Game.selectedBuilding
@@ -231,93 +235,61 @@ func show_upgrade_military(state):
 
 
 func _on_upgrade_to_wartortle_pressed():
-	if Game.waterUnitLvl != 0 or is_upgrade_ongoing("Wartortle") or Game.Food < 20:
+	if Game.waterUnitLvl != 0 or Game.Food < Game.FIRST_UPGRADE_COST or is_upgrade_ongoing("UpgradeToWartortle"):
 		return
-	if (Game.plantUnitLvl > 0 or is_upgrade_ongoing("Ivysaur")) and (Game.fireUnitLvl > 0 or is_upgrade_ongoing("Charmeleon")):
-		start_upgrade(150, "Wartortle")
-	elif (Game.plantUnitLvl > 0 or is_upgrade_ongoing("Ivysaur")) and (Game.fireUnitLvl == 0 or is_upgrade_ongoing("Charmeleon")):
-		start_upgrade(120, "Wartortle")
-	elif (Game.plantUnitLvl == 0 or is_upgrade_ongoing("Ivysaur")) and (Game.fireUnitLvl > 0 or is_upgrade_ongoing("Charmeleon")):
-		start_upgrade(120, "Wartortle")
-	else:
-		start_upgrade(90, "Wartortle")
+	start_upgrade("Wartortle")
+	Game.Food -= Game.FIRST_UPGRADE_COST
 
 
 func _on_upgrade_to_blastoise_pressed():
-	if Game.waterUnitLvl != 1 or is_upgrade_ongoing("Blastoise") or Game.Food < 20:
+	if Game.waterUnitLvl != 1 or Game.Food < Game.SECOND_UPGRADE_COST or is_upgrade_ongoing("UpgradeToBlastoise"):
 		return
-	if (Game.plantUnitLvl > 1 or is_upgrade_ongoing("Venusaur")) and (Game.fireUnitLvl > 1 or is_upgrade_ongoing("Charizard")):
-		start_upgrade(210, "Blastoise")
-	elif (Game.plantUnitLvl > 1 or is_upgrade_ongoing("Venusaur")) and (Game.fireUnitLvl == 1 or is_upgrade_ongoing("Charizard")):
-		start_upgrade(180, "Blastoise")
-	elif (Game.plantUnitLvl == 1 or is_upgrade_ongoing("Venusaur")) and (Game.fireUnitLvl > 1 or is_upgrade_ongoing("Charizard")):
-		start_upgrade(180, "Blastoise")
-	else:
-		start_upgrade(150, "Blastoise")
+	start_upgrade("Blastoise")
+	Game.Food -= Game.SECOND_UPGRADE_COST
 
 
 func _on_upgrade_to_charmeleon_pressed():
-	if Game.fireUnitLvl != 0 or is_upgrade_ongoing("Charmeleon") or Game.Food < 20:
+	if Game.fireUnitLvl != 0 or Game.Food < Game.FIRST_UPGRADE_COST or is_upgrade_ongoing("UpgradeToCharmeleon"):
 		return
-	if (Game.plantUnitLvl > 0 or is_upgrade_ongoing("Ivysaur")) and (Game.waterUnitLvl > 0 or is_upgrade_ongoing("Wartortle")):
-		start_upgrade(150, "Charmeleon")
-	elif (Game.plantUnitLvl > 0 or is_upgrade_ongoing("Ivysaur")) and (Game.waterUnitLvl == 0 or is_upgrade_ongoing("Wartortle")):
-		start_upgrade(120, "Charmeleon")
-	elif (Game.plantUnitLvl == 0 or is_upgrade_ongoing("Ivysaur")) and (Game.waterUnitLvl > 0 or is_upgrade_ongoing("Wartortle")):
-		start_upgrade(120, "Charmeleon")
-	else:
-		start_upgrade(90, "Charmeleon")
+	start_upgrade("Charmeleon")
+	Game.Food -= Game.FIRST_UPGRADE_COST
 
 
 func _on_upgrade_to_charizard_pressed():
-	if Game.fireUnitLvl != 1 or is_upgrade_ongoing("Charizard") or Game.Food < 20:
+	if Game.fireUnitLvl != 1 or Game.Food < Game.SECOND_UPGRADE_COST or is_upgrade_ongoing("UpgradeToCharizard"):
 		return
-	if (Game.plantUnitLvl > 1 or is_upgrade_ongoing("Venusaur")) and (Game.waterUnitLvl > 1 or is_upgrade_ongoing("Blastoise")):
-		start_upgrade(210, "Charizard")
-	elif (Game.plantUnitLvl > 1 or is_upgrade_ongoing("Venusaur")) and (Game.waterUnitLvl == 1 or is_upgrade_ongoing("Blastoise")):
-		start_upgrade(180, "Charizard")
-	elif (Game.plantUnitLvl == 1 or is_upgrade_ongoing("Venusaur")) and (Game.waterUnitLvl > 1 or is_upgrade_ongoing("Blastoise")):
-		start_upgrade(180, "Charizard")
-	else:
-		start_upgrade(150, "Charizard")
-
+	start_upgrade("Charizard")
+	Game.Food -= Game.SECOND_UPGRADE_COST
 
 func _on_upgrade_to_ivysaur_pressed():
-	if Game.plantUnitLvl != 0 or is_upgrade_ongoing("Ivysaur") or Game.Food < 20:
+	if Game.plantUnitLvl != 0 or Game.Food < Game.FIRST_UPGRADE_COST or is_upgrade_ongoing("UpgradeToIvysaur"):
 		return
-	if (Game.fireUnitLvl > 0 or is_upgrade_ongoing("Charmeleon")) and (Game.waterUnitLvl > 0 or is_upgrade_ongoing("Wartortle")):
-		start_upgrade(150, "Ivysaur")
-	elif (Game.fireUnitLvl > 0 or is_upgrade_ongoing("Charmeleon")) and (Game.waterUnitLvl == 0 or is_upgrade_ongoing("Wartortle")):
-		start_upgrade(120, "Ivysaur")
-	elif (Game.fireUnitLvl == 0 or is_upgrade_ongoing("Charmeleon")) and (Game.waterUnitLvl > 0 or is_upgrade_ongoing("Wartortle")):
-		start_upgrade(120, "Ivysaur")
-	else:
-		start_upgrade(90, "Ivysaur")
+	start_upgrade("Ivysaur")
+	Game.Food -= Game.FIRST_UPGRADE_COST
 
 
 func _on_upgrade_to_venusaur_pressed():
-	if Game.plantUnitLvl != 1 or is_upgrade_ongoing("Venusaur") or Game.Food < 20:
+	if Game.plantUnitLvl != 1 or Game.Food < Game.SECOND_UPGRADE_COST or is_upgrade_ongoing("UpgradeToVenusaur"):
 		return
-	
-	if (Game.fireUnitLvl > 1 or is_upgrade_ongoing("Charizard")) and (Game.waterUnitLvl > 1 or is_upgrade_ongoing("Blastoise")):
-		start_upgrade(210, "Venusaur")
-	elif (Game.fireUnitLvl > 1 or is_upgrade_ongoing("Charizard")) and (Game.waterUnitLvl == 1 or is_upgrade_ongoing("Blastoise")):
-		start_upgrade(180, "Venusaur")
-	elif (Game.fireUnitLvl == 1 or is_upgrade_ongoing("Charizard")) and (Game.waterUnitLvl > 1 or is_upgrade_ongoing("Blastoise")):
-		start_upgrade(180, "Venusaur")
-	else:
-		start_upgrade(150, "Venusaur")
+	start_upgrade("Venusaur")
+	Game.Food -= Game.SECOND_UPGRADE_COST
 
 
-func start_upgrade(time, upgrade_to):
+func start_upgrade(upgrade_to):
 	if Game.is_paused:
 		return
+		
+	if upgrade_to == "Blastoise" or upgrade_to == "Venusaur" or upgrade_to == "Charizard":
+		time = Game.SECOND_UPGRADE_TIME
+	else:
+		time = Game.FIRST_UPGRADE_TIME
+	
 	var trainIconScene = load("res://Scenes/GUI/Trainicon.tscn")
 	var queueItem = trainIconScene.instantiate()
 	var button = get_node("UpgradeMilitary/UpgradeTo"+upgrade_to)
 	queueItem.get_node("UnitIcon").texture = button.icon
 	queueItem.totalTime = time
-	queueItem.type = upgrade_to
+	queueItem.type = "UpgradeTo"+upgrade_to
 	$TrainingQueue.add_child(queueItem)
 
 func is_upgrade_ongoing(type_to_check: String) -> bool:
@@ -334,24 +306,24 @@ func check_upgrade_military_buttons():
 	$UpgradeMilitary/UpgradeToBlastoise.disabled = true
 	$UpgradeMilitary/UpgradeToCharizard.disabled = true
 
-	if Game.Food >= 20:
-		if Game.plantUnitLvl == 0 and !is_upgrade_ongoing("Ivysaur"):
+	if Game.Food >= Game.FIRST_UPGRADE_COST:
+		if Game.plantUnitLvl == 0 and !is_upgrade_ongoing("UpgradeToIvysaur"):
 			$UpgradeMilitary/UpgradeToIvysaur.disabled = false
 		
-		if Game.fireUnitLvl == 0 and !is_upgrade_ongoing("Charmeleon"):
+		if Game.fireUnitLvl == 0 and !is_upgrade_ongoing("UpgradeToCharmeleon"):
 			$UpgradeMilitary/UpgradeToCharmeleon.disabled = false
 		
-		if Game.waterUnitLvl == 0 and !is_upgrade_ongoing("Wartortle"):
+		if Game.waterUnitLvl == 0 and !is_upgrade_ongoing("UpgradeToWartortle"):
 			$UpgradeMilitary/UpgradeToWartortle.disabled = false
 
-	if Game.Food >= 40:
-		if Game.plantUnitLvl == 1 and !is_upgrade_ongoing("Venusaur"):
+	if Game.Food >= Game.SECOND_UPGRADE_COST:
+		if Game.plantUnitLvl == 1 and !is_upgrade_ongoing("UpgradeToVenusaur"):
 			$UpgradeMilitary/UpgradeToVenusaur.disabled = false
 
-		if Game.waterUnitLvl == 1 and !is_upgrade_ongoing("Blastoise"):
+		if Game.waterUnitLvl == 1 and !is_upgrade_ongoing("UpgradeToBlastoise"):
 			$UpgradeMilitary/UpgradeToBlastoise.disabled = false
 
-		if Game.fireUnitLvl == 1 and !is_upgrade_ongoing("Charizard"):
+		if Game.fireUnitLvl == 1 and !is_upgrade_ongoing("UpgradeToCharizard"):
 			$UpgradeMilitary/UpgradeToCharizard.disabled = false
 
 
