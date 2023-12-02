@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://cn8ein6jc6frg"]
+[gd_scene load_steps=56 format=3 uid="uid://cn8ein6jc6frg"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_c7xow"]
 [ext_resource type="Texture2D" uid="uid://b0yuglgf5hf8t" path="res://Assets/BerryGardenTiles.png" id="2_x2ryg"]
@@ -45,6 +45,16 @@ vertices = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_abls3"]
+vertices = PackedVector2Array(-8, -8, 8, -8, -8, 8)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 1, 2)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, -8, -8, 8)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_2t00g"]
+vertices = PackedVector2Array(-8, -8, 8, 8, -8, 8)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 0, 1, 2)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, -8, -8, 8, 8, -8, 8)])
+
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_tjm67"]
 vertices = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -54,6 +64,16 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8
 vertices = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_f4me5"]
+vertices = PackedVector2Array(-8, -8, 8, -8, 8, 8)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 0)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, -8)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_3tn6y"]
+vertices = PackedVector2Array(-8, 8, 8, -8, 8, 8)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 0)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-8, 8, 8, -8, 8, 8, -8, 8)])
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_u4l5o"]
 vertices = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -121,11 +141,13 @@ margins = Vector2i(1, 0)
 2:4/0 = 0
 2:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:4/0/physics_layer_0/angular_velocity = 0.0
-2:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -8, 8, -8, 8, 8, -8, 8)
+2:4/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_abls3")
 3:4/0 = 0
 3:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 3:4/0/physics_layer_0/angular_velocity = 0.0
-3:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, 8, 8, 8, -8, 8)
+3:4/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_f4me5")
 4:4/0 = 0
 4:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 4:4/0/physics_layer_0/angular_velocity = 0.0
@@ -139,11 +161,13 @@ margins = Vector2i(1, 0)
 2:5/0 = 0
 2:5/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:5/0/physics_layer_0/angular_velocity = 0.0
-2:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, -8)
+2:5/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_2t00g")
 3:5/0 = 0
 3:5/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 3:5/0/physics_layer_0/angular_velocity = 0.0
-3:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -8, -8, 8)
+3:5/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_3tn6y")
 4:5/0 = 0
 4:5/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 4:5/0/physics_layer_0/angular_velocity = 0.0
@@ -510,7 +534,7 @@ current_x_spawn_location = 1598
 current_y_spawn_location = 143
 
 [node name="EnemySpawnerTimer" type="Timer" parent="Moltres"]
-wait_time = 25.0
+wait_time = 35.0
 autostart = true
 
 [node name="HealthBar" type="ProgressBar" parent="Moltres"]
