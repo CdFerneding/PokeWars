@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://cn8ein6jc6frg"]
+[gd_scene load_steps=53 format=3 uid="uid://cn8ein6jc6frg"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_c7xow"]
 [ext_resource type="Texture2D" uid="uid://b0yuglgf5hf8t" path="res://Assets/BerryGardenTiles.png" id="2_x2ryg"]
@@ -270,6 +270,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hg3nv"]
+size = Vector2(90, 70)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_whga1"]
 atlas = ExtResource("19_bkhy1")
 region = Rect2(0, 0, 56, 96)
@@ -503,11 +506,13 @@ editor_description = "This is a fix for the camera because the border to move th
 wait_time = 0.1
 autostart = true
 
-[node name="BigBadPokemon" type="CharacterBody2D" parent="." groups=["arena1"]]
+[node name="BigBadPokemon" type="CharacterBody2D" parent="." groups=["arena", "arena1"]]
 position = Vector2(1598, 143)
 script = ExtResource("16_mwle3")
 current_x_spawn_location = 1598
 current_y_spawn_location = 143
+type = 1
+max_health = 200
 
 [node name="EnemySpawnerTimer" type="Timer" parent="BigBadPokemon"]
 wait_time = 25.0
@@ -534,18 +539,29 @@ shape = SubResource("CircleShape2D_q25ka")
 position = Vector2(2, 0)
 sprite_frames = SubResource("SpriteFrames_tgpkn")
 animation = &"idle_down"
+frame_progress = 0.793637
 
-[node name="BigBadPokemon2" type="CharacterBody2D" parent="." groups=["arena2"]]
+[node name="AttackRange" type="Area2D" parent="BigBadPokemon"]
+position = Vector2(2, -26)
+
+[node name="AttackRangeCollisionShape" type="CollisionShape2D" parent="BigBadPokemon/AttackRange"]
+position = Vector2(-1, 13)
+shape = SubResource("RectangleShape2D_hg3nv")
+
+[node name="BigBadPokemon2" type="CharacterBody2D" parent="." groups=["arena", "arena2"]]
 position = Vector2(1648, 723)
 script = ExtResource("16_mwle3")
 current_x_spawn_location = 1648
 current_y_spawn_location = 723
+type = 4
+max_health = 200
 
 [node name="EnemySpawnerTimer_2" type="Timer" parent="BigBadPokemon2"]
 wait_time = 40.0
 autostart = true
 
 [node name="HealthBar" type="ProgressBar" parent="BigBadPokemon2"]
+visible = false
 offset_left = -21.0
 offset_top = -49.0
 offset_right = 22.0
@@ -553,6 +569,7 @@ offset_bottom = -42.0
 show_percentage = false
 
 [node name="Selected" type="Panel" parent="BigBadPokemon2"]
+visible = false
 offset_left = -24.0
 offset_top = -42.0
 offset_right = 26.0
@@ -567,11 +584,20 @@ position = Vector2(-1, -2)
 sprite_frames = SubResource("SpriteFrames_6h60r")
 animation = &"idle_down"
 
-[node name="BigBadPokemon3" type="CharacterBody2D" parent="." groups=["arena3"]]
+[node name="AttackRange" type="Area2D" parent="BigBadPokemon2"]
+position = Vector2(2, -26)
+
+[node name="AttackRangeCollisionShape" type="CollisionShape2D" parent="BigBadPokemon2/AttackRange"]
+position = Vector2(-3, 12)
+shape = SubResource("RectangleShape2D_hg3nv")
+
+[node name="BigBadPokemon3" type="CharacterBody2D" parent="." groups=["arena", "arena3"]]
 position = Vector2(256, 750)
 script = ExtResource("16_mwle3")
 current_x_spawn_location = 256
 current_y_spawn_location = 750
+type = 2
+max_health = 200
 
 [node name="EnemySpawnerTimer_3" type="Timer" parent="BigBadPokemon3"]
 wait_time = 60.0
@@ -599,6 +625,13 @@ position = Vector2(-2, 3)
 sprite_frames = SubResource("SpriteFrames_u25gm")
 animation = &"idle_down"
 
+[node name="AttackRange" type="Area2D" parent="BigBadPokemon3"]
+position = Vector2(2, -26)
+
+[node name="AttackRangeCollisionShape" type="CollisionShape2D" parent="BigBadPokemon3/AttackRange"]
+position = Vector2(-3, 21)
+shape = SubResource("RectangleShape2D_hg3nv")
+
 [node name="StartEnemySpawn" type="Timer" parent="."]
 wait_time = 150.0
 one_shot = true
@@ -606,6 +639,9 @@ autostart = true
 
 [connection signal="timeout" from="UpdateCameraBorderFix" to="Camera" method="update_limit"]
 [connection signal="timeout" from="BigBadPokemon/EnemySpawnerTimer" to="BigBadPokemon" method="_on_enemy_spawner_timer_timeout"]
+[connection signal="body_entered" from="BigBadPokemon/AttackRange" to="BigBadPokemon" method="_on_attack_range_body_entered"]
 [connection signal="timeout" from="BigBadPokemon2/EnemySpawnerTimer_2" to="BigBadPokemon2" method="_on_enemy_spawner_timer_timeout"]
+[connection signal="body_entered" from="BigBadPokemon2/AttackRange" to="BigBadPokemon2" method="_on_attack_range_body_entered"]
 [connection signal="timeout" from="BigBadPokemon3/EnemySpawnerTimer_3" to="BigBadPokemon3" method="_on_enemy_spawner_timer_timeout"]
+[connection signal="body_entered" from="BigBadPokemon3/AttackRange" to="BigBadPokemon3" method="_on_attack_range_body_entered"]
 [connection signal="timeout" from="StartEnemySpawn" to="." method="_on_start_enemy_spawn_timeout"]

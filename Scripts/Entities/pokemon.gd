@@ -20,9 +20,11 @@ enum PokemonType {NEUTRAL, FIRE, WATER, GRASS, ELECTRICITY}
 
 @onready var health_bar = $HealthBar
 
+@export var max_health: int = 20
+
 func _ready():
-	health_bar.max_value = 20
-	health_bar.value = 20
+	health_bar.max_value = max_health
+	health_bar.value = max_health
 
 func _physics_process(delta):
 	pass

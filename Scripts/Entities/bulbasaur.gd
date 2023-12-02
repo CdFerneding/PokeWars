@@ -75,7 +75,7 @@ func _physics_process(_delta: float) -> void:
 		followPlayerOrder = false
 	apply_corresponding_animation(velocity)
 	
-	if $AttackCooldown.is_stopped() and current_target != null and position.distance_to(current_target.position) < 10:
+	if $AttackCooldown.is_stopped() and current_target != null and ((position.distance_to(current_target.position) < 10) or ((current_target as BigBadPokemon) != null and current_target.in_range(self))):
 		attack()
 	
 	move_and_slide()
@@ -247,7 +247,16 @@ func retarget():
 		if nearest_target == null or target.position.distance_to(position) < nearest_target.position.distance_to(position):
 			nearest_target = target
 			current_target = target
+			
+	var special_target = pathMain.get_arenas()
 
+	for target in special_target:
+		if target == null:
+			continue
+		if nearest_target == null or ( target.position.distance_to(position) < 200 and target.position.distance_to(position) < nearest_target.position.distance_to(position)):
+			nearest_target = target
+			current_target = target
+	
 	if nearest_target != null:
 		target = nav_agent.target_position
 		nav_agent.target_position = nearest_target.position
