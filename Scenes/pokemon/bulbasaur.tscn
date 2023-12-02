@@ -385,8 +385,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y5mt7"]
-radius = 9.0
-height = 18.0
+radius = 6.0
+height = 12.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wlnfl"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -669,7 +669,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fbwje"]
-height = 20.0
+radius = 7.0
+height = 14.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rg0e7"]
 atlas = ExtResource("4_o81o6")
@@ -939,8 +940,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6aj6e"]
-radius = 12.0
-height = 24.0
+radius = 8.0
+height = 16.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xe6cu"]
 bg_color = Color(0.192157, 0.917647, 0, 0.886275)
@@ -959,6 +960,7 @@ sprite_frames = SubResource("SpriteFrames_c762q")
 animation = &"walk_down_left"
 
 [node name="CollisionShapeBulbasaur" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_y5mt7")
 
 [node name="BulbasaurSelected" type="Panel" parent="."]
@@ -974,7 +976,6 @@ sprite_frames = SubResource("SpriteFrames_djvyi")
 animation = &"walk_down_left"
 
 [node name="CollisionShapeIvysaur" type="CollisionShape2D" parent="."]
-position = Vector2(0, -2)
 shape = SubResource("CapsuleShape2D_fbwje")
 
 [node name="IvysaurSelected" type="Panel" parent="."]
@@ -991,7 +992,7 @@ frame = 2
 frame_progress = 0.663923
 
 [node name="CollisionShapeVenusaur" type="CollisionShape2D" parent="."]
-position = Vector2(0, -3)
+position = Vector2(0, -1)
 shape = SubResource("CapsuleShape2D_6aj6e")
 
 [node name="VenusaurSelected" type="Panel" parent="."]

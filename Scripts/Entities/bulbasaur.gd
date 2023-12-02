@@ -76,7 +76,7 @@ func _physics_process(_delta: float) -> void:
 	if is_fighting == false:
 		apply_corresponding_animation()
 	
-	if $AttackCooldown.is_stopped() and current_target != null and ((position.distance_to(current_target.position) < 10) or ((current_target as BigBadPokemon) != null and current_target.in_range(self))):
+	if $AttackCooldown.is_stopped() and current_target != null and position.distance_to(current_target.position) < 10:
 		attack()
 	
 	move_and_slide()
