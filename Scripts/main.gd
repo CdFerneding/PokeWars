@@ -96,7 +96,10 @@ func get_buildings():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if Game.is_paused == true:
+		$StartEnemySpawn.paused = true
 		return
+	else:
+		$StartEnemySpawn.paused = false
 		
 func _physics_process(delta):
 	if Game.is_paused == true:
@@ -319,4 +322,3 @@ func get_arenas() -> Array[Node]:
 
 func _on_start_enemy_spawn_timeout():
 	enemiesCanSpawn = true
-	print("on start enemey spawn timeout")

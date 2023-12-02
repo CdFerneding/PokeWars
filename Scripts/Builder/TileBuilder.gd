@@ -35,6 +35,13 @@ static func _delete_building(position:Array, tileMap:TileMap):
 	tileMap.set_cell(1,Vector2(position[0], position[2]), -1)
 
 static func _tile_builder(position:Array, tileMap:TileMap, tileId:int):
+	if tileId == 3 and Game.Wood < Game.FIRE_ARENA_COST:
+		return
+	elif tileId == 4 and Game.Wood < Game.PLANT_ARENA_COST:
+		return
+	elif tileId == 5 and Game.Wood < Game.WATER_ARENA_COST:
+		return
+	
 	var no_obstacle = true
 	var right_offeset = 0
 	var left_offset = 0
@@ -55,12 +62,17 @@ static func _tile_builder(position:Array, tileMap:TileMap, tileId:int):
 			var obstacle_layer1 = is_instance_valid(tileMap.get_cell_tile_data(1,Vector2i(m, n)))
 			if(obstacle_layer1):
 				no_obstacle = false
-	
-	if(no_obstacle == true && Game.Wood >= Game.buildingCost):
+
+	if no_obstacle:
 		_tile_setter(position,tileMap,tileId)
 		var counter = Game.buildCounter
 		Game.buildCounter = counter + 1
-		Game.Wood = Game.Wood - 20
+		if tileId == 3:
+			Game.Wood -= Game.FIRE_ARENA_COST
+		elif tileId == 4:
+			Game.Wood -= Game.PLANT_ARENA_COST
+		elif tileId == 5:
+			Game.Wood -= Game.WATER_ARENA_COST
 		return true
 	else:
 		return false

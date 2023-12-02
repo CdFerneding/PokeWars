@@ -4,8 +4,6 @@ class_name BigBadPokemon
 
 signal ennemy_killed
 
-var num_of_enemies = 200
-
 var list_pokemon_in_area: Array[Node]
 
 var rng = RandomNumberGenerator.new()
@@ -56,7 +54,7 @@ func _process(delta):
 func _on_enemy_spawner_timer_timeout():
 	var mainPath = get_tree().get_root().get_node("Main")
 	
-	if Game.is_paused == true or (mainPath.enemiesCanSpawn == false):
+	if Game.is_paused == true or (mainPath.enemiesCanSpawn == false) or Game.POP_CAP_HOSTILE:
 		return
 	
 	if current_group == "arena1":
@@ -68,17 +66,17 @@ func _on_enemy_spawner_timer_timeout():
 	elif current_group == "arena3":
 		spawn_enemies(7 + iteration3 * 2)
 		iteration3 = iteration3 + 1
-	print("enemy spawn timer timeout")
 	
 func _on_ennemy_killed():
-	pass
+	# decrease hostile unit counter 
+	Game.hostileUnits -= 1
 	
 func spawn_enemies(number) -> void:
 	var mainPath = get_tree().get_root().get_node("Main")
 	var new_enemy
 	var enemyPath = get_tree().get_root().get_node("Main/Enemies/"+current_group)
 	
-	if enemyPath.get_child_count() >= num_of_enemies:
+	if enemyPath.get_child_count() > Game.POP_CAP_HOSTILE:
 		return
 	
 	if self.name == "Moltres":
@@ -87,6 +85,9 @@ func spawn_enemies(number) -> void:
 		new_enemy = plantos_child.instantiate()
 	else:
 		new_enemy = waltos_child.instantiate()
+	
+	# increment hostile unit counter 
+	Game.hostileUnits += 1
 	
 	for i in range(1, number):
 		new_enemy.position.x = current_x_spawn_location + rng.randf_range(-40, 40)
