@@ -8,7 +8,6 @@ choose between All, Most, Half, Some, Touched
 | | Justin | Max | Conrad | Evan |
 |----|----|----|----|----|
 |Map, Building & Tilemap|x| x | x | x | 
-|Wall of Death| x | x | x | x |  
 |Navigation| x | x | x | x |
 |Pikachu| x | x | x | x |
 |Sprites & Animation| x | x | x | x |
