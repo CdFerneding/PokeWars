@@ -99,7 +99,7 @@ func apply_corresponding_animation():
 	var current_animation
 	
 	# calculate the degrees of the walking direction
-	var current_velocity = get_real_velocity()
+	var current_velocity = velocity
 	var radians = current_velocity.angle()
 	var degrees = radians * (180/PI)
 	if degrees < 0:
