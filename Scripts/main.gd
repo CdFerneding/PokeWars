@@ -247,13 +247,13 @@ func _handle_place_input(event):
 	if Input.is_action_just_pressed("left_click"):
 		var position = tileMap.get_global_mouse_position()
 		if type_of_pokemon_to_place == 0:
-			unitBuilder._build_unit(self,"Pikachu", position, 0)
+			unitBuilder._build_unit(self,"Pikachu", position, 1, 0)
 		elif type_of_pokemon_to_place == 1:
-			unitBuilder._build_unit(self,"Charmander", position, 0)
+			unitBuilder._build_unit(self,"Charmander", position, 2, 0)
 		elif type_of_pokemon_to_place == 2:
-			unitBuilder._build_unit(self,"Squirtle", position, 0)
+			unitBuilder._build_unit(self,"Squirtle", position, 2, 0)
 		else:
-			unitBuilder._build_unit(self,"Bulbasaur", position, 0)
+			unitBuilder._build_unit(self,"Bulbasaur", position, 2, 0)
 			
 
 '

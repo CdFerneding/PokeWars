@@ -5,13 +5,15 @@ class_name PikachuBuilder
 
 # instantiate a new scene
 #						asChildOf   sceneName    startPosition     offset
-static func _build_unit(main: Node, name:String, position:Vector2, y_offset):
+static func _build_unit(main: Node, name:String, position:Vector2, y_offset, evolution):
 	var unitPath = _select_path(main, name)
 	var unitScene = _select_scene(name)
 		
 	var unit = unitScene.instantiate()
 	unit.position = position
 	unit.position.y += y_offset
+	if name != "Pikachu":
+		unit.evolution = evolution
 
 	unitPath.add_child(unit)
 	# pikachus need the name Pikachu, to be recognized by resources farming-area

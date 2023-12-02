@@ -9,8 +9,14 @@ const bulbasaur = "res://Scenes/pokemon/bulbasaur.tscn"
 
 var pikachuIcon = "res://Assets/Potraits/pikachu_and_evolutions/pikachu Angry.png"
 var CharmanderIcon = "res://Assets/Potraits/charmander_and_evolutions/charmander Angry.png"
-var SquirleIcon = "res://Assets/Potraits/squirtle Angry.png"
-var BulbasaurIcon = "res://Assets/Potraits/bulbasaur Angry.png"
+var CharmeleonIcon =  "res://Assets/Potraits/charmander_and_evolutions/charmeleon Angry.png"
+var CharizardIcon = "res://Assets/Potraits/charmander_and_evolutions/Charizard Angry.png"
+var SquirleIcon = "res://Assets/Potraits/squirtle_and_evolutions/squirtle Angry.png"
+var WartortleIcon = "res://Assets/Potraits/squirtle_and_evolutions/Wartortle Angry.png"
+var BlastoiseIcon = "res://Assets/Potraits/squirtle_and_evolutions/Blastoise Angry.png"
+var BulbasaurIcon = "res://Assets/Potraits/bulbasaur_and_evolutions/Bulbasaur Angry.png"
+var IvysaurIcon = "res://Assets/Potraits/bulbasaur_and_evolutions/Ivysaur Angry.png"
+var VenusaurIcon = "res://Assets/Potraits/bulbasaur_and_evolutions/Venusaur Angry.png"
 
 
 var Food = 0

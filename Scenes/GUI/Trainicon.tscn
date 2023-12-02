@@ -24,6 +24,7 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("2_6pgxs")
+expand_mode = 1
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 layout_mode = 0

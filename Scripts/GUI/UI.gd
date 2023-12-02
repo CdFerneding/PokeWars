@@ -7,7 +7,6 @@ extends CanvasLayer
 @onready var GameModeLabel = $GameStateBox/VBoxContainer/GameMode
 @onready var GameModeBuilding = $GameStateBox/VBoxContainer/CurrentBuilding
 @onready var SelectedLabel = $GameStateBox/VBoxContainer/Selected # (numbers of currently selected pikachus)
-@onready var pikachuIcon = preload("res://Assets/Potraits/pikachu_and_evolutions/pikachu Angry.png")
 
 var time = 0
 var currentBuilding
@@ -18,6 +17,8 @@ var currentBuilding
 func _ready():
 	$GameStateBox.visible = true
 	$BuildingButtonBox.visible = true
+	$TrainBox/TrainUnitButtonLvl2.disabled = true
+	$TrainBox/TrainUnitButtonLvl3.disabled = true
 	checkGameMode()
 
 func update_game_timer():
@@ -93,17 +94,61 @@ func checkGameMode():
 
 
 func show_training_button():
-	var button = $TrainBox/TrainUnitButton
-	if("PokeCenter" in currentBuilding.name):
-		button.icon = pikachuIcon
+	var button1 = $TrainBox/TrainUnitButtonLvl1
+	var button2 = $TrainBox/TrainUnitButtonLvl2
+	var button3 = $TrainBox/TrainUnitButtonLvl3
+	button2.show()
+	button3.show()
+	button2.disabled = true
+	button3.disabled = true
+	if"PokeCenter" in currentBuilding.name:
+		button1.icon = load(Game.pikachuIcon)
+		button2.hide()
+		button3.hide()
+	elif "Fire" in currentBuilding.name:
+		button1.icon = load(Game.CharmanderIcon)
+		button2.icon = load(Game.CharmeleonIcon)
+		button3.icon = load(Game.CharizardIcon)
+		_check_unlocks("Fire")
+	elif "Plant" in currentBuilding.name:
+		button1.icon = load(Game.BulbasaurIcon)
+		button2.icon = load(Game.IvysaurIcon)
+		button3.icon = load(Game.VenusaurIcon)
+		_check_unlocks("Plant")
+	elif "Water" in currentBuilding.name:
+		button1.icon = load(Game.SquirleIcon)
+		button2.icon = load(Game.WartortleIcon)
+		button3.icon = load(Game.BlastoiseIcon)
+		_check_unlocks("Water")
 	
 	$TrainBox.show()
 	$UpgradeMilitary.hide()
 	$BuildingButtonBox.hide()
 
+func _check_unlocks(name):
+	match name:
+		"Fire":
+			match Game.fireUnitLvl:
+				1:
+					$TrainBox/TrainUnitButtonLvl2.disabled = false
+				2:
+					$TrainBox/TrainUnitButtonLvl2.disabled = false
+					$TrainBox/TrainUnitButtonLvl3.disabled = false
+		"Water":
+			match Game.waterUnitLvl:
+				1:
+					$TrainBox/TrainUnitButtonLvl2.disabled = false
+				2:
+					$TrainBox/TrainUnitButtonLvl2.disabled = false
+					$TrainBox/TrainUnitButtonLvl3.disabled = false
+		"Plant":
+			match Game.plantUnitLvl:
+				1:
+					$TrainBox/TrainUnitButtonLvl2.disabled = false
+				2:
+					$TrainBox/TrainUnitButtonLvl2.disabled = false
+					$TrainBox/TrainUnitButtonLvl3.disabled = false
 
-func _on_train_unit_button_pressed():
-	currentBuilding.train_unit()
 
 
 func _on_train_box_mouse_entered():
@@ -151,6 +196,7 @@ func show_upgrade_military(state):
 
 
 func _on_upgrade_to_wartortle_pressed():
+	print("fwdwad")
 	if Game.waterUnitLvl != 0 or is_upgrade_ongoing("Wartortle"):
 		return
 	if (Game.plantUnitLvl > 0 or is_upgrade_ongoing("Ivysaur")) and (Game.fireUnitLvl > 0 or is_upgrade_ongoing("Charmeleon")):
@@ -186,7 +232,7 @@ func _on_upgrade_to_charmeleon_pressed():
 	elif (Game.plantUnitLvl == 0 or is_upgrade_ongoing("Ivysaur")) and (Game.waterUnitLvl > 0 or is_upgrade_ongoing("Wartortle")):
 		start_upgrade(120, "Charmeleon")
 	else:
-		start_upgrade(90, "Charmeleon")
+		start_upgrade(10, "Charmeleon")
 
 
 func _on_upgrade_to_charizard_pressed():
@@ -281,3 +327,14 @@ func _on_win_game_pressed():
 
 func _on_loose_game_pressed():
 	Game.trigger_loose_game()
+
+func _on_train_unit_button_lvl_1_pressed():
+	currentBuilding.train_unit(0)
+
+func _on_train_unit_button_lvl_2_pressed():
+	currentBuilding.train_unit(1)
+
+func _on_train_unit_button_lvl_3_pressed():
+	currentBuilding.train_unit(2)
+
+

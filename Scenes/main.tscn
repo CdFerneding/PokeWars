@@ -17,7 +17,7 @@
 [ext_resource type="Script" path="res://Scripts/Entities/BigBadPokemon.gd" id="16_mwle3"]
 [ext_resource type="Texture2D" uid="uid://di45pnuqtfhuh" path="res://Assets/Sprites/Fire/Moltres/Idle-Anim.png" id="17_sdfoi"]
 [ext_resource type="Texture2D" uid="uid://b2ad87iiw8j3w" path="res://Assets/Sprites/Grass/Zapdos/Idle-Anim.png" id="19_bkhy1"]
-[ext_resource type="PackedScene" path="res://Scenes/WorldObjects/laboratory.tscn" id="20_a52k6"]
+[ext_resource type="PackedScene" uid="uid://b1esjwpt462wj" path="res://Scenes/WorldObjects/laboratory.tscn" id="20_a52k6"]
 [ext_resource type="Texture2D" uid="uid://2uctvkx3s3i2" path="res://Assets/Sprites/Water/Artikuno/Idle-Anim.png" id="21_rur0q"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_n6h3u"]

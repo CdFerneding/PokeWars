@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://c5xbd3qrnk5vl"]
+[gd_scene load_steps=21 format=3 uid="uid://c5xbd3qrnk5vl"]
 
 [ext_resource type="Script" path="res://Scripts/GUI/UI.gd" id="1_ivh8w"]
 [ext_resource type="Texture2D" uid="uid://dv0lqqmit4txc" path="res://Assets/Menu/background.png" id="2_7x6ev"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://0f62nxxobstl" path="res://Assets/Sprites/Building/plant_arena.png" id="5_7q0qc"]
 [ext_resource type="Texture2D" uid="uid://cxmbtq8hta636" path="res://Assets/Potraits/pikachu_and_evolutions/pikachu Angry.png" id="6_a3ebk"]
 [ext_resource type="Texture2D" uid="uid://dprpybuepjxro" path="res://Assets/Potraits/squirtle_and_evolutions/wartortle.png" id="7_6yr0l"]
+[ext_resource type="Texture2D" uid="uid://bcin8ouydu2iu" path="res://Assets/Potraits/bulbasaur_and_evolutions/Ivysaur Angry.png" id="7_ft57y"]
 [ext_resource type="Texture2D" uid="uid://bv0hp1n8p3cgm" path="res://Assets/Potraits/squirtle_and_evolutions/blastoise.png" id="8_4jjvb"]
 [ext_resource type="Texture2D" uid="uid://bmssiujqxml5m" path="res://Assets/Potraits/charmander_and_evolutions/charmeleon.png" id="9_5lsh7"]
 [ext_resource type="Texture2D" uid="uid://criin56bg1ama" path="res://Assets/Potraits/charmander_and_evolutions/charizard.png" id="10_1dvkj"]
@@ -189,23 +190,40 @@ offset_bottom = 73.0
 [node name="Timer" type="Timer" parent="."]
 
 [node name="TrainBox" type="TextureRect" parent="."]
-visible = false
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_top = -268.0
-offset_right = 241.0
+offset_right = 389.0
 grow_vertical = 0
 texture = ExtResource("2_7x6ev")
 
-[node name="TrainUnitButton" type="Button" parent="TrainBox"]
+[node name="TrainUnitButtonLvl1" type="Button" parent="TrainBox"]
 layout_mode = 0
-offset_left = 57.0
-offset_top = 72.0
-offset_right = 193.0
-offset_bottom = 197.0
+offset_left = 50.0
+offset_top = 100.0
+offset_right = 138.0
+offset_bottom = 190.0
 icon = ExtResource("6_a3ebk")
 icon_alignment = 1
+expand_icon = true
+
+[node name="TrainUnitButtonLvl2" type="Button" parent="TrainBox"]
+layout_mode = 0
+offset_left = 150.0
+offset_top = 100.0
+offset_right = 238.0
+offset_bottom = 190.0
+icon = ExtResource("7_ft57y")
+expand_icon = true
+
+[node name="TrainUnitButtonLvl3" type="Button" parent="TrainBox"]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 100.0
+offset_right = 338.0
+offset_bottom = 190.0
+icon = ExtResource("7_ft57y")
 expand_icon = true
 
 [node name="UpgradeMilitary" type="TextureRect" parent="."]
@@ -291,19 +309,6 @@ offset_right = 573.0
 offset_bottom = 55.0
 theme_override_constants/separation = 0
 
-[node name="winGame" type="Button" parent="."]
-offset_left = 205.0
-offset_right = 301.0
-offset_bottom = 35.0
-text = "win game"
-
-[node name="looseGame" type="Button" parent="."]
-offset_left = 206.0
-offset_top = 40.0
-offset_right = 289.0
-offset_bottom = 75.0
-text = "loose game"
-
 [connection signal="pressed" from="BuildingButtonBox/Fire Arena Button" to="." method="_on_fire_arena_pressed"]
 [connection signal="pressed" from="BuildingButtonBox/Water Arena Button" to="." method="_on_water_arena_pressed"]
 [connection signal="pressed" from="BuildingButtonBox/Plant Arena Button" to="." method="_on_plant_arena_pressed"]
@@ -311,7 +316,9 @@ text = "loose game"
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="mouse_entered" from="TrainBox" to="." method="_on_train_box_mouse_entered"]
 [connection signal="mouse_exited" from="TrainBox" to="." method="_on_train_box_mouse_exited"]
-[connection signal="pressed" from="TrainBox/TrainUnitButton" to="." method="_on_train_unit_button_pressed"]
+[connection signal="pressed" from="TrainBox/TrainUnitButtonLvl1" to="." method="_on_train_unit_button_lvl_1_pressed"]
+[connection signal="pressed" from="TrainBox/TrainUnitButtonLvl2" to="." method="_on_train_unit_button_lvl_2_pressed"]
+[connection signal="pressed" from="TrainBox/TrainUnitButtonLvl3" to="." method="_on_train_unit_button_lvl_3_pressed"]
 [connection signal="mouse_entered" from="UpgradeMilitary" to="." method="_on_train_box_mouse_entered"]
 [connection signal="mouse_exited" from="UpgradeMilitary" to="." method="_on_train_box_mouse_exited"]
 [connection signal="pressed" from="UpgradeMilitary/UpgradeToWartortle" to="." method="_on_upgrade_to_wartortle_pressed"]
@@ -320,5 +327,3 @@ text = "loose game"
 [connection signal="pressed" from="UpgradeMilitary/UpgradeToCharizard" to="." method="_on_upgrade_to_charizard_pressed"]
 [connection signal="pressed" from="UpgradeMilitary/UpgradeToIvysaur" to="." method="_on_upgrade_to_ivysaur_pressed"]
 [connection signal="pressed" from="UpgradeMilitary/UpgradeToVenusaur" to="." method="_on_upgrade_to_venusaur_pressed"]
-[connection signal="pressed" from="winGame" to="." method="_on_win_game_pressed"]
-[connection signal="pressed" from="looseGame" to="." method="_on_loose_game_pressed"]

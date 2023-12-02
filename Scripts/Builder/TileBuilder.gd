@@ -4,7 +4,7 @@ static func _tile_setter(position:Array,tileMap:TileMap,tileId:int):
 	var y_range = (position[2]+2) - (position[3]+1)
 	var x_range = (position[1]-2) - (position[0]-3)
 	
-	tileMap.set_cell(1,Vector2(position[0], position[2]),tileId,Vector2i(0,0))
+	#tileMap.set_cell(1,Vector2(position[0], position[2]),tileId,Vector2i(0,0))
 	
 	for n in range(position[2]+2,position[3]+1,-1):
 		var x = 0
@@ -15,21 +15,16 @@ static func _tile_setter(position:Array,tileMap:TileMap,tileId:int):
 				elif y == y_range-1:
 					tileMap.set_cell(0,Vector2(m,n), 1,Vector2i(3,4))
 				else:
-					tileMap.set_cell(0,Vector2(m,n), 1,Vector2i(2,7))
+					tileMap.set_cell(0,Vector2(m,n), 1,Vector2i(0,4))
 			elif x == x_range-1:
 					if y == 0:
 						tileMap.set_cell(0,Vector2(m,n), 1,Vector2i(2,5))
 					elif y == y_range-1:
 						tileMap.set_cell(0,Vector2(m,n), 1,Vector2i(2,4))
 					else:
-						tileMap.set_cell(0,Vector2(m,n), 1,Vector2i(2,6))
-			else:
-					if y == y_range-1:
-						tileMap.set_cell(0,Vector2(m,n), 1,Vector2i(3,6))
-					elif y == 0:
-						tileMap.set_cell(0,Vector2(m,n), 1,Vector2i(3,7))
-					else:
 						tileMap.set_cell(0,Vector2(m,n), 1,Vector2i(0,4))
+			else:
+				tileMap.set_cell(0,Vector2(m,n), 1,Vector2i(0,4))
 			x = x +1
 		y = y + 1
 

@@ -33,23 +33,34 @@ func _process(delta):
 '
 timer functions
 '
-func _start_training():
+func _start_training(evolution):
 	var scene = load("res://Scenes/GUI/Trainicon.tscn")
 	var queueItem = scene.instantiate()
-	queueItem.get_node("UnitIcon").texture = check_current_pokemon()
+	queueItem.get_node("UnitIcon").texture = check_current_pokemon(evolution)
 	queueItem.building = self
+	queueItem.evolution = evolution
 	UI.get_node("TrainingQueue").add_child(queueItem)
 
-func training_finished():
+func training_finished(evolution):
 	currently_training = false
 	if "PokeCenter" in self.name:
-		unitBuilder._build_unit(main,"Pikachu",self.position, 3)
+		unitBuilder._build_unit(main,"Pikachu",self.position, 3,0)
 	if "Fire Arena" in self.name:
-			unitBuilder._build_unit(main,"Charmander",self.position, 4)
+		print(evolution)
+		match evolution:
+			0: unitBuilder._build_unit(main,"Charmander",self.position, 8,0)
+			1: unitBuilder._build_unit(main,"Charmander",self.position, 8,1)
+			2: unitBuilder._build_unit(main,"Charmander",self.position, 8,2)
 	if "Water Arena" in self.name:
-			unitBuilder._build_unit(main,"Squirtle",self.position, 4)
+		match evolution:
+			0: unitBuilder._build_unit(main,"Squirtle",self.position, 8,0)
+			1: unitBuilder._build_unit(main,"Squirtle",self.position, 8,1)
+			2: unitBuilder._build_unit(main,"Squirtle",self.position, 8,2)
 	if "Plant Arena" in self.name:
-			unitBuilder._build_unit(main,"Bulbasaur",self.position, 4)
+			match evolution:
+				0: unitBuilder._build_unit(main,"Bulbasaur",self.position, 8,0)
+				1: unitBuilder._build_unit(main,"Bulbasaur",self.position, 8,1)
+				2: unitBuilder._build_unit(main,"Bulbasaur",self.position, 8,2)
 
 
 
@@ -74,9 +85,10 @@ func _on_input_event(viewport, event, shape_idx):
 
 
 
-func train_unit():
-	Game.Food = Game.Food - 10
-	_start_training()
+func train_unit(evolution):
+	if Game.Food > _check_food():
+		Game.Food = Game.Food - _check_food()
+		_start_training(evolution)
 		
 
 func _delete_building(event):
@@ -91,12 +103,28 @@ func _show_train_UI():
 	UI.get_node("TrainBox").show()
 	UI.show_training_button()
 	
-func check_current_pokemon():
+func check_current_pokemon(evolution):
 	if "PokeCenter" in self.name:
 		return load(Game.pikachuIcon)
 	if "Fire Arena" in self.name:
-			return load(Game.CharmanderIcon)
+		match evolution:
+			0: return load(Game.CharmanderIcon)
+			1: return load(Game.CharmeleonIcon)
+			2: return load(Game.CharizardIcon)
 	if "Water Arena" in self.name:
-			return load(Game.SquirleIcon)
+			match evolution:
+				0: return load(Game.SquirleIcon)
+				1: return load(Game.WartortleIcon)
+				2: return load(Game.BlastoiseIcon)
 	if "Plant Arena" in self.name:
-			return load(Game.BulbasaurIcon)
+			match evolution:
+				0: return load(Game.BulbasaurIcon)
+				1: return load(Game.IvysaurIcon)
+				2: return load(Game.VenusaurIcon)
+
+
+func _check_food():
+	if "PokeCenter" in self.name:
+		return Game.pikachuCost
+	else:
+		return Game.militaryCost

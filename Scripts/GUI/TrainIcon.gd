@@ -5,6 +5,7 @@ var building: Node = null
 var currentTime
 var totalTime = 10
 var timer
+var evolution = 0
 @export var type = ""
 
 # Called when the node enters the scene tree for the first time.
@@ -24,7 +25,7 @@ func _on_progress_bar_value_changed(value):
 	var prog = $ProgressBar
 	if prog.value == prog.max_value:
 		if building != null:
-			building.training_finished()
+			building.training_finished(evolution)
 			# level the unit timer up if the icon was an upgrade
 		if type == "Wartortle":
 			Game.waterUnitLvl = 1
