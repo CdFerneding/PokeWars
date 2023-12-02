@@ -266,7 +266,7 @@ func _on_upgrade_to_charmeleon_pressed():
 	elif (Game.plantUnitLvl == 0 or is_upgrade_ongoing("Ivysaur")) and (Game.waterUnitLvl > 0 or is_upgrade_ongoing("Wartortle")):
 		start_upgrade(120, "Charmeleon")
 	else:
-		start_upgrade(10, "Charmeleon")
+		start_upgrade(90, "Charmeleon")
 
 
 func _on_upgrade_to_charizard_pressed():
