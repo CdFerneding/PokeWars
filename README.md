@@ -18,6 +18,7 @@ choose between All, Most, Half, Some, Touched
 |Win/Loose condition trigger| x | x | x | x | 
 |Music, Cursor| x | x | x | x | 
 |GUI| x | x | x | x | 
+|inheritance| x | x | x | x |
 
 ## Concept
 
@@ -32,7 +33,7 @@ Commands can be executed with right "game mode".
 Mode can be switched with:
 R -> "Run": handling pokemon
 B -> "Build": infrastructure, buildings
-P -> "Place": placing new pokemon (SHOULD NOT BE NECESSARY IN THE FINAL VERSION!)
+P -> "Place": placing new pokemon (IS DELETED IN THE FINAL VERSION!)
 
 ### Moving Pikachu:
 #### Game Mode: R
