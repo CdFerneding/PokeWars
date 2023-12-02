@@ -17,7 +17,7 @@
 [ext_resource type="Script" path="res://Scripts/Entities/BigBadPokemon.gd" id="16_mwle3"]
 [ext_resource type="Texture2D" uid="uid://di45pnuqtfhuh" path="res://Assets/Sprites/Fire/Moltres/Idle-Anim.png" id="17_sdfoi"]
 [ext_resource type="Texture2D" uid="uid://b2ad87iiw8j3w" path="res://Assets/Sprites/Grass/Zapdos/Idle-Anim.png" id="19_bkhy1"]
-[ext_resource type="PackedScene" path="res://Scenes/WorldObjects/laboratory.tscn" id="20_a52k6"]
+[ext_resource type="PackedScene" uid="uid://b1esjwpt462wj" path="res://Scenes/WorldObjects/laboratory.tscn" id="20_a52k6"]
 [ext_resource type="Texture2D" uid="uid://2uctvkx3s3i2" path="res://Assets/Sprites/Water/Artikuno/Idle-Anim.png" id="21_rur0q"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_n6h3u"]
@@ -601,10 +601,10 @@ animation = &"idle_down"
 
 [node name="StartEnemySpawn" type="Timer" parent="."]
 wait_time = 150.0
-one_shot = true
 autostart = true
 
 [connection signal="timeout" from="UpdateCameraBorderFix" to="Camera" method="update_limit"]
 [connection signal="timeout" from="Moltres/EnemySpawnerTimer" to="Moltres" method="_on_enemy_spawner_timer_timeout"]
 [connection signal="timeout" from="Plantos/EnemySpawnerTimer_2" to="Plantos" method="_on_enemy_spawner_timer_timeout"]
 [connection signal="timeout" from="Waltos/EnemySpawnerTimer_3" to="Waltos" method="_on_enemy_spawner_timer_timeout"]
+[connection signal="timeout" from="StartEnemySpawn" to="." method="_on_start_enemy_spawn_timeout"]

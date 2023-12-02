@@ -949,7 +949,7 @@ bg_color = Color(0.192157, 0.917647, 0, 0.886275)
 bg_color = Color(0.882353, 0.482353, 0, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_l8x67"]
-radius = 41.0
+radius = 31.0644
 
 [node name="Bulbasaur" type="CharacterBody2D" groups=["bulbasaurs"]]
 y_sort_enabled = true

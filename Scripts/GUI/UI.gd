@@ -18,6 +18,8 @@ var currentBuilding
 func _ready():
 	$GameStateBox.visible = true
 	$BuildingButtonBox.visible = true
+	$winGame.show()
+	$looseGame.show()
 	checkGameMode()
 
 func update_game_timer():

@@ -58,11 +58,6 @@ func _on_enemy_spawner_timer_timeout():
 	if Game.is_paused == true or (mainPath.enemiesCanSpawn == false):
 		return
 	
-	var enemyPath = get_tree().get_root().get_node("Main/Enemies/"+current_group)
-	
-	if enemyPath.get_child_count() >= num_of_enemies:
-		return
-
 	if current_group == "arena1":
 		spawn_enemies(2 + iteration1)
 		iteration1 = iteration1 + 1
@@ -72,13 +67,18 @@ func _on_enemy_spawner_timer_timeout():
 	elif current_group == "arena3":
 		spawn_enemies(7 + iteration3 * 2)
 		iteration3 = iteration3 + 1
-	
+	print("enemy spawn timer timeout")
 	
 func _on_ennemy_killed():
 	pass
 	
 func spawn_enemies(number) -> void:
+	var mainPath = get_tree().get_root().get_node("Main")
 	var new_enemy
+	var enemyPath = get_tree().get_root().get_node("Main/Enemies/"+current_group)
+	
+	if enemyPath.get_child_count() >= num_of_enemies:
+		return
 	
 	if self.name == "Moltres":
 		new_enemy = moltres_child.instantiate()

@@ -44,6 +44,7 @@ func _ready():
 	
 		
 func on_intro_finished():
+	$StartEnemySpawn.start()
 	score = 0
 	$UI/Timer.start()
 	$UI/GameStateBox.visible = true
@@ -202,7 +203,7 @@ pikachu multiple times and increases selected count
 '
 
 func _handle_esc():
-	if Input.is_action_pressed("Esc"):
+	if Input.is_action_just_pressed("Esc"):
 		var pathui = get_tree().get_root().get_node("Main/UI")
 		var childrenHUD = $UI.get_children()
 		for child in childrenHUD:
@@ -316,5 +317,5 @@ func get_bad_pokemon() -> Array:
 
 
 func _on_start_enemy_spawn_timeout():
-	
 	enemiesCanSpawn = true
+	print("on start enemey spawn timeout")

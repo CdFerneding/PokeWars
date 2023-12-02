@@ -349,6 +349,7 @@ offset_right = 458.0
 offset_bottom = 100.0
 text = "fist evolutions: 20 Berries
 second evolutions: 40 Berries"
+horizontal_alignment = 1
 
 [node name="TrainingQueue" type="HBoxContainer" parent="."]
 offset_left = 202.0
@@ -358,12 +359,14 @@ offset_bottom = 55.0
 theme_override_constants/separation = 0
 
 [node name="winGame" type="Button" parent="."]
+visible = false
 offset_left = 205.0
 offset_right = 301.0
 offset_bottom = 35.0
 text = "win game"
 
 [node name="looseGame" type="Button" parent="."]
+visible = false
 offset_left = 206.0
 offset_top = 40.0
 offset_right = 289.0
