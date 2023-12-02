@@ -7,7 +7,7 @@ Justin Frauböse (J), Max Neubauer (M), Conrad Ferneding (C), Evan Fregeais (E)
 choose between All, Most, Half, Some, Touched
 | | Justin | Max | Conrad | Evan |
 |----|----|----|----|----|
-|Map Building & Tilemap|x| x | x | x | 
+|Map, Building & Tilemap|x| x | x | x | 
 |Wall of Death| x | x | x | x |  
 |Navigation| x | x | x | x |
 |Pikachu| x | x | x | x |
@@ -16,7 +16,7 @@ choose between All, Most, Half, Some, Touched
 |Military Units and battle| x | x | x | x | 
 |Pokemon Spawner (+spawn rate)| x | x | x | x | 
 |Win/Loose condition trigger| x | x | x | x | 
-|Music| x | x | x | x | 
+|Music, Cursor| x | x | x | x | 
 |GUI| x | x | x | x | 
 
 ## Concept
