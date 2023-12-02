@@ -34,6 +34,9 @@ var default_cursor = preload("res://Assets/Sprites/Cursor/test_cursor_2.png")
 
 var rng = RandomNumberGenerator.new()
 
+#flag that indicates, when 2,5 min are over that enemies can spawn
+var enemiesCanSpawn = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#set cursor to default
@@ -93,7 +96,20 @@ func get_buildings():
 func _process(_delta):
 	if Game.is_paused == true:
 		return
-
+		
+func _physics_process(delta):
+	if Game.is_paused == true:
+		return
+	else:
+		
+		var p = get_tree().get_nodes_in_group("pikachus").size()
+		var b = get_tree().get_nodes_in_group("bulbasaurs").size()
+		var c = get_tree().get_nodes_in_group("charmanders").size()
+		var s = get_tree().get_nodes_in_group("squirtles").size()
+		if p + b + c + s == 0:
+			Game.trigger_loose_game()
+		
+		
 '
 this is code for the drag-selection
 part of it is in the camera.gd file
@@ -295,3 +311,10 @@ func get_good_pokemon():
 
 func get_bad_pokemon() -> Array:
 	return enemies
+
+
+
+
+func _on_start_enemy_spawn_timeout():
+	
+	enemiesCanSpawn = true

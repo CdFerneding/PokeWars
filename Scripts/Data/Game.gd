@@ -55,7 +55,12 @@ func set_game_paused(state):
 	
 	# this state varible is used to more specifically skip functions in the Game
 	is_paused = state
-
+'''
+func _process(delta):
+	if is_paused == false:
+		if true:
+			var mainPath = get_tree().get_root().get_node("Main")
+'''			
 
 func run_intro_finished():
 	var mainPath = get_tree().get_root().get_node("Main")

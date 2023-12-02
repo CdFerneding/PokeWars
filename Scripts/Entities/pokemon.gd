@@ -14,6 +14,10 @@ var speed = 25
 #used to detect when path is reached
 var target : Vector2
 
+enum PokemonType {NEUTRAL, FIRE, WATER, GRASS, ELECTRICITY}
+
+@export var type : PokemonType
+
 @onready var health_bar = $HealthBar
 
 func _ready():
@@ -22,3 +26,27 @@ func _ready():
 
 func _physics_process(delta):
 	pass
+
+func calculateDamage(damage : int, attackType : PokemonType):
+	match attackType:
+		PokemonType.FIRE:
+			if type == PokemonType.WATER or type == PokemonType.FIRE:
+				damage /= 2
+			elif type == PokemonType.GRASS:
+				damage *= 2
+		PokemonType.WATER:
+			if type == PokemonType.GRASS or type == PokemonType.WATER:
+				damage /= 2
+			elif type == PokemonType.FIRE:
+				damage *= 2
+		PokemonType.GRASS:
+			if type == PokemonType.FIRE or type == PokemonType.GRASS:
+				damage /= 2
+			elif type == PokemonType.WATER:
+				damage *= 2
+		PokemonType.ELECTRICITY:
+			if type == PokemonType.GRASS or type == PokemonType.ELECTRICITY:
+				damage /= 2
+			elif type == PokemonType.WATER:
+				damage *= 2
+	return damage
