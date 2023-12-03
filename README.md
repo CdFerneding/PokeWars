@@ -1,10 +1,9 @@
 # Pokewars
 
 ## Members
-Justin Frauböse (J), Max Neubauer (M), Conrad Ferneding (C), Evan Fregeais (E)
+Justin Frauböse, Max Neubauer, Conrad Ferneding, Evan Fregeais
 
 ## Code claims 
-choose between All, Most, Half, Some, Touched
 | | Justin | Max | Conrad | Evan |
 |----|----|----|----|----|
 |Map & Tilemap| Touched | All | Touched | Touched | 
