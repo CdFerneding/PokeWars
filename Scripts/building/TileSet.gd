@@ -22,7 +22,7 @@ func _ready():
 		start_position = map_to_local(start_position)
 		home_base = all_pokemon_centers[0]
 		home_base = map_to_local(home_base)
-
+	Game.HOME_BASE = home_base
 
 '''
 Description:
