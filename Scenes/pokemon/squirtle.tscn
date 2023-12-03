@@ -1,4 +1,4 @@
-[gd_scene load_steps=110 format=3 uid="uid://peogcc3k3r4i"]
+[gd_scene load_steps=111 format=3 uid="uid://peogcc3k3r4i"]
 
 [ext_resource type="Script" path="res://Scripts/Entities/squirtle.gd" id="1_6lpe6"]
 [ext_resource type="Texture2D" uid="uid://dp8p0gty50ojf" path="res://Assets/Sprites/Water/Squirtle/Walk-Anim.png" id="1_lqs8x"]
@@ -837,6 +837,9 @@ bg_color = Color(0.192157, 0.917647, 0, 0.886275)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5b1lp"]
 bg_color = Color(0.882353, 0.482353, 0, 1)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_xfg7k"]
+radius = 200.0
+
 [node name="Squirtle" type="CharacterBody2D" groups=["squirtles"]]
 y_sort_enabled = true
 input_pickable = true
@@ -897,6 +900,9 @@ offset_bottom = 12.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_wlnfl")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+process_thread_group = 2
+process_thread_group_order = 2
+process_thread_messages = 1
 navigation_layers = 3
 avoidance_enabled = true
 avoidance_mask = 3
@@ -918,7 +924,20 @@ autostart = true
 autostart = true
 
 [node name="PlayerNavigationAgent" type="NavigationAgent2D" parent="."]
+process_thread_group = 2
+process_thread_group_order = 2
+process_thread_messages = 1
+
+[node name="AttackRangeArea2D" type="Area2D" parent="."]
+process_thread_group = 2
+process_thread_group_order = 1
+process_thread_messages = 2
+
+[node name="AttackCollisionShape2D" type="CollisionShape2D" parent="AttackRangeArea2D"]
+shape = SubResource("CircleShape2D_xfg7k")
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
 [connection signal="timeout" from="RetargetTimer" to="." method="_on_retarget_timer_timeout"]
+[connection signal="body_entered" from="AttackRangeArea2D" to="." method="_on_attack_range_area_2d_body_entered"]
+[connection signal="body_exited" from="AttackRangeArea2D" to="." method="_on_attack_range_area_2d_body_exited"]
