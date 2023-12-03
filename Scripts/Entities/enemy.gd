@@ -18,9 +18,9 @@ var home_base = pathTilemap.home_base
 @export var arena : Node = null
 
 var current_target: Node
-
-var animationSprite
 var is_fighting = false
+
+@export var attack_damage = 5
 
 #implements the pathfinding algorithm
 @onready var nav_agent:= $NavigationAgent2D #as NavigationAgent2D
@@ -41,10 +41,13 @@ func _ready():
 func assign_sprite():
 	if self.name == "WaltosChild":
 		animationSprite = $waltos
+		type = PokemonType.WATER
 	elif self.name == "PlantosChild":
+		type = PokemonType.GRASS
 		animationSprite = $plantos
 		animationSprite.modulate = Color(0, 1, 0)
 	else:
+		type = PokemonType.ELECTRICITY
 		animationSprite = $moltres
 
 func _process(_delta:float):
@@ -60,7 +63,7 @@ func _process(_delta:float):
 #		is_fighting = false
 		
 func attack():
-	(current_target as GoodPokemon)._on_hit(1, PokemonType.ELECTRICITY)
+	(current_target as GoodPokemon)._on_hit(attack_damage, type)
 	$AttackCooldown.start()
 	
 func _physics_process(_delta: float) -> void:
@@ -88,38 +91,6 @@ func _physics_process(_delta: float) -> void:
 func make_path(ressource_position = get_global_mouse_position()) -> void:
 	nav_agent.target_position = nearest_target.position
 	target = nav_agent.target_position
-	
-
-func apply_corresponding_animation():
-	var current_animation
-	
-	# calculate the degrees of the walking direction
-	var current_velocity = velocity
-	var radians = current_velocity.angle()
-	var degrees = radians * (180/PI)
-	if degrees < 0:
-		degrees = 360 - abs(degrees)
-	
-	if degrees >= 22.5 and degrees <= 67.5:
-		current_animation = "walk_down_right"
-	elif degrees > 67.5 and degrees <= 112.5:
-		current_animation = "walk_down"
-	elif degrees > 112.5 and degrees <= 157.5:
-		current_animation = "walk_down_left"
-	elif degrees > 157.5 and degrees <= 202.5:
-		current_animation = "walk_left"
-	elif degrees > 202.5 and degrees <= 247.5:
-		current_animation = "walk_up_left"
-	elif degrees > 247.5 and degrees <= 292.5:
-		current_animation = "walk_up"
-	elif degrees > 292.5 and degrees <= 337.5:
-		current_animation = "walk_up_right"
-	else:
-		current_animation = "walk_right"
-
-	animationSprite.animation = current_animation
-	animationSprite.play()
-
 
 func _on_mouse_entered():
 	if Game.is_paused == true:

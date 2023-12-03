@@ -1,7 +1,7 @@
 [gd_scene load_steps=40 format=3 uid="uid://dms8vabnoo6fp"]
 
 [ext_resource type="Script" path="res://Scripts/Entities/enemy.gd" id="1_iaykp"]
-[ext_resource type="Texture2D" path="res://Assets/Sprites/Fire/Moltres/Walk-Anim.png" id="2_8qepe"]
+[ext_resource type="Texture2D" uid="uid://bk43i2dfsfgup" path="res://Assets/Sprites/Fire/Moltres/Walk-Anim.png" id="2_8qepe"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_aq3mw"]
 atlas = ExtResource("2_8qepe")
@@ -307,6 +307,9 @@ scale = Vector2(0.6, 0.6)
 shape = SubResource("CircleShape2D_vg7x3")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+process_thread_group = 2
+process_thread_group_order = 3
+process_thread_messages = 1
 navigation_layers = 3
 avoidance_enabled = true
 avoidance_mask = 3

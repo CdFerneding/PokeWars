@@ -1,7 +1,7 @@
 [gd_scene load_steps=40 format=3 uid="uid://bn63hdf1clkai"]
 
 [ext_resource type="Script" path="res://Scripts/Entities/enemy.gd" id="1_odqlq"]
-[ext_resource type="Texture2D" path="res://Assets/Sprites/Water/Artikuno/Walk-Anim.png" id="2_qlvlm"]
+[ext_resource type="Texture2D" uid="uid://b5iec0w8obj6i" path="res://Assets/Sprites/Water/Artikuno/Walk-Anim.png" id="2_qlvlm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4r461"]
 atlas = ExtResource("2_qlvlm")
@@ -306,6 +306,9 @@ scale = Vector2(0.6, 0.6)
 shape = SubResource("CircleShape2D_vg7x3")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+process_thread_group = 2
+process_thread_group_order = 3
+process_thread_messages = 1
 navigation_layers = 3
 avoidance_enabled = true
 avoidance_mask = 3
