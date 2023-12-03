@@ -85,15 +85,15 @@ var BULBASAUR_HEALTH = 20
 var IVYSAUR_HEALTH = 40
 var VENUSAUR_HEALTH = 80
 
-var CHARMANDER_ATTACK = 5
-var CHARMELEON_ATTACK = 10
-var CHARIZARD_ATTACK = 15
-var SQUIRTLE_ATTACK = 5
-var WARTORTLE_ATTACK = 10
-var BLASTOISE_ATTACK = 15
-var BULBASAUR_ATTACK = 5
-var IVYSAUR_ATTACK = 10
-var VENUSAUR_ATTACK = 15
+var CHARMANDER_ATTACK = 15 if playerName == "Charmander" else 5 
+var CHARMELEON_ATTACK = 20 if playerName == "Charmander" else 10
+var CHARIZARD_ATTACK = 25 if playerName == "Charmander" else 15
+var SQUIRTLE_ATTACK = 15 if playerName == "Squirtle" else 5
+var WARTORTLE_ATTACK = 20 if playerName == "Squirtle" else 10 
+var BLASTOISE_ATTACK = 25 if playerName == "Squirtle" else 15
+var BULBASAUR_ATTACK = 15 if playerName == "Bulbasaur" else 5 
+var IVYSAUR_ATTACK = 20 if playerName == "Bulbasaur" else 10
+var VENUSAUR_ATTACK = 25 if playerName == "Bulbasaur" else 15 
 
 # building costs (wood)
 var FIRE_ARENA_COST = 20 
