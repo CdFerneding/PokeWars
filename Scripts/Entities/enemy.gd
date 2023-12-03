@@ -20,6 +20,8 @@ var home_base = pathTilemap.home_base
 var current_target: Node
 var is_fighting = false
 
+@export var attack_damage = 5
+
 #implements the pathfinding algorithm
 @onready var nav_agent:= $NavigationAgent2D #as NavigationAgent2D
 
@@ -61,7 +63,7 @@ func _process(_delta:float):
 #		is_fighting = false
 		
 func attack():
-	(current_target as GoodPokemon)._on_hit(1, type)
+	(current_target as GoodPokemon)._on_hit(attack_damage, type)
 	$AttackCooldown.start()
 	
 func _physics_process(_delta: float) -> void:
