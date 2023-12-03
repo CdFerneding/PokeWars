@@ -23,7 +23,10 @@ choose between All, Most, Half, Some, Touched
 |GUI| Half | Touched | Half | Touched | 
 |Dialogue| X | Touched | All | X |
 |Controlls & Key binds| Half | X | Half | Touched |
-|inheritance| X | Half | Some | Some |
+|Inheritance| X | Half | Some | Some |
+|Farming | X | X | All | X |
+|Bosses| X | Most | Touched | Some|
+|Enemies| X | X | Some | Most|
 
 ## Concept
 
