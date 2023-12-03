@@ -149,10 +149,6 @@ func _on_hit(damage, type):
 		if self in pathMain.selected_pokemon:
 			pathMain.selected_pokemon.erase(self)
 			Game.Selected = pathMain.selected_pokemon.size()
-		# decrease friendly unit counter
-		Game.friendlyUnits -= 1
-		if Game.friendlyUnits == 0:
-			Game.trigger_loose_game()
 
 
 

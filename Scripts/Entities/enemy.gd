@@ -170,7 +170,7 @@ func _on_hit(damage, type):
 	if health_bar.value == 0:
 		pathMain.enemies.erase(self)
 		self.queue_free()
-		pathMain.get_units()
+		pathMain.get_friendly_units()
 
 
 func _on_area_2d_area_entered(area):
