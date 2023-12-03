@@ -35,11 +35,13 @@ func _on_mouse_entered():
 	if Game.is_paused:
 		return
 	buildingHover = true
+	Game.UIHover = true
 
 func _on_mouse_exited():
 	if Game.is_paused:
 		return
 	buildingHover = false
+	Game.UIHover = false
 
 func _input(event):
 	if Game.is_paused:
@@ -47,7 +49,7 @@ func _input(event):
 	if buildingHover:
 		if Game.selectedBuilding == "delete":
 			_delete_building(event)
-		elif Input.is_action_just_released("left_click"):
+		elif Input.is_action_just_released("left_click") and Game.GameMode != "build":
 			UI.show_upgrade_military(true)
 
 func _delete_building(event):
@@ -60,4 +62,5 @@ func _delete_building(event):
 func _show_upgrade_UI():
 	UI.currentBuilding = self
 	UI.get_node("UpgradeMilitary").show()
+	UI.show_upgrade_military(true)
 

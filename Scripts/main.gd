@@ -225,6 +225,7 @@ func _handle_play_input(event):
 	# this check needs to check for "release". Otherwise when placing new pikachus they get instantly selected
 	if Input.is_action_just_released("left_click") && Game.UIHover == false:
 		$UI/TrainBox.hide()
+		$UI/UpgradeMilitary.hide()
 		for p in pikachus + charmanders + bulbasaurs + squirtles:
 			if p == null:
 				continue
@@ -280,10 +281,7 @@ func _change_gamemode():
 		Game.GameMode = "select"
 	if Input.is_action_pressed("R"):
 		Game.GameMode = "play"
-	if Input.is_action_pressed("P"):
-		if Game.GameMode == "place":
-			type_of_pokemon_to_place = (type_of_pokemon_to_place + 1) % 4
-		Game.GameMode = "place"
+	
 
 '''
 func _on_enemy_spawner_timer_timeout():

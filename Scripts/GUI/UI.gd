@@ -343,4 +343,9 @@ func _on_train_unit_button_lvl_2_pressed():
 func _on_train_unit_button_lvl_3_pressed():
 	currentBuilding.train_unit(2)
 
+func setGameUIHover(b):
+	Game.UIHover = b
 
+func _on_upgrade_to_wartortle_mouse_entered():
+	setGameUIHover(true)
+	
