@@ -1,0 +1,6 @@
+~ warning_enemies
+
+Master Pikachu: Do you remember how I mentioned pesky birds will be coming? I hope you have prepared yourself.
+do Game.set_game_paused(false)
+
+=> END

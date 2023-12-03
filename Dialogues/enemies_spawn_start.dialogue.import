@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_11"
+type="Resource"
+uid="uid://bx7c2xnlbe0ol"
+path="res://.godot/imported/enemies_spawn_start.dialogue-4cad79e0488a5478004a712b9860d547.tres"
+
+[deps]
+
+source_file="res://Dialogues/enemies_spawn_start.dialogue"
+dest_files=["res://.godot/imported/enemies_spawn_start.dialogue-4cad79e0488a5478004a712b9860d547.tres"]
+
+[params]
+
+defaults=true
