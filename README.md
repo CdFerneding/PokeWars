@@ -36,7 +36,7 @@ The goal of the game is to train Pokemon and defeat the bosses on the edge of th
 
 We started working with Unity in the begining but due to issues, we decided to switch to Godot.
 
-## Controlls
+## Controls
 Commands can be executed with right "game mode".
 Mode can be switched with:
 R -> "Run": handling pokemon
