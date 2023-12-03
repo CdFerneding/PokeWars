@@ -53,18 +53,18 @@ func _process(delta):
 
 func _on_enemy_spawner_timer_timeout():
 	var mainPath = get_tree().get_root().get_node("Main")
-	
-	if Game.is_paused == true or (mainPath.enemiesCanSpawn == false) or Game.POP_CAP_HOSTILE:
+
+	if Game.is_paused == true or (mainPath.enemiesCanSpawn == false) or Game.POP_CAP_HOSTILE < Game.hostileUnits:
 		return
 	
 	if current_group == "arena1":
-		spawn_enemies(2 + iteration1)
+		spawn_enemies(1 + iteration1)
 		iteration1 = iteration1 + 1
 	elif current_group == "arena2":
-		spawn_enemies(5 + iteration2)
+		spawn_enemies(2 + iteration2)
 		iteration2 = iteration2 + 1
 	elif current_group == "arena3":
-		spawn_enemies(7 + iteration3 * 2)
+		spawn_enemies(3 + iteration3 * 2)
 		iteration3 = iteration3 + 1
 	
 func _on_ennemy_killed():
@@ -72,6 +72,7 @@ func _on_ennemy_killed():
 	Game.hostileUnits -= 1
 	
 func spawn_enemies(number) -> void:
+	
 	var mainPath = get_tree().get_root().get_node("Main")
 	var new_enemy
 	var enemyPath = get_tree().get_root().get_node("Main/Enemies/"+current_group)
@@ -79,17 +80,18 @@ func spawn_enemies(number) -> void:
 	if enemyPath.get_child_count() > Game.POP_CAP_HOSTILE:
 		return
 	
-	if self.name == "Moltres":
-		new_enemy = moltres_child.instantiate()
-	elif self.name == "Plantos":
-		new_enemy = plantos_child.instantiate()
-	else:
-		new_enemy = waltos_child.instantiate()
-	
-	# increment hostile unit counter 
-	Game.hostileUnits += 1
-	
 	for i in range(1, number):
+		
+		# increment hostile unit counter 
+		Game.hostileUnits += 1
+		
+		if self.name == "Moltres":
+			new_enemy = moltres_child.instantiate()
+		elif self.name == "Plantos":
+			new_enemy = plantos_child.instantiate()
+		else:
+			new_enemy = waltos_child.instantiate()
+		
 		new_enemy.position.x = current_x_spawn_location + rng.randf_range(-40, 40)
 		new_enemy.position.y = current_y_spawn_location + rng.randf_range(-40, 40)
 		enemyPath.add_child(new_enemy)

@@ -199,14 +199,14 @@ func _manage_train_inputs():
 				currentBuilding.train_unit(1)
 		elif Input.is_action_just_pressed("E"):
 			currentBuilding.train_unit(2)
-	elif "Water" in currentBuilding:
+	elif "Water" in currentBuilding.name:
 		if Input.is_action_just_pressed("Q"):
 			currentBuilding.train_unit(0)
 		elif Input.is_action_just_pressed("W"):
 			currentBuilding.train_unit(1)
 		elif Input.is_action_just_pressed("E"):
 			currentBuilding.train_unit(2)
-	elif "Plant" in currentBuilding:
+	elif "Plant" in currentBuilding.name:
 		if Input.is_action_just_pressed("Q"):
 			currentBuilding.train_unit(0)
 		elif Input.is_action_just_pressed("W"):
