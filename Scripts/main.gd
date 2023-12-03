@@ -149,6 +149,7 @@ the correlating _handle_input function
 func _input(_event):
 	if Game.is_paused == true:
 		return
+	handle_hotkeys()
 	_change_gamemode()
 	_handle_esc()
 	if Game.GameMode == "play":
@@ -160,7 +161,10 @@ func _input(_event):
 	elif Game.GameMode == "place":
 		_handle_place_input(_event)
 
-
+func handle_hotkeys():
+	if Input.is_action_pressed("1"):
+		$Camera.position = Game.HOME_BASE
+	
 # connected through funciton in pikachu._ready()
 #func _on_pikachu_clicked(object: CharacterBody2D):
 #	selected_pokemon = []

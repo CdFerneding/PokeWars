@@ -87,6 +87,9 @@ var hostileUnits = 0
 var POP_CAP_FRIENDLY = 70
 var POP_CAP_HOSTILE = 50
 
+# hotkey position for moving the camera
+var HOME_BASE
+
 # game state can be paused (false) or running (true)
 # if the game is paused, no more _process funcions are getting called
 # do not use
