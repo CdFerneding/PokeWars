@@ -77,7 +77,7 @@ func _physics_process(_delta: float) -> void:
 	var dir = to_local(next_pos).normalized()
 	velocity = dir * speed
 	
-	if position.distance_to(current_target.position) < 10:
+	if current_target!= null and position.distance_to(current_target.position) < 10:
 		velocity = Vector2.ZERO
 		if $AttackCooldown.is_stopped() and current_target != null:
 			attack()
