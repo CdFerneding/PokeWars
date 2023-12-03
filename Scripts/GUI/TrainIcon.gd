@@ -20,7 +20,6 @@ func _ready():
 	elif type == "Squirtle" or type == "Wartortle" or type == "Blastoise":
 		Game.waterQueue.append(selfId)
 	
-	print(type)
 	
 	currentTime = 0
 	$ProgressBar.max_value = totalTime
