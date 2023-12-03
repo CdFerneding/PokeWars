@@ -163,8 +163,7 @@ func _on_train_box_mouse_exited():
 	Game.UIHover = false
 
 func _input(event):
-	if Input.is_action_just_pressed("left_click") && Game.UIHover == false:
-		show_upgrade_military(false)
+	
 	if $UpgradeMilitary.is_visible():
 		_manage_upgrade_inputs()
 	elif $TrainBox.is_visible():
@@ -235,6 +234,7 @@ func show_upgrade_military(state):
 
 
 func _on_upgrade_to_wartortle_pressed():
+
 	if Game.waterUnitLvl != 0 or Game.Food < Game.FIRST_UPGRADE_COST or is_upgrade_ongoing("UpgradeToWartortle"):
 		return
 	start_upgrade("Wartortle")
