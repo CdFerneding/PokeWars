@@ -21,7 +21,7 @@ Justin Frauböse, Max Neubauer, Conrad Ferneding, Evan Fregeais
 |Camera| X | X | Touched | All|
 |GUI| Half | Touched | Half | Touched | 
 |Dialogue| X | Touched | All | X |
-|Controlls & Key binds| Half | X | Half | Touched |
+|Controls & Key binds| Half | X | Half | Touched |
 |Inheritance| X | Half | Some | Some |
 |Farming | X | X | All | X |
 |Bosses| X | Most | Touched | Some|
@@ -49,7 +49,7 @@ B -> "Build": infrastructure, buildings
  - select multiple pikachus by dragging the mouse over the screen while holding left click, they can then be moved all at once
  - deselect all currently selected pikachus by left clicking on "nothing" (somewhere where there is no pikachu).
 
-### Controlling the military:
+### Controling the military:
 #### Game Mode: R
 Military units can be controlled in the same fashion as pikachus.
 If a military unit has "no current task" it will attack the closest enemy.
