@@ -321,4 +321,10 @@ func get_arenas() -> Array[Node]:
 
 
 func _on_start_enemy_spawn_timeout():
+	# print enemy spawning warning
+	if Game.skipping_speeches == false:
+		Game.set_game_paused(true)
+		var dialogueResource = preload("res://Dialogues/enemies_spawn_start.dialogue")
+		DialogueManager.show_example_dialogue_balloon(dialogueResource, "warning_enemies")
+		
 	enemiesCanSpawn = true
