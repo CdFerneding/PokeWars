@@ -49,7 +49,7 @@ B -> "Build": infrastructure, buildings
  - select multiple pikachus by dragging the mouse over the screen while holding left click, they can then be moved all at once
  - deselect all currently selected pikachus by left clicking on "nothing" (somewhere where there is no pikachu).
 
-### Controling the military:
+### Controlling the military:
 #### Game Mode: R
 Military units can be controlled in the same fashion as pikachus.
 If a military unit has "no current task" it will attack the closest enemy.
