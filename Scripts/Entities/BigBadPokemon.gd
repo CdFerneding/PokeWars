@@ -21,6 +21,8 @@ var iteration1 = 1
 var iteration2 = 1
 var iteration3 = 1
 
+static var bigBadPokemon = 3
+
 @export var current_x_spawn_location : int
 @export var current_y_spawn_location : int
 
@@ -117,3 +119,6 @@ func _on_hit(damage, type):
 		pathMain.enemies.erase(self)
 		self.queue_free()
 		pathMain.get_units()
+		bigBadPokemon -= 1
+		if bigBadPokemon == 0:
+			Game.trigger_win_game()

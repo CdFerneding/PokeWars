@@ -102,16 +102,7 @@ func _process(_delta):
 		$StartEnemySpawn.paused = false
 		
 func _physics_process(delta):
-	if Game.is_paused == true:
-		return
-	else:
-		
-		var p = get_tree().get_nodes_in_group("pikachus").size()
-		var b = get_tree().get_nodes_in_group("bulbasaurs").size()
-		var c = get_tree().get_nodes_in_group("charmanders").size()
-		var s = get_tree().get_nodes_in_group("squirtles").size()
-		if p + b + c + s == 0:
-			Game.trigger_loose_game()
+	pass
 		
 		
 '
