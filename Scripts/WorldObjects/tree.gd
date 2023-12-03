@@ -13,6 +13,8 @@ func _ready():
 	bar.max_value = totalTime
 	
 func _process(_delta):
+	if Game.is_paused:
+		return
 	bar.value = currTime
 	# check if bush has been completely choped 
 	if currTime <= 0:
@@ -31,6 +33,8 @@ func _on_chop_area_body_exited(body):
 
 
 func _on_timer_timeout():
+	if Game.is_paused:
+		return
 	var chopSpeed = 1*pikachus
 	currTime -= chopSpeed
 	# tweens are used to create smoothened animations
@@ -45,6 +49,7 @@ func startChopping():
 
 func treeChopped():
 	Game.Wood += 4
+	$Sound.play()
 	# resetting ProgressBar and currentTime
 	_ready()
 

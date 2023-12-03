@@ -1,0 +1,472 @@
+[gd_scene load_steps=21 format=3 uid="uid://c5xbd3qrnk5vl"]
+
+[ext_resource type="Script" path="res://Scripts/GUI/UI.gd" id="1_ivh8w"]
+[ext_resource type="Texture2D" uid="uid://dv0lqqmit4txc" path="res://Assets/Menu/background.png" id="2_7x6ev"]
+[ext_resource type="Texture2D" uid="uid://foy76vonkqb3" path="res://Assets/Sprites/Building/fire_arena.png" id="3_0v2bx"]
+[ext_resource type="Texture2D" uid="uid://b67a3mttwb0ld" path="res://Assets/Sprites/Building/water_arena.png" id="4_a0tl4"]
+[ext_resource type="Texture2D" uid="uid://0f62nxxobstl" path="res://Assets/Sprites/Building/plant_arena.png" id="5_7q0qc"]
+[ext_resource type="Texture2D" uid="uid://cxmbtq8hta636" path="res://Assets/Potraits/pikachu_and_evolutions/pikachu Angry.png" id="6_a3ebk"]
+[ext_resource type="Texture2D" uid="uid://dprpybuepjxro" path="res://Assets/Potraits/squirtle_and_evolutions/wartortle.png" id="7_6yr0l"]
+[ext_resource type="Texture2D" uid="uid://bcin8ouydu2iu" path="res://Assets/Potraits/bulbasaur_and_evolutions/Ivysaur Angry.png" id="7_ft57y"]
+[ext_resource type="Texture2D" uid="uid://bv0hp1n8p3cgm" path="res://Assets/Potraits/squirtle_and_evolutions/blastoise.png" id="8_4jjvb"]
+[ext_resource type="Texture2D" uid="uid://bmssiujqxml5m" path="res://Assets/Potraits/charmander_and_evolutions/charmeleon.png" id="9_5lsh7"]
+[ext_resource type="Texture2D" uid="uid://criin56bg1ama" path="res://Assets/Potraits/charmander_and_evolutions/charizard.png" id="10_1dvkj"]
+[ext_resource type="Texture2D" uid="uid://b486ejlnb0awm" path="res://Assets/Potraits/bulbasaur_and_evolutions/ivysaur.png" id="11_shfo7"]
+[ext_resource type="Texture2D" uid="uid://b8fd7ngwkpewe" path="res://Assets/Potraits/bulbasaur_and_evolutions/venusaur.png" id="12_42b1i"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c22t0"]
+bg_color = Color(0.352941, 0.352941, 0.352941, 0.580392)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i4cx8"]
+atlas = ExtResource("7_6yr0l")
+region = Rect2(0, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ensck"]
+atlas = ExtResource("8_4jjvb")
+region = Rect2(0, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v0jgc"]
+atlas = ExtResource("9_5lsh7")
+region = Rect2(0, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_crtdq"]
+atlas = ExtResource("10_1dvkj")
+region = Rect2(0, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ixqmi"]
+atlas = ExtResource("11_shfo7")
+region = Rect2(0, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ljfhg"]
+atlas = ExtResource("12_42b1i")
+region = Rect2(0, 0, 40, 40)
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1_ivh8w")
+
+[node name="Panel" type="Panel" parent="."]
+theme_override_styles/panel = SubResource("StyleBoxFlat_c22t0")
+
+[node name="GameStateBox" type="TextureRect" parent="."]
+visible = false
+anchors_preset = -1
+anchor_right = 0.0208333
+offset_right = 200.0
+offset_bottom = 268.0
+texture = ExtResource("2_7x6ev")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameStateBox"]
+layout_direction = 1
+layout_mode = 0
+offset_left = 34.0
+offset_top = 24.0
+offset_right = 192.0
+offset_bottom = 232.0
+alignment = 1
+
+[node name="Food" type="Label" parent="GameStateBox/VBoxContainer"]
+layout_mode = 2
+text = "Food :"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Wood" type="Label" parent="GameStateBox/VBoxContainer"]
+layout_mode = 2
+text = "Wood :"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PopCap" type="Label" parent="GameStateBox/VBoxContainer"]
+layout_mode = 2
+text = "Trained Units: x / y"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameTimer" type="Label" parent="GameStateBox/VBoxContainer"]
+layout_mode = 2
+text = "Time"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameMode" type="Label" parent="GameStateBox/VBoxContainer"]
+layout_mode = 2
+text = "GameMode:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CurrentBuilding" type="Label" parent="GameStateBox/VBoxContainer"]
+layout_mode = 2
+text = "Building:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Selected" type="Label" parent="GameStateBox/VBoxContainer"]
+layout_mode = 2
+text = "Selected :"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BuildingButtonBox" type="TextureRect" parent="."]
+visible = false
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -268.0
+offset_right = 592.0
+grow_vertical = 0
+texture = ExtResource("2_7x6ev")
+expand_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Fire Arena Button" type="Button" parent="BuildingButtonBox"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 48.0
+offset_top = -176.0
+offset_right = 168.936
+offset_bottom = -42.0
+grow_vertical = 0
+text = "Fire Arena"
+icon = ExtResource("3_0v2bx")
+icon_alignment = 1
+vertical_icon_alignment = 0
+
+[node name="Water Arena Button" type="Button" parent="BuildingButtonBox"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 192.0
+offset_top = -176.0
+offset_right = 298.0
+offset_bottom = -42.0
+grow_vertical = 0
+text = "Water Arena"
+icon = ExtResource("4_a0tl4")
+icon_alignment = 1
+vertical_icon_alignment = 0
+
+[node name="Plant Arena Button" type="Button" parent="BuildingButtonBox"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 320.0
+offset_top = -176.0
+offset_right = 419.0
+offset_bottom = -42.0
+grow_vertical = 0
+text = "Plant Arena"
+icon = ExtResource("5_7q0qc")
+icon_alignment = 1
+vertical_icon_alignment = 0
+
+[node name="Delete Button" type="Button" parent="BuildingButtonBox"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 448.0
+offset_top = -176.0
+offset_right = 544.0
+offset_bottom = -40.0
+grow_vertical = 0
+text = "Delete"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BuildingButtonBox"]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 33.0
+offset_right = 266.0
+offset_bottom = 73.0
+
+[node name="Label" type="Label" parent="BuildingButtonBox"]
+layout_mode = 0
+offset_left = 152.0
+offset_top = 36.0
+offset_right = 329.0
+offset_bottom = 62.0
+text = "Building Cost: 20 Wood"
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="TrainBox" type="TextureRect" parent="."]
+visible = false
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -268.0
+offset_right = 389.0
+grow_vertical = 0
+texture = ExtResource("2_7x6ev")
+
+[node name="TrainUnitButtonLvl1" type="Button" parent="TrainBox"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 100.0
+offset_right = 138.0
+offset_bottom = 190.0
+icon = ExtResource("6_a3ebk")
+icon_alignment = 1
+expand_icon = true
+
+[node name="QPress" type="Label" parent="TrainBox/TrainUnitButtonLvl1"]
+layout_mode = 0
+offset_left = 38.0
+offset_top = 100.0
+offset_right = 54.0
+offset_bottom = 126.0
+text = "Q"
+
+[node name="Label" type="Label" parent="TrainBox/TrainUnitButtonLvl1"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = -32.0
+offset_right = 54.0
+offset_bottom = -6.0
+text = "10"
+
+[node name="TrainUnitButtonLvl2" type="Button" parent="TrainBox"]
+layout_mode = 0
+offset_left = 150.0
+offset_top = 100.0
+offset_right = 238.0
+offset_bottom = 190.0
+icon = ExtResource("7_ft57y")
+expand_icon = true
+
+[node name="WPress" type="Label" parent="TrainBox/TrainUnitButtonLvl2"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 100.0
+offset_right = 51.0
+offset_bottom = 126.0
+text = "W"
+
+[node name="Label" type="Label" parent="TrainBox/TrainUnitButtonLvl2"]
+layout_mode = 0
+offset_left = 34.0
+offset_top = -32.0
+offset_right = 74.0
+offset_bottom = -6.0
+text = "20"
+
+[node name="TrainUnitButtonLvl3" type="Button" parent="TrainBox"]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 100.0
+offset_right = 338.0
+offset_bottom = 190.0
+icon = ExtResource("7_ft57y")
+expand_icon = true
+
+[node name="EPress" type="Label" parent="TrainBox/TrainUnitButtonLvl3"]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 100.0
+offset_right = 48.0
+offset_bottom = 126.0
+text = "E"
+
+[node name="Label" type="Label" parent="TrainBox/TrainUnitButtonLvl3"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = -32.0
+offset_right = 70.0
+offset_bottom = -6.0
+text = "30"
+
+[node name="UpgradeMilitary" type="TextureRect" parent="."]
+visible = false
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -264.0
+offset_right = 656.0
+grow_vertical = 0
+tooltip_text = "press the indicated keys to upgrade your military. "
+mouse_filter = 0
+texture = ExtResource("2_7x6ev")
+expand_mode = 1
+
+[node name="QPress" type="Label" parent="UpgradeMilitary"]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 176.0
+offset_right = 112.0
+offset_bottom = 202.0
+text = "Q"
+
+[node name="UpgradeToWartortle" type="Button" parent="UpgradeMilitary"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 80.0
+offset_top = -136.0
+offset_right = 128.0
+offset_bottom = -88.0
+grow_vertical = 0
+action_mode = 0
+icon = SubResource("AtlasTexture_i4cx8")
+
+[node name="WPress" type="Label" parent="UpgradeMilitary"]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 176.0
+offset_right = 176.0
+offset_bottom = 202.0
+text = "W"
+
+[node name="UpgradeToBlastoise" type="Button" parent="UpgradeMilitary"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 144.0
+offset_top = -136.0
+offset_right = 192.0
+offset_bottom = -88.0
+grow_vertical = 0
+action_mode = 0
+icon = SubResource("AtlasTexture_ensck")
+
+[node name="EPress" type="Label" parent="UpgradeMilitary"]
+layout_mode = 0
+offset_left = 288.0
+offset_top = 176.0
+offset_right = 297.0
+offset_bottom = 202.0
+text = "E"
+
+[node name="UpgradeToCharmeleon" type="Button" parent="UpgradeMilitary"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 272.0
+offset_top = -136.0
+offset_right = 320.0
+offset_bottom = -88.0
+grow_vertical = 0
+action_mode = 0
+icon = SubResource("AtlasTexture_v0jgc")
+
+[node name="RPress" type="Label" parent="UpgradeMilitary"]
+layout_mode = 0
+offset_left = 352.0
+offset_top = 176.0
+offset_right = 363.0
+offset_bottom = 202.0
+text = "R"
+
+[node name="UpgradeToCharizard" type="Button" parent="UpgradeMilitary"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 336.0
+offset_top = -136.0
+offset_right = 384.0
+offset_bottom = -88.0
+grow_vertical = 0
+action_mode = 0
+icon = SubResource("AtlasTexture_crtdq")
+
+[node name="APress" type="Label" parent="UpgradeMilitary"]
+layout_mode = 0
+offset_left = 480.0
+offset_top = 176.0
+offset_right = 491.0
+offset_bottom = 202.0
+text = "A"
+
+[node name="UpgradeToIvysaur" type="Button" parent="UpgradeMilitary"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 464.0
+offset_top = -136.0
+offset_right = 512.0
+offset_bottom = -88.0
+grow_vertical = 0
+action_mode = 0
+icon = SubResource("AtlasTexture_ixqmi")
+
+[node name="SPress" type="Label" parent="UpgradeMilitary"]
+layout_mode = 0
+offset_left = 544.0
+offset_top = 176.0
+offset_right = 553.0
+offset_bottom = 202.0
+text = "S"
+
+[node name="UpgradeToVenusaur" type="Button" parent="UpgradeMilitary"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 528.0
+offset_top = -136.0
+offset_right = 576.0
+offset_bottom = -88.0
+grow_vertical = 0
+action_mode = 0
+icon = SubResource("AtlasTexture_ljfhg")
+
+[node name="Label" type="Label" parent="UpgradeMilitary"]
+layout_mode = 0
+offset_left = 232.0
+offset_top = 48.0
+offset_right = 458.0
+offset_bottom = 100.0
+text = "fist evolutions: 20 Berries
+second evolutions: 40 Berries"
+horizontal_alignment = 1
+
+[node name="TrainingQueue" type="HBoxContainer" parent="."]
+offset_left = 256.0
+offset_right = 627.0
+offset_bottom = 53.0
+theme_override_constants/separation = 0
+
+[connection signal="pressed" from="BuildingButtonBox/Fire Arena Button" to="." method="_on_fire_arena_pressed"]
+[connection signal="pressed" from="BuildingButtonBox/Water Arena Button" to="." method="_on_water_arena_pressed"]
+[connection signal="pressed" from="BuildingButtonBox/Plant Arena Button" to="." method="_on_plant_arena_pressed"]
+[connection signal="pressed" from="BuildingButtonBox/Delete Button" to="." method="_on_delete_button_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="mouse_entered" from="TrainBox" to="." method="_on_train_box_mouse_entered"]
+[connection signal="mouse_exited" from="TrainBox" to="." method="_on_train_box_mouse_exited"]
+[connection signal="mouse_entered" from="TrainBox/TrainUnitButtonLvl1" to="." method="_on_upgrade_to_wartortle_mouse_entered"]
+[connection signal="pressed" from="TrainBox/TrainUnitButtonLvl1" to="." method="_on_train_unit_button_lvl_1_pressed"]
+[connection signal="mouse_entered" from="TrainBox/TrainUnitButtonLvl2" to="." method="_on_upgrade_to_wartortle_mouse_entered"]
+[connection signal="pressed" from="TrainBox/TrainUnitButtonLvl2" to="." method="_on_train_unit_button_lvl_2_pressed"]
+[connection signal="mouse_entered" from="TrainBox/TrainUnitButtonLvl3" to="." method="_on_upgrade_to_wartortle_mouse_entered"]
+[connection signal="pressed" from="TrainBox/TrainUnitButtonLvl3" to="." method="_on_train_unit_button_lvl_3_pressed"]
+[connection signal="mouse_entered" from="UpgradeMilitary" to="." method="_on_train_box_mouse_entered"]
+[connection signal="mouse_exited" from="UpgradeMilitary" to="." method="_on_train_box_mouse_exited"]
+[connection signal="mouse_entered" from="UpgradeMilitary/UpgradeToWartortle" to="." method="_on_upgrade_to_wartortle_mouse_entered"]
+[connection signal="pressed" from="UpgradeMilitary/UpgradeToWartortle" to="." method="_on_upgrade_to_wartortle_pressed"]
+[connection signal="mouse_entered" from="UpgradeMilitary/UpgradeToBlastoise" to="." method="_on_upgrade_to_wartortle_mouse_entered"]
+[connection signal="pressed" from="UpgradeMilitary/UpgradeToBlastoise" to="." method="_on_upgrade_to_blastoise_pressed"]
+[connection signal="mouse_entered" from="UpgradeMilitary/UpgradeToCharmeleon" to="." method="_on_upgrade_to_wartortle_mouse_entered"]
+[connection signal="pressed" from="UpgradeMilitary/UpgradeToCharmeleon" to="." method="_on_upgrade_to_charmeleon_pressed"]
+[connection signal="mouse_entered" from="UpgradeMilitary/UpgradeToCharizard" to="." method="_on_upgrade_to_wartortle_mouse_entered"]
+[connection signal="pressed" from="UpgradeMilitary/UpgradeToCharizard" to="." method="_on_upgrade_to_charizard_pressed"]
+[connection signal="mouse_entered" from="UpgradeMilitary/UpgradeToIvysaur" to="." method="_on_upgrade_to_wartortle_mouse_entered"]
+[connection signal="pressed" from="UpgradeMilitary/UpgradeToIvysaur" to="." method="_on_upgrade_to_ivysaur_pressed"]
+[connection signal="mouse_entered" from="UpgradeMilitary/UpgradeToVenusaur" to="." method="_on_upgrade_to_wartortle_mouse_entered"]
+[connection signal="pressed" from="UpgradeMilitary/UpgradeToVenusaur" to="." method="_on_upgrade_to_venusaur_pressed"]

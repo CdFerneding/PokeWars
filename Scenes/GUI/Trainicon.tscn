@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://cxesue10asqli"]
+
+[ext_resource type="Script" path="res://Scripts/GUI/TrainIcon.gd" id="1_fohl6"]
+[ext_resource type="Texture2D" uid="uid://dqfw1xmgys5y7" path="res://Assets/Potraits/bulbasaur_and_evolutions/bulbasaur Angry.png" id="2_6pgxs"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_auej5"]
+bg_color = Color(0.192157, 0.917647, 0, 0.886275)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5a2mu"]
+bg_color = Color(0.92549, 0.0627451, 0.180392, 1)
+
+[node name="Trainicon" type="Control"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fohl6")
+
+[node name="UnitIcon" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_6pgxs")
+expand_mode = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_top = 40.0
+offset_right = 40.0
+offset_bottom = 46.0
+rotation = -6.28319
+theme_override_styles/background = SubResource("StyleBoxFlat_auej5")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5a2mu")
+max_value = 10.0
+fill_mode = 1
+show_percentage = false
+
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
+
+[connection signal="value_changed" from="ProgressBar" to="." method="_on_progress_bar_value_changed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

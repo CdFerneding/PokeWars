@@ -1,44 +1,43 @@
-extends CharacterBody2D
+extends GoodPokemon
+#extends CharacterBody2D
 
-#@export var main: Node
-#@export var main: Node
-var pik_hover = false
+class_name Pikachu
+
 signal pikachu_clicked
 
-# pikachu highlighting 
 @export var selected = false
 @onready var box = get_node("Selected")
-
-#speed of moving Pikatchu
-const speed = 25
-
-#used to detect when path is reached
-var target : Vector2
-
-var previous_direction
 
 #implements the pathfinding algorithm
 @onready var nav_agent:= $NavigationAgent2D #as NavigationAgent2D
 
+var is_fighting = false
+
 func _ready():
-	previous_direction = "down"
 	$AnimatedSprite2D.animation = "walk_down"
+	$AnimatedSprite2D.play()
+	
 	var main_node = get_tree().get_root().get_node("Main")
 	connect("pikachu_clicked", Callable(main_node, "_on_pikachu_clicked"))
-	set_selected(selected)
+	
+	set_selected(false)
+	
+	# super initializes the healthbar 
+	super()
 
-func set_selected(value):
-	selected = value
-	box.visible = value
 
 func _process(_delta:float):
-	pikatchu_scale_on_hover()
+	if Game.is_paused == true:
+		return
+	pikachu_scale_on_hover()
 		
 	
 func _physics_process(_delta: float) -> void:
-#	var prev_vel = velocity
-	if self.position == target:
+	if Game.is_paused == true:
 		return
+#	var prev_vel = velocity
+	#if int(nav_agent.distance_to_target() < 2):
+		#return
 		
 	var next_pos = nav_agent.get_next_path_position()
 	var dir = to_local(next_pos).normalized()
@@ -49,64 +48,84 @@ func _physics_process(_delta: float) -> void:
 		if dir != Vector2.ZERO:
 			self.position = next_pos
 		target = self.position
-	apply_corresponding_animation(velocity)
+	
+	if is_fighting == false:
+		apply_corresponding_animation()
 	
 	move_and_slide()
+
+
+func apply_corresponding_animation():
+	var current_animation
 	
-# added is_farming = false to cancel farming when a new destination is issued for pikachu
-func make_path(ressource_position = get_global_mouse_position()) -> void:
-	nav_agent.target_position = ressource_position
-	target = nav_agent.target_position
+	# calculate the degrees of the walking direction
+	var current_velocity = velocity
+	var radians = current_velocity.angle()
+	var degrees = radians * (180/PI)
+	if degrees < 0:
+		degrees = 360 - abs(degrees)
 	
-#toDo
-#not sufficient yet
-func apply_corresponding_animation(_prev):
-	var current_animation = ""
-	
-	#if prev.x == velocity.x and prev.y == velocity.y:
-	#	current_animation += "down_"
-		
-	if velocity.y > 0:
-		current_animation+="down_"
-	elif velocity.y < 0:
-		current_animation+="up_"
-		
-	if velocity.x < 0:
-		current_animation+="left_"
-	elif velocity.x > 0:
-		current_animation += "right_"
-		
-	if current_animation == "":
-		current_animation = previous_direction+"_"
-	
-	previous_direction = current_animation.left(current_animation.length() - 1)
-	current_animation = "walk_"+previous_direction
+	if degrees >= 22.5 and degrees <= 67.5:
+		current_animation = "walk_down_right"
+	elif degrees > 67.5 and degrees <= 112.5:
+		current_animation = "walk_down"
+	elif degrees > 112.5 and degrees <= 157.5:
+		current_animation = "walk_down_left"
+	elif degrees > 157.5 and degrees <= 202.5:
+		current_animation = "walk_left"
+	elif degrees > 202.5 and degrees <= 247.5:
+		current_animation = "walk_up_left"
+	elif degrees > 247.5 and degrees <= 292.5:
+		current_animation = "walk_up"
+	elif degrees > 292.5 and degrees <= 337.5:
+		current_animation = "walk_up_right"
+	else:
+		current_animation = "walk_right"
 
 	$AnimatedSprite2D.animation = current_animation
 	$AnimatedSprite2D.play()
 
 
+# added is_farming = false to cancel farming when a new destination is issued for pikachu
+func make_path(ressource_position = get_global_mouse_position()) -> void:
+	if Game.is_paused == true:
+		return
+	nav_agent.target_position = ressource_position
+	target = nav_agent.target_position
+
 func _on_mouse_entered():
-	pik_hover = true
-	set_selected(!selected)
+	if Game.is_paused == true:
+		return
+	pok_hover = true
+	set_selected(true)
 
 func _on_mouse_exited():
-	pik_hover = false
-	set_selected(!selected)
+	if Game.is_paused == true:
+		return
+	pok_hover = false
+	set_selected(false)
+
+func set_selected(value):
+	selected = value
+	box.visible = value
 
 
 func _pika_hover_selected_check(_event):
-	if pik_hover and Input.is_action_pressed("left_click"):
+	if Game.is_paused == true:
+		return
+	if pok_hover and Input.is_action_pressed("left_click"):
 		emit_signal("pikachu_clicked", self)
-		pik_hover = false
+		pok_hover = false
 		
 	# leftclick on "nothing" to deselect units
 	elif Input.is_action_pressed("left_click"):
-		pik_hover = false
+		pok_hover = false
 
 
-func pikatchu_scale_on_hover() -> void:
-	if pik_hover:
+func pikachu_scale_on_hover() -> void:
+	if Game.is_paused == true:
+		return
+	if pok_hover:
 		self.scale.x = 0.6
 		self.scale.y = 0.6
 
@@ -115,5 +134,31 @@ func pikatchu_scale_on_hover() -> void:
 		self.scale.y = 0.5
 
 func _on_input_event(_viewport, event, _shape_idx):
-	if pik_hover:
+	if pok_hover:
 		_pika_hover_selected_check(event)
+
+# function to reduce pikachus health, number damage is reducted from pikachus health_bar
+func _on_hit(damage, type):
+	var pathMain = get_tree().get_root().get_node("Main")
+	damage = calculateDamage(damage, type)
+	health_bar.value -= damage
+	if health_bar.value == 0:
+		pathMain.pikachus.erase(self)
+		self.queue_free()
+		pathMain.get_pikachus()
+		if self in pathMain.selected_pokemon:
+			pathMain.selected_pokemon.erase(self)
+			Game.Selected = pathMain.selected_pokemon.size()
+		# decrease friendly unit counter
+		Game.friendlyUnits -= 1
+		if Game.friendlyUnits == 0:
+			Game.trigger_loose_game()
+
+
+
+func _on_area_2d_area_entered(area):
+	is_fighting = true
+
+
+func _on_area_2d_area_exited(area):
+	is_fighting = false
