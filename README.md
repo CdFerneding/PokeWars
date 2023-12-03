@@ -7,17 +7,23 @@ Justin Frauböse (J), Max Neubauer (M), Conrad Ferneding (C), Evan Fregeais (E)
 choose between All, Most, Half, Some, Touched
 | | Justin | Max | Conrad | Evan |
 |----|----|----|----|----|
-|Map, Building & Tilemap|x| x | x | x | 
-|Navigation| x | x | x | x |
-|Pikachu| x | x | x | x |
-|Sprites & Animation| x | x | x | x |
-|Character Selection| x |x | x | x | 
-|Military Units and battle| x | x | x | x | 
-|Pokemon Spawner (+spawn rate)| x | x | x | x | 
-|Win/Loose condition trigger| x | x | x | x | 
-|Music, Cursor| x | x | x | x | 
-|GUI| x | x | x | x | 
-|inheritance| x | x | x | x |
+|Map & Tilemap| Touched | All | Touched | Touched | 
+|Laboratory| Touched | Touched | All | X |
+|Military Buildings| All | Touched | Touched | Touched |
+|Optimisation| X | X | X | All|
+|Navigation| Touched | Most | x | Some |
+|Pikachu| X | Some | Some | Some |
+|Sprites & Animation| Some | Some | Some | Some |
+|Character Selection| Touched | Touched | All | Touched | 
+|Military Units and battle| X | X | Some | Most | 
+|Pokemon Spawner (+spawn rate)| Some | Some | Some | Some | 
+|Win/Lose condition | Touched | Half | Some | Some | 
+|Sound, Cursor| Some | Some | Some | Some | 
+|Camera| X | X | Touched | All|
+|GUI| Half | Touched | Half | Touched | 
+|Dialogue| X | Touched | All | X |
+|Controlls & Key binds| Half | X | Half | Touched |
+|inheritance| X | Half | Some | Some |
 
 ## Concept
 
