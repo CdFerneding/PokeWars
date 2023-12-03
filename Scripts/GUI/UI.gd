@@ -102,11 +102,14 @@ func show_training_button():
 	var button1 = $TrainBox/TrainUnitButtonLvl1
 	var button2 = $TrainBox/TrainUnitButtonLvl2
 	var button3 = $TrainBox/TrainUnitButtonLvl3
+	var cost1 = $TrainBox/TrainUnitButtonLvl1/Label
+	cost1.text = "10"
 	button2.show()
 	button3.show()
 	button2.disabled = true
 	button3.disabled = true
 	if"PokeCenter" in currentBuilding.name:
+		cost1.text = "8"
 		button1.icon = load(Game.pikachuIcon)
 		button2.hide()
 		button3.hide()
