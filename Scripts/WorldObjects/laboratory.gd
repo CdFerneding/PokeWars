@@ -32,7 +32,9 @@ func _process(delta):
 Input managment functions
 '
 func _on_mouse_entered():
-	if Game.is_paused:
+	var n = get_tree().get_root().get_node("Main/UI/BuildingButtonBox")
+	var is_visible = n.is_visible()
+	if Game.is_paused or is_visible:
 		return
 	buildingHover = true
 	Game.UIHover = true
@@ -49,7 +51,7 @@ func _input(event):
 	if buildingHover:
 		if Game.selectedBuilding == "delete":
 			_delete_building(event)
-		elif Input.is_action_just_released("left_click") and Game.GameMode != "build":
+		elif Input.is_action_just_released("left_click"):
 			UI.show_upgrade_military(true)
 
 func _delete_building(event):
