@@ -56,7 +56,7 @@ Only to be set to true after some minutes.
 
 ![Empty Inheritance](Documentation/Max_Neubauer_Personal_Report_Assets/bad_code_use_of_global_flag.png )
 
-And the flag is use inside of the BigBadPokemon class to prevent the Boss Pokemon from spawning smaller enemies at the first part of the game.
+And the flag is only used inside of the BigBadPokemon class to prevent the Boss Pokemon from spawning smaller enemies at the first part of the game.
 
 
 ![Empty Inheritance](Documentation/Max_Neubauer_Personal_Report_Assets/bad_code_actual_use_of_flag_var.png)
@@ -101,7 +101,7 @@ func _on_trigger():
 
 A test of the navigation agent can be seen [here](https://github.com/TxRuX/Godot_Navigation).
 
-The navigation code is short, straight to the point and easy to understand. That is why I consider it as good code. Secondly there are severel parts that are implemented in the Godot interface. Which makes is easier to use. The real A* algorithm is encapsulated and performace optimated.
+The navigation code is short, straight to the point and easy to understand. That is why I consider it as good code. Secondly there are severel parts that are implemented in the Godot interface. Which makes is easier to use. The real A* algorithm is encapsulated and performace optimated by Godot.
 
 And this is how the code is integrated:
 
@@ -129,7 +129,7 @@ Before this semester I had never touched Game programming or a Game Engine. I wa
 
 Now I am not that angry anymore when I face game lags because I understand the struggle in the background :)
 
-Now I understand that a game consists of lots of different facets which need to harmonize in order to get a good game experience. There is the music, the animation, the interface, the logic and the structure of all the different components like the Pokemon in our game.
+Moreover, I understand that a game consists of lots of different facets which need to harmonize in order to get a good game experience. There is the music, the animation, the interface, the logic and the structure of all the different components like the Pokemon in our game.
 The structure of the project and the structure of the data is different from typical structures in backend serverside programming. When I started the project I had no idea of how to work and interact with all the different scenes. But the deeper i dived into the matter and the more I used them the more familiar I became with the structuring and intercations. Every Scene has instances underneath it. E. G. a player has a health bar, a collision shape (to interact with the environment) and a sprite (or animated sprite) to appear as a player and get basic functionality. The player is in a scene interacting with other players. The main scene also has a music player and a user interface (which consists of other scenes). 
 
 Another very imortant point to make is that the Game Engine already handles a lot of difficult algorithems and settings. Getting familiar with using the Engine effectively is another skill that helps reducing code and developing the game faster.
