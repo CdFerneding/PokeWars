@@ -38,7 +38,7 @@ enemiesCanSpawn == false
 
 // after the timer is finished
 when_timer_is_finished() -> void:
-enemiesCanSpawn == true
+    enemiesCanSpawn == true
 
 
 // in loop triggered by another timer
@@ -48,7 +48,7 @@ spawn_enemies()
 </pre>
 
 
-Here is initialise the flag.
+Here is the initialisation of the flag.
 
 ![Empty Inheritance](Documentation/Max_Neubauer_Personal_Report_Assets/bad_code_global_flag_declaration.png )
 
