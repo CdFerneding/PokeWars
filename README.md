@@ -1,6 +1,9 @@
 # Pokewars
 
 ## Members
+
+**[Justin Frauböse](/Justin.md)**
+
 Justin Frauböse, Max Neubauer, Conrad Ferneding, Evan Fregeais
 
 ## Code claims 
