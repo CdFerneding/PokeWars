@@ -11,7 +11,7 @@ The Pokemon class is extended by GoodPokemon and BadPokemon. BadPokemon is exten
 
 This way it is possible to use these classes as Types to work with different Pokemon that belong to the same Type.
 
-(This code is not from me, but shows how to use the inheritance)
+(This code is not from me, but shows how to use the inheritance (This is not bad code))
 
 ![Inheritance used](Documentation/Max_Neubauer_Personal_Report_Assets/_inheritance_description.png)
 
