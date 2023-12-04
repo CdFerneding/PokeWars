@@ -3,8 +3,9 @@
 ## Members
 
 **[Justin Frauböse](/Justin.md)**
-
-Justin Frauböse, Max Neubauer, Conrad Ferneding, Evan Fregeais
+**[Max Neubauer](/Justin.md)**
+**[Conrad Ferneding](/Justin.md)**
+**[Evan Fregeais](/Justin.md)**
 
 ## Code claims 
 | | Justin | Max | Conrad | Evan |
