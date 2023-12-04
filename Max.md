@@ -109,8 +109,38 @@ And this is how the code is integrated:
 
 ![Empty Inheritance](Documentation/Max_Neubauer_Personal_Report_Assets/good_code_navigation_2.png)
 
+Another good code example is the mechsnism of spawning enemy Pokemon.
+To make the game more difficult the more time runs by we decided, that the amount of enemies which is spawning should incrase with every attack wave. Furthermore, the amount of spawing enemies differes between the 3 BigBadPokemon. To realise this design decision there is an *iteration* variable for each BigBadPokemon that increases by 1 with every wave.
+Depending on which BigBadPokemon is to spawn enemies there is a conditional clause that executes the spawn enemy function which takes the number of enemies to spawn.
+
+![Empty Inheritance](Documentation/Max_Neubauer_Personal_Report_Assets/good_code_execute_enemy_spawn.png)
+
+Inside of the *spawn_enemy* function I iterate from 1 to the given number and spawn the accompanying Pokemon every time. To make the spawning look better, the Pokemon do not spawn at the same position. The random number generator determines the exact position with their random number between -40 and 40. This way it looks as if the enemies spawn in a circle around the BigBadPokemon (The curcular form comes from the collision shape around the BigBadPokemon).
+
+![Empty Inheritance](Documentation/Max_Neubauer_Personal_Report_Assets/good_code_spawn.png)
+
+I consider this code as good because it is well structured and readable. It also separates the enemy spawning logic into a function which makes the first part more readable and changes can be applied easier.
 
 ## Reflextion
+
+Was the course worth taking? Yes, definitally. 
+
+Before this semester I had never touched Game programming or a Game Engine. I was familiar with backend serverside programming and hardware programming but I had no idea how to struckture Games or what the development process would be like.
+
+Now I am not that angry anymore when I face game lags because I understand the struggle in the background :)
+
+Now I understand that a game consists of lots of different facets which need to harmonize in order to get a good game experience. There is the music, the animation, the interface, the logic and the structure of all the different components like the Pokemon in our game.
+The structure of the project and the structure of the data is different from typical structures in backend serverside programming. When I started the project I had no idea of how to work and interact with all the different scenes. But the deeper i dived into the matter and the more I used them the more familiar I became with the structuring and intercations. Every Scene has instances underneath it. E. G. a player has a health bar, a collision shape (to interact with the environment) and a sprite (or animated sprite) to appear as a player and get basic functionality. The player is in a scene interacting with other players. The main scene also has a music player and a user interface (which consists of other scenes). 
+
+Another very imortant point to make is that the Game Engine already handles a lot of difficult algorithems and settings. Getting familiar with using the Engine effectively is another skill that helps reducing code and developing the game faster.
+
+Since my development progress was not optimal I learned about the issues that take time when you do not take tham serously. When I develop my next game I will invest a lot more time into the engineering and planing part. Because a well structured development plan reduces stress, time and enables easy scalebility. Another thing I will do better is reduce finding workarounds. If there is no support to a certain issue, then your way of implementation is not the inteded way. There will probaply be an easier option with lots of support. (Of course there are exceptions). 
+
+Putting everything into one account, I come to the conclusion that I learned a lot about game development and programming. Because I started with zero knowledge and now I understand the development progress of making a computer game.
+
+
+
+
 
 
 
