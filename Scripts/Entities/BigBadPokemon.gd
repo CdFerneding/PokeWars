@@ -17,9 +17,9 @@ var current_group = ""
 @onready var plantos_child = preload("res://Scenes/pokemon/plantos_child.tscn")
 @onready var moltres_child = preload("res://Scenes/pokemon/moltres_child.tscn")
 
-var iteration1 = 1
-var iteration2 = 1
-var iteration3 = 1
+var iteration1 = 0
+var iteration2 = 0
+var iteration3 = 0
 
 static var bigBadPokemon = 3
 
@@ -66,7 +66,7 @@ func _on_enemy_spawner_timer_timeout():
 		spawn_enemies(2 + iteration2)
 		iteration2 = iteration2 + 1
 	elif current_group == "arena3":
-		spawn_enemies(3 + iteration3 * 2)
+		spawn_enemies(2 + iteration3 * 2)
 		iteration3 = iteration3 + 1
 	
 func _on_ennemy_killed():
