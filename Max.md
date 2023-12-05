@@ -11,7 +11,7 @@ The Pokemon class is extended by GoodPokemon and BadPokemon. BadPokemon is exten
 
 This way it is possible to use these classes as Types to work with different Pokemon that belong to the same Type.
 
-(This code is not from me, but shows how to use the inheritance (This is not bad code))
+(This code is not from me, but shows how to use the inheritance (This is not bad code either))
 
 ![Inheritance used](Documentation/Max_Neubauer_Personal_Report_Assets/_inheritance_description.png)
 
@@ -24,7 +24,7 @@ Due to the lack of outsourcing and abstraction the GoodPokemon class is currentl
 ![Empty Inheritance](Documentation/Max_Neubauer_Personal_Report_Assets/bad_code_empty_inheritance.png )
 
 
-Another example of bad code is the use of global flag variables. Global flag variables may seem like a propper solution in the first place. But when the code becomes more and the number of flag variables increases, the complexity of the code increases sigificantly. 
+Another example of bad code is the use of global flag variables. Global flag variables may seem like a sufficient solution in the first place. But when the code becomes more and the number of flag variables increases, the complexity of the code also increases sigificantly. 
 
 Although I tried to use as few global flag variables as possible there are still some left. For example: I wanted to make sure that bad Pokemon only spawn after a certain amount of time. 
 
@@ -37,7 +37,7 @@ The abstract version of the code would look like this:
 enemiesCanSpawn == false
 
 // after the timer is finished
-when_timer_is_finished() -> void:
+when_timer_is_finished():
     enemiesCanSpawn == true
 
 
@@ -46,7 +46,6 @@ if enemiesCanSpawn == false:
     return
 spawn_enemies()
 </pre>
-
 
 Here is the initialisation of the flag.
 
@@ -75,13 +74,13 @@ The abstract code of the navigation looks like this:
 const speed = 100
 
 // navigation agent
-@onready var nav_agent:= $NavigationAgent2D as NavigationAgent2D
+@onready var nav_agent:= $NavigationAgent2D
 
 // here the actual algorithm of the navigation agent is used
-func _physics_process(_delta: float) -> void:
+func _physics_process(_delta: float):
 
     // the navigation agent returns the direction to arrive at the target
-    var dir = to_local(nav_agent.get_next_path_position()).normalized()
+    dir = to_local(nav_agent.get_next_path_position()).normalized()
 
     // the movement is calculated
     velocity = dir * speed
@@ -90,13 +89,13 @@ func _physics_process(_delta: float) -> void:
     move_and_slide()
 	
 // set the target_position to the designated area the character should walk to
-func make_path(goal) -> void:
-	nav_agent.target_position = goal
+func make_path(tartget_position):
+    nav_agent.target_position = targer_position
 	
 // when a certain condition is met, define the target and start moving
 func _on_trigger():
-    var goal = get_where_the_character_should_move()
-    make_path(goal)
+    target_position = get_where_the_character_should_move()
+    make_path(target_position)
 </pre>
 
 A test of the navigation agent can be seen [here](https://github.com/TxRuX/Godot_Navigation).
@@ -110,7 +109,7 @@ And this is how the code is integrated:
 ![Empty Inheritance](Documentation/Max_Neubauer_Personal_Report_Assets/good_code_navigation_2.png)
 
 Another good code example is the mechsnism of spawning enemy Pokemon.
-To make the game more difficult the more time runs by we decided, that the amount of enemies which is spawning should incrase with every attack wave. Furthermore, the amount of spawing enemies differes between the 3 BigBadPokemon. To realise this design decision there is an *iteration* variable for each BigBadPokemon that increases by 1 with every wave.
+To make the game more difficult the more time runs by we decided, that the amount of enemies which are spawning should incrase with every attack wave. Furthermore, the amount of spawing enemies differes between the 3 BigBadPokemon. To realise this design decision there is an *iteration* variable for each BigBadPokemon that increases by 1 with every wave.
 Depending on which BigBadPokemon is to spawn enemies there is a conditional clause that executes the spawn enemy function which takes the number of enemies to spawn.
 
 ![Empty Inheritance](Documentation/Max_Neubauer_Personal_Report_Assets/good_code_execute_enemy_spawn.png)
@@ -120,6 +119,15 @@ Inside of the *spawn_enemy* function I iterate from 1 to the given number and sp
 ![Empty Inheritance](Documentation/Max_Neubauer_Personal_Report_Assets/good_code_spawn.png)
 
 I consider this code as good because it is well structured and readable. It also separates the enemy spawning logic into a function which makes the first part more readable and changes can be applied easier.
+
+## Video
+
+In this video i am going to present how the navigation works on the TileMap and how timers are used to trigger certain actions.
+
+![Video about settings made in Godot interface](Documentation/Max_Neubauer_Personal_Report_Assets/video_for_interface_documentation.mp4)
+
+These are only some implementations made in the Godot interface. But since the other team members will also present some settings directly connected to the interface there will be a great overview.
+
 
 ## Reflextion
 
@@ -136,7 +144,7 @@ Another very imortant point to make is that the Game Engine already handles a lo
 
 Since my development progress was not optimal I learned about the issues that take time when you do not take tham serously. When I develop my next game I will invest a lot more time into the engineering and planing part. Because a well structured development plan reduces stress, time and enables easy scalebility. Another thing I will do better is reduce finding workarounds. If there is no support to a certain issue, then your way of implementation is not the inteded way. There will probaply be an easier option with lots of support. (Of course there are exceptions). 
 
-Putting everything into one account, I come to the conclusion that I learned a lot about game development and programming. Because I started with zero knowledge and now I understand the development progress of making a computer game.
+Putting everything into one account, I come to the conclusion that I learned a lot about game development and programming. Because I started with zero knowledge and now I understand the development progress of creating and coding a computer game.
 
 
 
