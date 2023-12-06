@@ -55,6 +55,7 @@ func on_intro_finished():
 
 func on_start_game():
 	$Music.play()
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master") , linear_to_db(0.5))
 	#DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	get_viewport().size_changed.connect(Callable(get_node("Camera"), "update_limit"))
 	$UI/TrainBox.hide()
