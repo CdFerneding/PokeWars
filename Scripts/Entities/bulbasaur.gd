@@ -28,7 +28,9 @@ func _ready():
 
 func _process(_delta:float):
 	if Game.is_paused:
+		animationSprite.pause()
 		return
+	animationSprite.play()
 	
 	charmander_scale_on_hover()
 	check_evolution()
