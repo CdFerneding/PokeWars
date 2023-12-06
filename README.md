@@ -36,7 +36,9 @@
 
 ## Video
 
-![Video about settings made in Godot interface](Documentation/Group_Video/video_for_interface_documentation.mp4)
+There were issues with the audio on the recording, hence this video is without audio.
+
+![Gameplay video (please be merciefull UwU <3](Documentation/Group_Video/2023-12-06_13-43-00.mp4)
 
 ## Concept
 
