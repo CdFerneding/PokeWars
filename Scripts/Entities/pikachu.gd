@@ -34,8 +34,9 @@ func _process(_delta:float):
 	
 func _physics_process(_delta: float) -> void:
 	if Game.is_paused:
+		$AnimatedSprite2D.pause()
 		return
-		
+	$AnimatedSprite2D.play()
 	var next_pos = nav_agent.get_next_path_position()
 	var dir = to_local(next_pos).normalized()
 	velocity = dir * speed

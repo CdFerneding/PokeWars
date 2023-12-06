@@ -50,8 +50,9 @@ func assign_sprite():
 	
 func _process(delta):
 	if Game.is_paused:
+		animatedSprite.pause()
 		return
-	
+	animatedSprite.play()
 
 func _on_enemy_spawner_timer_timeout():
 	var mainPath = get_tree().get_root().get_node("Main")

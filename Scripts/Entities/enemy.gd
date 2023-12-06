@@ -66,6 +66,10 @@ func attack():
 	$AttackCooldown.start()
 	
 func _physics_process(_delta: float) -> void:
+	if Game.is_paused:
+		animationSprite.pause()
+		return
+	animationSprite.play()
 #	var prev_vel = velocity
 	if self.position == target || current_target == null || Game.is_paused:
 		return
