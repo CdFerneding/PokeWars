@@ -16,7 +16,8 @@ Design of fighting pokemon production and an evolution System, where the player 
 #### RTS Elements:
 Classic RTS mechanics like: unit selection and moving, building infrastructure and fighting strategy. 
 #### Game Story:
-
+Total Extinction of the legendary native birds, and their lineage, while not being eliminated by their children.
+Save your berries and friends from being annihilated.
 
 ### Stats
 
