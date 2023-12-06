@@ -34,6 +34,10 @@
 |Bosses| X | Most | Touched | Some|
 |Enemies| X | X | Some | Most|
 
+## Video
+
+![Video about settings made in Godot interface](Documentation/Group_Video/video_for_interface_documentation.mp4)
+
 ## Concept
 
 The concept behind the game is a mix between Age of Empires and Pokemon.
