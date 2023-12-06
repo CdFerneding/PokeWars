@@ -19,3 +19,34 @@ Classic RTS mechanics like: unit selection and moving, building infrastructure a
 Pokemon Lore:
 Implementation of the pokemon lore by incorporating different regions with different starter pokemon (aka. fighting pokemon). The different regions may have different perks or advantages which make them unique.
 
+### Stats
+
+Column attacks row.
+
+|| Water | Grass | Fire | 
+|----|----|----|----|
+|Water| 0.5 | 0.5 | 2 |
+|Grass| 2 | 0.5 | 0.5 |
+|Fire| 0.5 | 2 | 0.5 |
+
+
+| Unit | HP | ATK | Cost|
+|----|----|----|----|
+|Pikachu| 20 | 0 | 8 |
+|Bulbasaur (G)| 20 | 5 | 10 |
+|Ivysaur (G2)| 40 | 2 | 10 | 20 |
+|Venusaur (G3)| 80 | 15 | 30 |
+|Charmander (F)| 20 | 5 | 10 |
+|Charmeleon (F2)| 40 | 10 | 20 |
+|Charizard (F3)| 80 | 15 | 30 |
+|Squirtle (W)| 20 | 5 | 10 |
+|Wartortle (W2)| 40 | 10 | 20 |
+|Blastoise (W3)| 80 | 15 | 30 |
+|waltos_child (W)| 20 | 5 ||
+|moltres_child (F)| 20 | 5 ||
+|plantos_child (G)| 20 | 5 ||
+
+Your "favourite pokemon" (see dialogue) gets a +5 sttack boost.
+
+
+
