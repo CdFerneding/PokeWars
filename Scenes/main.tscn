@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://jbkfgig6x3sy" path="res://Scenes/pokemon/pikachu.tscn" id="10_dhifx"]
 [ext_resource type="PackedScene" uid="uid://weyowi1k0j0y" path="res://Scenes/WorldObjects/berrybush.tscn" id="11_u5ymy"]
 [ext_resource type="PackedScene" uid="uid://dw0dfm6o0ni0s" path="res://Scenes/WorldObjects/tree.tscn" id="12_he3mb"]
-[ext_resource type="PackedScene" uid="uid://ctnohtufkqyj3" path="res://Scenes/WorldObjects/building.tscn" id="13_ot5q2"]
+[ext_resource type="PackedScene" uid="uid://lfb680htllb4" path="res://Scenes/WorldObjects/building2.tscn" id="14_3xtgs"]
 [ext_resource type="PackedScene" uid="uid://bxlqywquk2y85" path="res://Scenes/GUI/hud.tscn" id="14_aq381"]
 [ext_resource type="Script" path="res://Scripts/Entities/BigBadPokemon.gd" id="16_mwle3"]
 [ext_resource type="Texture2D" uid="uid://di45pnuqtfhuh" path="res://Assets/Sprites/Fire/Moltres/Idle-Anim.png" id="17_sdfoi"]
@@ -513,11 +513,11 @@ position = Vector2(389, 426)
 [node name="Buildings" type="Node2D" parent="."]
 y_sort_enabled = true
 
-[node name="PokeCenter" parent="Buildings" groups=["buildings"] instance=ExtResource("13_ot5q2")]
-position = Vector2(168, 77)
-
 [node name="Laboratory" parent="Buildings" instance=ExtResource("20_a52k6")]
 position = Vector2(383, 129)
+
+[node name="PokeCenter" parent="Buildings" instance=ExtResource("14_3xtgs")]
+position = Vector2(168, 81)
 
 [node name="UpdateCameraBorderFix" type="Timer" parent="."]
 editor_description = "This is a fix for the camera because the border to move the camera isn't updated on Windows and MacOS. An event to now when the windows size is updated exists but work only on Linux (Ubuntu with Gnome)"
@@ -633,6 +633,7 @@ autostart = true
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_l55f3")
+volume_db = -80.0
 
 [connection signal="timeout" from="UpdateCameraBorderFix" to="Camera" method="update_limit"]
 [connection signal="timeout" from="Moltres/EnemySpawnerTimer" to="Moltres" method="_on_enemy_spawner_timer_timeout"]

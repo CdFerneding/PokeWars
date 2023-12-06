@@ -34,6 +34,7 @@ static func _delete_building(position:Array, tileMap:TileMap):
 			tileMap.set_cell(0,Vector2(m,n),1, Vector2(1,4))
 	tileMap.set_cell(1,Vector2(position[0], position[2]), -1)
 
+
 static func _tile_builder(position:Array, tileMap:TileMap, tileId:int):
 	if tileId == 3 and Game.Wood < Game.FIRE_ARENA_COST:
 		return
@@ -77,6 +78,3 @@ static func _tile_builder(position:Array, tileMap:TileMap, tileId:int):
 	else:
 		return false
 
-	
-
-		

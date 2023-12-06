@@ -187,14 +187,12 @@ func _handle_building_input(event):
 		var tile_position = tileMap.get_global_mouse_position()
 		var selected = Game.selectedBuilding
 		match selected:
-			"PokeCenter":
-				tileMap._place_building(tile_position,4,3,2)
 			"Fire Arena":
-				tileMap._place_building(tile_position,4,4,3)
+				tileMap._place_building(tile_position,3)
 			"Plant Arena":
-				tileMap._place_building(tile_position,4,4,4)
+				tileMap._place_building(tile_position,4)
 			"Water Arena":
-				tileMap._place_building(tile_position,4,4,5)
+				tileMap._place_building(tile_position,5)
 
 
 '
