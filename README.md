@@ -45,6 +45,10 @@ There were issues with the audio on the recording, hence this video is without a
 The concept behind the game is a mix between Age of Empires and Pokemon.
 The goal of the game is to train Pokemon and defeat the bosses on the edge of the map.
 
+**[Gamedesign](/Gamedesign.md)**
+
+**[Artdesign](/Artdesign.md)**
+
 ## Game Engine
 
 We started working with Unity in the begining but due to issues, we decided to switch to Godot.
