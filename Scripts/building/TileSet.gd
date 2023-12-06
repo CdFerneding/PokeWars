@@ -47,6 +47,9 @@ func _place_building(position:Vector2, tileId):
 	
 		var building = scene.instantiate()
 		building.position = get_global_mouse_position()
+		building.position.x += 8
+		building.position.y += 8
+		
 		mainPath.get_buildings()
 		building.main = self.main
 		buildingPath.add_child(building)
@@ -59,7 +62,7 @@ func _place_building(position:Vector2, tileId):
 func initiate_tileset(position:Vector2, tileId):
 	var tile_position = _get_tile_position(position)
 	var position_array = _create_offset(tileId, tile_position)
-	#tileBuiler._tile_builder(position_array, self, tileId)
+	tileBuiler._tile_builder(position_array, self, tileId)
 
 func _delete_building(position: Vector2, tileId):
 	var tile_position = _get_tile_position(position)

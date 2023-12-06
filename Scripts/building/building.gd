@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name Building
+
 var buildingHover = false
 @onready var unitBuilder = preload("res://Scripts/Builder/UnitBuilder.gd")
 
@@ -163,11 +165,11 @@ func _on_area_2d_body_shape_entered(body_rid, body, body_shape_index, local_shap
 	for obj in array:
 		if obj.get_class() == "CharacterBody2D":
 			Game.GameMode = "play"
-			delete_building()
+			self.queue_free()
 			break
-		elif !(obj == $StaticBody2D) and !("PokeCenter" in name) and obj.get_parent() != main:
+		elif obj.get_parent() as Building != null and obj.get_parent() != self:
 			Game.GameMode = "play"
-			delete_building()
+			self.queue_free()
 			break
 		else:
 			valid = true
