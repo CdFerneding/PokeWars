@@ -1,15 +1,15 @@
 ~ start_game_greeting
 
-Master Pikachu: Hello, there! Glad to meet you! Welcome to the world of Pokémon! My name is Pikachu. People affectionately refer to me as the Pokémon Professor. This world is inhabited far and wide by creatures called Pokémon! For some, Pokémon are pets. Other use them for battling. As for myself, I battle Pokemon as a profession. 
-Master Pikachu: But first, tell me a little about yourself. What is your favourite pokemon? 
+Master Pikachu: Hello, there! Glad to meet you! Welcome to the world of Pokemon! My name is Pikachu. People affectionately refer to me "Master Pikachu". This world is inhabited far and wide by creatures called Pokemon! For some, Pokemon are pets. Other use them for battling. As for myself, I battle Pokemon as a profession. 
+Master Pikachu: But first, tell me a little about yourself. What is your favourite Pokemon? 
 - Charmander
 	set Game.playerName = "Charmander"
 - Bulbasaur
 	set Game.playerName = "Bulbasaur"
 - Shiggy
 	set Game.playerName = "Shiggy"
-Master Pikachu: Get ready for an awesome Pokémon adventure! I'll walk you through the basics.
-Master Pikachu: First off, to control your Pokémon, just left-click or drag your mouse over them. You'll need berries to train new Pokémon, so keep an eye on your food income. Aim for a steady flow of new Pikachu pals.
+Master Pikachu: Get ready for an awesome Pokemon adventure! I'll walk you through the basics.
+Master Pikachu: First off, to control your Pokemon, just left-click or drag your mouse over them. You'll need berries to train new Pokemon, so keep an eye on your food income. Aim for a steady flow of new Pikachu pals.
 Master Pikachu: Need some military backup? Harvest wood to build military buildings (press 'B'). And if you want to switch back to selecting units, hit 'R'. But remember, you can only add three more buildings, so choose wisely. And remember, there are some units that may be more fit to fight against specific types!
 Master Pikachu: Don't dawdle too long, though. There are annoying birds lurking around, trying to snatch your berries! Get your setup going and defend those snacks!
 do Game.run_intro_finished()
