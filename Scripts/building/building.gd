@@ -17,7 +17,7 @@ var currently_training = false
 var tileId:int
 var maxHealth = 200
 var valid = false
-var build = false
+@export var build = false
 
 
 @onready var area2d = $Area2D
@@ -27,16 +27,21 @@ func _ready():
 	Game.GameMode = "play"
 	main = get_tree().get_root().get_node("Main")
 	UI = main.get_node("UI")
-
+	
 
 
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if valid == true and build == false and !("PokeCenter" in name):
+	if "PokemonCenter" in name:
+		if valid == false:
+			$Area2D.disconnect("body_shape_entered", _on_area_2d_body_shape_entered)
+			valid = true
+	elif valid == true and build == false and !("PokeCenter" in name):
 		main.get_node("TileMap").initiate_tileset(self.position, self.tileId)
 		build == true
+		$Area2D.disconnect("body_shape_entered", _on_area_2d_body_shape_entered)
 
 
 func _start_training(evolution):
@@ -157,9 +162,13 @@ func _on_area_2d_body_shape_entered(body_rid, body, body_shape_index, local_shap
 	var array = area2d.get_overlapping_bodies()
 	for obj in array:
 		if obj.get_class() == "CharacterBody2D":
-			queue_free()
+			Game.GameMode = "play"
+			delete_building()
+			break
 		elif !(obj == $StaticBody2D) and !("PokeCenter" in name) and obj.get_parent() != main:
-			queue_free()
+			Game.GameMode = "play"
+			delete_building()
+			break
 		else:
 			valid = true
 

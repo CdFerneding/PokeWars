@@ -518,6 +518,7 @@ position = Vector2(383, 129)
 
 [node name="PokeCenter" parent="Buildings" instance=ExtResource("14_3xtgs")]
 position = Vector2(168, 81)
+build = true
 
 [node name="UpdateCameraBorderFix" type="Timer" parent="."]
 editor_description = "This is a fix for the camera because the border to move the camera isn't updated on Windows and MacOS. An event to now when the windows size is updated exists but work only on Linux (Ubuntu with Gnome)"
