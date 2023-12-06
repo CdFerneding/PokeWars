@@ -33,11 +33,8 @@ func _process(_delta:float):
 		
 	
 func _physics_process(_delta: float) -> void:
-	if Game.is_paused == true:
+	if Game.is_paused:
 		return
-#	var prev_vel = velocity
-	#if int(nav_agent.distance_to_target() < 2):
-		#return
 		
 	var next_pos = nav_agent.get_next_path_position()
 	var dir = to_local(next_pos).normalized()
@@ -49,7 +46,7 @@ func _physics_process(_delta: float) -> void:
 			self.position = next_pos
 		target = self.position
 	
-	if is_fighting == false:
+	if !is_fighting:
 		apply_corresponding_animation()
 	
 	move_and_slide()
@@ -61,7 +58,7 @@ func apply_corresponding_animation():
 	# calculate the degrees of the walking direction
 	var current_velocity = velocity
 	var radians = current_velocity.angle()
-	var degrees = radians * (180/PI)
+	var degrees = radians * 180 * 0.32  # equals 180 / PI but should be faster
 	if degrees < 0:
 		degrees = 360 - abs(degrees)
 	

@@ -67,7 +67,7 @@ func attack():
 	
 func _physics_process(_delta: float) -> void:
 #	var prev_vel = velocity
-	if self.position == target or current_target == null or Game.is_paused == true:
+	if self.position == target || current_target == null || Game.is_paused:
 		return
 	
 	var next_pos = nav_agent.get_next_path_position()
@@ -81,7 +81,7 @@ func _physics_process(_delta: float) -> void:
 		if $AttackCooldown.is_stopped():
 			attack()
 	
-	if is_fighting == false:
+	if !is_fighting:
 		apply_corresponding_animation()
 	
 	move_and_slide()

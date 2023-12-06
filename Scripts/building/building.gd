@@ -156,7 +156,7 @@ func _on_area_2d_mouse_entered():
 func _on_area_2d_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
 	var array = area2d.get_overlapping_bodies()
 	for obj in array:
-		if obj.get_class() == "CharacterBody2D":
+		if obj.get_class() == "CharacterBody2D"  and !("PokeCenter" in name):
 			queue_free()
 		elif !(obj == $StaticBody2D) and !("PokeCenter" in name) and obj.get_parent() != main:
 			queue_free()
