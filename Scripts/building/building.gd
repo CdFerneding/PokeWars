@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name Building
+
 var buildingHover = false
 @onready var unitBuilder = preload("res://Scripts/Builder/UnitBuilder.gd")
 
@@ -18,6 +20,7 @@ var tileId:int
 var maxHealth = 200
 var valid = false
 var build = false
+var disconnect_shape_entered= false
 
 
 @onready var area2d = $Area2D
@@ -27,16 +30,23 @@ func _ready():
 	Game.GameMode = "play"
 	main = get_tree().get_root().get_node("Main")
 	UI = main.get_node("UI")
-
+	
 
 
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if valid == true and build == false and !("PokeCenter" in name):
-		main.get_node("TileMap").initiate_tileset(self.position, self.tileId)
+	if "PokeCenter" in name:
+		if disconnect_shape_entered == false:
+			$Area2D.disconnect("body_shape_entered", _on_area_2d_body_shape_entered)
+			disconnect_shape_entered = true
+	elif valid == true and build == false and !("PokeCenter" in name) and disconnect_shape_entered == false:
+		main.get_node("TileMap").initiate_tileset(self.position, self.tileId, self)
 		build == true
+		$Area2D.disconnect("body_shape_entered", _on_area_2d_body_shape_entered)
+		disconnect_shape_entered = true
+		$Area2D/CollisionShape2D2.shape.radius = 45.0
 
 
 func _start_training(evolution):
@@ -142,6 +152,7 @@ func delete_building():
 	tileMap._delete_building(self.position, tileId)
 	Game.buildCounter -= 1
 	self.queue_free()
+	Game.selectedBuilding = "Fire Arena"
 '
 Input managment functions
 '
@@ -156,10 +167,14 @@ func _on_area_2d_mouse_entered():
 func _on_area_2d_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
 	var array = area2d.get_overlapping_bodies()
 	for obj in array:
-		if obj.get_class() == "CharacterBody2D"  and !("PokeCenter" in name):
-			queue_free()
-		elif !(obj == $StaticBody2D) and !("PokeCenter" in name) and obj.get_parent() != main:
-			queue_free()
+		if obj.get_class() == "CharacterBody2D":
+			Game.GameMode = "play"
+			self.queue_free()
+			break
+		elif obj.get_parent() as Building != null and obj.get_parent() != self:
+			Game.GameMode = "play"
+			self.queue_free()
+			break
 		else:
 			valid = true
 
