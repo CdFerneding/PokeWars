@@ -16,7 +16,7 @@
 |Map & Tilemap| Touched | All | Touched | Touched | 
 |Laboratory| Touched | Touched | All | X |
 |Military Buildings| All | Touched | Touched | Touched |
-|Optimization| X | X | X | All|
+|Optimization| Touched | X | X | All|
 |Navigation| Touched | Most | x | Some |
 |Pikachu| X | Some | Some | Some |
 |Sprites & Animation| Some | Some | Some | Some |
