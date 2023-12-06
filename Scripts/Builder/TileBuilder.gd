@@ -40,12 +40,6 @@ static func _delete_building(position:Array, tileMap:TileMap):
 
 
 static func _tile_builder(positionArray:Array, tileMap:TileMap, tileId:int, position, building):
-	if tileId == 3 and Game.Wood < Game.FIRE_ARENA_COST:
-		return
-	elif tileId == 4 and Game.Wood < Game.PLANT_ARENA_COST:
-		return
-	elif tileId == 5 and Game.Wood < Game.WATER_ARENA_COST:
-		return
 	
 	var no_obstacle = true
 	var right_offeset = 0

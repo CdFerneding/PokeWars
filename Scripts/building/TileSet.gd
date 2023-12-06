@@ -40,6 +40,12 @@ Next Step:
 '''
 
 func _place_building(position:Vector2, tileId):
+	if tileId == 3 and Game.Wood < Game.FIRE_ARENA_COST:
+		return
+	elif tileId == 4 and Game.Wood < Game.PLANT_ARENA_COST:
+		return
+	elif tileId == 5 and Game.Wood < Game.WATER_ARENA_COST:
+		return
 	if position.y < 400 and position.x < 600:
 		var scene = load("res://Scenes/WorldObjects/building2.tscn")
 		var mainPath = get_tree().get_root().get_node("Main")
