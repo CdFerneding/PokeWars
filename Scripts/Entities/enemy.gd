@@ -5,7 +5,6 @@ class_name enemy
 #@export var main: Node
 #@export var main: Node
 var enemy_hover = false
-signal enemy_clicked
 
 # this is the position that the enemy will attack when all pikachus are dead
 # initializing home_base position
@@ -67,19 +66,19 @@ func attack():
 	$AttackCooldown.start()
 	
 func _physics_process(_delta: float) -> void:
-	if Game.is_paused == true:
-		return
 #	var prev_vel = velocity
-	if self.position == target:
+	if self.position == target or current_target == null or Game.is_paused == true:
 		return
-		
+	
 	var next_pos = nav_agent.get_next_path_position()
+	if next_pos == Vector2.ZERO:
+		return
 	var dir = to_local(next_pos).normalized()
 	velocity = dir * speed
 	
-	if position.distance_to(current_target.position) < 10:
+	if current_target!= null and position.distance_to(current_target.position) < 10:
 		velocity = Vector2.ZERO
-		if $AttackCooldown.is_stopped() and current_target != null:
+		if $AttackCooldown.is_stopped():
 			attack()
 	
 	if is_fighting == false:
