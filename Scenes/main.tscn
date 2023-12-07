@@ -628,7 +628,7 @@ sprite_frames = SubResource("SpriteFrames_u25gm")
 animation = &"idle_down"
 
 [node name="StartEnemySpawn" type="Timer" parent="."]
-wait_time = 170.0
+wait_time = 150.0
 one_shot = true
 autostart = true
 

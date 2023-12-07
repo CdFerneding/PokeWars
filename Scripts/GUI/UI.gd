@@ -8,7 +8,7 @@ extends CanvasLayer
 @onready var GameModeBuilding = $GameStateBox/VBoxContainer/CurrentBuilding
 @onready var SelectedLabel = $GameStateBox/VBoxContainer/Selected # (numbers of currently selected pikachus)
 
-var time = 0
+@export var time = 0
 var currentBuilding
 
 # variables to remember if the upgrade timers where running before the game was paused

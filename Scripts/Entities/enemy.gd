@@ -20,11 +20,15 @@ var current_target: Node
 var is_fighting = false
 
 @export var attack_damage = 5
+@onready var gameTime = get_tree().get_root().get_node("Main/UI").time
 
 #implements the pathfinding algorithm
 @onready var nav_agent:= $NavigationAgent2D #as NavigationAgent2D
 
 func _ready():
+	# initial max health of new moltres
+	max_health = 25
+	
 	assign_sprite()
 	
 	# make the enemies significantly slower than economy pokemon
@@ -53,14 +57,22 @@ func _process(_delta:float):
 	if Game.is_paused == true:
 		return
 	enemy_scale_on_hover()
-	
+	scale_stats_with_time()
 #	var main_path = get_tree().get_root().get_node("Main")
 #	var all_pokemon = main_path.get_all_units()
 #	if all_pokemon.position.distance_to(position) < 15:
 #		is_fighting = true
 #	else:
 #		is_fighting = false
-		
+
+func scale_stats_with_time():
+	if gameTime > 210:
+		max_health = 50
+		attack_damage = 12
+	else: 
+		max_health = 25
+		attack_damage = 6
+
 func attack():
 	(current_target as GoodPokemon)._on_hit(attack_damage, type)
 	$AttackCooldown.start()

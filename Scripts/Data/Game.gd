@@ -57,10 +57,10 @@ var waterQueue = []
 var plantQueue = []
 
 # upgrade time and cost constants (food)
-var FIRST_UPGRADE_COST = 80
-var SECOND_UPGRADE_COST = 160
-var FIRST_UPGRADE_TIME = 100
-var SECOND_UPGRADE_TIME = 200
+var FIRST_UPGRADE_COST = 60
+var SECOND_UPGRADE_COST = 120
+var FIRST_UPGRADE_TIME = 60
+var SECOND_UPGRADE_TIME = 120
 
 # unit costs (food)
 var PIKACHU_COST = 8
