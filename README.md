@@ -1,7 +1,14 @@
 # Pokewars
 
 ## Members
-Justin Frauböse, Max Neubauer, Conrad Ferneding, Evan Fregeais
+
+**[Justin Frauböse](/Justin.md)**
+
+**[Max Neubauer](/Max.md)**
+
+**[Conrad Ferneding](/Conrad.md)**
+
+**[Evan Fregeais](/Evan.md)**
 
 ## Code claims 
 | | Justin | Max | Conrad | Evan |
@@ -9,7 +16,7 @@ Justin Frauböse, Max Neubauer, Conrad Ferneding, Evan Fregeais
 |Map & Tilemap| Touched | All | Touched | Touched | 
 |Laboratory| Touched | Touched | All | X |
 |Military Buildings| All | Touched | Touched | Touched |
-|Optimization| X | X | X | All|
+|Optimization| Touched | X | X | All|
 |Navigation| Touched | Most | x | Some |
 |Pikachu| X | Some | Some | Some |
 |Sprites & Animation| Some | Some | Some | Some |
@@ -27,10 +34,20 @@ Justin Frauböse, Max Neubauer, Conrad Ferneding, Evan Fregeais
 |Bosses| X | Most | Touched | Some|
 |Enemies| X | X | Some | Most|
 
+## Video
+
+There were issues with the audio on the recording, hence this video is without audio.
+
+![Gameplay video (please be merciefull UwU <3](Documentation/Group_Video/2023-12-06_13-43-00.mp4)
+
 ## Concept
 
 The concept behind the game is a mix between Age of Empires and Pokemon.
 The goal of the game is to train Pokemon and defeat the bosses on the edge of the map.
+
+**[Gamedesign](/Gamedesign.md)**
+
+**[Artdesign](/Artdesign.md)**
 
 ## Game Engine
 
