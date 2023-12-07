@@ -19,7 +19,8 @@ var currently_training = false
 var tileId:int
 var maxHealth = 200
 var valid = false
-@export var build = false
+var build = false
+var disconnect_shape_entered= false
 
 
 @onready var area2d = $Area2D
@@ -36,14 +37,16 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if "PokemonCenter" in name:
-		if valid == false:
+	if "PokeCenter" in name:
+		if disconnect_shape_entered == false:
 			$Area2D.disconnect("body_shape_entered", _on_area_2d_body_shape_entered)
-			valid = true
-	elif valid == true and build == false and !("PokeCenter" in name):
-		main.get_node("TileMap").initiate_tileset(self.position, self.tileId)
+			disconnect_shape_entered = true
+	elif valid == true and build == false and !("PokeCenter" in name) and disconnect_shape_entered == false:
+		main.get_node("TileMap").initiate_tileset(self.position, self.tileId, self)
 		build == true
 		$Area2D.disconnect("body_shape_entered", _on_area_2d_body_shape_entered)
+		disconnect_shape_entered = true
+		$Area2D/CollisionShape2D2.shape.radius = 45.0
 
 
 func _start_training(evolution):
@@ -149,6 +152,7 @@ func delete_building():
 	tileMap._delete_building(self.position, tileId)
 	Game.buildCounter -= 1
 	self.queue_free()
+	Game.selectedBuilding = "Fire Arena"
 '
 Input managment functions
 '
@@ -164,6 +168,7 @@ func _on_area_2d_body_shape_entered(body_rid, body, body_shape_index, local_shap
 	var array = area2d.get_overlapping_bodies()
 	for obj in array:
 		if obj.get_class() == "CharacterBody2D":
+			print(area2d.get_child(1).scale)
 			Game.GameMode = "play"
 			self.queue_free()
 			break
