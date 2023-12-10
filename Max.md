@@ -129,7 +129,7 @@ In this video i am going to present how the navigation works on the TileMap and 
 These are only some implementations made in the Godot interface. But since the other team members will also present some settings directly connected to the interface there will be a great overview.
 
 
-## Reflextion
+## Reflexion
 
 Was the course worth taking? Yes, definitally. 
 
