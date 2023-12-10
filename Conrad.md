@@ -8,7 +8,7 @@ I programmed along a youtube tutorial [CodingQuests RTSGame](https://www.youtube
   
 Through this youtube tutorial I was able to add a health bar, drag selection, learn about signals, order of nodes in the scene tree and groups.  
 
-drag selection in [camera.gd](Scripts/Data/camera.gd#135):
+drag selection in [camera.gd](Scripts/Data/camera.gd#L135):
 <pre>
 if Input.is_action_just_released("left_click"):
 		if startV.distance_to(mousePos) > 20:
@@ -32,7 +32,7 @@ func draw_area(s = true):
 	# let the rectangle dissapear after drawing
 	box.size *= int(s)
 </pre>
-logic behind farming wood in [tree.gd](Scripts/WorldObjects/tree.gd#15):
+logic behind farming wood in [tree.gd](Scripts/WorldObjects/tree.gd#L15):
 <pre>
 func _process(_delta):
 	if Game.is_paused:
@@ -51,7 +51,7 @@ func _on_chop_area_body_entered(body):
 ### Training queue  
 After Justin added the functionality of training pokemon in different buildings I added a training queue for the different pokemon. Before the queue existed the player would be able to simultaniously train multiple pikachus if the neccessary ressources are available. Through the queues the player is forced to always keep an eye on the queue and keep the training of pikachus going.  
 
-variables in [Game.gd](Scripts/Data/Game.gd#53):
+variables in [Game.gd](Scripts/Data/Game.gd#L53):
 <pre>
 # training Queues
 var pikachuQueue = []
@@ -59,7 +59,7 @@ var fireQueue = []
 var waterQueue = []
 var plantQueue = []
 </pre>
-implementation in [TrainIcon.gd](/Scripts/GUI/TrainIcon.gd#13):
+implementation in [TrainIcon.gd](/Scripts/GUI/TrainIcon.gd#L13):
 <pre>
 func _ready():
 	if type == "Pikachu":
@@ -86,7 +86,7 @@ For the pokemon to be able to evolve I added additional sprites, selection boxes
 # handling evolution differences
 @export var evolution = 0
 </pre>  
-Inside [check_evolution](/Scripts/Entities/charmander.gd#37) function:
+Inside [check_evolution](/Scripts/Entities/charmander.gd#L37) function:
 <pre>
 # check current evolution of charmander and enable / disable according boxes, shapes and sprites
 	if evolution == 0:
@@ -110,7 +110,7 @@ Inside [check_evolution](/Scripts/Entities/charmander.gd#37) function:
         [...]
 </pre>  
 To unlock the evolution of a pokemon the player needs to farm berries, click the upgrade in the laboratory and wait for the upgrade to go through. The corresponding bottons are disabled/enabled based on the player action (is the upgrade already in queue / was it already done / does the player have enough resources).  
-[UI.gd](/Scripts/GUI/UI.gd#277):
+[UI.gd](/Scripts/GUI/UI.gd#L277):
 <pre>
 func _on_upgrade_to_venusaur_pressed():
 	if Game.plantUnitLvl != 1 or Game.Food < Game.SECOND_UPGRADE_COST or is_upgrade_ongoing("UpgradeToVenusaur"):
@@ -143,7 +143,7 @@ The following code is pretty self explanatory. The velocity is already given thr
 Now I spanned these 45 degrees around the walking direction. For example should the walk_down_right sprite be used when the angle is bigger than 22.5 or smaller than 67.5:  
 67.5 - 22.5 = 45  
 Now I am going around the 360 degrees and always add 45 to get the new angle border until I am at 22.5 again (or I have programmed 8 directions).  
-in [pikachu.gd](/Scripts/Entities/pikachu.gd#56)
+in [pikachu.gd](/Scripts/Entities/pikachu.gd#L56)
 <pre>
 func apply_corresponding_animation():
 	var current_animation
@@ -178,7 +178,7 @@ func apply_corresponding_animation():
 
 ### Other
 Other things I did that I had a lower number of issues in include:  
-Adding sprites for the enemies, creating selection boxes, writing dialogue (which is not really code in my opinion) and playing it in the game, creating a start-/win-/loose-game HUD 
+Adding sprites for the enemies, creating selection boxes, writing dialogue (which is not really code in my opinion) and playing it in the game, creating a start-/win-/loose-game HUD, menu and settings with editable music volume
 
 ## Bad code
 ### Redundant code for Pokemon
@@ -188,7 +188,7 @@ This could've been done for the military pokemon as well (bulbasaur, squirtle, c
 ### Variables and functions naming conventions
 Unfortunately we missed to discuss naming conventions on our first meeting. Because of this blunder the naming conventions are messed up throughout the repository. For example I wrote my Variables in camelCase, my functions in snake_case (Godot funcitons are _snake_case [with underscore]), constants in UPPER CASE. However I know that there are Variable and Function names that are not following this pattern which we said would be to much to change by now and it does not bother us.  
 I want to mention that if the project was larger this would be a bigger problem since there are more variables and funciton developer (and maybe new developers) need to track.  
-Example from [camera.gd](/Scripts/Data/camera.gd#16):  
+Example from [camera.gd](/Scripts/Data/camera.gd#L16):  
 <pre>
 # variable names by Evan
 var maximum_x_to_move_camera_left
@@ -208,7 +208,9 @@ Even though it is good that I implemented constants they could've been inside an
 
 ## Refleciton on key concepts
 Concepts I have implemented are the following:  
-Drag selection, event handling, queue management, pause game functionality, use of constants, evolution / upgrade mechanisms / player state, sprite animation, 
+Drag selection, event handling, queue management, pause game functionality, use of constants, evolution / upgrade mechanisms / player state, sprite animation,  
+
+While playtesting I noticed the music (which is often too loud) and some other things not working as expected which has led me to newfound respect for all developers who make their game accessible on multiple platforms
 
 ## Video
 Video about groups, pausing the game, the Dialogue Manager, public scripts and event trigger in Godot (signals)  
