@@ -57,10 +57,10 @@ var waterQueue = []
 var plantQueue = []
 
 # upgrade time and cost constants (food)
-var FIRST_UPGRADE_COST = 100
-var SECOND_UPGRADE_COST = 200
-var FIRST_UPGRADE_TIME = 100
-var SECOND_UPGRADE_TIME = 200
+var FIRST_UPGRADE_COST = 60
+var SECOND_UPGRADE_COST = 120
+var FIRST_UPGRADE_TIME = 60
+var SECOND_UPGRADE_TIME = 120
 
 # unit costs (food)
 var PIKACHU_COST = 8
@@ -73,6 +73,27 @@ var BLASTOISE_COST = 30
 var BULBASAUR_COST = 10
 var IVYSAUR_COST = 20
 var VENUSAUR_COST = 30
+
+# unit stats
+var CHARMANDER_HEALTH = 20
+var CHARMELEON_HEALTH = 40
+var CHARIZARD_HEALTH = 80
+var SQUIRTLE_HEALTH = 20
+var WARTORTLE_HEALTH = 40
+var BLASTOISE_HEALTH = 80
+var BULBASAUR_HEALTH = 20
+var IVYSAUR_HEALTH = 40
+var VENUSAUR_HEALTH = 80
+
+var CHARMANDER_ATTACK = 15 if playerName == "Charmander" else 5 
+var CHARMELEON_ATTACK = 20 if playerName == "Charmander" else 10
+var CHARIZARD_ATTACK = 25 if playerName == "Charmander" else 15
+var SQUIRTLE_ATTACK = 15 if playerName == "Squirtle" else 5
+var WARTORTLE_ATTACK = 20 if playerName == "Squirtle" else 10 
+var BLASTOISE_ATTACK = 25 if playerName == "Squirtle" else 15
+var BULBASAUR_ATTACK = 15 if playerName == "Bulbasaur" else 5 
+var IVYSAUR_ATTACK = 20 if playerName == "Bulbasaur" else 10
+var VENUSAUR_ATTACK = 25 if playerName == "Bulbasaur" else 15 
 
 # building costs (wood)
 var FIRE_ARENA_COST = 20 

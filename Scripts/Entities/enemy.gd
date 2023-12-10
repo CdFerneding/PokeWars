@@ -5,7 +5,6 @@ class_name enemy
 #@export var main: Node
 #@export var main: Node
 var enemy_hover = false
-signal enemy_clicked
 
 # this is the position that the enemy will attack when all pikachus are dead
 # initializing home_base position
@@ -21,11 +20,15 @@ var current_target: Node
 var is_fighting = false
 
 @export var attack_damage = 5
+@onready var gameTime = get_tree().get_root().get_node("Main/UI").time
 
 #implements the pathfinding algorithm
 @onready var nav_agent:= $NavigationAgent2D #as NavigationAgent2D
 
 func _ready():
+	# initial max health of new moltres
+	max_health = 25
+	
 	assign_sprite()
 	
 	# make the enemies significantly slower than economy pokemon
@@ -54,35 +57,47 @@ func _process(_delta:float):
 	if Game.is_paused == true:
 		return
 	enemy_scale_on_hover()
-	
+	scale_stats_with_time()
 #	var main_path = get_tree().get_root().get_node("Main")
 #	var all_pokemon = main_path.get_all_units()
 #	if all_pokemon.position.distance_to(position) < 15:
 #		is_fighting = true
 #	else:
 #		is_fighting = false
-		
+
+func scale_stats_with_time():
+	if gameTime > 210:
+		max_health = 50
+		attack_damage = 12
+	else: 
+		max_health = 25
+		attack_damage = 6
+
 func attack():
 	(current_target as GoodPokemon)._on_hit(attack_damage, type)
 	$AttackCooldown.start()
 	
 func _physics_process(_delta: float) -> void:
-	if Game.is_paused == true:
+	if Game.is_paused:
+		animationSprite.pause()
 		return
+	animationSprite.play()
 #	var prev_vel = velocity
-	if self.position == target:
+	if self.position == target || current_target == null || Game.is_paused:
 		return
-		
+	
 	var next_pos = nav_agent.get_next_path_position()
+	if next_pos == Vector2.ZERO:
+		return
 	var dir = to_local(next_pos).normalized()
 	velocity = dir * speed
 	
-	if position.distance_to(next_pos) < 10:
+	if current_target!= null and position.distance_to(current_target.position) < 10:
 		velocity = Vector2.ZERO
-		if $AttackCooldown.is_stopped() and current_target != null:
+		if $AttackCooldown.is_stopped():
 			attack()
 	
-	if is_fighting == false:
+	if !is_fighting:
 		apply_corresponding_animation()
 	
 	move_and_slide()
@@ -170,7 +185,7 @@ func _on_hit(damage, type):
 	if health_bar.value == 0:
 		pathMain.enemies.erase(self)
 		self.queue_free()
-		pathMain.get_units()
+		pathMain.get_friendly_units()
 
 
 func _on_area_2d_area_entered(area):

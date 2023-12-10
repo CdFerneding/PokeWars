@@ -20,7 +20,7 @@ static func _build_unit(main: Node, name:String, position:Vector2, y_offset, evo
 	unit.name = name
 	
 	# recall to have all pikachus from the "pikachus"-group in "pikachus"-variable again
-	main.get_units()
+	main.get_friendly_units()
 
 static func _select_scene(name:String):
 	match name:

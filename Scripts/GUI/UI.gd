@@ -8,7 +8,7 @@ extends CanvasLayer
 @onready var GameModeBuilding = $GameStateBox/VBoxContainer/CurrentBuilding
 @onready var SelectedLabel = $GameStateBox/VBoxContainer/Selected # (numbers of currently selected pikachus)
 
-var time = 0
+@export var time = 0
 var currentBuilding
 
 # variables to remember if the upgrade timers where running before the game was paused
@@ -102,11 +102,14 @@ func show_training_button():
 	var button1 = $TrainBox/TrainUnitButtonLvl1
 	var button2 = $TrainBox/TrainUnitButtonLvl2
 	var button3 = $TrainBox/TrainUnitButtonLvl3
+	var cost1 = $TrainBox/TrainUnitButtonLvl1/Label
+	cost1.text = "10"
 	button2.show()
 	button3.show()
 	button2.disabled = true
 	button3.disabled = true
 	if"PokeCenter" in currentBuilding.name:
+		cost1.text = "8"
 		button1.icon = load(Game.pikachuIcon)
 		button2.hide()
 		button3.hide()
@@ -188,30 +191,33 @@ func _manage_upgrade_inputs():
 
 
 func _manage_train_inputs():
-	if "PokeCenter" in currentBuilding.name:
-		if Input.is_action_just_pressed("Q"):
-			currentBuilding.train_unit(0)
-	elif "Fire" in currentBuilding.name:
-		if Input.is_action_just_pressed("Q"):
-			currentBuilding.train_unit(0)
-		elif Input.is_action_just_pressed("W"):
+	if currentBuilding != null:
+		if "PokeCenter" in currentBuilding.name:
+			if Input.is_action_just_pressed("Q"):
+				currentBuilding.train_unit(0)
+		elif "Fire" in currentBuilding.name:
+			if Input.is_action_just_pressed("Q"):
+				currentBuilding.train_unit(0)
+			elif Input.is_action_just_pressed("W"):
+					currentBuilding.train_unit(1)
+			elif Input.is_action_just_pressed("E"):
+				currentBuilding.train_unit(2)
+		elif "Water" in currentBuilding.name:
+			if Input.is_action_just_pressed("Q"):
+				currentBuilding.train_unit(0)
+			elif Input.is_action_just_pressed("W"):
 				currentBuilding.train_unit(1)
-		elif Input.is_action_just_pressed("E"):
-			currentBuilding.train_unit(2)
-	elif "Water" in currentBuilding.name:
-		if Input.is_action_just_pressed("Q"):
-			currentBuilding.train_unit(0)
-		elif Input.is_action_just_pressed("W"):
-			currentBuilding.train_unit(1)
-		elif Input.is_action_just_pressed("E"):
-			currentBuilding.train_unit(2)
-	elif "Plant" in currentBuilding.name:
-		if Input.is_action_just_pressed("Q"):
-			currentBuilding.train_unit(0)
-		elif Input.is_action_just_pressed("W"):
-			currentBuilding.train_unit(1)
-		elif Input.is_action_just_pressed("E"):
-			currentBuilding.train_unit(2)
+			elif Input.is_action_just_pressed("E"):
+				currentBuilding.train_unit(2)
+		elif "Plant" in currentBuilding.name:
+			if Input.is_action_just_pressed("Q"):
+				currentBuilding.train_unit(0)
+			elif Input.is_action_just_pressed("W"):
+				currentBuilding.train_unit(1)
+			elif Input.is_action_just_pressed("E"):
+				currentBuilding.train_unit(2)
+	else:
+		$TrainBox.hide()
 	
 
 func set_timer_state(state):

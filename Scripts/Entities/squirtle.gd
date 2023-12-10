@@ -27,13 +27,17 @@ func _ready():
 
 func _process(_delta:float):
 	if Game.is_paused:
+		animationSprite.pause()
 		return
+	animationSprite.play()
 	
 	charmander_scale_on_hover()
 
 func check_evolution():
 	# check current evolution of charmander and enable / disable according boxes, shapes and sprites
 	if evolution == 0:
+		attack_damage = Game.SQUIRTLE_ATTACK
+		$HealthBar.max_value = Game.SQUIRTLE_HEALTH
 		$squirtle.visible = true
 		$CollisionShapeSquirtle.visible = true
 		animationSprite = $squirtle
@@ -48,6 +52,8 @@ func check_evolution():
 		$WartortleSelected.visible = false
 		$BlastoiseSelected.visible = false
 	elif evolution == 1:
+		attack_damage = Game.WARTORTLE_ATTACK
+		$HealthBar.max_value = Game.WARTORTLE_HEALTH
 		$wartortle.visible = true
 		$CollisionShapeWartortle.visible = true
 		animationSprite = $wartortle
@@ -62,6 +68,8 @@ func check_evolution():
 		$SquirtleSelected.visible = false
 		$BlastoiseSelected.visible = false
 	else:
+		attack_damage = Game.BLASTOISE_ATTACK
+		$HealthBar.max_value = Game.BLASTOISE_HEALTH
 		$blastoise.visible = true
 		$CollisionShapeBlastoise.visible = true
 		animationSprite = $blastoise
@@ -75,6 +83,8 @@ func check_evolution():
 		## disable selection boxes
 		$SquirtleSelected.visible = false
 		$WartortleSelected.visible = false
+		
+	$HealthBar.value = $HealthBar.max_value
 
 func _on_mouse_entered():
 	if Game.is_paused:
@@ -129,14 +139,10 @@ func _on_hit(damage, type):
 	if health_bar.value == 0:
 		pathMain.squirtles.erase(self)
 		self.queue_free()
-		pathMain.get_units()
+		pathMain.get_friendly_units()
 		if self in pathMain.selected_pokemon:
 			pathMain.selected_pokemon.erase(self)
 			Game.Selected = pathMain.selected_pokemon.size()
-		# decrease friendly unit counter
-		Game.friendlyUnits -= 1
-		if Game.friendlyUnits == 0:
-			Game.trigger_loose_game()
 			
 func _on_retarget_timer_timeout():
 	if Game.is_paused:

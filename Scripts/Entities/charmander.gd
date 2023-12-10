@@ -27,19 +27,18 @@ func _ready():
 
 func _process(_delta:float):
 	if Game.is_paused:
+		animationSprite.pause()
 		return
+	animationSprite.play()
 	
 	charmander_scale_on_hover()
-		
 
-# Setter-Funktion for evolution var
-func set_evolution(value: int) -> void:
-	# var is only allowed to be 0,1 or 2
-	evolution = clamp(value, 0, 2)
 
 func check_evolution():
 	# check current evolution of charmander and enable / disable according boxes, shapes and sprites
 	if evolution == 0:
+		attack_damage = Game.CHARMANDER_ATTACK
+		$HealthBar.max_value = Game.CHARMANDER_HEALTH
 		$charmander.visible = true
 		$CollisionShapeCharmander.visible = true
 		animationSprite = $charmander
@@ -54,6 +53,8 @@ func check_evolution():
 		$CharmeleonSelected.visible = false
 		$CharizardSelected.visible = false
 	elif evolution == 1:
+		attack_damage = Game.CHARMELEON_ATTACK
+		$HealthBar.max_value = Game.CHARMANDER_HEALTH
 		$charmeleon.visible = true
 		$CollisionShapeCharmeleon.visible = true
 		animationSprite = $charmeleon
@@ -68,6 +69,8 @@ func check_evolution():
 		$CharmanderSelected.visible = false
 		$CharizardSelected.visible = false
 	else:
+		attack_damage = Game.CHARIZARD_ATTACK
+		$HealthBar.max_value = Game.CHARIZARD_HEALTH
 		$charizard.visible = true
 		$CollisionShapeCharizard.visible = true
 		animationSprite = $charizard
@@ -81,6 +84,8 @@ func check_evolution():
 		## disable selection boxes
 		$CharmanderSelected.visible = false
 		$CharmeleonSelected.visible = false
+	
+	$HealthBar.value = $HealthBar.max_value
 
 func _on_mouse_entered():
 	if Game.is_paused:
@@ -135,14 +140,10 @@ func _on_hit(damage, type):
 	if health_bar.value == 0:
 		pathMain.bulbasaurs.erase(self)
 		self.queue_free()
-		pathMain.get_units()
+		pathMain.get_friendly_units()
 		if self in pathMain.selected_pokemon:
 			pathMain.selected_pokemon.erase(self)
 			Game.Selected = pathMain.selected_pokemon.size()
-		# decrease friendly unit counter
-		Game.friendlyUnits -= 1
-		if Game.friendlyUnits == 0:
-			Game.trigger_loose_game()
 			
 func _on_retarget_timer_timeout():
 	if Game.is_paused:

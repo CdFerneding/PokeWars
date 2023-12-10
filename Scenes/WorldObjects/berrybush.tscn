@@ -27,6 +27,7 @@ bg_color = Color(0.192157, 0.917647, 0, 0.886275)
 bg_color = Color(0.882353, 0.482353, 0, 1)
 
 [node name="BerryBush" type="StaticBody2D"]
+y_sort_enabled = true
 script = ExtResource("1_erh1v")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

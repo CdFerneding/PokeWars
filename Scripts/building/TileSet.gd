@@ -39,29 +39,33 @@ Next Step:
 	when the player places buildings
 '''
 
-func _place_building(position:Vector2, x_offset, y_offset, tileId):
+func _place_building(position:Vector2, tileId):
+	if tileId == 3 and Game.Wood < Game.FIRE_ARENA_COST:
+		return
+	elif tileId == 4 and Game.Wood < Game.PLANT_ARENA_COST:
+		return
+	elif tileId == 5 and Game.Wood < Game.WATER_ARENA_COST:
+		return
+	if position.y < 400 and position.x < 600:
+		var scene = load("res://Scenes/WorldObjects/building2.tscn")
+		var mainPath = get_tree().get_root().get_node("Main")
+		var buildingPath = get_tree().get_root().get_node("Main/Buildings")
+	
+		var building = scene.instantiate()
+		building.position = get_global_mouse_position()
+		
+		mainPath.get_buildings()
+		building.main = self.main
+		buildingPath.add_child(building)
+	
+		building.name = Game.selectedBuilding
+		building.tileId = tileId
+		building.get_node("Area2D/CollisionShape2D2").scale = Vector2(1.28,1.28)
+
+func initiate_tileset(position:Vector2, tileId, building):
 	var tile_position = _get_tile_position(position)
 	var position_array = _create_offset(tileId, tile_position)
-	if tileBuiler._tile_builder(position_array, self, tileId):
-		_initiate_building(tile_position, main, tileId)
-		
-
-
-func _initiate_building(position:Vector2, main:Node, tileId):
-
-	var scene = load("res://Scenes/WorldObjects/building.tscn")
-	var mainPath = get_tree().get_root().get_node("Main")
-	var buildingPath = get_tree().get_root().get_node("Main/Buildings")
-	
-	var building = scene.instantiate()
-	building.position = get_global_mouse_position()
-	building.main = self.main
-	buildingPath.add_child(building)
-	
-	building.name = Game.selectedBuilding
-	building.tileId = tileId
-	
-	mainPath.get_buildings()
+	tileBuiler._tile_builder(position_array, self, tileId, position, building)
 
 func _delete_building(position: Vector2, tileId):
 	var tile_position = _get_tile_position(position)

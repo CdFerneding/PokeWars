@@ -48,13 +48,14 @@ func on_intro_finished():
 	score = 0
 	$UI/Timer.start()
 	$UI/GameStateBox.visible = true
-	get_units()
+	get_friendly_units()
 	get_buildings()
 	get_enemies()
 	Game.set_game_paused(false)
 
 func on_start_game():
 	$Music.play()
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master") , linear_to_db(0.5))
 	#DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	get_viewport().size_changed.connect(Callable(get_node("Camera"), "update_limit"))
 	$UI/TrainBox.hide()
@@ -75,12 +76,13 @@ func get_all_units():
 	all += get_tree().get_nodes_in_group("enemies")
 	return all
 
-func get_units():
+func get_friendly_units():
 	pikachu = []
 	get_pikachus()
 	charmanders = get_tree().get_nodes_in_group("charmanders")
 	bulbasaurs = get_tree().get_nodes_in_group("bulbasaurs")
 	squirtles = get_tree().get_nodes_in_group("squirtles")
+	return pikachus + charmanders + bulbasaurs + squirtles
 
 func get_enemies():
 	enemies = []
@@ -100,6 +102,10 @@ func _process(_delta):
 		return
 	else:
 		$StartEnemySpawn.paused = false
+		
+	Game.friendlyUnits = get_friendly_units().size()
+	if Game.friendlyUnits == 0:
+		Game.trigger_loose_game()
 		
 func _physics_process(delta):
 	pass
@@ -182,14 +188,12 @@ func _handle_building_input(event):
 		var tile_position = tileMap.get_global_mouse_position()
 		var selected = Game.selectedBuilding
 		match selected:
-			"PokeCenter":
-				tileMap._place_building(tile_position,4,3,2)
 			"Fire Arena":
-				tileMap._place_building(tile_position,4,4,3)
+				tileMap._place_building(tile_position,3)
 			"Plant Arena":
-				tileMap._place_building(tile_position,4,4,4)
+				tileMap._place_building(tile_position,4)
 			"Water Arena":
-				tileMap._place_building(tile_position,4,4,5)
+				tileMap._place_building(tile_position,5)
 
 
 '

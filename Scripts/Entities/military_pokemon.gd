@@ -31,8 +31,12 @@ func _physics_process(_delta: float) -> void:
 	var next_pos: Vector2
 	if followPlayerOrder:
 		next_pos = $PlayerNavigationAgent.get_next_path_position()
+		if next_pos == Vector2.ZERO:
+			return
 	elif mode != AttackModeEnum.STILL:
 		next_pos = nav_agent.get_next_path_position()
+		if next_pos == Vector2.ZERO:
+			return
 	else:
 		next_pos = position
 	

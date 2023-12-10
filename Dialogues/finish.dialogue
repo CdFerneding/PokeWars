@@ -1,7 +1,7 @@
 ~ finish_game
 
 if Game.player_win:
-	Master Pikachu: [speed=0.8]It seems you managed to win {{Game.playerName}}. The journey until here must have been a hard one. So take a rest now and enjoy your win with all the new friends you have gathered. [speed=0.3]... [speed=0.8]or maybe play again!
+	Master Pikachu: [speed=0.8]It seems you managed to win. The journey until here must have been a hard one. So take a rest now and enjoy your win with all the new friends you have gathered. [speed=0.3]... [speed=0.8]or maybe play again!
 	=> play_again
 else: 
 	[speed=0.5]...[speed=0.8] You lost :/
@@ -15,6 +15,10 @@ else:
 
 ~ play_again
 
+if Game.player_win:
+	[speed=0.5]...[speed=0.8] You win!! Well done.
+else:
+	[speed=0.5]...[speed=0.8] You lost :/
 Master Pikachu: Do you want to play again?
 - yes
 	do Game.play_again()

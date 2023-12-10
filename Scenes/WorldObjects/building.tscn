@@ -20,6 +20,7 @@ offset_left = -7.0
 offset_top = -38.0
 offset_right = 33.0
 offset_bottom = -15.0
+metadata/_edit_use_anchors_ = true
 
 [node name="Created_Unit_Sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_xn8r5")

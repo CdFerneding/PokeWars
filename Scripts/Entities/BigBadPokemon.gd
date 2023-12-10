@@ -17,9 +17,9 @@ var current_group = ""
 @onready var plantos_child = preload("res://Scenes/pokemon/plantos_child.tscn")
 @onready var moltres_child = preload("res://Scenes/pokemon/moltres_child.tscn")
 
-var iteration1 = 1
-var iteration2 = 1
-var iteration3 = 1
+var iteration1 = 0
+var iteration2 = 0
+var iteration3 = 0
 
 static var bigBadPokemon = 3
 
@@ -50,8 +50,9 @@ func assign_sprite():
 	
 func _process(delta):
 	if Game.is_paused:
+		animatedSprite.pause()
 		return
-	
+	animatedSprite.play()
 
 func _on_enemy_spawner_timer_timeout():
 	var mainPath = get_tree().get_root().get_node("Main")
@@ -66,7 +67,7 @@ func _on_enemy_spawner_timer_timeout():
 		spawn_enemies(2 + iteration2)
 		iteration2 = iteration2 + 1
 	elif current_group == "arena3":
-		spawn_enemies(3 + iteration3 * 2)
+		spawn_enemies(2 + iteration3 * 2)
 		iteration3 = iteration3 + 1
 	
 func _on_ennemy_killed():
@@ -112,7 +113,7 @@ func _on_hit(damage, type):
 	if health_bar.value == 0:
 		pathMain.enemies.erase(self)
 		self.queue_free()
-		pathMain.get_units()
+		pathMain.get_friendly_units()
 		bigBadPokemon -= 1
 		if bigBadPokemon == 0:
 			Game.trigger_win_game()

@@ -28,7 +28,9 @@ func _ready():
 
 func _process(_delta:float):
 	if Game.is_paused:
+		animationSprite.pause()
 		return
+	animationSprite.play()
 	
 	charmander_scale_on_hover()
 	check_evolution()
@@ -38,6 +40,8 @@ func _process(_delta:float):
 func check_evolution():
 	# check current evolution of charmander and enable / disable according boxes, shapes and sprites
 	if evolution == 0:
+		attack_damage = Game.BULBASAUR_ATTACK
+		$HealthBar.max_value = Game.BULBASAUR_HEALTH
 		$bulbasaur.visible = true
 		$CollisionShapeBulbasaur.visible = true
 		animationSprite = $bulbasaur
@@ -52,6 +56,8 @@ func check_evolution():
 		$IvysaurSelected.visible = false
 		$VenusaurSelected.visible = false
 	elif evolution == 1:
+		attack_damage = Game.IVYSAUR_ATTACK
+		$HealthBar.max_value = Game.IVYSAUR_HEALTH
 		$ivysaur.visible = true
 		$CollisionShapeIvysaur.visible = true
 		animationSprite = $ivysaur
@@ -66,6 +72,8 @@ func check_evolution():
 		$BulbasaurSelected.visible = false
 		$VenusaurSelected.visible = false
 	else:
+		attack_damage = Game.VENUSAUR_ATTACK
+		$HealthBar.max_value = Game.VENUSAUR_HEALTH
 		$venusaur.visible = true
 		$CollisionShapeVenusaur.visible = true
 		animationSprite = $venusaur
@@ -79,6 +87,8 @@ func check_evolution():
 		## disable selection boxes
 		$BulbasaurSelected.visible = false
 		$IvysaurSelected.visible = false
+		
+	$HealthBar.value = $HealthBar.max_value
 
 
 func _on_mouse_entered():
@@ -134,14 +144,10 @@ func _on_hit(damage, type):
 	if health_bar.value == 0:
 		pathMain.bulbasaurs.erase(self)
 		self.queue_free()
-		pathMain.get_units()
+		pathMain.get_friendly_units()
 		if self in pathMain.selected_pokemon:
 			pathMain.selected_pokemon.erase(self)
 			Game.Selected = pathMain.selected_pokemon.size()
-		# decrease friendly unit counter
-		Game.friendlyUnits -= 1
-		if Game.friendlyUnits == 0:
-			Game.trigger_loose_game()
 			
 func _on_retarget_timer_timeout():
 	if Game.is_paused:

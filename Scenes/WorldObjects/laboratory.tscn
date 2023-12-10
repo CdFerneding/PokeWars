@@ -26,8 +26,13 @@ bg_color = Color(0.192157, 0.917647, 0, 0.886275)
 bg_color = Color(0.882353, 0.482353, 0, 1)
 
 [node name="Laboratory" type="StaticBody2D" groups=["buildings"]]
+y_sort_enabled = true
 input_pickable = true
 script = ExtResource("1_6tr4f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.5, 9.5)
+shape = SubResource("RectangleShape2D_n8kxw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(1, -8)
@@ -35,10 +40,6 @@ texture = ExtResource("1_4hxsq")
 hframes = 6
 vframes = 3
 frame = 6
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1.5, 9.5)
-shape = SubResource("RectangleShape2D_n8kxw")
 
 [node name="Selected" type="Panel" parent="."]
 offset_left = -31.0
