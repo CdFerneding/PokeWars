@@ -26,6 +26,7 @@ bg_color = Color(0.192157, 0.917647, 0, 0.886275)
 bg_color = Color(0.882353, 0.482353, 0, 1)
 
 [node name="Laboratory" type="StaticBody2D" groups=["buildings"]]
+y_sort_enabled = true
 input_pickable = true
 script = ExtResource("1_6tr4f")
 
