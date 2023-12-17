@@ -125,3 +125,14 @@ static func _tile_setter(position:Array,tileMap:TileMap,tileId:int, building):
 			x = x +1
 		y = y + 1
 </pre>
+
+Another thing is that we later decided that we want to place the pokeCenter(tileId: 2) by ourself at so the player can't place it so the whole switch case part to check for the id of the choosen tile is pretty redundant.
+
+## Good Code
+
+## Reflexion
+First and foremost I want to say that I had a lot of fun with the coure and learned a lot from it.
+For game programming I had a tiny amount of prior experience with unity but that was a long time ago so I forgot most of it and since we used the godot game engine it made it even less beneficial for me. Especially because at first I was a bit biased towards Godot because it is quite small in what you can do with it in comparison to unity. So it took a while for me to get used to Godot. But after a while Godot did not seem so bad and I got used to it pretty nicely.
+After we now finished our project I am kind of split as to whether it was a good decision to create a RTA game as our first game or not. I think the genre of RTA games was a bit too large in scale for us to create as our first project Especially because we were only a group of four people and also only had four month to create a RTA game. So if we I look at our game from the perspective of if the game is good or not I would probably say not really. But when I look at it from what I have learned I could confidently say that I was a good learing experience because the scope of the project was so big.
+And what I learned is not limited to how to code or work with Godot, but also how to design a game and how to work in a group using Git. Since I had no previous experience with Git I had to adapt and learn how to use it. And since Godot does not support Git features I did not have the training wheels for that you have for other IDEs like VS Code or the JetBrain tools.
+As a concluding mark I want to say that this course was very educative and that I had so much fun, that I could imagine that I make some small games with some of my friends as a side project or maybe even participate in some game jams.
