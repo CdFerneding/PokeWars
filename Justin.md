@@ -88,4 +88,40 @@ static func tile_builder(positionArray:Array, tileMap:TileMap, tileId:int, posit
 			if(obstacle_layer1):
 				no_obstacle = false
 </pre>
+
 [tile_setter](scripts/Builder/TileBuilder.gd#L1)
+<pre>
+static func _tile_setter(position:Array,tileMap:TileMap,tileId:int, building):
+	var y = 0
+
+	var y_range = (position[2]+2) - (position[3]+1)
+	var x_range = (position[1]-2) - (position[0]-3)
+	print(position[2]*16)
+	building.position = Vector2(position[0] * 16 + x_range, position[2]*16 + y_range + 2)
+	#building.position.y = y_range
+	#building.position.x = x_range
+	
+	tileMap.set_cell(1,Vector2(position[0], position[2]),tileId,Vector2i(0,0))
+	
+	for n in range(position[2]+2,position[3]+1,-1):
+		var x = 0
+		for m in range(position[1]-2,position[0]-3, -1):
+			if x == 0:
+				if y == 0:
+					tileMap.set_cell(0,Vector2(m,n), 1,Vector2i(3,5))
+				elif y == y_range-1:
+					tileMap.set_cell(0,Vector2(m,n), 1,Vector2i(3,4))
+				else:
+					tileMap.set_cell(0,Vector2(m,n), 1,Vector2i(0,4))
+			elif x == x_range-1:
+					if y == 0:
+						tileMap.set_cell(0,Vector2(m,n), 1,Vector2i(2,5))
+					elif y == y_range-1:
+						tileMap.set_cell(0,Vector2(m,n), 1,Vector2i(2,4))
+					else:
+						tileMap.set_cell(0,Vector2(m,n), 1,Vector2i(0,4))
+			else:
+				tileMap.set_cell(0,Vector2(m,n), 1,Vector2i(0,4))
+			x = x +1
+		y = y + 1
+</pre>
