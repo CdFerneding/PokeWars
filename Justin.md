@@ -28,6 +28,7 @@ func _check_food(evolution):
 </pre>
 
 The way I could solve this is by creating a generic script that includes the universal functions like deleting a building. From that script I could create other scripts that inherit that scipt as a parent. Inside I could write the more specific script. With that I could reduce the code at the top to a minimum depending on the scene.
+
 For the fire arena it could look like this.
 <pre>
 func _check_food(evolution):
@@ -41,6 +42,7 @@ func _check_food(evolution):
 ### placing buildings
 The next bad code I want to present is about pacing building into the world. Here I decoupled the sprite for the building for the scene object. As to why, I think it was because I had tunnel vision and at first I tried to create the building without taking the object into account.
 For a little background the "sprite" of the building is just a tile inside the tilemap of the main scene that is placed by the player. I did it like that, because it was the only way we could think of to make our units avoid the buildings and walk around it. Behind that main tile on a lower layer I also place an area of obstacle tiles to be certain of that.
+
 In retrospective I could just have the sprite inside of the scene and it should work fine. But I would still have to create the area below the building for navigation. So if I wanted to fix that I would have to restructure the whole navigation aspect to also avoid scenes and objects. If that were possible we completely scrape the [tileBuilder.gd](scripts/Builder/TileBuilder.gd). As there would be no need to create the tile for the "Sprite" or the area below it.
 
 ### the tileBuilder script
@@ -98,7 +100,9 @@ Another thing is, that we later on decided that we want to place the pokeCenter(
 ## Good Code
 ###Training new units
 But if I were to look away from the problems that are present for the  initilization of the building, there are also some better line of code. For example the functionality to train new units inside of the building. Especially the creation of a trainIcon inside of the UI for each unit that is in training. here a new scene of type [trainIcon](scripts/GUI/TrainIcon.gd) is created and added to the UI. 
+
 Inside of the trainIcon exists a timer and progressbar and with each tick of the timer the progressbar is filled until the pokemon is ready for creation. 
+
 if I were to improve on it I would create an universal timer that ticks for all the different trainIcon simultaneously instead of each one having an indiviual one as this could improve the performance by a little.
 <pre>
 func _start_training(evolution):
@@ -113,6 +117,7 @@ func _start_training(evolution):
 
 ### Gamemode variable
 I created a variable that depending on what the value is set to regulates what actions the user can take. For instance when the user presses "b" a building window shows up that the user can select a building from a window to place on the map. In general it just makes the code more readable and maintanable, as later you can just look for the function that you want to edit. 
+
 But still if I were to improve on the code I would make the gamemode variable a enumeration of the differet gamemodes we have implemented instead of using a simple String.
 <pre>
 	if Game.GameMode == "play":
@@ -127,12 +132,18 @@ But still if I were to improve on the code I would make the gamemode variable a 
 
 ## What would I do differently?
 As I said in my bad code example I decoupled the sprite from the actual object what was a big mistake and is most likely also seen as bad practice as, since there is no real reason to do it like that and there are certainly better option to go about it. 
+
 Also I would try and plan the structure of the code/scene I want to write more thoroughly to avoid the having a single file that is responsible for every type of building. (aside from the laboratory that was created by someone else) So maybe I could create a parent class that is inherited by the child classes.
 
 ## Reflexion
 First and foremost I want to say that I had a lot of fun with the coure and learned a lot from it.
+
 For game programming I had a tiny amount of prior experience with unity but that was a long time ago so I forgot most of it and since we used the godot game engine it made it even less beneficial for me. Especially because at first I was a bit biased towards Godot because it is quite small in what you can do with it in comparison to unity. So it took a while for me to get used to Godot. But after a while Godot did not seem so bad and I got used to it pretty nicely.
+
 After we now finished our project I am kind of split as to whether it was a good decision to create a RTA game as our first game or not. I think the genre of RTA games was a bit too large in scale for us to create as our first project Especially because we were only a group of four people and also only had four month to create a RTA game. So if we I look at our game from the perspective of if the game is good or not I would probably say not really. But when I look at it from what I have learned I could confidently say that I was a good learing experience because the scope of the project was as big as it was big.
+
 Moreover what I learned is not limited to how to code or work with Godot, but also how to design a game and how to work in a group using Git. Since I had no previous experience with Git I had to adapt and learn how to use it. And since Godot does not support Git features I did not have the training wheels for that you have for other IDEs like VSCode or the JetBrain tools.
+
 If I were to create another game at another time I would like to work on the playable characters instead of on the UI and the building, since I think these require a different approach to how to implement them and I would learn a lot as well
+
 As my concluding remark I want to say that it was very educative to look into the background of how games are created. I also had a lot of fun and could imagine, that I create another small game as a side project or hobby with some friend or maybe even participate in some game jams
