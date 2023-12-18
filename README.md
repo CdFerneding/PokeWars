@@ -38,7 +38,7 @@
 
 There were issues with the audio on the recording, hence this video is without audio.
 
-![Gameplay video (please be merciefull UwU <3](Documentation/Group_Video/2023-12-06_13-43-00.mp4)
+![Gameplay video](Documentation/Group_Video/2023-12-06_13-43-00.mp4)
 
 ## Concept
 

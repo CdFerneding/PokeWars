@@ -2,7 +2,15 @@
 
 # Individual Report - Max Neubauer (106077)
 
-
+## Score weighting
+| Description | my weight |
+|----|----|
+| Gameplay video | 15 |
+| Code video | 15 |
+| Good Code | 30 | 
+| Bad Code | 10 |
+| Development process | 10 |
+| Reflection | 20 | 
 
 ## Bad Code
 
@@ -23,16 +31,19 @@ Due to the lack of outsourcing and abstraction the GoodPokemon class is currentl
 
 ![Empty Inheritance](Documentation/Max_Neubauer_Personal_Report_Assets/bad_code_empty_inheritance.png )
 
+And there are some functions that are similar in different classes but not completely identical. Excluding and generalizing them would improve software quality. Unfortunately, due to the lack of time I was not able to refactor all the code. That is why I mention it in the bad code section.
 
-Another example of bad code is the use of global flag variables. Global flag variables may seem like a sufficient solution in the first place. But when the code becomes more and the number of flag variables increases, the complexity of the code also increases sigificantly. 
+
+Another example of bad code is the use of global flag variables. Global flag variables may temporarily seem like a sufficient solution. But when the code becomes more and the number of flag variables increases, the complexity of the code also increases sigificantly. 
 
 Although I tried to use as few global flag variables as possible there are still some left. For example: I wanted to make sure that bad Pokemon only spawn after a certain amount of time. 
 
 That is why I used a timer. When the time is over, then and only then bad Pokemon are allowed to spawn.
 
 The abstract version of the code would look like this:
-<pre>
 
+
+```js
 // global flag
 enemiesCanSpawn == false
 
@@ -45,7 +56,7 @@ when_timer_is_finished():
 if enemiesCanSpawn == false:
     return
 spawn_enemies()
-</pre>
+```
 
 Here is the initialisation of the flag.
 
@@ -60,6 +71,8 @@ And the flag is only used inside of the BigBadPokemon class to prevent the Boss 
 
 ![Empty Inheritance](Documentation/Max_Neubauer_Personal_Report_Assets/bad_code_actual_use_of_flag_var.png)
 
+A solution to improve this code would be the use of bit masks or enumerations if there were a lot of inevitable flags. But in this specific case I thought about encapsulating the flag varibale together with the BigBadPokemon in a sub-class. But due to the lack of time I was unable to refactor and apply the changes that would be necessary.
+
 ## Good Code
 
 For the good code I want to present the navigation. Further information about the navigation on the TileMap can be found in the video. 
@@ -68,7 +81,7 @@ In order to use the navigation you need a CharacterBody2D and a NavigationAgent2
 
 The abstract code of the navigation looks like this:
 
-<pre>
+```js
 
 // speed of the Character 
 const speed = 100
@@ -96,9 +109,9 @@ func make_path(tartget_position):
 func _on_trigger():
     target_position = get_where_the_character_should_move()
     make_path(target_position)
-</pre>
+```
 
-A test of the navigation agent can be seen [here](https://github.com/TxRuX/Godot_Navigation).
+A test of the navigation agent can be seen on my [GitHub](https://github.com/TxRuX/Godot_Navigation).
 
 The navigation code is short, straight to the point and easy to understand. That is why I consider it as good code. Secondly there are severel parts that are implemented in the Godot interface. Which makes is easier to use. The real A* algorithm is encapsulated and performace optimated by Godot.
 
@@ -129,7 +142,7 @@ In this video i am going to present how the navigation works on the TileMap and 
 These are only some implementations made in the Godot interface. But since the other team members will also present some settings directly connected to the interface there will be a great overview.
 
 
-## Reflextion
+## Reflexion
 
 Was the course worth taking? Yes, definitally. 
 
@@ -144,7 +157,7 @@ Another very imortant point to make is that the Game Engine already handles a lo
 
 Since my development progress was not optimal I learned about the issues that take time when you do not take tham serously. When I develop my next game I will invest a lot more time into the engineering and planing part. Because a well structured development plan reduces stress, time and enables easy scalebility. Another thing I will do better is reduce finding workarounds. If there is no support to a certain issue, then your way of implementation is not the inteded way. There will probaply be an easier option with lots of support. (Of course there are exceptions). 
 
-Putting everything into one account, I come to the conclusion that I learned a lot about game development and programming. Because I started with zero knowledge and now I understand the development progress of creating and coding a computer game.
+Putting everything into one account, I come to the conclusion that I learned a lot about game development and programming. Because I started with zero knowledge and now I understand the development process of creating and coding a computer game.
 
 
 
