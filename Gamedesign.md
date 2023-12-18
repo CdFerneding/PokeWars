@@ -42,9 +42,14 @@ Column attacks row.
 |Squirtle (W)| 20 | 5 | 10 |
 |Wartortle (W2)| 40 | 10 | 20 |
 |Blastoise (W3)| 80 | 15 | 30 |
-|waltos_child (W)| 20 | 5 ||
-|moltres_child (F)| 20 | 5 ||
-|plantos_child (G)| 20 | 5 ||
+enemies before 210 sec
+|waltos_child (W)| 25 | 6 ||
+|moltres_child (F)| 25 | 6 ||
+|plantos_child (G)| 25 | 6 ||
+enemies after 210 sec (to balance the upgrades that are possible to the military units)
+|waltos_child (W)| 50 | 12 ||
+|moltres_child (F)| 50 | 12 ||
+|plantos_child (G)| 50 | 12 ||
 
 Your "favourite pokemon" (see dialogue) gets a +5 sttack boost.
 
