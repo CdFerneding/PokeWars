@@ -129,7 +129,18 @@ static func _tile_setter(position:Array,tileMap:TileMap,tileId:int, building):
 Another thing is that we later decided that we want to place the pokeCenter(tileId: 2) by ourself at so the player can't place it so the whole switch case part to check for the id of the choosen tile is pretty redundant.
 
 ## Good Code
-
+### Gamemode variable
+I created a variable that depending on what the value is set to regulates what actions the user can take. For instance when the user presses "b" a building window shows up that the user can select a building from a window to place on the map. In general it just makes the code more readable and 
+<pre>
+	if Game.GameMode == "play":
+		_handle_play_input(_event)
+		
+	elif Game.GameMode == "build" && Game.buildCounter < 3:
+		_handle_building_input(_event)
+		
+	elif Game.GameMode == "place":
+		_handle_place_input(_event)
+</pre>
 ## Reflexion
 First and foremost I want to say that I had a lot of fun with the coure and learned a lot from it.
 For game programming I had a tiny amount of prior experience with unity but that was a long time ago so I forgot most of it and since we used the godot game engine it made it even less beneficial for me. Especially because at first I was a bit biased towards Godot because it is quite small in what you can do with it in comparison to unity. So it took a while for me to get used to Godot. But after a while Godot did not seem so bad and I got used to it pretty nicely.
