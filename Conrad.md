@@ -8,9 +8,29 @@ I programmed along a youtube tutorial [CodingQuests RTSGame](https://www.youtube
   
 Through this youtube tutorial I was able to add a health bar, drag selection, learn about signals, order of nodes in the scene tree and groups.  
 
+On Drag Selection: The basics of what is happening: I am using the Godot "Input" inside the `camera.gd/process` function to register the left-click mouse input and set the `isDragging` variable to true. This variable is toggled to false when the left mouse button is released.
+
+While the left-click is held (`if isDragging == true`), a rectangle is dynamically drawn from the initial mouse click position to the current mouse position. The key here is the distance check (`startV.distance_to(mousePos) > 20`), which ensures that a drag action is occurring and not just a simple click. If the mouse has moved significantly (more than 20 pixels), it signifies a deliberate drag, triggering the rectangle drawing logic.
+
+When the left-click is released, the final rectangle is drawn, and its coordinates are emitted through a signal to the `main.gd` code, which manages the selection.
+
+The `draw_area` function handles the mathematical calculations for drawing the rectangle, offering a visual representation of the selection. This process is designed for clarity and ease of understanding, though it may be even clearer with pen and paper.
+
+
 drag selection in [camera.gd](Scripts/Data/camera.gd#L135):
 <pre>
-if Input.is_action_just_released("left_click"):
+# drag-select
+	if Input.is_action_just_pressed("left_click"):
+		start = mousePosGlobal
+		startV = mousePos
+		isDragging = true
+
+	if isDragging:
+		end = mousePosGlobal
+		endV = mousePos
+		draw_area()
+	
+	if Input.is_action_just_released("left_click"):
 		if startV.distance_to(mousePos) > 20:
 			end = mousePosGlobal
 			endV = mousePos
@@ -21,16 +41,6 @@ if Input.is_action_just_released("left_click"):
 			end = start
 			isDragging = false
 			draw_area(false)
-
-func draw_area(s = true):
-	box.size = Vector2(abs(startV.x - endV.x), abs(startV.y - endV.y))
-	var pos = Vector2()
-	pos.x = min(startV.x, endV.x)
-	pos.y = min(startV.y, endV.y)
-	box.position = pos
-	
-	# let the rectangle dissapear after drawing
-	box.size *= int(s)
 </pre>
 logic behind farming wood in [tree.gd](Scripts/WorldObjects/tree.gd#L15):
 <pre>
@@ -181,13 +191,20 @@ Other things I did that I had a lower number of issues in include:
 Adding sprites for the enemies, creating selection boxes, writing dialogue (which is not really code in my opinion) and playing it in the game, creating a start-/win-/loose-game HUD, menu and settings with editable music volume
 
 ## Bad code
-### Redundant code for Pokemon
-Before I worked on the enemies (adding the different sprites) Max and Evan created 3 different "BigBadPokemon". Since the code is basically the same with the only difference being the animation and the pokemon defence/attack type, they were able to get the code into one script. This is very good in terms of overview and sanitation of the code (maybe a little worse in terms of efficiency because conditions are neccessary to animate the correct sprites).  
-This could've been done for the military pokemon as well (bulbasaur, squirtle, charmander). This should technically be done, because when developer want to make changes to all Pokemon it makes it harder to overlook a file when there is only one instead of 3.  
+### Consolidation of Pokemon Code
+Problem:
+Before addressing the enemies, there was redundant code for three different "BigBadPokemon." While Max and Evan initially created separate scripts, the realization came that the code was essentially identical, differing only in animations and Pokemon attributes.
 
-### Variables and functions naming conventions
-Unfortunately we missed to discuss naming conventions on our first meeting. Because of this blunder the naming conventions are messed up throughout the repository. For example I wrote my Variables in camelCase, my functions in snake_case (Godot funcitons are _snake_case [with underscore]), constants in UPPER CASE. However I know that there are Variable and Function names that are not following this pattern which we said would be to much to change by now and it does not bother us.  
-I want to mention that if the project was larger this would be a bigger problem since there are more variables and funciton developer (and maybe new developers) need to track.  
+Solution:
+To enhance code clarity and maintainability, we consolidated the code into a single script. Although this approach slightly impacts efficiency due to conditional statements for sprite animations, it significantly improves code overview and cleanliness. A similar consolidation approach could be applied to military Pokemon (e.g., Bulbasaur, Squirtle, Charmander) to promote consistency and ease of future modifications.
+
+### Naming Conventions Oversight
+Problem:
+Naming conventions for variables and functions were not discussed during our initial meeting, leading to inconsistent patterns throughout the repository. For instance, variables were named in camelCase, functions in snake_case (Godot functions with an underscore), and constants in UPPER CASE. While this inconsistency currently doesn't pose a major issue, it may become problematic as the project scales.
+
+Solution:
+While acknowledging the oversight, we decided not to retroactively modify existing names due to the project's current state. However, it's essential to recognize that in larger projects, inconsistent naming conventions could pose challenges for developers, especially newcomers. Going forward, we commit to adhering to a unified naming convention to ensure better code maintainability.  
+
 Example from [camera.gd](/Scripts/Data/camera.gd#L16):  
 <pre>
 # variable names by Evan
@@ -206,11 +223,41 @@ var startV = Vector2()
 ### Constants
 Even though it is good that I implemented constants they could've been inside an extra file to isolate the constants from game state variables and game/dialogue functions (modulation).  
 
-## Refleciton on key concepts
-Concepts I have implemented are the following:  
-Drag selection, event handling, queue management, pause game functionality, use of constants, evolution / upgrade mechanisms / player state, sprite animation,  
+### Unused Delta variable / elapsed time since last frame
+We have basically not used the delta variable of all the different processes functions.  This may have led to drawbacks in terms of gameplay smoothness, frame rate independence, and overall performance.  
+This oversight can lead to significant drawbacks in terms of gameplay smoothness, frame rate independence, and overall
+performance.  
+Godot 4 most likely implements delta time independence for the nodes because of which the animation are working the same on all devices.  
+The delta time could have been used to optimized the Game. 
 
-While playtesting I noticed the music (which is often too loud) and some other things not working as expected which has led me to newfound respect for all developers who make their game accessible on multiple platforms
+## Refleciton
+### Implemented Concepts
+Concepts I have implemented are the following:  
+Unit selection, event handling, queue management, pause game functionality, use of constants, evolution / upgrade mechanisms / unit state, sprite animation.  
+
+### Playtesting
+While playtesting I noticed the music (which is often too loud / changes volume when playing on different devices / platforms) and some other things not working as expected which has led me to newfound respect for all developers who make their game accessible on multiple platforms.  
+
+### Unit balancing 
+Due to little time we did not nearly have enough time to playtest and therefore balancing. I updated the initial enemies health and attack values based on game time to match the military pokemon of the player wich can be made stronger (through the laboratory) than the original enemies.  
+However we did not nearly have enough time to finetune the statistics (which can be seen in the Game Design file).  
+
+### Key concepts learned in the duration of the Game Progarmming course
+I will not consider wether I learned the following concepts during the lectures, through simply using a Game Enginge or by research as it really does not matter to me.   
+1. Game Loop:  
+	The Game loop is represented in Godot 4 through the _process(delta) function (even though we mostly didn't use the delta function).  
+2. Physics Simulation  
+	This is implemented in Godot 4 mainly through collision shaped as a child node of different world objects.  
+3. Input Handling  
+	Implementing User Input is very beginner friendly in Godot as developers can always ceck "Input.[...]" as well as the very easy to use "signals". 
+4. Artificial Intelligence  
+	Referring to the enemies and the military pokemon who search for the nearest enemy and attack them
+5. Sound effects and music
+6. User Interface  
+	In Godot this section is reserved for specific nodes (which are tecnically not the only nodes able to display UI but are made by Godot especially for this purpose), e.g. "CanvasLayer". 
+7. Optimisation and performance
+8. Version Control
+	In our groups case the version control was git.
 
 ## Video
 Video about groups, pausing the game, the Dialogue Manager, public scripts and event trigger in Godot (signals)  

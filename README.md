@@ -96,4 +96,10 @@ Since our game contatins several files where multiple people work on simultanous
 With GitLab we created branches that everyone can work on their own code. With issues we kept track of what to do.
 For version control with Godot we use Sublime Merge.
 
-
+### Unimplemented Features:
+1. Mini Map:
+	Despite our intentions, we were unable to implement a mini-map feature. This could have provided players with a broader view of the game environment for strategic planning.
+2. Fog of War:
+	The planned fog of war feature, which hides unexplored areas of the game map, was not implemented in the end as well. This could have added an element of mystery to the gameplay.  
+3. Multiplayer:  
+	This Game was originally not supposed to be a single player based Game but due to us not having enough time we needed to forget about these features
