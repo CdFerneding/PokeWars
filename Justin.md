@@ -134,42 +134,44 @@ If I were to say what could be improved about this code, it might be, that the i
 
 But apart from that, I am pretty satisfied with this part of the code.
 <pre>
-	#creates tiles from left to right and bottom up
-	for n in range(position[2]+2,position[3]+1,-1):
-		var x = 0
-		for m in range(position[1]-2,position[0]-3, -1):
-			if x == 0:
-				if y == 0:
+#creates tiles from left to right and bottom up
+for n in range(position[2]+2,position[3]+1,-1):
+	var x = 0
+	for m in range(position[1]-2,position[0]-3, -1):
+		if x == 0:
+			if y == 0:
 
-					#tile for bottom left corner
-					tileMap.set_cell(0,Vector2(m,n), 1,Vector2i(3,5))
-				elif y == y_range-1:
+			#tile for bottom left corner
+			tileMap.set_cell(0,Vector2(m,n), 1,Vector2i(3,5))
+			elif y == y_range-1:
 
-					#tile for upper left corner
-					tileMap.set_cell(0,Vector2(m,n), 1,Vector2i(3,4))
+				#tile for upper left corner
+				tileMap.set_cell(0,Vector2(m,n), 1,Vector2i(3,4))
+	
 				else:
 					
-					#default square dirt tile
-					tileMap.set_cell(0,Vector2(m,n), 1,Vector2i(0,4))
-			elif x == x_range-1:
-					if y == 0:
-
-						#tile for bottom right corner
-						tileMap.set_cell(0,Vector2(m,n), 1,Vector2i(2,5))
-					elif y == y_range-1:
-
-						#tile for upper right corner
-						tileMap.set_cell(0,Vector2(m,n), 1,Vector2i(2,4))
-					else:
-
-						#default square dirt tile
-						tileMap.set_cell(0,Vector2(m,n), 1,Vector2i(0,4))
-			else:
-
 				#default square dirt tile
 				tileMap.set_cell(0,Vector2(m,n), 1,Vector2i(0,4))
-			x = x +1
-		y = y + 1
+
+		elif x == x_range-1:
+				if y == 0:
+
+					#tile for bottom right corner
+					tileMap.set_cell(0,Vector2(m,n), 1,Vector2i(2,5))
+				elif y == y_range-1:
+
+					#tile for upper right corner
+					tileMap.set_cell(0,Vector2(m,n), 1,Vector2i(2,4))
+				else:
+
+					#default square dirt tile
+					tileMap.set_cell(0,Vector2(m,n), 1,Vector2i(0,4))
+		else:
+
+			#default square dirt tile
+			tileMap.set_cell(0,Vector2(m,n), 1,Vector2i(0,4))
+		x = x +1
+	y = y + 1
 </pre>
 ### Gamemode variable
 I created a variable that depending on what the value is set to regulates what actions the user can take. For instance when the user presses "b" a building window shows up that the user can select a building from a window to place on the map. In general it just makes the code more readable and maintanable, as later you can just look for the function that you want to edit. 
