@@ -135,6 +135,10 @@ As I said in my bad code example I decoupled the sprite from the actual object w
 
 Also I would try and plan the structure of the code/scene I want to write more thoroughly to avoid the having a single file that is responsible for every type of building. (aside from the laboratory that was created by someone else) So maybe I could create a parent class that is inherited by the child classes.
 
+## Individual Video
+![Video about the buildings](Documentation/Justin_Frauboese Report video/2023-12-19_16-26-41.mp4)
+sorry about the unintelligible muttering sometimes
+
 ## Reflexion
 First and foremost I want to say that I had a lot of fun with the coure and learned a lot from it.
 
