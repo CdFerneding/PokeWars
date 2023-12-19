@@ -99,7 +99,7 @@ Another thing is, that we later on decided that we want to place the pokeCenter(
 
 ## Good Code
 ###Training new units
-But if I were to look away from the problems that are present for the  initilization of the building, there are also some better line of code. For example the functionality to train new units inside of the building. Especially the creation of a trainIcon inside of the UI for each unit that is in training. here a new scene of type [trainIcon](scripts/GUI/TrainIcon.gd) is created and added to the UI. 
+But if I were to look away from the problems that are present for the initilization of the building, there are also some better line of code. For example the functionality to train new units inside of the building. Especially the creation of a trainIcon inside of the UI for each unit that is in training. here a new scene of type [trainIcon](scripts/GUI/TrainIcon.gd) is created and added to the UI. 
 
 Inside of the trainIcon exists a timer and progressbar and with each tick of the timer the progressbar is filled until the pokemon is ready for creation. 
 
@@ -115,6 +115,38 @@ func _start_training(evolution):
 	UI.get_node("TrainingQueue").add_child(queueItem)
 </pre>
 
+Inside of the TileBuilder I also made something rather good inside of the tile_builder function, even if I would still do it differently and delete the whole class. What I am talking about is the way I create the tiles below the building to act as an obstacle layer so the units avoid and walk around it.
+
+Here we have a for loop nested in another for the creation of a two dimentional tile area. And depending on what the current x and y value is it creates different tiles. 
+
+the position array with yet another offset signify the boundaries of the area I want to create and also where exactly the tiles should be placed inside of the tilemap.
+
+If I were to say what could be improved about this code, it might be, that the if statement are replaced by a switch case statement. And also maybe find a way to not always create new offsets each time I you the position. And also comment the code for easier readability.
+
+But apart from that, I am pretty satisfied with this part of the code.
+<pre>
+	for n in range(position[2]+2,position[3]+1,-1):
+		var x = 0
+		for m in range(position[1]-2,position[0]-3, -1):
+			if x == 0:
+				if y == 0:
+					tileMap.set_cell(0,Vector2(m,n), 1,Vector2i(3,5))
+				elif y == y_range-1:
+					tileMap.set_cell(0,Vector2(m,n), 1,Vector2i(3,4))
+				else:
+					tileMap.set_cell(0,Vector2(m,n), 1,Vector2i(0,4))
+			elif x == x_range-1:
+					if y == 0:
+						tileMap.set_cell(0,Vector2(m,n), 1,Vector2i(2,5))
+					elif y == y_range-1:
+						tileMap.set_cell(0,Vector2(m,n), 1,Vector2i(2,4))
+					else:
+						tileMap.set_cell(0,Vector2(m,n), 1,Vector2i(0,4))
+			else:
+				tileMap.set_cell(0,Vector2(m,n), 1,Vector2i(0,4))
+			x = x +1
+		y = y + 1
+</pre>
 ### Gamemode variable
 I created a variable that depending on what the value is set to regulates what actions the user can take. For instance when the user presses "b" a building window shows up that the user can select a building from a window to place on the map. In general it just makes the code more readable and maintanable, as later you can just look for the function that you want to edit. 
 
@@ -136,8 +168,10 @@ As I said in my bad code example I decoupled the sprite from the actual object w
 Also I would try and plan the structure of the code/scene I want to write more thoroughly to avoid the having a single file that is responsible for every type of building. (aside from the laboratory that was created by someone else) So maybe I could create a parent class that is inherited by the child classes.
 
 ## Individual Video
+In the video I want to talk about what you can do with the buildings, from how to create them to how to delete them and some other smaller implementations I made.
+
+
 ![Video about the buildings](Documentation/Justin_Frauboese Report video/2023-12-19_16-26-41.mp4)
-sorry about the unintelligible muttering sometimes
 
 ## Reflexion
 First and foremost I want to say that I had a lot of fun with the coure and learned a lot from it.
