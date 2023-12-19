@@ -92,7 +92,9 @@ static func tile_builder(positionArray:Array, tileMap:TileMap, tileId:int, posit
 		right_offeset = 5
 		top_offset = 4
 		
-	#(directions inside the array with index) 0=x_pos_offset_left, 1=x_pos_offset_right, 2=y_pos_offset_up, 3=y_pos_offset_down
+	'directions inside the array with index:
+	0=x_pos_offset_left, 1=x_pos_offset_right, 2=y_pos_offset_up, 3=y_pos_offset_down'
+
 	#two for loop to check the area where the building is supposed to be placed
 	for n in range(positionArray[2]+top_offset,positionArray[3]-1,-1):
 		for m in range(positionArray[1] - left_offset,positionArray[0]-right_offeset, -1):
