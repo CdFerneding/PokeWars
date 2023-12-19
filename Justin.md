@@ -108,6 +108,11 @@ static func tile_builder(positionArray:Array, tileMap:TileMap, tileId:int, posit
 
 Another thing is, that we later on decided that we want to place the pokeCenter(tileId: 2) manually. So the player can't place it, which means the whole switch case part to check for the id of the choosen tile is redundant.
 
+## Naming conventions not consistent
+In our whole project everyone kind of did it how they thought it was correct because we did not talk about how we want to name our variables, function and files in general.
+
+that means sometimes we have variables in snake_case and other times in camelCase. Also for my functions I thought it would be smart to name the functions that are only called inside of the script file with a underscore to show it is a private function unfortunately it seems when I called the functions that was at that point still supposed to be "private" somewhere else, I sometimes removed the underscore and sometimes I did not.
+
 ## Good Code
 ### Training new units
 But if I were to look away from the problems that are present for the initilization of the building, there are also some better line of code. For example the functionality to train new units inside of the building. Especially the creation of a trainIcon inside of the UI for each unit that is in training. here a new scene of type [trainIcon](scripts/GUI/TrainIcon.gd) is created and added to the UI. 
