@@ -109,7 +109,7 @@ static func tile_builder(positionArray:Array, tileMap:TileMap, tileId:int, posit
 Another thing is, that we later on decided that we want to place the pokeCenter(tileId: 2) manually. So the player can't place it, which means the whole switch case part to check for the id of the choosen tile is redundant.
 
 ## Good Code
-###Training new units
+### Training new units
 But if I were to look away from the problems that are present for the initilization of the building, there are also some better line of code. For example the functionality to train new units inside of the building. Especially the creation of a trainIcon inside of the UI for each unit that is in training. here a new scene of type [trainIcon](scripts/GUI/TrainIcon.gd) is created and added to the UI. 
 
 Inside of the trainIcon exists a timer and progressbar and with each tick of the timer the progressbar is filled until the pokemon is ready for creation. 
