@@ -59,7 +59,8 @@ func _create_offset(tileId, tile_position):
 		3,4,5:
 			x_offset = 4
 			y_offset = 4
-		
+	
+	#create the different offsets and return them as an array
 	var x_pos_offset_left = tile_position.x
 	var x_pos_offset_right = tile_position.x + x_offset
 	var y_pos_offset_up = tile_position.y
@@ -72,26 +73,34 @@ From there this offset is then sent as a parameter to the tile_builder. Inside I
 [tile_builder](scripts/Builder/TileBuilder.gd#L42)
 <pre>
 static func tile_builder(positionArray:Array, tileMap:TileMap, tileId:int, position, building):
-	var no_obstacle = true
+
+	#create a boolean to see if the placement of the building is valid
+	var no_obstacle = true 
+
+	#yet another offset
 	var right_offeset = 0
 	var left_offset = 0
 	var top_offset = 0
+
+	#now redundant
 	if(tileId == 2):
 		right_offeset = 4
 		left_offset = 1
 		top_offset = 3
+	#only the else branch is important now
 	else:
 		right_offeset = 5
 		top_offset = 4
 		
-	#position array x_pos_offset_left, x_pos_offset_right, y_pos_offset_up, y_pos_offset_down
-
+	#(directions inside the array with index) 0=x_pos_offset_left, 1=x_pos_offset_right, 2=y_pos_offset_up, 3=y_pos_offset_down
+	#two for loop to check the area where the building is supposed to be placed
 	for n in range(positionArray[2]+top_offset,positionArray[3]-1,-1):
 		for m in range(positionArray[1] - left_offset,positionArray[0]-right_offeset, -1):
 			var current_position = Vector2i(m,n)
 			var obstacle_layer1 = is_instance_valid(tileMap.get_cell_tile_data(1,Vector2i(m, n)))
+			#if there is a tile at position(n,m) obstacle_layer1 is set to true and goes into the if statement
 			if(obstacle_layer1):
-				no_obstacle = false
+				no_obstacle = false #sets the no_obstacle variable to false so the tiles for the building are not placed
 </pre>
 
 
@@ -121,28 +130,43 @@ Here we have a for loop nested in another for the creation of a two dimentional 
 
 the position array with yet another offset signify the boundaries of the area I want to create and also where exactly the tiles should be placed inside of the tilemap.
 
-If I were to say what could be improved about this code, it might be, that the if statement are replaced by a switch case statement. And also maybe find a way to not always create new offsets each time I you the position. And also comment the code for easier readability.
+If I were to say what could be improved about this code, it might be, that the if statement are replaced by a switch case statement. And also maybe find a way to not always create new offsets each time I you the position.
 
 But apart from that, I am pretty satisfied with this part of the code.
 <pre>
+	#creates tiles from left to right and bottom up
 	for n in range(position[2]+2,position[3]+1,-1):
 		var x = 0
 		for m in range(position[1]-2,position[0]-3, -1):
 			if x == 0:
 				if y == 0:
+
+					#tile for bottom left corner
 					tileMap.set_cell(0,Vector2(m,n), 1,Vector2i(3,5))
 				elif y == y_range-1:
+
+					#tile for upper left corner
 					tileMap.set_cell(0,Vector2(m,n), 1,Vector2i(3,4))
 				else:
+					
+					#default square dirt tile
 					tileMap.set_cell(0,Vector2(m,n), 1,Vector2i(0,4))
 			elif x == x_range-1:
 					if y == 0:
+
+						#tile for bottom right corner
 						tileMap.set_cell(0,Vector2(m,n), 1,Vector2i(2,5))
 					elif y == y_range-1:
+
+						#tile for upper right corner
 						tileMap.set_cell(0,Vector2(m,n), 1,Vector2i(2,4))
 					else:
+
+						#default square dirt tile
 						tileMap.set_cell(0,Vector2(m,n), 1,Vector2i(0,4))
 			else:
+
+				#default square dirt tile
 				tileMap.set_cell(0,Vector2(m,n), 1,Vector2i(0,4))
 			x = x +1
 		y = y + 1
